@@ -1,0 +1,53 @@
+# Maintainer: Luca Weiss <luca@z3ntu.xyz>
+pkgname=ubuntu-themes
+pkgver=0_git20181005
+_commit="c5bd237813a35a86c2eb3484f0635da306882765"
+pkgrel=0
+pkgdesc="Theme files for Unity 8"
+arch="noarch"
+url="https://unity8.io"
+license="GPL-3.0"
+subpackages="light-themes:light_themes suru-icon-theme:suru_icon_theme ubuntu-mono:ubuntu_mono ubuntu-artwork:ubuntu_artwork ubuntu-mobile-icons:ubuntu_mobile_icons"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+_builddir="$srcdir/$pkgname-$_commit"
+
+package() {
+	mkdir -p "$pkgdir"
+}
+
+light_themes() {
+	depends="gtk-murrine-engine ubuntu-mono" # humanity-icon-theme
+	cd "$_builddir"
+	mkdir -p "$subpkgdir"/usr/share/themes
+	cp -r Ambiance Radiance "$subpkgdir"/usr/share/themes
+}
+
+suru_icon_theme() {
+	depends="ubuntu-mobile-icons hicolor-icon-theme"
+	cd "$_builddir"
+	mkdir -p "$subpkgdir"/usr/share/icons
+	cp -r suru-icons "$subpkgdir"/usr/share/icons/suru
+}
+
+ubuntu_artwork() {
+	depends="light-themes ubuntu-mono" # adium-theme-ubuntu ubports-wallpaper
+	cd "$_builddir"
+	mkdir -p "$subpkgdir"/usr/share/icons/hicolor/48x48/apps
+	cp distributor-logo.png "$subpkgdir"/usr/share/icons/hicolor/48x48/apps
+}
+
+ubuntu_mobile_icons() {
+	depends="hicolor-icon-theme"
+	cd "$_builddir"
+	mkdir -p "$subpkgdir"/usr/share/icons
+	cp -r ubuntu-mobile "$subpkgdir"/usr/share/icons
+}
+
+ubuntu_mono() {
+	depends="adwaita-icon-theme hicolor-icon-theme" # humanity-icon-theme
+	cd "$_builddir"
+	mkdir -p "$subpkgdir"/usr/share/icons
+	cp -r ubuntu-mono-dark ubuntu-mono-light LoginIcons "$subpkgdir"/usr/share/icons
+}
+
+sha512sums="553226ef0f94e2b2c56f7604380039cd4fa69b6082fa1020e065719adb1ad32c8a2ac098aa0beedb8943f9d53eb89f8aaddaf9fb84f881ea79a84a77f8d19afa  ubuntu-themes-c5bd237813a35a86c2eb3484f0635da306882765.tar.gz"
