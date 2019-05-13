@@ -14,6 +14,7 @@ install=""
 subpackages="$pkgname-dev"
 source="https://github.com/lib-cpp/process-cpp/archive/$_commit.tar.gz
 	0001-Musl-libc-fixes.patch" # https://github.com/lib-cpp/process-cpp/pull/1
+options="!check" # ChildProcess.ensure_that_forked_children_are_cleaned_up hangs under QEMU
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
