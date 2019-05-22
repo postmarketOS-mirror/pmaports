@@ -16,6 +16,7 @@ source="
 	0001-Fix-google-protobuf-closure-related-errors.patch
 	0002-Remove-drmIsMaster-to-use-libdrm-version.patch
 	link_fix.patch
+	temp.patch
 	"
 subpackages="$pkgname-dev"
 options="!check" # Some tests fail
@@ -43,5 +44,6 @@ package() {
 }
 sha512sums="4431615d795b93239a83a197d61a5900f094a2108933be4e4da09220bd20e2b031e5232174805216a964279fcf8786672d5c40c3be83856d1903f128b7b814b7  mir-1.1.2.tar.xz
 6f0d22d2d0ec85793b5067f2dcb95ac57ef5118096028098f096b32781f49acfe28ab52523ac34f72035ec7518056c392a9fc46ea5c41332538fe7a0d0db303a  0001-Fix-google-protobuf-closure-related-errors.patch
-279c009d8d54823bcfdfd564543ffa4cb1ad99cef211f82d5eefe3cc33fda80d5455dfaf8ba732f6cd1067bb442d732b364fdeee07018006def13b55887c6da8  0002-Remove-drmIsMaster-to-use-libdrm-version.patch"
-190219d876c4c5e4b215a45d36316e7eeb0fc87880d1b5f3c9c91298409e21f9560b0713c88c6ad5aaf39d73468362d7b9aa680dc9bb68b6bb180de91e4e6007  link_fix.patch"
+279c009d8d54823bcfdfd564543ffa4cb1ad99cef211f82d5eefe3cc33fda80d5455dfaf8ba732f6cd1067bb442d732b364fdeee07018006def13b55887c6da8  0002-Remove-drmIsMaster-to-use-libdrm-version.patch
+190219d876c4c5e4b215a45d36316e7eeb0fc87880d1b5f3c9c91298409e21f9560b0713c88c6ad5aaf39d73468362d7b9aa680dc9bb68b6bb180de91e4e6007  link_fix.patch
+dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"
