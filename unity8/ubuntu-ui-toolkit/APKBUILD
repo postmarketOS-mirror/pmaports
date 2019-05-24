@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-ui-toolkit
-pkgver=0_git20190208
-_commit="cee7f49f493f37ebf0690137ed85700f94bacdf9"
+pkgver=0_git20190422
+_commit="d19600f2e7690aaf5f49c88174b541aeab7bc7ef"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -41,6 +41,6 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="bdbef210a353349d26b273979a5fca67d47cee16fc56f8386247ff6c7871635e2cf7dbca8e69bc258a46db536885bc3350de2a7706ef4a01b1dcced505e31600  ubuntu-ui-toolkit-cee7f49f493f37ebf0690137ed85700f94bacdf9.tar.gz
+sha512sums="99e333e51653b810c14d2918f89421ac52d8d845010c4671d33c302f5990e796446c03e517c8ea5cd39d951bb378eaa1a4c3654f27850c6aaaf1d0134dc684bd  ubuntu-ui-toolkit-d19600f2e7690aaf5f49c88174b541aeab7bc7ef.tar.gz
 5b5c00bd365ee4068e2e0622a0ce31c7b67b0c6cf136b0d717dd68ac9559bc2d9c54e1e0c9106fa1d6e3438de974fa8b44c023888fe87bc1d1ed584023184eba  0004-Make-it-compile-with-Qt-5.12.patch
 e01567f2426f78b0862e7b09cd99cabf3d885b600592e6a4f0e07dc077fae2ba8dd1d2deba3bb89d31171a90db6de909281664bcbc7736b9432f2bc0b26544e1  replace-bash-for-sh.patch"

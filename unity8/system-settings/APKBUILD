@@ -2,9 +2,9 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=system-settings
 _pkgname=system-settings
-pkgver=0_git20181011
-_commit="7414ae1e6436aafe8be2717b382ab865bd923a2e"
-pkgrel=2
+pkgver=0_git20190420
+_commit="14ae291eecb8664d9a22699964aa188da92d6323"
+pkgrel=0
 pkgdesc="System Settings application for Unity8"
 url="https://github.com/ubports/system-settings"
 arch="all"
@@ -12,8 +12,7 @@ license="GPL-3.0"
 depends=""
 makedepends="cmake qt5-qtbase-dev upower-dev networkmanager-dev accountsservice-ubuntu-dev geonames-dev icu-dev libqtdbusmock gsettings-qt-dev click-dev gnome-desktop-dev trust-store-dev qt5-qtdeclarative-dev qt5-qtdeclarative intltool"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	qmltestrunner.patch
-	0001-Remove-unused-libnm-glib-dependency.patch"
+	qmltestrunner.patch"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Needs xvfb-run
 
@@ -45,6 +44,5 @@ package() {
 	cd "$builddir"/build
 	make DESTDIR="$pkgdir" install
 }
-sha512sums="a4cbc9d5be75268032bf4a325b95bab180b5cf20e7f6b6a176e195522c076edf048962f7acbcda56f368fca745ef8e2888261bd35a5c772d54e0ff42c51f6ad4  system-settings-7414ae1e6436aafe8be2717b382ab865bd923a2e.tar.gz
-d839e01038301ecccaba86407f0b82c56cac175992d7900893a5aa6a71468a7a78a6458ba56a39c949947be7c9b705409db9f8e70e08ddf3155259ceb5327d31  qmltestrunner.patch
-282e99199a8d615b7267400e9d3daea58aa16ef92cd747f310a8b1efcd5f7d0c4b2104cea4372fb58b73dd9951238282f5bf6945e13ce8990bb05641b5a54246  0001-Remove-unused-libnm-glib-dependency.patch"
+sha512sums="9f741d57a5cf55e2195608d989f38b6537f4d3a2b839d3b8be993eac8858837f4efa9ed276133bb3d761b0aa45fdc75adcea6c1160ac93b2c4da30e931f06689  system-settings-14ae291eecb8664d9a22699964aa188da92d6323.tar.gz
+d839e01038301ecccaba86407f0b82c56cac175992d7900893a5aa6a71468a7a78a6458ba56a39c949947be7c9b705409db9f8e70e08ddf3155259ceb5327d31  qmltestrunner.patch"
