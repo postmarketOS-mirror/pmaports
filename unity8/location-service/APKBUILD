@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=location-service
-pkgver=0_git20190111
-pkgrel=2
-_commit="b1d6a2fda0269be01a573b2b3726184a25168110"
+pkgver=0_git20190628
+pkgrel=0
+_commit="73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639"
 pkgdesc="Location service aggregating position/velocity/heading updates and exporting them over dbus"
 arch="all"
 url="https://unity8.io"
@@ -37,4 +37,4 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="72821a935f9401d5006ee76f1b034976773af621a3a9ad2dfab15af6e99c8cbfbcb32304a4e2d8ce072bfc38309db2058bc78b2fd1f5e7342bb7f51ff857ad93  location-service-b1d6a2fda0269be01a573b2b3726184a25168110.tar.gz"
+sha512sums="0b56411c67b8724ecad1b5534b5f4b6c7d2fc57176453c40bfea8a3789120f9cfe5c8bd253527dcb31d9ee5682bcbdd313d02cca675a06f51f5073eae37b3574  location-service-73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639.tar.gz"

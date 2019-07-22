@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity-api
-pkgver=0_git20190211
-_commit="3361ed583f7545684965ac8b0094cd88a5cf26cd"
+pkgver=0_git20190721
+_commit="30dd7b38c6e38f55624dae7b9268a6efc5086287"
 pkgrel=0
 pkgdesc="API for Unity shell integration"
 url="https://github.com/ubports/unity-api"
@@ -36,5 +36,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="fe69fdfb958a885a4a7472868750d7eb23c29d77a1c32914f47f7ffc9adfd62e6f354e6d48498890eb7f5a6ad42fdec3c0bcae690ca59f06f634db3574e72aee  unity-api-3361ed583f7545684965ac8b0094cd88a5cf26cd.tar.gz
+sha512sums="6272c64002df83f5aa97f05494afcadcbe88d9fec708d8beb7e2024a5848ecfe1d3ead5442caddca22950562eb3982ee8c66587b423fc7eaa8e885572c4355b6  unity-api-30dd7b38c6e38f55624dae7b9268a6efc5086287.tar.gz
 8695998cb0451943ff08f00be52766d27c439184b1e8531a563cffe4bf4251dea52d5bc3493d797f4f6007f13130930c6b0cfb2c04b9dc54e6891e17c2978fb9  qmltestrunner.patch"
