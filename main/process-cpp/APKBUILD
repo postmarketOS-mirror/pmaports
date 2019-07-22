@@ -18,6 +18,9 @@ options="!check" # ChildProcess.ensure_that_forked_children_are_cleaned_up hangs
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
+	# Don't build the tests
+	truncate -s 0 "$builddir"/tests/CMakeLists.txt
+
 	mkdir "$builddir"/build
 	cd "$builddir"/build
 	cmake .. \
