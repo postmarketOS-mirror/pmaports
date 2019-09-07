@@ -1,0 +1,43 @@
+# Contributor:
+# Maintainer:
+pkgname="wlcs"
+pkgver="1.1.0"
+pkgrel=0
+pkgdesc="Wayland Conformance Test Suite"
+url="https://github.com/MirServer/wlcs"
+arch="all"
+license="GPL-2.0-or-later"
+depends=""
+depends_dev=""
+makedepends="$depends_dev cmake gtest-dev wayland-dev boost-dev"
+install=""
+subpackages="$pkgname-dev"
+source="https://github.com/MirServer/wlcs/releases/download/v$pkgver/wlcs-$pkgver.tar.xz
+	dlvsym.patch"
+builddir="$srcdir/wlcs-1.0.0"
+options="!check" # No test suite
+
+build() {
+	if [ "$CBUILD" != "$CHOST" ]; then
+		CMAKE_CROSSOPTS="-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_HOST_SYSTEM_NAME=Linux"
+	fi
+	cmake \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_SHARED_LIBS=True \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
+		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DWLCS_BUILD_ASAN=False \
+		-DWLCS_BUILD_TSAN=False \
+		-DWLCS_BUILD_UBSAN=False \
+		${CMAKE_CROSSOPTS} .
+	make
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="ce9e47cf6b6ad5c34bf82af128a453a278e40646aa02efe1acdf037bfc34ce0342f588014dfaaa6ab3823c5daaa5c5b9d3e49d401f7784ae4fe4e61efadb767b  wlcs-1.1.0.tar.xz
+fa5d9b6ef0e2ecd92f3e628b3000fe1a25ad882059e9c3de8af573b7ea00960ed81099220ccf1a9bba39fd8c8d5a5d582dff913e68e4a0821fb0f54e7df67458  dlvsym.patch"
