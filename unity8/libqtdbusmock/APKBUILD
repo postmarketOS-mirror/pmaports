@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=libqtdbusmock
-pkgver=0_git20181013
-_commit="f3ac84e2f3c005ae59a10a392c1b2ad4b8e6c528"
-pkgrel=1
+pkgver=0_git20190909
+_commit="1e9fd84aa31c7b858b90e2bbbdcadf081549fa65"
+pkgrel=0
 pkgdesc="Library for mocking DBus interactions using Qt"
 url="https://github.com/ubports/libqtdbusmock"
 arch="all"
@@ -11,8 +11,7 @@ license="LGPL-3.0"
 depends=""
 makedepends="cmake cmake-extras libqtdbustest networkmanager-dev qt5-qtbase-dev gtest-dev gmock"
 checkdepends="py3-dbusmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0001-Migrate-from-libnm-glib-to-libnm.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # 0% tests passed, 1 tests failed out of 1
 
@@ -32,5 +31,4 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-sha512sums="d59ce4258ce1e26896c533ed0aa99bb3f30d731ca55d7742bd635edef6c8c0ee82343b3e960effa8a58ed9268de8e870dbeaafaf420a08a49aea1f9cbc294ac7  libqtdbusmock-f3ac84e2f3c005ae59a10a392c1b2ad4b8e6c528.tar.gz
-44245015c8d888444089c1e911af282af1053ce127c00a936c66a68b82498095c612b15859b6dd5e0da5a376a3f8a2510f84d8e2dca1024f80e3447fd5abdd05  0001-Migrate-from-libnm-glib-to-libnm.patch"
+sha512sums="5726b78bee6fbc0b7dd3feecdcc0ac1611e4b73610ad55fc351a8b3a75d1df998854b6ecaacd8a25a632ebc3b2daf8053a607a00ddd4821d8dcf1ac01c971bea  libqtdbusmock-1e9fd84aa31c7b858b90e2bbbdcadf081549fa65.tar.gz"

@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=indicator-network
-pkgver=0_git20190212
-_commit="3cb4ada3d87303e6b981cf1307244f3a88017fec"
+pkgver=0_git20190907
+_commit="2539978c51684822733fbbd7ebb6971d671492a0"
 pkgrel=0
 pkgdesc="The 'Network' indicator for Ubuntu Touch"
 arch="all"
@@ -37,5 +37,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="a5ce04d9a896b2887592caf6f3bab8962569cdc5ba09a77c7799ce42b1b3cc78f8f2bb66d704a9b1487784755854188dcf012ca0515cdd79e418c51afad78b72  indicator-network-3cb4ada3d87303e6b981cf1307244f3a88017fec.tar.gz
+sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz
 33d6ec247b34ec92970b858aa410811b1becbda5d5e4f0bb7d72a68838db3a6fabc27278314c3d5b5261a56cd3ffb3c64f24f5048b81f35bdaa84b41927e1904  0001-Migrate-from-libnm-glib-to-libnm.patch"
