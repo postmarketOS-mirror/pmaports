@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=mir
-pkgver=1.1.2
-pkgrel=4
+pkgver=1.4.0
+pkgrel=0
 pkgdesc="Canonical's display server"
 url="https://mir-server.io"
 arch="all"
@@ -10,14 +10,14 @@ license="GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0"
 depends="xkeyboard-config dmz-cursor-theme ttf-freefont"
 depends_dev="boost-dev mesa-dev glm-dev protobuf-dev glog-dev gflags-dev eudev-dev glib-dev wayland-dev libepoxy-dev nettle-dev libinput-dev
 	capnproto-dev libxml++-2.6-dev py3-pillow freetype-dev libevdev-dev umockdev-dev lttng-ust-dev yaml-cpp-dev libxcursor-dev"
-makedepends="$depends_dev cmake libxkbcommon-dev gtest-dev gmock"
+makedepends="$depends_dev cmake libxkbcommon-dev gtest-dev gmock wlcs-dev"
 source="
 	https://github.com/MirServer/mir/releases/download/v$pkgver/mir-$pkgver.tar.xz
-	0001-Fix-google-protobuf-closure-related-errors.patch
-	0002-Remove-drmIsMaster-to-use-libdrm-version.patch
-	link_fix.patch
+	0001-Add-missing-throw_exception.hpp-include.patch
+	1006.patch
+	lttng_no_sdt.patch
 	temp.patch
-	"
+"
 subpackages="$pkgname-dev"
 options="!check" # Some tests fail
 
@@ -42,8 +42,8 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir/" install
 }
-sha512sums="4431615d795b93239a83a197d61a5900f094a2108933be4e4da09220bd20e2b031e5232174805216a964279fcf8786672d5c40c3be83856d1903f128b7b814b7  mir-1.1.2.tar.xz
-6f0d22d2d0ec85793b5067f2dcb95ac57ef5118096028098f096b32781f49acfe28ab52523ac34f72035ec7518056c392a9fc46ea5c41332538fe7a0d0db303a  0001-Fix-google-protobuf-closure-related-errors.patch
-279c009d8d54823bcfdfd564543ffa4cb1ad99cef211f82d5eefe3cc33fda80d5455dfaf8ba732f6cd1067bb442d732b364fdeee07018006def13b55887c6da8  0002-Remove-drmIsMaster-to-use-libdrm-version.patch
-190219d876c4c5e4b215a45d36316e7eeb0fc87880d1b5f3c9c91298409e21f9560b0713c88c6ad5aaf39d73468362d7b9aa680dc9bb68b6bb180de91e4e6007  link_fix.patch
+sha512sums="6f2d579eaf6eecc13326a1cadfff9ecf44fcf1c621ada184dc20beb79a211bb9e11900128eead6484f574f4b6012fe7de6246281b30d9ccfe617bb1e36141d9e  mir-1.4.0.tar.xz
+95e2d8158876f1a3f6cb0148eff156bd5d61e32bcd89dfed50a937dd2d8c2f954a8655331c5dec0e34a39c1ae42d75b736d8c770477f4fefd2519cbb55e1cf5b  0001-Add-missing-throw_exception.hpp-include.patch
+73cdd160fd46bff86fa96e1cd7dd154ca6b838d67d67e6470173a38f0c0dc76dd56ad39804d4e4fde361879321f2cfb8418e9d7f08ac6c5242a96c45dc6d8c8c  1006.patch
+c27e7b43f19044f2aac6d85d0403e2d9bae8e7c11b47b9964940c4e194dc49bc88a4b3828c7227358d90a9ef24e2d2fca94ea66ce9fb659cd9b5ec5fcefd522d  lttng_no_sdt.patch
 dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"

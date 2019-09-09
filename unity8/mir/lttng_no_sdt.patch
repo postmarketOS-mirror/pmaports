@@ -1,0 +1,17 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c897b20056..7e28adf3e8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -300,9 +300,9 @@ check_cxx_symbol_exists("drmIsMaster" "xf86drm.h" MIR_LIBDRM_HAS_IS_MASTER)
+ # USDT integration. The integration only involves #include-ing a
+ # SystemTap header and calling a macro from it in the LTTNG macro,
+ # but there aren't guarantees this won't change in future.
+-add_definitions(  # Drop in favour of add_compile_definitions when we drop 16.04
+-  -DLTTNG_UST_HAVE_SDT_INTEGRATION
+-)
++#add_definitions(  # Drop in favour of add_compile_definitions when we drop 16.04
++#  -DLTTNG_UST_HAVE_SDT_INTEGRATION
++#)
+ 
+ #
+ # Full OpenGL support is possibly complete but not yet perfect. So is
