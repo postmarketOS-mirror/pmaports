@@ -11,8 +11,7 @@ license="GPL-3.0"
 depends=""
 depends_dev="glib-dev unity-api-dev ofono-dev networkmanager-dev libsecret-dev url-dispatcher-dev qt5-qtdeclarative-dev libqofono-dev"
 makedepends="$depends_dev cmake-extras gtest-dev gmock libqtdbustest libqtdbusmock gmenuharness-dev intltool"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0001-Migrate-from-libnm-glib-to-libnm.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests hang
@@ -37,5 +36,4 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz
-33d6ec247b34ec92970b858aa410811b1becbda5d5e4f0bb7d72a68838db3a6fabc27278314c3d5b5261a56cd3ffb3c64f24f5048b81f35bdaa84b41927e1904  0001-Migrate-from-libnm-glib-to-libnm.patch"
+sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz"
