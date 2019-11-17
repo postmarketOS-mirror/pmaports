@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=mir
-pkgver=1.4.0
+pkgver=1.5.0
 pkgrel=0
 pkgdesc="Canonical's display server"
 url="https://mir-server.io"
@@ -12,9 +12,9 @@ depends_dev="boost-dev mesa-dev glm-dev protobuf-dev glog-dev gflags-dev eudev-d
 	capnproto-dev libxml++-2.6-dev py3-pillow freetype-dev libevdev-dev umockdev-dev lttng-ust-dev yaml-cpp-dev libxcursor-dev"
 makedepends="$depends_dev cmake libxkbcommon-dev gtest-dev gmock wlcs-dev"
 source="
-	https://github.com/MirServer/mir/releases/download/v$pkgver/mir-$pkgver.tar.xz
-	0001-Add-missing-throw_exception.hpp-include.patch
-	1006.patch
+	$pkgname-$pkgver.tar.gz::https://github.com/MirServer/mir/archive/v$pkgver.tar.gz
+	1069.patch
+	googletest-1.10.patch
 	lttng_no_sdt.patch
 	temp.patch
 "
@@ -42,8 +42,8 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir/" install
 }
-sha512sums="6f2d579eaf6eecc13326a1cadfff9ecf44fcf1c621ada184dc20beb79a211bb9e11900128eead6484f574f4b6012fe7de6246281b30d9ccfe617bb1e36141d9e  mir-1.4.0.tar.xz
-95e2d8158876f1a3f6cb0148eff156bd5d61e32bcd89dfed50a937dd2d8c2f954a8655331c5dec0e34a39c1ae42d75b736d8c770477f4fefd2519cbb55e1cf5b  0001-Add-missing-throw_exception.hpp-include.patch
-73cdd160fd46bff86fa96e1cd7dd154ca6b838d67d67e6470173a38f0c0dc76dd56ad39804d4e4fde361879321f2cfb8418e9d7f08ac6c5242a96c45dc6d8c8c  1006.patch
+sha512sums="3712fbb46c4d8a74a1ea4f872f589fb2ad797f6d8e37b6b05330c43ceb9083f4d3ba17ff13ebaa3886e01b3b7c913a19e04e222fc4a26174da7875482c9f2819  mir-1.5.0.tar.gz
+0d189c2e4d4354f1dd90e93c04ec1fcfbfcebb3671b68ddf5842c9ee796dba96a5f9df87e0cd7f724545ac746b17e537da425071530800bcf228956e9ff342bb  1069.patch
+87efa09aa300f2f30e6835915920fd8e39c09edc747b9e7d7b7973a2694c73c58363d3d42e3c4531d836082ebc2f691500a08529ae1a97c1e44569783641f5f6  googletest-1.10.patch
 c27e7b43f19044f2aac6d85d0403e2d9bae8e7c11b47b9964940c4e194dc49bc88a4b3828c7227358d90a9ef24e2d2fca94ea66ce9fb659cd9b5ec5fcefd522d  lttng_no_sdt.patch
 dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"

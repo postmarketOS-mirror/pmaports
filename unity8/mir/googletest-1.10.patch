@@ -1,0 +1,26 @@
+From 67346dc412d6dde71dc9915d73a50f3a217746d1 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sun, 17 Nov 2019 22:46:59 +0100
+Subject: [PATCH] Adjust regex for googletest 1.10.0
+
+The regex didn't handle two digits for the 'minor' number. Fix that.
+---
+ tests/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index ea55055fc9..6f19253eb5 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -43,7 +43,7 @@ else()
+ endif()
+ 
+ string(REGEX MATCH
+-  "([0-9])\\.([0-9])\\.([0-9])" GTEST_VERSION_PARSED
++  "([0-9])\\.([0-9]+)\\.([0-9])" GTEST_VERSION_PARSED
+   ${GTEST_VERSION_STR})
+ if (GTEST_VERSION_PARSED)
+   set(GTEST_VERSION_MAJOR ${CMAKE_MATCH_1})
+-- 
+2.24.0
+
