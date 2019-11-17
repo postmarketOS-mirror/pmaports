@@ -35,6 +35,9 @@ check() {
 package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir/" PYTHON_INSTALL_FLAGS="--root=$pkgdir/" install
+
+	# Make abuild's version check happy (#386)
+	sed -i s/+ubports//g "$pkgdir"/usr/lib/pkgconfig/*.pc
 }
 
 sha512sums="c7b2aed6bd14a791cde5ea97d6558c29a6e86e5da48ea15cd008e0811fab254ce6c0e289eb7e00554a5522e1f5562ed0d4e24e057ea4d1bd37b9a11580ef69d7  click-cc108942faa348a155e665a5c07828dd36954d6a.tar.gz"
