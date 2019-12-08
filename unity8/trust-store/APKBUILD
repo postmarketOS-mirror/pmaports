@@ -12,7 +12,7 @@ makedepends="cmake cmake-extras mir-dev boost-dev process-cpp-dev dbus-cpp-dev p
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	link_with_libintl.patch
 	no_werror.patch"
-subpackages="$pkgname-dev $pkgname-lang"
+subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # 62% tests passed, 5 tests failed out of 13
 
