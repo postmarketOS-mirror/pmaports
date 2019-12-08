@@ -1,7 +1,7 @@
 From 526ac3f293fa9c6afcf1e4db3c12ee271ffc206b Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:23:11 +0100
-Subject: [PATCH 2/5] NoDpkgParse
+Subject: [PATCH 2/6] NoDpkgParse
 
 ---
  data/CMakeLists.txt | 4 ++--
@@ -22,5 +22,5 @@ index f13c6b639..ea0d788f1 100644
 -install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/unity8)
 +#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/unity8)
 -- 
-2.20.1
+2.24.0
 
