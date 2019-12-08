@@ -1,16 +1,16 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20190222
-_commit="1bddb8c2331f990a53286aeeb070ed384850b52e"
+pkgver=0_git20191206
+_commit="b7bd31a43ab37986b4adfd676806de242a9d9a31"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
 url="https://unity8.io"
 license="LGPL-3.0"
-depends=""
 makedepends="$depends_dev cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+	0001-Revert-Use-app-launch-2.patch"
 builddir="$srcdir/$pkgname-$_commit"
 
 prepare() {
@@ -40,4 +40,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="36492fc7ffe0937abb343e9ab816b7194636a4fb8e946f25a3113639460e0c79f8449c05d8fe4b44e4e30167fa39dd8c054bd4df536e21926b73b855212db9eb  qtmir-1bddb8c2331f990a53286aeeb070ed384850b52e.tar.gz"
+sha512sums="62bdcbed2196279334f8f5fb0e1093dcdd11def6864e331605ee3710edf695699362be1c840f289e98dd05142c27ee416bd9e7ca607cf33b7d07f3a6f285bf74  qtmir-b7bd31a43ab37986b4adfd676806de242a9d9a31.tar.gz
+cd970ebc05c1f78ef664fe781a1ec06590fa61f389a5444487d2770801fcf669eb03bc249ed89c86d1a358e3ae5780636a544d9aac1b2b05e15f312a935888fd  0001-Revert-Use-app-launch-2.patch"
