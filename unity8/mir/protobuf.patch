@@ -1,0 +1,124 @@
+diff --git a/src/client/display_configuration.h b/src/client/display_configuration.h
+index e7503698e3..3dd48de2eb 100644
+--- a/src/client/display_configuration.h
++++ b/src/client/display_configuration.h
+@@ -43,10 +43,17 @@ struct MirDisplayConfig
+         return wrapped;
+     }
+ 
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++    size_t ByteSize() const
++    {
++        return wrapped.ByteSizeLong();
++    }
++#else
+     int ByteSize() const
+     {
+         return wrapped.ByteSize();
+     }
++#endif
+ 
+     uint8_t* SerializeWithCachedSizesToArray(uint8_t* target) const
+     {
+diff --git a/src/client/mir_blob.cpp b/src/client/mir_blob.cpp
+index 15c6ea4aef..031009b482 100644
+--- a/src/client/mir_blob.cpp
++++ b/src/client/mir_blob.cpp
+@@ -109,7 +109,11 @@ try
+         protobuf_output->set_orientation(output->orientation);
+     }
+ 
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++    auto blob = std::make_unique<MirManagedBlob>(static_cast<size_t>(protobuf_config.ByteSizeLong()));
++#else
+     auto blob = std::make_unique<MirManagedBlob>(static_cast<size_t>(protobuf_config.ByteSize()));
++#endif
+ 
+     protobuf_config.SerializeWithCachedSizesToArray(blob->data());
+ 
+diff --git a/src/client/rpc/mir_basic_rpc_channel.cpp b/src/client/rpc/mir_basic_rpc_channel.cpp
+index a4acaef3b5..602517de6a 100644
+--- a/src/client/rpc/mir_basic_rpc_channel.cpp
++++ b/src/client/rpc/mir_basic_rpc_channel.cpp
+@@ -154,7 +154,11 @@ mir::protobuf::wire::Invocation mclr::MirBasicRpcChannel::invocation_for(
+     size_t num_side_channel_fds)
+ {
+     mir::VariableLengthArray<mir::frontend::serialization_buffer_size>
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++        buffer{static_cast<size_t>(request->ByteSizeLong())};
++#else
+         buffer{static_cast<size_t>(request->ByteSize())};
++#endif
+ 
+     request->SerializeWithCachedSizesToArray(buffer.data());
+ 
+diff --git a/src/client/rpc/mir_protobuf_rpc_channel.cpp b/src/client/rpc/mir_protobuf_rpc_channel.cpp
+index a5b206540b..b12abd15c6 100644
+--- a/src/client/rpc/mir_protobuf_rpc_channel.cpp
++++ b/src/client/rpc/mir_protobuf_rpc_channel.cpp
+@@ -265,7 +265,11 @@ void mclr::MirProtobufRpcChannel::send_message(
+     mir::protobuf::wire::Invocation const& invocation,
+     std::vector<mir::Fd>& fds)
+ {
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++    const size_t size = body.ByteSizeLong();
++#else
+     const size_t size = body.ByteSize();
++#endif
+     const unsigned char header_bytes[2] =
+     {
+         static_cast<unsigned char>((size >> 8) & 0xff),
+diff --git a/src/server/frontend/event_sender.cpp b/src/server/frontend/event_sender.cpp
+index e3bf5b9a6c..1c3507ceb6 100644
+--- a/src/server/frontend/event_sender.cpp
++++ b/src/server/frontend/event_sender.cpp
+@@ -104,13 +104,21 @@ void mfd::EventSender::handle_input_config_change(MirInputConfig const& config)
+ void mfd::EventSender::send_event_sequence(mp::EventSequence& seq, FdSets const& fds)
+ {
+     mir::VariableLengthArray<frontend::serialization_buffer_size>
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++        send_buffer{static_cast<size_t>(seq.ByteSizeLong())};
++#else
+         send_buffer{static_cast<size_t>(seq.ByteSize())};
++#endif
+ 
+     seq.SerializeWithCachedSizesToArray(send_buffer.data());
+ 
+     mir::protobuf::wire::Result result;
+     result.add_events(send_buffer.data(), send_buffer.size());
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++    send_buffer.resize(result.ByteSizeLong());
++#else
+     send_buffer.resize(result.ByteSize());
++#endif
+     result.SerializeWithCachedSizesToArray(send_buffer.data());
+ 
+     try
+diff --git a/src/server/frontend/protobuf_responder.cpp b/src/server/frontend/protobuf_responder.cpp
+index 83b9cd114c..5b516e8516 100644
+--- a/src/server/frontend/protobuf_responder.cpp
++++ b/src/server/frontend/protobuf_responder.cpp
+@@ -39,7 +39,11 @@ void mfd::ProtobufResponder::send_response(
+     FdSets const& fd_sets)
+ {
+     mir::VariableLengthArray<serialization_buffer_size>
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++        send_response_buffer{static_cast<size_t>(response->ByteSizeLong())};
++#else
+         send_response_buffer{static_cast<size_t>(response->ByteSize())};
++#endif
+ 
+     response->SerializeWithCachedSizesToArray(send_response_buffer.data());
+ 
+@@ -49,7 +53,11 @@ void mfd::ProtobufResponder::send_response(
+         send_response_result.set_id(id);
+         send_response_result.set_response(send_response_buffer.data(), send_response_buffer.size());
+ 
++#if GOOGLE_PROTOBUF_VERSION >= 3010000
++        send_response_buffer.resize(send_response_result.ByteSizeLong());
++#else
+         send_response_buffer.resize(send_response_result.ByteSize());
++#endif
+         send_response_result.SerializeWithCachedSizesToArray(send_response_buffer.data());
+     }
+ 

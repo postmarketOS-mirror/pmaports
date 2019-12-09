@@ -1,0 +1,30 @@
+From bb0579638b990879a860aa1eea05657aa1d70d93 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Mon, 9 Dec 2019 19:19:27 +0100
+Subject: [PATCH] Use poll.h instead of sys/poll.h
+
+Solves the following build warning:
+
+/usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+    1 | #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+      |  ^~~~~~~
+---
+ src/platforms/wayland/display.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/platforms/wayland/display.cpp b/src/platforms/wayland/display.cpp
+index ede686313b..57edd0da5e 100644
+--- a/src/platforms/wayland/display.cpp
++++ b/src/platforms/wayland/display.cpp
+@@ -31,7 +31,7 @@
+ #include <boost/throw_exception.hpp>
+ 
+ #include <sys/eventfd.h>
+-#include <sys/poll.h>
++#include <poll.h>
+ #include <algorithm>
+ #include <vector>
+ 
+-- 
+2.24.0
+
