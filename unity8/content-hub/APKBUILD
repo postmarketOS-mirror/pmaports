@@ -10,18 +10,12 @@ license="GPL-3.0 LGPL-3.0"
 depends=""
 depends_dev="qt5-qtdeclarative-dev ubuntu-app-launch-dev gsettings-qt-dev libnih-dev ubuntu-download-manager-dev libnotify-dev libapparmor-dev ubuntu-ui-toolkit-dev"
 makedepends="$depends_dev cmake cmake-extras libapparmor"
-checkdepends="gtest-dev gmock dbus-test-runner"
-options="!check" # 92% tests passed, 1 tests failed out of 12 (xfvb-run script is missing, see https://bugs.alpinelinux.org/issues/9617)
+checkdepends="gtest-dev gmock dbus-test-runner xvfb-run"
+options="!check" # 92% tests passed, 1 tests failed out of 12
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	0001-Use-qmlplugindump-qt5.patch"
 subpackages="$pkgname-dev $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
-
-prepare() {
-	default_prepare
-	# Don't build tests
-	truncate -s 0 "$builddir"/tests/CMakeLists.txt
-}
 
 build() {
 	mkdir "$builddir"/build
@@ -34,7 +28,7 @@ build() {
 
 check() {
 	cd "$builddir"/build/tests
-	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+	xvfb-run env CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
