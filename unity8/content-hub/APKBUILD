@@ -9,8 +9,8 @@ arch="all"
 license="GPL-3.0 LGPL-3.0"
 depends=""
 depends_dev="qt5-qtdeclarative-dev ubuntu-app-launch-dev gsettings-qt-dev libnih-dev ubuntu-download-manager-dev libnotify-dev libapparmor-dev ubuntu-ui-toolkit-dev"
-makedepends="$depends_dev cmake cmake-extras libapparmor"
-checkdepends="gtest-dev gmock dbus-test-runner xvfb-run"
+makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev"
+checkdepends="gmock dbus-test-runner xvfb-run"
 options="!check" # 92% tests passed, 1 tests failed out of 12
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	0001-Use-qmlplugindump-qt5.patch"
