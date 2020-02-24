@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=mir
-pkgver=1.7.0
+pkgver=1.7.1
 pkgrel=0
 pkgdesc="Canonical's display server"
 url="https://mir-server.io"
@@ -15,8 +15,6 @@ source="
 	$pkgname-$pkgver.tar.gz::https://github.com/MirServer/mir/archive/v$pkgver.tar.gz
 	lttng_no_sdt.patch
 	temp.patch
-	0001-Use-poll.h-instead-of-sys-poll.h.patch
-	protobuf.patch
 "
 subpackages="$pkgname-dev"
 options="!check" # Some tests fail
@@ -39,8 +37,6 @@ check() {
 package() {
 	make DESTDIR="$pkgdir/" install
 }
-sha512sums="12622fb6c23663d5563b773fe1a6a1beaff591d5c35e3c4066d4c8bbe5edb2d503bb992d0c487718e9161836e0a062b85f72d3977876066f0d1278e8846e5ffd  mir-1.7.0.tar.gz
+sha512sums="8d7e3e1803a628da1565fc6a01df28a6899e6ed8fa60cbb62ddd6e23e1072477315c252050b35e4860d9b538419a7b5fd3b9754cfae38cf0fabe8747a4e90817  mir-1.7.1.tar.gz
 c27e7b43f19044f2aac6d85d0403e2d9bae8e7c11b47b9964940c4e194dc49bc88a4b3828c7227358d90a9ef24e2d2fca94ea66ce9fb659cd9b5ec5fcefd522d  lttng_no_sdt.patch
-dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch
-e2eed0a5a80768f469d9846010b7320b178ec47ff4b3f731946e2629036565d5039cd3e633d1fcd59fc962a211f4f0d78b7fa64bab588a77c84b395aa74e125a  0001-Use-poll.h-instead-of-sys-poll.h.patch
-ed5e866e20bd422f2505cfd156f923592b063ac3c6926234f1326853f26d46d96ded8dc843e2267aba7af2a450d0ac5dab6c3391d8a051590d0bf63ab2fcd9c2  protobuf.patch"
+dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"
