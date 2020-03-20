@@ -1,17 +1,17 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=cmake-extras
-pkgver=0_git20190725
-_commit="c58ef40ee519efed321ab2df580b1b5b309b8700"
+pkgver=0_git20200225
+_commit="a90eeede250b5300e496f8be7298d602aefc742d"
 pkgrel=0
 pkgdesc="A collection of add-ons for the CMake build tool"
-url="https://github.com/ubports/cmake-extras"
+url="https://gitlab.com/ubports/core/cmake-extras"
 arch="noarch"
 license="GPL-3.0"
 depends="cmake"
 makedepends="cmake"
 options="!check" # No testsuite
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/cmake-extras/-/archive/$_commit/cmake-extras-$_commit.tar.gz
 	Use_gtest_cmake_from_mir.patch
 	qmlplugindump_path.patch"
 builddir="$srcdir/$pkgname-$_commit"
@@ -26,6 +26,6 @@ package() {
 	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
-sha512sums="67c54fa91dfd8fc4123369d52b2df4bad5ab7d3b1d82795ed9733e091d42e9c88874bc0b524827d71851419dcd61c5f6a6788320176eadba3f62d173e5f1486f  cmake-extras-c58ef40ee519efed321ab2df580b1b5b309b8700.tar.gz
+sha512sums="a580f5dad0cb208cce749107e6ab8400eda6aa177f412908a7a35b1f3c7d7a6d803050f52b440d9644d6f894590dd2236b326706192d9677396ef4f727b7719d  cmake-extras-a90eeede250b5300e496f8be7298d602aefc742d.tar.gz
 996334490e062868b2dd24a0d2d688d95877343ae2db6a06efc580d14ffe1d00f0c9277be0929b9c7c859aef2dea0be68ddc49a7495ad16eaa0a156838f8bca9  Use_gtest_cmake_from_mir.patch
 e55bd3ae7372b33534d239f7e959af0eba5687aba0386613381e4f9fc840f89213f5ae92544b7e969943d46e815d49c66fd24c29c44fd4166bb3a6bf81e1ac7e  qmlplugindump_path.patch"
