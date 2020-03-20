@@ -3,7 +3,7 @@ index 623911a..7e11034 100644
 --- a/tests/libual-test.cc
 +++ b/tests/libual-test.cc
 @@ -32,7 +32,7 @@
- #include "lomiri-app-launch.h"
+ #include "ubuntu-app-launch.h"
  
  #include "eventually-fixture.h"
 -#include "libertine-service.h"
