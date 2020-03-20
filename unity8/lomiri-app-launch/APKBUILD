@@ -1,17 +1,17 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=ubuntu-app-launch
-pkgver=0_git20181230
+pkgname=lomiri-app-launch
+pkgver=0_git20200306
 pkgrel=0
-_commit="55c0338a110a10994de4efc220d36293080770e2"
+_commit="98b9d4c04caf5f748ab896b9de04960dc643facd"
 pkgdesc="Session init system job for Launching Applications"
 arch="all"
-url="https://unity8.io"
+url="https://gitlab.com/ubports/core/lomiri-app-launch"
 license="GPL-3.0"
 depends_dev="gobject-introspection-dev lttng-ust-dev json-glib-dev zeitgeist-dev lomiri-api-dev curl-dev properties-cpp-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative gtest-dev glib-dev mir-dev"
 checkdepends="gtest-dev gmock py3-dbusmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-app-launch/-/archive/$_commit/lomiri-app-launch-$_commit.tar.gz
 	libual-test_libertine.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -42,5 +42,5 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="0834277bd0cf14255bbf67a558933044a3daa04b62de4df1bf540dad63f2a03411ec3b1833c1ef7b97a26051064a37e9b1c9a2078caad8bd4d389425f0fd091e  ubuntu-app-launch-55c0338a110a10994de4efc220d36293080770e2.tar.gz
-aaec2d03930b85ea4298c056670ecc1e7855ecb951ecaa13cc94a762524928aacdd86a8d89cf86fa16f44bd8a6064e2f8cc3450a9f06cc57e1fa8bbd1a21c2d9  libual-test_libertine.patch"
+sha512sums="8d03175ffcb7613445b71b0825fc7d6d65fe62cf1fd0ace68166992ee5542b9cafc824b9c1a1a65ed267fbe7579caa82afe24958c74bc518cbab12e91b90340f  lomiri-app-launch-98b9d4c04caf5f748ab896b9de04960dc643facd.tar.gz
+d7338b9f514398b685328cfd81bcd9f7d9b11149674831bb065f3d1074ff1602009e0fe08bbed0855657084c8a48f88b9b1228d8a496095ffcc185d4f3f35a6b  libual-test_libertine.patch"
