@@ -9,7 +9,7 @@ arch="all"
 license="LGPL-3.0"
 depends=""
 depends_dev=""
-makedepends="$depends_dev cmake cmake-extras qt5-qtbase-dev unity-api-dev glib-dev gtest-dev gmock libqtdbustest"
+makedepends="$depends_dev cmake cmake-extras qt5-qtbase-dev lomiri-api-dev glib-dev gtest-dev gmock libqtdbustest"
 checkdepends=""
 source="$pkgname-$_commit.tar.gz::https://github.com/unity8-team/$pkgname/archive/$_commit.tar.gz
 	0001-Add-missing-header-include.patch"
