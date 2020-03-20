@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity-api
-pkgver=0_git20191124
-_commit="66ad408a60c48102c5a99da2a675edf90c26325a"
+pkgver=0_git20200226
+_commit="989301571498a86ce99174379045e85b8549c2d9"
 pkgrel=0
 pkgdesc="API for Unity shell integration"
 url="https://github.com/ubports/unity-api"
@@ -12,7 +12,8 @@ depends=""
 depends_dev=""
 makedepends="$depends_dev cmake cmake-extras qt5-qtdeclarative-dev libqtdbustest gtest-dev gmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	qmltestrunner.patch"
+	qmltestrunner.patch
+	0001-Add-Mir-AttachedState.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # 88% tests passed, 3 tests failed out of 26
@@ -36,5 +37,6 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="814715305f8647ab5ed41b64db08e5b64d4a41a45e056849b35e05cfcbad3cb58aec69a9a743008d3f20d2e12257a8dd4ceec5a36b26a23a1b1076a72e2a28a9  unity-api-66ad408a60c48102c5a99da2a675edf90c26325a.tar.gz
-8695998cb0451943ff08f00be52766d27c439184b1e8531a563cffe4bf4251dea52d5bc3493d797f4f6007f13130930c6b0cfb2c04b9dc54e6891e17c2978fb9  qmltestrunner.patch"
+sha512sums="226a5f0c05978ced41b48587c14db9a811a0fd709c51e43579ba9f88ba79f3a2b735e977b3c1fbcbe7aab4527b0b0fdbc7049ba76ffe22590687f833ea5685b2  unity-api-989301571498a86ce99174379045e85b8549c2d9.tar.gz
+8695998cb0451943ff08f00be52766d27c439184b1e8531a563cffe4bf4251dea52d5bc3493d797f4f6007f13130930c6b0cfb2c04b9dc54e6891e17c2978fb9  qmltestrunner.patch
+d6a05624bfbec5da87ac4dfdb34f8387dd969f1226d29be73c059216dd76191b3084364e45c88d8c9da15d9632f121d7b9a134fecd08532c8cc60427b39e5ab5  0001-Add-Mir-AttachedState.patch"

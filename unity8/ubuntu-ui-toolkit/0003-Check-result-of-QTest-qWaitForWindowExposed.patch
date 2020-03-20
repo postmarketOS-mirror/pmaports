@@ -1,0 +1,52 @@
+From 431d90cc1a10be729400a91c190aaa5a0623e3ce Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Thu, 5 Mar 2020 13:33:49 +0100
+Subject: [PATCH 3/4] Check result of QTest::qWaitForWindowExposed
+
+Fixes #10, fixes #23
+---
+ src/imports/Test/plugin/uctestcase.cpp       | 3 ++-
+ tests/unit/recreateview/tst_recreateview.cpp | 6 ++++--
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/src/imports/Test/plugin/uctestcase.cpp b/src/imports/Test/plugin/uctestcase.cpp
+index 3ac3eb522..a042cff9b 100644
+--- a/src/imports/Test/plugin/uctestcase.cpp
++++ b/src/imports/Test/plugin/uctestcase.cpp
+@@ -55,7 +55,8 @@ UbuntuTestCase::UbuntuTestCase(const QString& file, ResizeMode resize, bool asse
+     }
+     if (rootObject()) {
+         show();
+-        QTest::qWaitForWindowExposed(this);
++        bool window_shown = QTest::qWaitForWindowExposed(this);
++        Q_ASSERT(window_shown);
+     }
+ }
+ 
+diff --git a/tests/unit/recreateview/tst_recreateview.cpp b/tests/unit/recreateview/tst_recreateview.cpp
+index 814f16ff8..ecf1a5c86 100644
+--- a/tests/unit/recreateview/tst_recreateview.cpp
++++ b/tests/unit/recreateview/tst_recreateview.cpp
+@@ -51,7 +51,8 @@ void RecreateViewTest::testCase_recreateView()
+     view->setSource(QUrl::fromLocalFile("SimpleApp.qml"));
+     QVERIFY(view->rootObject() != 0);
+     view->show();
+-    QTest::qWaitForWindowExposed(view);
++    bool window_shown = QTest::qWaitForWindowExposed(view);
++    Q_ASSERT(window_shown);
+     delete view;
+ 
+     view = new QQuickView;
+@@ -60,7 +61,8 @@ void RecreateViewTest::testCase_recreateView()
+     view->setSource(QUrl::fromLocalFile("SimpleApp.qml"));
+     QVERIFY(view->rootObject() != 0);
+     view->show();
+-    QTest::qWaitForWindowExposed(view);
++    window_shown = QTest::qWaitForWindowExposed(view);
++    Q_ASSERT(window_shown);
+     delete view;
+ }
+ 
+-- 
+2.25.2
+

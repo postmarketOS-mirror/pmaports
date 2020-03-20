@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-ui-toolkit
-pkgver=0_git20190422
-_commit="d19600f2e7690aaf5f49c88174b541aeab7bc7ef"
+pkgver=0_git20200204
+_commit="9fceb0f5b2082ea13acdbcdb55160d896db86367"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -12,18 +12,13 @@ depends="qt5-qtfeedback"
 depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-dev libxi-dev eudev-dev mir-dev libevdev-dev qt5-qtgraphicaleffects qt5-qtfeedback-dev"
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0004-Make-it-compile-with-Qt-5.12.patch
-	replace-bash-for-sh.patch"
+	0001-Add-include-to-math.h.patch
+	0002-Don-t-hardcode-Debian-specific-python3-path.patch
+	0003-Check-result-of-QTest-qWaitForWindowExposed.patch
+	0004-Fix-missing-sentinel-warning.patch"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # Complaining about a non-existing file
 builddir="$srcdir/$pkgname-$_commit"
-
-prepare() {
-	default_prepare
-
-	# Lets warnings be warnings and not errors
-	sed -i 's|warning_clean|warn_off|' "$builddir"/.qmake.conf
-}
 
 build() {
 	cd "$builddir"
@@ -41,6 +36,8 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="99e333e51653b810c14d2918f89421ac52d8d845010c4671d33c302f5990e796446c03e517c8ea5cd39d951bb378eaa1a4c3654f27850c6aaaf1d0134dc684bd  ubuntu-ui-toolkit-d19600f2e7690aaf5f49c88174b541aeab7bc7ef.tar.gz
-5b5c00bd365ee4068e2e0622a0ce31c7b67b0c6cf136b0d717dd68ac9559bc2d9c54e1e0c9106fa1d6e3438de974fa8b44c023888fe87bc1d1ed584023184eba  0004-Make-it-compile-with-Qt-5.12.patch
-e01567f2426f78b0862e7b09cd99cabf3d885b600592e6a4f0e07dc077fae2ba8dd1d2deba3bb89d31171a90db6de909281664bcbc7736b9432f2bc0b26544e1  replace-bash-for-sh.patch"
+sha512sums="910db5b70147dae6c10563eda07129073473e89e4367fd2fa1aa62ac656a42b1f7062bfe451984cee3bbea73ae5873db63e66b2966442b90b25e3be0a79d11e6  ubuntu-ui-toolkit-9fceb0f5b2082ea13acdbcdb55160d896db86367.tar.gz
+4eb30bec1a457aacf969cb83dc847f7fa95a77e5e8672771253205b170dd0776541c71f0da9adf8e6178af92b4d50c455fa4b863a8492f6bb8048ceb4ed172a4  0001-Add-include-to-math.h.patch
+22f6cb444e9e132ecc9b74cfe1f5b28ab5c4b8e53c248176eae7d35357796364ec769577c8293d89364546659b04ba4d429a5b6731c41fcb87f73c8bdcb8d9e8  0002-Don-t-hardcode-Debian-specific-python3-path.patch
+a89da826f470d335e8d3c208063f031792dd99d547c3a1979db6e4bdc5fe0adecc6fea3cba8a4687626d561c1826ff1f7232cdd136ece6713b6dc616aa79ec28  0003-Check-result-of-QTest-qWaitForWindowExposed.patch
+7bdc17548ba76b6b841d5687c03ba859566efc0442915faac5d7c6d034372766198e5b5e7538bdac598259a9d89ca086fa5a973aa1e1d9a110befb2d2ee265b1  0004-Fix-missing-sentinel-warning.patch"

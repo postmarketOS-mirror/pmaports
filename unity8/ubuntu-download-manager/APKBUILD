@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-download-manager
-pkgver=0_git20190524
-_commit="a418eead31c7e8610fb610b633d9e9eb5b22ba0f"
+pkgver=0_git20200118
+_commit="6d1d305da3f6e9c3bfba278fb7268b80c48ef7fd"
 pkgrel=0
 pkgdesc="Provides a service for downloading files while an application is suspended"
 arch="all"
@@ -12,8 +12,7 @@ depends=""
 depends_dev="qt5-qtdeclarative-dev boost-dev glog-dev libnih-dev"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock"
 checkdepends="dbus-test-runner xvfb-run"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0002-Move-SquidConfTemplate-implementation-from-.h-to-.cp.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests fail
@@ -39,5 +38,4 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="9dc19b99fc8cdc9b76337ea5c924634068c492d30c1106df4d4a374e58d3d4f542dd553835d954174b2aa3dd78b6388bcbfe46a5f5bdbdac5db8d6edf788a9c8  ubuntu-download-manager-a418eead31c7e8610fb610b633d9e9eb5b22ba0f.tar.gz
-2ecf4f2be794e9adf067be1568f9d7c4e0a5205c6258f57d26cb401113e501790f860b0aafaad7e036710f71fc01330cbb1b2051549dc67b4f98b042c177ffe5  0002-Move-SquidConfTemplate-implementation-from-.h-to-.cp.patch"
+sha512sums="6fd4ff502609db21ddde239ea2a9e087ce42b6d9fe69aa451a4383c03333f95a9d704375096599d81bec36ac69e76c0983d1f2ad3cd41b2aac737cfe3f911030  ubuntu-download-manager-6d1d305da3f6e9c3bfba278fb7268b80c48ef7fd.tar.gz"
