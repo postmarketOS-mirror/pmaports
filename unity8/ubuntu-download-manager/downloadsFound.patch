@@ -1,0 +1,16 @@
+diff --git a/src/downloads/qml/ubuntu_download_manager.cpp b/src/downloads/qml/ubuntu_download_manager.cpp
+index 247201ba..15ec41e0 100644
+--- a/src/downloads/qml/ubuntu_download_manager.cpp
++++ b/src/downloads/qml/ubuntu_download_manager.cpp
+@@ -153,6 +153,11 @@ void UbuntuDownloadManager::downloadGroupCreated(GroupDownload* group)
+     Q_UNUSED(group);
+ }
+ 
++void UbuntuDownloadManager::downloadsFound(DownloadsList* downloads)
++{
++    Q_UNUSED(downloads);
++}
++
+ void UbuntuDownloadManager::registerError(DownloadError& downloadError)
+ {
+     m_errorMessage = downloadError.message();
