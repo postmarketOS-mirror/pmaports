@@ -1,4 +1,4 @@
-From ad764293d7fc06a1880acd51ff95094f2c85a76c Mon Sep 17 00:00:00 2001
+From 235cc22d1e31f507c63cc43f8dfcfc95364ca477 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Fri, 20 Mar 2020 22:35:05 +0100
 Subject: [PATCH 2/3] Disable Werror
@@ -8,7 +8,7 @@ Subject: [PATCH 2/3] Disable Werror
  1 file changed, 2 insertions(+), 11 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 49c6ffa1..189b6f03 100644
+index 0970c756..816d9f4f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -26,8 +26,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
@@ -22,7 +22,7 @@ index 49c6ffa1..189b6f03 100644
  set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-undefined")
  
  set (CMAKE_CXX_STANDARD 14)
-@@ -159,15 +159,6 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
+@@ -164,15 +164,6 @@ string(TOLOWER "${CMAKE_BUILD_TYPE}" cmake_build_type_lower)
  if(cmake_build_type_lower MATCHES relwithdebinfo) # workaround for http://public.kitware.com/Bug/view.php?id=14696
      add_definitions(-DQT_NO_DEBUG)
  endif()
@@ -39,5 +39,5 @@ index 49c6ffa1..189b6f03 100644
  
  # Mir uses boost, which does not like Qt defining macros named "signals" and "slots"
 -- 
-2.25.2
+2.26.1
 

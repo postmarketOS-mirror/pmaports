@@ -1,48 +1,45 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20200217
-_commit="f1a612ce524c57f689b68c6f3b57fdfe8d169560"
+pkgver=0_git20200410
+_commit="2ee141de3a6a54eae22e9864264432136895ebc5"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
 url="https://unity8.io"
 license="LGPL-3.0"
-makedepends="$depends_dev cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev"
+makedepends="$depends_dev cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev cgmanager-dev"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	0001-Revert-Use-app-launch-2.patch
 	0002-Disable-Werror.patch
-	0003-Fix-CMake-error-with-Qt-5.14.patch"
+	0003-Fix-compilation-with-Qt-5.14.patch"
 builddir="$srcdir/$pkgname-$_commit"
 
 prepare() {
 	default_prepare
-	mkdir -p "$builddir"/build
 
 	# Don't build tests, they require Mir to be built with tests which is disabled
-	truncate -s 0 "$builddir"/tests/CMakeLists.txt
+	truncate -s 0 tests/CMakeLists.txt
 }
 
 build() {
-	cd "$builddir"/build
-	cmake \
+	cmake -B build \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib ..
-	make
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
 }
 
 check() {
-	cd "$builddir"/build
+	cd build
 	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="2dbf7672e9075663c213ee24aff36a3d2463f4c002374582adead829d6fa3ac998c6d52995e17d69c62c7c80acc790a8969278caaf9da7c6d27d0ec326177ca7  qtmir-f1a612ce524c57f689b68c6f3b57fdfe8d169560.tar.gz
-03fc9960072c58fc06ba9bc9edc6f12d0688d144a6f86d10eb0bce8fc1b2972dfe2fe4234259b2fbf2dbecca4c81ddeee0092f90c31fa62bb25f5bb3400f136f  0001-Revert-Use-app-launch-2.patch
-af81b205c4a035c8ee04d57af3a0c2da8ec5b0b284e00c7b55c88b3e19040dd1fbfba706b91c10871af5227808146cc2aa82de2ac362c9c9c240455af129a0fc  0002-Disable-Werror.patch
-70e42980491ede0353e273c45dfc22933db20a80016b4a7ea1ec99c39ff064fb5ea04d50e0a6bf6cdb9aec0d1f4ba1f5eee552755892fbab71c6cf8887e01410  0003-Fix-CMake-error-with-Qt-5.14.patch"
+sha512sums="36137928787871677b01ad4c8563289efc7fc3c6eddec1aff4343409935d1489ba11c9a34ce764a34740eded94de82d3aa0a536ef902a79bc81ac9e3648825d6  qtmir-2ee141de3a6a54eae22e9864264432136895ebc5.tar.gz
+ac86979c4ed44076ed28c60b8a7f34359370b6e635c10e13ae54a6f3f04fa26256b6fbf234cf0fbc86aa4895652c7b19da011e14f560e39f6fc1b0de0ac1db65  0001-Revert-Use-app-launch-2.patch
+9b96da0d68fae98b0cd328ca469ea5d2fdd7cf7ed44cec793064b2649cd6fd14004583c7eb3251581e7cfaba5a0517341670410d9ae6aa6a8ef133696d232b52  0002-Disable-Werror.patch
+68216e7e954e8b83b547b0c37f6daf9fd4b148cd4e173b1d8eb786c7062aeb937de245cdd9c9bcfd871be16b65e56b43e613a16c0cdee3b9758a1a5188148e1b  0003-Fix-compilation-with-Qt-5.14.patch"
