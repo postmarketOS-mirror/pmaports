@@ -8,35 +8,32 @@ pkgdesc="API for Unity shell integration"
 url="https://github.com/ubports/unity-api"
 arch="all"
 license="LGPL-3.0"
-depends=""
-depends_dev=""
 makedepends="$depends_dev cmake cmake-extras qt5-qtdeclarative-dev libqtdbustest gtest-dev gmock"
+checkdepends="dbus"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	qmltestrunner.patch
-	0001-Add-Mir-AttachedState.patch"
+	0001-Add-Mir-AttachedState.patch
+	0001-GlibMemory.h-remove-GRefString-from-smart-pointers.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
-options="!check" # 88% tests passed, 3 tests failed out of 26
 
 build() {
-	mkdir "$builddir"/build
-	cd "$builddir"/build
-
-	cmake -DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib ..
-	make
+	cmake -B build \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
 }
 
 check() {
-	cd "$builddir"/build
-	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+	cd build
+	env CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	make -C build DESTDIR="$pkgdir" install
 }
 
 sha512sums="226a5f0c05978ced41b48587c14db9a811a0fd709c51e43579ba9f88ba79f3a2b735e977b3c1fbcbe7aab4527b0b0fdbc7049ba76ffe22590687f833ea5685b2  unity-api-989301571498a86ce99174379045e85b8549c2d9.tar.gz
 8695998cb0451943ff08f00be52766d27c439184b1e8531a563cffe4bf4251dea52d5bc3493d797f4f6007f13130930c6b0cfb2c04b9dc54e6891e17c2978fb9  qmltestrunner.patch
-d6a05624bfbec5da87ac4dfdb34f8387dd969f1226d29be73c059216dd76191b3084364e45c88d8c9da15d9632f121d7b9a134fecd08532c8cc60427b39e5ab5  0001-Add-Mir-AttachedState.patch"
+d6a05624bfbec5da87ac4dfdb34f8387dd969f1226d29be73c059216dd76191b3084364e45c88d8c9da15d9632f121d7b9a134fecd08532c8cc60427b39e5ab5  0001-Add-Mir-AttachedState.patch
+8861b0abd252d897f184e5cc748cb42ac3ca25d8c32a806248294e28c1d17b9304a296ff1933d5955cd00b53c17526e3fa233a6a14913133136fbe0a780038f9  0001-GlibMemory.h-remove-GRefString-from-smart-pointers.patch"

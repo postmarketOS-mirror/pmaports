@@ -1,0 +1,67 @@
+From 92d045bc8534093eb89a3fc2123d2c2c274e74d7 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 18 Apr 2020 14:13:57 +0200
+Subject: [PATCH] GlibMemory.h: remove GRefString from smart pointers
+
+I'm guessing this causes some confusion in glib between "normal" gchar
+and GRefString causing a normal gchar to be passed to
+g_ref_string_release which triggers an assert in glib.
+
+(process:621235): GLib-CRITICAL **: 12:08:32.069: g_atomic_rc_box_release_full: assertion 'real_box->magic == G_BOX_MAGIC' failed
+
+#0  _g_log_abort (breakpoint=breakpoint@entry=1) at ../glib/gmessages.c:554
+#1  0x00007ffff7c6234b in g_logv (log_domain=0x7ffff7ca66ae "GLib", log_level=G_LOG_LEVEL_CRITICAL, format=<optimized out>, args=args@entry=0x7fffffffe720) at ../glib/gmessages.c:1373
+#2  0x00007ffff7c6242a in g_log (log_domain=<optimized out>, log_level=log_level@entry=G_LOG_LEVEL_CRITICAL, format=format@entry=0x7ffff7ca04ea "%s: assertion '%s' failed")
+    at ../glib/gmessages.c:1415
+#3  0x00007ffff7c62a53 in g_return_if_fail_warning (log_domain=<optimized out>, pretty_function=<optimized out>, expression=<optimized out>) at ../glib/gmessages.c:2771
+#4  0x000055555555809f in unity::util::internal::GlibDeleter<char>::operator()(char*)
+    (this=<synthetic pointer>, ptr=0x555555593e60 "unix:abstract=/tmp/dbus-hxeJmcxvLQ,guid=e7b462705c7b6737aadaeb7a5e9aedc0")
+    at /home/pmos/build/src/unity-api-989301571498a86ce99174379045e85b8549c2d9/include/unity/util/GlibMemory.h:238
+#5  std::unique_ptr<char, unity::util::internal::GlibDeleter<char> >::~unique_ptr() (this=<synthetic pointer>, __in_chrg=<optimized out>) at /usr/include/c++/9.3.0/bits/unique_ptr.h:292
+#6  (anonymous namespace)::GioMemoryTest::getSessionBus () at /home/pmos/build/src/unity-api-989301571498a86ce99174379045e85b8549c2d9/test/gtest/unity/util/GioMemory/GioMemory_test.cpp:66
+#7  (anonymous namespace)::GioMemoryTest_signals_Test::TestBody() (this=0x7ffff6e55800)
+    at /home/pmos/build/src/unity-api-989301571498a86ce99174379045e85b8549c2d9/test/gtest/unity/util/GioMemory/GioMemory_test.cpp:102
+#8  0x00007ffff7f4d7c9 in void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) ()
+    at /usr/lib/libgtest.so
+#9  0x00007ffff7f456c9 in testing::Test::Run() () at /usr/lib/libgtest.so
+#10 0x00007ffff7f45795 in testing::TestInfo::Run() () at /usr/lib/libgtest.so
+#11 0x00007ffff7f458a8 in testing::TestSuite::Run() () at /usr/lib/libgtest.so
+#12 0x00007ffff7f45b8d in testing::internal::UnitTestImpl::RunAllTests() () at /usr/lib/libgtest.so
+#13 0x00007ffff7f4dbd6 in bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) () at /usr/lib/libgtest.so
+#14 0x00007ffff7f45d20 in testing::UnitTest::Run() () at /usr/lib/libgtest.so
+#15 0x00007ffff7f0d0d3 in main () at /usr/lib/libgtest_main.so
+#16 0x00007ffff7f851f5 in  () at /lib/ld-musl-x86_64.so.1
+#17 0x00007ffff7f851ce in  () at /lib/ld-musl-x86_64.so.1
+#18 0x00007fffffffeb90 in  ()
+#19 0x0000000000000000 in  ()
+---
+ include/unity/util/GlibMemory.h | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/include/unity/util/GlibMemory.h b/include/unity/util/GlibMemory.h
+index ec471e5..6ae13ab 100644
+--- a/include/unity/util/GlibMemory.h
++++ b/include/unity/util/GlibMemory.h
+@@ -234,19 +234,11 @@ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantBuilder, g_variant_builder_unref)
+ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantIter, g_variant_iter_free)
+ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantDict, g_variant_dict_unref)
+ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GVariantType, g_variant_type_free)
+-#if GLIB_CHECK_VERSION(2, 58, 0)
+-UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(GRefString, g_ref_string_release)
+-#endif
+ 
+ /**
+  * Manually add extra definitions for gchar* and gchar**
+  */
+-#if GLIB_CHECK_VERSION(2, 57, 2)
+-typedef GRefStringSPtr gcharSPtr;
+-typedef GRefStringUPtr gcharUPtr;
+-#else
+ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gchar, g_free)
+-#endif
+ typedef gchar* gcharv;
+ UNITY_UTIL_DEFINE_GLIB_SMART_POINTERS(gcharv, g_strfreev)
+ 
+-- 
+2.26.1
+
