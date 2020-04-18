@@ -10,7 +10,8 @@ url="https://github.com/ubports/system-settings"
 arch="all"
 license="GPL-3.0"
 depends=""
-makedepends="cmake qt5-qtbase-dev upower-dev networkmanager-dev accountsservice-ubuntu-dev geonames-dev icu-dev libqtdbusmock gsettings-qt-dev click-dev gnome-desktop-dev trust-store-dev qt5-qtdeclarative-dev qt5-qtdeclarative intltool"
+# CMake 3.16+ are broken because of https://gitlab.kitware.com/cmake/cmake/-/issues/20598
+makedepends="cmake-3.15 qt5-qtbase-dev upower-dev networkmanager-dev accountsservice-ubuntu-dev geonames-dev icu-dev libqtdbusmock gsettings-qt-dev click-dev gnome-desktop-dev trust-store-dev qt5-qtdeclarative-dev qt5-qtdeclarative intltool"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	qmltestrunner.patch"
 builddir="$srcdir/$pkgname-$_commit"
