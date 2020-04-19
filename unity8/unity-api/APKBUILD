@@ -26,7 +26,9 @@ build() {
 
 check() {
 	cd build
-	env CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+	# GioMemory_test fails under QEMU for aarch64
+	# Error connecting to D-Bus address unix:abstract=/tmp/dbus-IRpDQKgJCX,guid=daa250871edc3ad426e54ceb5e9b5bde: Error sending credentials: Error sending message: No buffer space available
+	env CTEST_OUTPUT_ON_FAILURE=TRUE ctest -E "GioMemory_test"
 }
 
 package() {
