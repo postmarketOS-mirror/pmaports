@@ -9,13 +9,14 @@ arch="all"
 url="https://unity8.io"
 license="GPL-3.0"
 depends_dev="gobject-introspection-dev lttng-ust-dev json-glib-dev zeitgeist-dev unity-api-dev curl-dev properties-cpp-dev"
-makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative gtest-dev glib-dev mir-dev"
+makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative gtest-dev glib-dev mir-dev pthread-cancel-noop"
 checkdepends="gtest-dev gmock py3-dbusmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	libual-test_libertine.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
-options="!check" # Tests have to be adjusted for POSIX backend
+# Build without crossdirect as long as we need the LD_PRELOAD
+options="!check pmb:no-crossdirect" # Tests fail
 
 prepare() {
 	default_prepare
@@ -29,7 +30,10 @@ build() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib
-	make
+	# Work around QEMU issue with pthread_cancel
+	# See https://gitlab.com/postmarketOS/pmaports/issues/190
+	LD_PRELOAD=/usr/lib/preload/pthread_cancel_noop.so \
+		make
 }
 
 check() {
