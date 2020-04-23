@@ -11,7 +11,7 @@ depends_dev="qt5-qtdeclarative-dev ubuntu-app-launch-dev gsettings-qt-dev libnih
 makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev pthread-cancel-noop"
 checkdepends="gmock dbus-test-runner xvfb-run"
 # Build without crossdirect as long as we need the LD_PRELOAD
-options="!check pmb:no-crossdirect" # 92% tests passed, 1 tests failed out of 12
+options="!check !pmb:crossdirect" # 92% tests passed, 1 tests failed out of 12
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	0001-Use-qmlplugindump-qt5.patch"
 subpackages="$pkgname-dev $pkgname-lang"

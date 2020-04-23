@@ -16,7 +16,7 @@ source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 # Build without crossdirect as long as we need the LD_PRELOAD
-options="!check pmb:no-crossdirect" # Tests fail
+options="!check !pmb:crossdirect" # Tests fail
 
 prepare() {
 	default_prepare
