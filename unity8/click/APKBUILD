@@ -1,22 +1,20 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=click
-pkgver=0_git20190129
-_commit="cc108942faa348a155e665a5c07828dd36954d6a"
+pkgver=0_git20200424
+_commit="de701d86fbc7cfc3bff163f2f2b2c07955e13860"
 pkgrel=0
 pkgdesc="Click is a simplified packaging format"
 url="https://github.com/ubports/click"
 arch="all"
-license="GPL-3.0"
-depends=""
+license="GPL-3.0-only"
 depends_dev="libgee-dev gobject-introspection-dev"
 makedepends="$depends_dev cmake intltool vala gobject-introspection autoconf libtool automake json-glib-dev py3-setuptools"
 subpackages="$pkgname-dev $pkgname-doc"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/click/archive/$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Needs dpkg
 
 build() {
-	cd "$builddir"
 	./autogen.sh
 	./configure \
 		--build=$CBUILD \
@@ -28,16 +26,14 @@ build() {
 }
 
 check() {
-	cd "$builddir"
 	make check
 }
 
 package() {
-	cd "$builddir"
 	make DESTDIR="$pkgdir/" PYTHON_INSTALL_FLAGS="--root=$pkgdir/" install
 
 	# Make abuild's version check happy (#386)
 	sed -i s/+ubports//g "$pkgdir"/usr/lib/pkgconfig/*.pc
 }
 
-sha512sums="c7b2aed6bd14a791cde5ea97d6558c29a6e86e5da48ea15cd008e0811fab254ce6c0e289eb7e00554a5522e1f5562ed0d4e24e057ea4d1bd37b9a11580ef69d7  click-cc108942faa348a155e665a5c07828dd36954d6a.tar.gz"
+sha512sums="3298a296415b3436c736e667024b36553a2da46a908b71195ec4012feba6cbe38fd541b5d26e7a890c04b4c1dab136703e8e1eed733bfeb65106554bae668bc3  click-de701d86fbc7cfc3bff163f2f2b2c07955e13860.tar.gz"
