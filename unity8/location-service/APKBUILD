@@ -6,35 +6,32 @@ pkgrel=0
 _commit="73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639"
 pkgdesc="Location service aggregating position/velocity/heading updates and exporting them over dbus"
 arch="all"
-url="https://unity8.io"
+url="https://github.com/ubports/location-service"
 license="GPL-3.0 LGPL-3.0"
-depends=""
 depends_dev="boost-dev dbus-dev net-cpp-dev process-cpp-dev properties-cpp-dev json-c-dev libapparmor-dev gflags-dev glog-dev trust-store-dev"
 makedepends="$depends_dev cmake-extras gettext gtest-dev gmock dbus-cpp-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+checkdepends="coreutils"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/location-service/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
-options="!check" # Several failures
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # Several failures
 
 build() {
-	mkdir -p "$builddir"/build
-	cd "$builddir"/build
-	cmake \
+	cmake -B build \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DLOCATION_SERVICE_ENABLE_GPS_PROVIDER=OFF ..
-	make
+		-DLOCATION_SERVICE_ENABLE_GPS_PROVIDER=OFF
+	make -C build
 }
 
 check() {
-	cd "$builddir"/build
+	cd build
 	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	make -C build DESTDIR="$pkgdir" install
 }
 
 sha512sums="0b56411c67b8724ecad1b5534b5f4b6c7d2fc57176453c40bfea8a3789120f9cfe5c8bd253527dcb31d9ee5682bcbdd313d02cca675a06f51f5073eae37b3574  location-service-73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639.tar.gz"
