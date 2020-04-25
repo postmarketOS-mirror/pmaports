@@ -6,15 +6,14 @@ pkgrel=0
 _commit="b3bdf178e4226c91c567b84f1adf9202b2492ca2"
 pkgdesc='Collection of GSettings schemas for settings shared by various components of an Ubuntu environment'
 arch="noarch"
-url='https://unity8.io'
+url="https://github.com/ubports/gsettings-ubuntu-touch-schemas"
 license="LGPL-2.1"
-depends=""
 makedepends="gnome-common automake autoconf glib-dev intltool"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gsettings-ubuntu-touch-schemas/archive/$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # No tests
 
 build() {
-	cd "$builddir"
 	./autogen.sh \
 		--build=$CBUILD \
 		--host=$CHOST \
@@ -24,7 +23,6 @@ build() {
 }
 
 package() {
-	cd "$builddir"
 	make DESTDIR="$pkgdir" install
 }
 
