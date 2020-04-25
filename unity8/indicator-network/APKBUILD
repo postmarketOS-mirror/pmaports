@@ -6,34 +6,31 @@ _commit="2539978c51684822733fbbd7ebb6971d671492a0"
 pkgrel=0
 pkgdesc="The 'Network' indicator for Ubuntu Touch"
 arch="all"
-url="https://unity8.io"
+url="https://github.com/ubports/indicator-network"
 license="GPL-3.0"
-depends=""
 depends_dev="glib-dev unity-api-dev ofono-dev networkmanager-dev libsecret-dev url-dispatcher-dev qt5-qtdeclarative-dev libqofono-dev"
 makedepends="$depends_dev cmake-extras gtest-dev gmock libqtdbustest libqtdbusmock gmenuharness-dev intltool"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+checkdepends="py3-dbusmock"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/indicator-network/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
-options="!check" # Tests hang
+options="!check" # Tests are broken in general at the moment
 
 build() {
-	mkdir -p "$builddir"/build
-	cd "$builddir"/build
-	cmake \
+	cmake -B build \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib ..
-	make
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
 }
 
 check() {
-	cd "$builddir"/build
+	cd build
 	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	make -C build DESTDIR="$pkgdir" install
 }
 
 sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz"
