@@ -1,0 +1,23 @@
+# Maintainer: Luca Weiss <luca@z3ntu.xyz>
+pkgname=postmarketos-ui-lomiri
+pkgver=1
+pkgrel=0
+pkgdesc="(Wayland) Lomiri"
+url="https://unity8.io/"
+arch="noarch"
+license="GPL-3.0-or-later"
+depends="
+	unity8
+	postmarketos-artwork-wallpapers
+"
+source="
+	000-gschema.override
+"
+options="!check"
+
+package() {
+	install -Dm644 "$srcdir"/000-gschema.override \
+		"$pkgdir"/usr/share/glib-2.0/schemas/000-postmarketos.gschema.override
+}
+
+sha512sums="f44d4e2544d44119ed1ab9fb454a20d1fc050925a029ce10df4d7c20da3d1f461b018cdd6129272e38e50179d1e5ff71b72d3cc4dbce28113fe1b3561a2e84b5  000-gschema.override"
