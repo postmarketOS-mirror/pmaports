@@ -13,6 +13,7 @@ source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archiv
 	0001-Add-missing-header-include.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # Tests fail under QEMU
 
 build() {
 	cmake -B build \
