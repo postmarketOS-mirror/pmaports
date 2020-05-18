@@ -1,0 +1,25 @@
+From adbf2dd3658bbfb00b2962c6edf76e52522118bf Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Mon, 18 May 2020 21:37:40 +0200
+Subject: [PATCH 3/3] Use qmltestrunner-qt5
+
+---
+ cmake/QmlTest.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmake/QmlTest.cmake b/cmake/QmlTest.cmake
+index 253b1206..dbdf6668 100644
+--- a/cmake/QmlTest.cmake
++++ b/cmake/QmlTest.cmake
+@@ -19,7 +19,7 @@
+ # qmltest_DEFAULT_IMPORT_PATHS
+ # qmltest_DEFAULT_PROPERTIES
+ 
+-find_program(qmltestrunner_exe qmltestrunner)
++find_program(qmltestrunner_exe qmltestrunner-qt5)
+ find_program(qmlscene_exe qmlscene)
+ find_program(gcc_exe gcc)
+ 
+-- 
+2.26.2
+

@@ -1,0 +1,121 @@
+From 88081e739645727c55310494a20fd5cf6191ff35 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Mon, 18 May 2020 21:34:37 +0200
+Subject: [PATCH 2/3] Don't build update components
+
+---
+ plugins/system-update/CMakeLists.txt          |  3 --
+ .../SystemSettings/Update/CMakeLists.txt      |  2 -
+ tests/plugins/CMakeLists.txt                  | 42 +++++++++----------
+ 3 files changed, 21 insertions(+), 26 deletions(-)
+
+diff --git a/plugins/system-update/CMakeLists.txt b/plugins/system-update/CMakeLists.txt
+index 57488cc5..e2b6bc0f 100644
+--- a/plugins/system-update/CMakeLists.txt
++++ b/plugins/system-update/CMakeLists.txt
+@@ -17,7 +17,6 @@ set(QML_SOURCES
+ include_directories(
+     ${CMAKE_CURRENT_BINARY_DIR}
+     ${CMAKE_CURRENT_SOURCE_DIR}
+-    /usr/include/apt-pkg/
+ )
+ 
+ add_library(UpdatePlugin SHARED
+@@ -36,7 +35,6 @@ add_library(UpdatePlugin SHARED
+     network/accessmanager_impl.cpp
+ 
+     helpers.cpp
+-    update.cpp
+     updatedb.cpp
+     updatemodel.cpp
+     updatemanager.cpp
+@@ -49,7 +47,6 @@ target_link_libraries(UpdatePlugin
+     Qt5::Quick
+     Qt5::Sql
+ 
+-    apt-pkg
+     uss-systemimage
+ )
+ 
+diff --git a/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt b/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
+index 373dfaf4..13d372a6 100644
+--- a/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
++++ b/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
+@@ -3,12 +3,10 @@ include_directories(
+     ${CMAKE_SOURCE_DIR}/src
+     ${CMAKE_SOURCE_DIR}/plugins/system-update
+     ${CMAKE_SOURCE_DIR}/tests/mocks/plugins/system-update
+-    /usr/include/apt-pkg/
+ )
+ 
+ set(PLUGIN_LIBS
+     UpdatePlugin
+-    apt-pkg
+ )
+ 
+ set(MOCK_SYSTEMUPDATE_SRCS
+diff --git a/tests/plugins/CMakeLists.txt b/tests/plugins/CMakeLists.txt
+index 538f6d90..42231449 100644
+--- a/tests/plugins/CMakeLists.txt
++++ b/tests/plugins/CMakeLists.txt
+@@ -2,7 +2,7 @@
+ include(QmlTest)
+ 
+ add_subdirectory(security-privacy)
+-add_subdirectory(system-update)
++#add_subdirectory(system-update)
+ add_subdirectory(bluetooth)
+ add_subdirectory(wifi)
+ add_subdirectory(notifications)
+@@ -29,28 +29,28 @@ set(SYSTEMUPDATE_IMPORT_PATHS
+     ${CMAKE_SOURCE_DIR}/src
+     ${CMAKE_BINARY_DIR}/tests/utils/modules
+     ${CMAKE_BINARY_DIR}/tests/mocks/
+-    ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
++#    ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
+ )
+ 
+-add_qml_test(system-update systemupdate_update
+-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-)
+-
+-add_qml_test(system-update systemupdate_global
+-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-)
+-
+-add_qml_test(system-update systemupdate_pagecomponent
+-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-)
+-
+-add_qml_test(system-update systemupdate_entrycomponent
+-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-)
+-
+-add_qml_test(system-update systemupdate_download_handler
+-    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-)
++#add_qml_test(system-update systemupdate_update
++#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
++#)
++#
++#add_qml_test(system-update systemupdate_global
++#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
++#)
++#
++#add_qml_test(system-update systemupdate_pagecomponent
++#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
++#)
++#
++#add_qml_test(system-update systemupdate_entrycomponent
++#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
++#)
++#
++#add_qml_test(system-update systemupdate_download_handler
++#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
++#)
+ 
+ add_qml_test(main MainWindow
+     IMPORT_PATHS
+-- 
+2.26.2
+
