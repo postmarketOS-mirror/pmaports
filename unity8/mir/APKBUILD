@@ -6,11 +6,12 @@ pkgrel=0
 pkgdesc="Canonical's display server"
 url="https://mir-server.io"
 arch="all"
-license="GPL-2.0 GPL-3.0 LGPL-2.1 LGPL-3.0"
+license="GPL-2.0-or-later AND LGPL-2.0-or-later"
 depends="xkeyboard-config dmz-cursor-theme ttf-freefont"
 depends_dev="boost-dev mesa-dev glm-dev glog-dev gflags-dev eudev-dev glib-dev wayland-dev libepoxy-dev nettle-dev libinput-dev
 	capnproto-dev libxml++-2.6-dev py3-pillow freetype-dev libevdev-dev umockdev-dev lttng-ust-dev yaml-cpp-dev libxcursor-dev"
 makedepends="$depends_dev cmake libxkbcommon-dev gtest-dev gmock wlcs-dev protobuf-dev"
+checkdepends="wlcs grep bash"
 source="
 	$pkgname-$pkgver.tar.gz::https://github.com/MirServer/mir/archive/v$pkgver.tar.gz
 	lttng_no_sdt.patch
@@ -20,23 +21,23 @@ subpackages="$pkgname-dev"
 options="!check" # Some tests fail
 
 build() {
-	cmake \
-		-DCMAKE_INSTALL_PREFIX:PATH=/usr \
+	cmake -B build \
+		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DMIR_USE_LD=ld \
-		-DMIR_FATAL_COMPILE_WARNINGS=OFF
-	make
+		-DMIR_FATAL_COMPILE_WARNINGS=OFF \
+		-DMIR_USE_LD=ld
+	make -C build
 }
 
 check() {
-	bin/mir_acceptance_tests
-	bin/mir_integration_tests
-	bin/mir_unit_tests
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	make DESTDIR="$pkgdir/" install
+	make -C build DESTDIR="$pkgdir" install
 }
+
 sha512sums="dedc2f973cd8c34ace09d1ff33bab75ee43d05f036e64a38876a3b64a143ad3cd906e87fa7ce3233dd7be8b61d04a79b8d69d01ee7f849d2e2394e9f52e5a59a  mir-1.8.0.tar.gz
 c27e7b43f19044f2aac6d85d0403e2d9bae8e7c11b47b9964940c4e194dc49bc88a4b3828c7227358d90a9ef24e2d2fca94ea66ce9fb659cd9b5ec5fcefd522d  lttng_no_sdt.patch
 dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"
