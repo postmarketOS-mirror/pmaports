@@ -1,0 +1,24 @@
+From 833b206626cc2316ef4b9164b87d012b6c40edd2 Mon Sep 17 00:00:00 2001
+From: Marius Gripsgard <mariogrip@ubuntu.com>
+Date: Sun, 18 Feb 2018 14:24:02 +0100
+Subject: [PATCH 3/3] Fix gcc7
+
+---
+ .../common/mirclient/application_instance_mirclient_priv.h       | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/ubuntu/application/common/mirclient/application_instance_mirclient_priv.h b/src/ubuntu/application/common/mirclient/application_instance_mirclient_priv.h
+index cb1c025..010c6a4 100644
+--- a/src/ubuntu/application/common/mirclient/application_instance_mirclient_priv.h
++++ b/src/ubuntu/application/common/mirclient/application_instance_mirclient_priv.h
+@@ -23,6 +23,7 @@
+ 
+ #include <memory>
+ #include <string>
++#include <functional>
+ 
+ #include <mir_toolkit/mir_client_library.h>
+ 
+-- 
+2.26.2
+

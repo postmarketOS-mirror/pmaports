@@ -1,7 +1,7 @@
-From 35d1771d83879a0e6970682b1e75f83d9cb1d143 Mon Sep 17 00:00:00 2001
-From: Luca Weiss <luca@z3ntu.xyz>
-Date: Sat, 12 Jan 2019 14:14:45 +0100
-Subject: [PATCH 3/3] Only use hybris if available
+From f4956215716220370adc35035b95be826305933f Mon Sep 17 00:00:00 2001
+From: Ivan Semkin <ivan@semkin.ru>
+Date: Wed, 20 Jun 2018 00:20:25 +0300
+Subject: [PATCH 2/3] Only use Hybris when available
 
 ---
  src/ubuntu/application/touch/CMakeLists.txt   | 58 +++++++--------
@@ -204,5 +204,5 @@ index df1f0d2..b780f16 100644
 +    add_subdirectory(tests/)
 +endif()
 -- 
-2.20.1
+2.26.2
 
