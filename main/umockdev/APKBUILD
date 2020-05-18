@@ -9,6 +9,7 @@ url="https://github.com/martinpitt/umockdev/"
 license="LGPL-2.1-or-later"
 depends_dev="eudev-dev libgudev-dev"
 makedepends="$depends_dev autoconf automake libtool gtk-doc vala linux-headers bash"
+checkdepends="usbutils xz"
 source="$pkgname-$pkgver.tar.gz::https://github.com/martinpitt/umockdev/archive/$pkgver.tar.gz"
 subpackages="$pkgname-dev $pkgname-doc"
 options="!check" # needs /dev/pts inside chroot
