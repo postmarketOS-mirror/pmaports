@@ -1,0 +1,16 @@
+diff --git a/tests/framework/gmock_fixes.h b/tests/framework/gmock_fixes.h
+index e07af3df..7e72663c 100644
+--- a/tests/framework/gmock_fixes.h
++++ b/tests/framework/gmock_fixes.h
+@@ -75,9 +75,9 @@ class ActionResultHolder<std::unique_ptr<T>>
+   // result in a new-ed ActionResultHolder.
+   template <typename F>
+   static ActionResultHolder* PerformDefaultAction(
+-      const FunctionMockerBase<F>* func_mocker,
++      const FunctionMocker<F>* func_mocker,
+       typename Function<F>::ArgumentTuple args,
+-      const string& call_description) {
++      const std::string& call_description) {
+     return new ActionResultHolder(
+         func_mocker->PerformDefaultAction(std::move(args), call_description));
+   }

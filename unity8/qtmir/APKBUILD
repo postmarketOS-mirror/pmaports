@@ -6,22 +6,17 @@ _commit="2ee141de3a6a54eae22e9864264432136895ebc5"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
-url="https://unity8.io"
-license="LGPL-3.0"
-makedepends="$depends_dev cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev cgmanager-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+url="https://github.com/ubports/qtmir"
+license="LGPL-3.0-only"
+makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev cgmanager-dev"
+checkdepends="py3-dbusmock dbus"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/qtmir/archive/$_commit.tar.gz
 	0001-Revert-Use-app-launch-2.patch
 	0002-Disable-Werror.patch
 	0003-Fix-compilation-with-Qt-5.14.patch
-	0001-Port-to-gl-Texture-using-SGTexture.patch"
+	0001-Port-to-gl-Texture-using-SGTexture.patch
+	gmock.patch"
 builddir="$srcdir/$pkgname-$_commit"
-
-prepare() {
-	default_prepare
-
-	# Don't build tests, they require Mir to be built with tests which is disabled
-	truncate -s 0 tests/CMakeLists.txt
-}
 
 build() {
 	cmake -B build \
@@ -44,4 +39,5 @@ sha512sums="36137928787871677b01ad4c8563289efc7fc3c6eddec1aff4343409935d1489ba11
 ac86979c4ed44076ed28c60b8a7f34359370b6e635c10e13ae54a6f3f04fa26256b6fbf234cf0fbc86aa4895652c7b19da011e14f560e39f6fc1b0de0ac1db65  0001-Revert-Use-app-launch-2.patch
 9b96da0d68fae98b0cd328ca469ea5d2fdd7cf7ed44cec793064b2649cd6fd14004583c7eb3251581e7cfaba5a0517341670410d9ae6aa6a8ef133696d232b52  0002-Disable-Werror.patch
 68216e7e954e8b83b547b0c37f6daf9fd4b148cd4e173b1d8eb786c7062aeb937de245cdd9c9bcfd871be16b65e56b43e613a16c0cdee3b9758a1a5188148e1b  0003-Fix-compilation-with-Qt-5.14.patch
-e281f07dc648eed44c5708cd1bfc644ac761a6f337112a2a0d7d4dd40d7cd4e365c3d32482db7b493a3ea1489026bfdf9196b4f0d69c1c71fbb9e0c02ebb003c  0001-Port-to-gl-Texture-using-SGTexture.patch"
+e281f07dc648eed44c5708cd1bfc644ac761a6f337112a2a0d7d4dd40d7cd4e365c3d32482db7b493a3ea1489026bfdf9196b4f0d69c1c71fbb9e0c02ebb003c  0001-Port-to-gl-Texture-using-SGTexture.patch
+6b5d6606c708fa9e2a98d659719f52c8a95593c334f7ddce54d41c8f30c72c0151e6050fdeb3b2f5c7a5877ca2422d0c489a79dde0ca4d64a83638fcc8f518a7  gmock.patch"
