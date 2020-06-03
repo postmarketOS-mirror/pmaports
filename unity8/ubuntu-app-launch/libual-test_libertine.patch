@@ -1,3 +1,5 @@
+Remove libertine dependency from tests
+
 diff --git a/tests/libual-test.cc b/tests/libual-test.cc
 index 623911a..7e11034 100644
 --- a/tests/libual-test.cc
