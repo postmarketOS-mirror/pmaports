@@ -6,19 +6,19 @@ _commit="6d1d305da3f6e9c3bfba278fb7268b80c48ef7fd"
 pkgrel=1
 pkgdesc="Provides a service for downloading files while an application is suspended"
 arch="all"
-url="https://unity8.io"
-license="LGPL-3.0"
+url="https://github.com/ubports/ubuntu-download-manager"
+license="LGPL-3.0-only"
 depends_dev="qt5-qtdeclarative-dev boost-dev glog-dev libnih-dev"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock"
 checkdepends="dbus-test-runner xvfb-run"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-download-manager/archive/$_commit.tar.gz
 	0001-Enable-and-fix-qml-tests.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
 	cmake -B build \
-		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBEXECDIR=/usr/lib \
 		-DCMAKE_INSTALL_LIBDIR=lib
