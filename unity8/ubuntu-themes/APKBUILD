@@ -5,11 +5,12 @@ _commit="c5bd237813a35a86c2eb3484f0635da306882765"
 pkgrel=0
 pkgdesc="Theme files for Unity 8"
 arch="noarch"
-url="https://unity8.io"
-license="GPL-3.0"
+url="https://github.com/ubports/ubuntu-themes"
+license="GPL-3.0-only"
 subpackages="light-themes:light_themes suru-icon-theme:suru_icon_theme ubuntu-mono:ubuntu_mono ubuntu-artwork:ubuntu_artwork ubuntu-mobile-icons:ubuntu_mobile_icons"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
-_builddir="$srcdir/$pkgname-$_commit"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-themes/archive/$_commit.tar.gz"
+builddir="$srcdir/$pkgname-$_commit"
+options="!check" # No tests
 
 package() {
 	mkdir -p "$pkgdir"
@@ -17,35 +18,35 @@ package() {
 
 light_themes() {
 	depends="gtk-murrine-engine ubuntu-mono" # humanity-icon-theme
-	cd "$_builddir"
+	cd "$builddir"
 	mkdir -p "$subpkgdir"/usr/share/themes
 	cp -r Ambiance Radiance "$subpkgdir"/usr/share/themes
 }
 
 suru_icon_theme() {
 	depends="ubuntu-mobile-icons hicolor-icon-theme"
-	cd "$_builddir"
+	cd "$builddir"
 	mkdir -p "$subpkgdir"/usr/share/icons
 	cp -r suru-icons "$subpkgdir"/usr/share/icons/suru
 }
 
 ubuntu_artwork() {
 	depends="light-themes ubuntu-mono" # adium-theme-ubuntu ubports-wallpaper
-	cd "$_builddir"
+	cd "$builddir"
 	mkdir -p "$subpkgdir"/usr/share/icons/hicolor/48x48/apps
 	cp distributor-logo.png "$subpkgdir"/usr/share/icons/hicolor/48x48/apps
 }
 
 ubuntu_mobile_icons() {
 	depends="hicolor-icon-theme"
-	cd "$_builddir"
+	cd "$builddir"
 	mkdir -p "$subpkgdir"/usr/share/icons
 	cp -r ubuntu-mobile "$subpkgdir"/usr/share/icons
 }
 
 ubuntu_mono() {
 	depends="adwaita-icon-theme hicolor-icon-theme" # humanity-icon-theme
-	cd "$_builddir"
+	cd "$builddir"
 	mkdir -p "$subpkgdir"/usr/share/icons
 	cp -r ubuntu-mono-dark ubuntu-mono-light LoginIcons "$subpkgdir"/usr/share/icons
 }
