@@ -1,3 +1,5 @@
+Alpine uses versioned Qt binaries
+
 diff --git a/cmake/modules/QmlTest.cmake b/cmake/modules/QmlTest.cmake
 index 8241703..d209b55 100644
 --- a/cmake/modules/QmlTest.cmake
