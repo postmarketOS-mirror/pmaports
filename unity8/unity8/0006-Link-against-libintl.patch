@@ -1,7 +1,7 @@
-From a70ffba3209f6b2cf497db060bddd2f21dec2a2b Mon Sep 17 00:00:00 2001
+From b554aa3c0e57521041db0777576f2a67aa9e12c5 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 22:19:51 +0100
-Subject: [PATCH 5/6] Link against libintl
+Subject: [PATCH 6/6] Link against libintl
 
 ---
  plugins/LightDM/FullLightDM/CMakeLists.txt             | 1 +
@@ -75,5 +75,5 @@ index c35cbff8f..67918cfc8 100644
  target_include_directories(GreeterPromptsModelTestExec PUBLIC
      ${CMAKE_SOURCE_DIR}/plugins/LightDM
 -- 
-2.24.0
+2.26.2
 

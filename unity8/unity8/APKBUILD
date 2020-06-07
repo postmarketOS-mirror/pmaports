@@ -1,30 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity8
-pkgver=0_git20181011
-_commit="18c3f6f3c6d6274e1a63562b955bd65f41266fb8"
-pkgrel=1
+pkgver=0_git20200527
+_commit="34f8f8881053a3065a4bced9551c192eaacfdda9"
+pkgrel=0
 pkgdesc="A convergent desktop environment"
 arch="all"
 url="https://github.com/ubports/unity8"
 license="GPL-3.0 LGPL-2.1"
-depends="qt5-qtgraphicaleffects settings-components gsettings-ubuntu-touch-schemas qtmir unity7-schemas suru-icon-theme gsettings-desktop-schemas"
+depends="qt5-qtgraphicaleffects qt5-qtbase-sqlite settings-components gsettings-ubuntu-touch-schemas qtmir suru-icon-theme gsettings-desktop-schemas"
 depends_dev="qt5-qtbase-dev qt5-qtdeclarative-dev unity-api-dev geonames-dev qmenumodel-dev qmenumodel gnome-desktop-dev ubuntu-app-launch-dev ubuntu-ui-toolkit-dev libqtdbustest libqtdbusmock indicator-network-dev gsettings-qt-dev libusermetrics-dev lightdm-qt5 lightdm-qt5-dev ubuntu-download-manager-dev linux-pam-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-test-runner doxygen graphviz system-settings"
 checkdepends="py3-dbusmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity8/archive/$_commit.tar.gz
 	0001-AndroidAway.patch
 	0002-NoDpkgParse.patch
-	0003-Add-missing-includes.patch
-	0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
-	0005-Link-against-libintl.patch
-	0006-Add-forceClose-Impl-for-MirSurface-Mock.patch"
+	0003-UAL3.patch
+	0004-Add-missing-includes.patch
+	0005-Add-qt5-suffix-to-search-for-Qt-tools.patch
+	0006-Link-against-libintl.patch"
 subpackages="$pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
 	cmake -B build \
-		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DCMAKE_INSTALL_LOCALSTATEDIR=/var
@@ -33,19 +33,22 @@ build() {
 
 check() {
 	cd build
-	CTEST_OUTPUT_ON_FAILURE=TRUE ctest -E "testRootActionState|testWizardSystem"
+	# testRootActionState: RootActionStateTest::testToQVariantIcons() 'serializedIcons[0] == "image://theme/testIcon0"' returned FALSE.
+	# testWindowStateStorage: https://github.com/ubports/unity8/issues/316
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest -E "testRootActionState|testWindowStateStorage"
 }
 
 package() {
 	make -C build DESTDIR="$pkgdir" install
 	# Remove this mock as apk thinks, it conflicts with the qmenumodel package
+	# conflicts: qmenumodel-0_git20180727-r0[so:libqmenumodel.so.0=0]
 	rm -r "$pkgdir"/usr/lib/unity8/qml/mocks/QMenuModel/
 }
 
-sha512sums="6bf08f06d6046fe8cf68c3c9aa8f6ef273285ac6362e1167bebb00c309d9407418fefc6635f75beb6301b8ec9192952a56544178ade94859a10f59a701b6c39a  unity8-18c3f6f3c6d6274e1a63562b955bd65f41266fb8.tar.gz
-2abfb71c0632962afc737a0619882ce4a000ecec7cb32659a933c922b42b14491cb7d7f7326f0b4ed2753c16600ca1b085187717bddee6cd0fed4e7b818d7c69  0001-AndroidAway.patch
-541fce025d8dac0081d0887322635a410ebadb0fb04ef2d022349ca4b2c8ff0dc126dae6d554828220a2ebeecc6438baf0cea2378e5cb64ce83f1a7f7e7738e0  0002-NoDpkgParse.patch
-a34af2aeb731b1bdef6ece1bbd9bfbb067aad202079dc7bd7373827da9d28ff4928eedc4a881ab39df54c80d39f714187fbbc87bb82b397a9380be8d502b8924  0003-Add-missing-includes.patch
-0fdda8a7bbcc1c59f6fdf02a7909b8c9bc601c86a64b3debf4d66aabe9316d348184e9b839596c8bf1dacecda88a3a3de75c910838c704a1f6d2112f29869d0e  0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
-232046048e736754bf626d18f0be9268005567fae327432d9fc0607b5a6e241346f3096b7da768e23477dc8e67b08e9e5ce037a38516c6e217807af1b533b771  0005-Link-against-libintl.patch
-31cb731d18dc323c2f0bddeea17adbda4930f0e43eca3ad902bf29ce9f8a39aca05d1917fe745bef5f5d4a3228e978e9ffca57b8f5c697a2531748fdc3947329  0006-Add-forceClose-Impl-for-MirSurface-Mock.patch"
+sha512sums="8f9caf9fe8e6814e68b30902d5016accc9a03f87514f5dfd7dd0245cf126d2127d9c73bbb0cd04898f3206e324d51d81d459711656bb8fa70bed9907b0de1a71  unity8-34f8f8881053a3065a4bced9551c192eaacfdda9.tar.gz
+60377259b9469efcae17ee5989d29e083d972bb3c1500c813e98789902631fa05707518cda82374ffa7b273e94523b72117dc01f1361465f17e2217350bb7dbb  0001-AndroidAway.patch
+f80a8df669f2d66c7edc2da790bbebc42d3767dac620d5c20ddc98719d251ba8b011ee58a9df5c1194e0d0accd8080c0f51e322613eb6ad8d6254029c223e158  0002-NoDpkgParse.patch
+b9a9f3e997aa0d90c140db24828b4ce74282113881ac033439ffa3e894c6fdb13becf918498f37b5312a051480e0fe3e566022cbdd995b7aa5ead239b6727e08  0003-UAL3.patch
+a28f7cb9fcd0e4a79f9081de4875b9dde42da254ee6e19b9a7a6effba68338280e864c69e5c71d13c5a63f8fb828254230f03d935264e5777bdb86f2ca6e312d  0004-Add-missing-includes.patch
+38c3ec2e1ed3cf8588e5116abbc4f2d3f8b39596c9d7193c61012531cbfd1bfbb53fb5a68ba64137e314dcbd1cbcbb12345d63fbbabeec68ef79daffb710ed2a  0005-Add-qt5-suffix-to-search-for-Qt-tools.patch
+0cf14290c8c5923833f22693f49ef2a97df1cf046ecf4768d36b5662979ce5850fe80fa44db98fe6a83824a9dab055bc720b182702fd7f514c8b05da713c8363  0006-Link-against-libintl.patch"

@@ -1,4 +1,4 @@
-From ad7848c68e447c9abfb6507f3fe42c120ea098cf Mon Sep 17 00:00:00 2001
+From a16abda41caa6b456f9ec4ba69275dcd46e6d0d8 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:21:04 +0100
 Subject: [PATCH 1/6] AndroidAway
@@ -48,7 +48,7 @@ index fc0c9ca9b..8dd6614f5 100644
  
  if (NOT "${ANDROID_PROPERTIES_INCLUDE_DIRS}" STREQUAL "")
 diff --git a/src/ShellApplication.cpp b/src/ShellApplication.cpp
-index d7365ca37..c1181cc6f 100644
+index 58532bc48..d0c47a6b7 100644
 --- a/src/ShellApplication.cpp
 +++ b/src/ShellApplication.cpp
 @@ -26,7 +26,7 @@
@@ -60,7 +60,7 @@ index d7365ca37..c1181cc6f 100644
  
  // local
  #include <paths.h>
-@@ -49,9 +49,9 @@ ShellApplication::ShellApplication(int & argc, char ** argv, bool isMirServer)
+@@ -50,9 +50,9 @@ ShellApplication::ShellApplication(int & argc, char ** argv, bool isMirServer)
      if (!parser.deviceName().isEmpty()) {
          m_deviceName = parser.deviceName();
      } else {
@@ -74,5 +74,5 @@ index d7365ca37..c1181cc6f 100644
      m_qmlArgs.setDeviceName(m_deviceName);
  
 -- 
-2.24.0
+2.26.2
 

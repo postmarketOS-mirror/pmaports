@@ -1,7 +1,7 @@
-From 2853d23485b8fdbf778d3b8368b87ae76a5da672 Mon Sep 17 00:00:00 2001
+From ac1e3a077e6be1a7467f53bb551c06e0185b56d9 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:25:24 +0100
-Subject: [PATCH 4/6] Add -qt5 suffix to search for Qt tools
+Subject: [PATCH 5/6] Add -qt5 suffix to search for Qt tools
 
 ---
  cmake/modules/QmlTest.cmake | 4 ++--
@@ -9,7 +9,7 @@ Subject: [PATCH 4/6] Add -qt5 suffix to search for Qt tools
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/cmake/modules/QmlTest.cmake b/cmake/modules/QmlTest.cmake
-index 25a4f6fde..da7e0a3b5 100644
+index bfa27134f..7faf06668 100644
 --- a/cmake/modules/QmlTest.cmake
 +++ b/cmake/modules/QmlTest.cmake
 @@ -114,9 +114,9 @@ endfunction()
@@ -43,5 +43,5 @@ index 65a874083..8a36dec83 100644
  
  install(DIRECTORY data graphics
 -- 
-2.24.0
+2.26.2
 
