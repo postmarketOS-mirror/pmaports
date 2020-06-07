@@ -1,16 +1,102 @@
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index e43816b3..e7851d95 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -1,5 +1,33 @@
+ find_package(GMock)
+ 
++pkg_check_modules(GTEST gtest)
++if(NOT GTEST_FOUND)
++    message(WARNING "'gtest' not found with pkg-config, assuming v1.7.0")
++    set(GTEST_VERSION "1.7.0")
++endif()
++string(REGEX MATCH
++    "([0-9])\\.([0-9]+)\\.([0-9])" GTEST_VERSION_PARSED
++    ${GTEST_VERSION})
++if (GTEST_VERSION_PARSED)
++    set(GTEST_VERSION_MAJOR ${CMAKE_MATCH_1})
++    set(GTEST_VERSION_MINOR ${CMAKE_MATCH_2})
++    set(GTEST_VERSION_PATCH ${CMAKE_MATCH_3})
++    message("Using GTest v${GTEST_VERSION_MAJOR}.${GTEST_VERSION_MINOR}.${GTEST_VERSION_PATCH}")
++else()
++    set(GTEST_VERSION_MAJOR 1)
++    set(GTEST_VERSION_MINOR 8)
++    set(GTEST_VERSION_PATCH 0)
++    message(WARNING "Could not parse GTest version: ${GTEST_VERSION}, assuming v1.8.0 (or compatible) and hoping for the best")
++endif()
++
++add_definitions(-DGTEST_VERSION_MAJOR=${GTEST_VERSION_MAJOR})
++add_definitions(-DGTEST_VERSION_MINOR=${GTEST_VERSION_MINOR})
++add_definitions(-DGTEST_VERSION_PATCH=${GTEST_VERSION_PATCH})
++
++include_directories(
++    include
++)
++
+ pkg_check_modules(MIRTEST mirtest>=0.26 REQUIRED)
+ 
+ add_subdirectory(framework)
 diff --git a/tests/framework/gmock_fixes.h b/tests/framework/gmock_fixes.h
-index e07af3df..7e72663c 100644
+index e07af3df..b112e8bd 100644
 --- a/tests/framework/gmock_fixes.h
 +++ b/tests/framework/gmock_fixes.h
-@@ -75,9 +75,9 @@ class ActionResultHolder<std::unique_ptr<T>>
+@@ -38,6 +38,8 @@
+ #include <memory>
+ #include <gmock/gmock.h>
+ 
++#include "check_gtest_version.h"
++
+ namespace testing
+ {
+ namespace internal
+@@ -75,9 +77,13 @@ class ActionResultHolder<std::unique_ptr<T>>
    // result in a new-ed ActionResultHolder.
    template <typename F>
    static ActionResultHolder* PerformDefaultAction(
--      const FunctionMockerBase<F>* func_mocker,
++#if GTEST_AT_LEAST(1, 10, 0)
 +      const FunctionMocker<F>* func_mocker,
++#else
+       const FunctionMockerBase<F>* func_mocker,
++#endif
        typename Function<F>::ArgumentTuple args,
 -      const string& call_description) {
 +      const std::string& call_description) {
      return new ActionResultHolder(
          func_mocker->PerformDefaultAction(std::move(args), call_description));
    }
+diff --git a/tests/include/check_gtest_version.h b/tests/include/check_gtest_version.h
+new file mode 100644
+index 00000000..aac2d1ca
+--- /dev/null
++++ b/tests/include/check_gtest_version.h
+@@ -0,0 +1,30 @@
++/*
++ * Copyright © 2018 Canonical Ltd.
++ *
++ * This program is free software: you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 2 or 3,
++ * as published by the Free Software Foundation.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
++ *
++ * Authored by: William Wold <william.wold@canonical.com>
++ */
++
++#ifndef GMOCK_CHECK_VERSION_H_
++#define GMOCK_CHECK_VERSION_H_
++
++// NOTE: GTEST_VERSION_* macros are pulled out of the gtest-config utility in cmake, they are NOT provided by any GTest headers.
++
++#if !defined(GTEST_VERSION_MAJOR) || !defined(GTEST_VERSION_MINOR) || !defined(GTEST_VERSION_PATCH)
++#error GTest version macro(s) (GTEST_VERSION_MAJOR, GTEST_VERSION_MINOR or GTEST_VERSION_PATCH) not defined, They should have been defined in tests/CMakeLists.txt
++#endif
++
++#define GTEST_AT_LEAST(x, y, z) (GTEST_VERSION_MAJOR > x || (GTEST_VERSION_MAJOR == x && (GTEST_VERSION_MINOR > y || (GTEST_VERSION_MINOR == y && (GTEST_VERSION_PATCH >= z)))))
++
++#endif // GMOCK_CHECK_VERSION_H_
