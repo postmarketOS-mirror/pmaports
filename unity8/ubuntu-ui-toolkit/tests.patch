@@ -1,0 +1,21 @@
+dpkg-architecture isn't available on Alpine
+
+diff --git a/tests/unit/runtest.sh b/tests/unit/runtest.sh
+index f15ed1776..c88ffba45 100755
+--- a/tests/unit/runtest.sh
++++ b/tests/unit/runtest.sh
+@@ -88,13 +88,7 @@ function create_test_cmd {
+   EXE=$(abspath $_TARGETPATH)
+   _CMD="-n $_TESTFILE -m 500"
+ 
+-  DEB_HOST_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH)
+-  if [[ ${DEB_HOST_ARCH} =~ 'arm' ]]; then
+-    _CMD="dbus-test-runner --task $EXE $_CMD"
+-  else
+-    _CMD="dbus-test-runner --task gdb -p --quiet $_CMD"
+-    _CMD="$_CMD -p --batch -p -ex -p 'set print thread-events off' -p -ex -p run -p -ex -p bt -p --return-child-result -p --args -p $EXE"
+-  fi
++  _CMD="dbus-test-runner --task $EXE $_CMD"
+ 
+   if [[ 'minimal custom' == *$_MINIMAL* ]]; then
+       _CMD="$_CMD -p -platform -p $_MINIMAL"

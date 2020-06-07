@@ -7,32 +7,31 @@ pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
 url="https://unity8.io"
-license="LGPL-3.0"
+license="LGPL-3.0-only"
 depends="qt5-qtfeedback qt5-qtgraphicaleffects"
 depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-dev libxi-dev eudev-dev mir-dev libevdev-dev qt5-qtgraphicaleffects qt5-qtfeedback-dev"
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
+checkdepends="diffutils bash"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-ui-toolkit/archive/$_commit.tar.gz
 	0001-Add-include-to-math.h.patch
 	0002-Don-t-hardcode-Debian-specific-python3-path.patch
 	0003-Check-result-of-QTest-qWaitForWindowExposed.patch
-	0004-Fix-missing-sentinel-warning.patch"
+	0004-Fix-missing-sentinel-warning.patch
+	tests.patch"
 subpackages="$pkgname-dev $pkgname-lang"
-options="!check" # Complaining about a non-existing file
+options="!check" # components.api test fails
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
-	cd "$builddir"
-	qmake-qt5 "CONFIG+=no_docs"
+	qmake-qt5 CONFIG+=no_docs
 	make
 }
 
 check() {
-	cd "$builddir"
 	make check
 }
 
 package() {
-	cd "$builddir"
 	make INSTALL_ROOT="$pkgdir" install
 }
 
@@ -40,4 +39,5 @@ sha512sums="910db5b70147dae6c10563eda07129073473e89e4367fd2fa1aa62ac656a42b1f706
 4eb30bec1a457aacf969cb83dc847f7fa95a77e5e8672771253205b170dd0776541c71f0da9adf8e6178af92b4d50c455fa4b863a8492f6bb8048ceb4ed172a4  0001-Add-include-to-math.h.patch
 22f6cb444e9e132ecc9b74cfe1f5b28ab5c4b8e53c248176eae7d35357796364ec769577c8293d89364546659b04ba4d429a5b6731c41fcb87f73c8bdcb8d9e8  0002-Don-t-hardcode-Debian-specific-python3-path.patch
 a89da826f470d335e8d3c208063f031792dd99d547c3a1979db6e4bdc5fe0adecc6fea3cba8a4687626d561c1826ff1f7232cdd136ece6713b6dc616aa79ec28  0003-Check-result-of-QTest-qWaitForWindowExposed.patch
-7bdc17548ba76b6b841d5687c03ba859566efc0442915faac5d7c6d034372766198e5b5e7538bdac598259a9d89ca086fa5a973aa1e1d9a110befb2d2ee265b1  0004-Fix-missing-sentinel-warning.patch"
+7bdc17548ba76b6b841d5687c03ba859566efc0442915faac5d7c6d034372766198e5b5e7538bdac598259a9d89ca086fa5a973aa1e1d9a110befb2d2ee265b1  0004-Fix-missing-sentinel-warning.patch
+3636aec91f98fc87b4d7407494daaffa1a9146442fbaaaf78956cda907364b53d115b1feea1e30e04a2538c0c0446c90b98731b0b4467cf7e3abcb6a550a4265  tests.patch"
