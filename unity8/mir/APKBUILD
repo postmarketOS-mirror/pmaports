@@ -10,7 +10,7 @@ license="GPL-2.0-or-later AND LGPL-2.0-or-later"
 depends="xkeyboard-config dmz-cursor-theme ttf-freefont"
 depends_dev="boost-dev mesa-dev glm-dev glog-dev gflags-dev eudev-dev glib-dev wayland-dev libepoxy-dev nettle-dev libinput-dev
 	capnproto-dev libxml++-2.6-dev py3-pillow freetype-dev libevdev-dev umockdev-dev lttng-ust-dev yaml-cpp-dev libxcursor-dev"
-makedepends="$depends_dev cmake libxkbcommon-dev gtest-dev gmock wlcs-dev protobuf-dev"
+makedepends="$depends_dev cmake lttng-ust-tools libxkbcommon-dev gtest-dev gmock wlcs-dev protobuf-dev"
 checkdepends="wlcs grep bash"
 source="
 	$pkgname-$pkgver.tar.gz::https://github.com/MirServer/mir/archive/v$pkgver.tar.gz
