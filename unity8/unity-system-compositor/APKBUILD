@@ -1,36 +1,42 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity-system-compositor
-pkgver=0_git20190522
-_commit="63270a3ad1cd04332d699da0ea975b2edf7e5bc0"
+pkgver=0_git20200414
+_commit="b38dc1299fcd0e5b11e8e28c9f95564682f05a4c"
 pkgrel=0
 pkgdesc="System compositor using the Mir display server"
 arch="all"
-url="https://unity8.io"
-license="GPL-3.0"
-depends=""
+url="https://github.com/ubports/unity-system-compositor"
+license="GPL-3.0-only"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock gdk-pixbuf-dev mir-dev dbus-dev"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity-system-compositor/archive/$_commit.tar.gz
+	0001-Use-GMock-config-from-cmake-extras.patch
+	0002-Adapt-to-upstream-mir-1.6-changes.patch
+	0003-spinner-Add-support-for-wayland-backend.patch"
 builddir="$srcdir/$pkgname-$_commit"
-options="!check" # 50% tests passed, 1 tests failed out of 2
 
 build() {
-	cmake \
-		-DCMAKE_BUILD_TYPE=Release \
+	# fails to build with fortify headers enabled
+	export CXXFLAGS="$CXXFLAGS -U_FORTIFY_SOURCE"
+
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib
-	make
+	make -C build
 }
 
 check() {
-	cd "$builddir"
+	cd build
 	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"
-	make DESTDIR="$pkgdir" install
+	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="fa7a8ee4ab4d3ddafd03f1164f539786b153b5624421a0084594e275ed1cd40ae1086faba9d2774b25f8c1e0875732351c76a094fecde853a2264195eeb761fd  unity-system-compositor-63270a3ad1cd04332d699da0ea975b2edf7e5bc0.tar.gz"
+sha512sums="80251c429aecbc57cd59307715be2a720eada70a49e45e4a0f7745b0d589b957b16a4948197017246c4caa11e56ad174a34dc63bc9f45849738afd80a5854a30  unity-system-compositor-b38dc1299fcd0e5b11e8e28c9f95564682f05a4c.tar.gz
+70238fa2ebd6aa201463524c214f849db671888660c89fa76d776c8e092d93b6233a88601b60ebcc917d3601c367c35c1ba8b2fae1e953fa84e5f1f43c6bbd55  0001-Use-GMock-config-from-cmake-extras.patch
+45de9167f5bb4df3e70e70bbb8a05669d1f7ff7e1be86d01fbc577aa165729aec6e00982d559cd012c267ba4b3c4681729e80baa6bee6fe8108dfc4d64525d51  0002-Adapt-to-upstream-mir-1.6-changes.patch
+46e993944c9bccf83c8735ac020e64fd25937b03b484730b69e12daa00d4795e3bfacf1ce23a58489c29fa0e6f05e7625c871bfa5ec10d154048fa1c96273f39  0003-spinner-Add-support-for-wayland-backend.patch"
