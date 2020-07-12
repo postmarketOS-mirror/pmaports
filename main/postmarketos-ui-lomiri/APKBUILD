@@ -9,6 +9,7 @@ license="GPL-3.0-or-later"
 depends="
 	unity8
 	postmarketos-artwork-wallpapers
+	system-settings
 "
 source="
 	000-gschema.override
