@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=platform-api
-pkgver=0_git20181020
+pkgver=0_git20200720
 pkgrel=0
-_commit="54a933236598e750ffe6c9b8a8a76daa8bf1ce0b"
+_commit="dec173823d718ec8ffe9e8d21714819ea928c3e2"
 pkgdesc="Platform API for system level capabilities"
 arch="all"
 url='https://github.com/ubports/platform-api'
@@ -11,9 +11,7 @@ license="GPL-3.0-only AND LGPL-3.0-only"
 depends_dev="process-cpp-dev url-dispatcher-dev location-service-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-cpp-dev gtest-dev gmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0001-Use-proper-GTest.patch
-	0002-Only-use-Hybris-when-available.patch
-	0003-Fix-gcc7.patch"
+	0002-Only-use-Hybris-when-available.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -33,7 +31,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="c2b3280a2bdc4f2bf21fe8e2623058b6d5645c10f00236781bab86e6a96b2678ba95c3adf5162c4f6647ce5d7bac566b446f2376dd88bdba59feb70f94308405  platform-api-54a933236598e750ffe6c9b8a8a76daa8bf1ce0b.tar.gz
-42f76bd765550e8ddff31e79d6d293470c4ab33bd0058b1ceeeb4b6bd71fd3b5e94736ac1d588889fb41b3c1b6961330335f7294bec8cd1e605260a519cf38fb  0001-Use-proper-GTest.patch
-1dceef13de9321c1aaa2f8530ff90c8cdf4359788453575b8e81eca12246f015ca03cc8e0721936b0762e6f087f55bb274049d4213e64b607c9977a69fac3042  0002-Only-use-Hybris-when-available.patch
-5257b6166aa4481d1d72dd2027b742c6abb3c31685c7ad6f155b6b7b0408f5eac811d189454c925444c8943533e07a930f0399214a901d7135de6d70fb79c26e  0003-Fix-gcc7.patch"
+sha512sums="514287324d90acda84537a277f8e5b4158d3cf034fe18edefe1e1838dcbaab350bde09467e717e8a607f3655f1dc4ca021047e6f1202d5e776feeaf472cf1b6f  platform-api-dec173823d718ec8ffe9e8d21714819ea928c3e2.tar.gz
+1dceef13de9321c1aaa2f8530ff90c8cdf4359788453575b8e81eca12246f015ca03cc8e0721936b0762e6f087f55bb274049d4213e64b607c9977a69fac3042  0002-Only-use-Hybris-when-available.patch"

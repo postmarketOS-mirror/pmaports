@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-themes
-pkgver=0_git20181005
-_commit="c5bd237813a35a86c2eb3484f0635da306882765"
+pkgver=0_git20200211
+_commit="2992fa55a80f214b72c4cb01703191258a19fddb"
 pkgrel=0
 pkgdesc="Theme files for Unity 8"
 arch="noarch"
@@ -51,4 +51,4 @@ ubuntu_mono() {
 	cp -r ubuntu-mono-dark ubuntu-mono-light LoginIcons "$subpkgdir"/usr/share/icons
 }
 
-sha512sums="553226ef0f94e2b2c56f7604380039cd4fa69b6082fa1020e065719adb1ad32c8a2ac098aa0beedb8943f9d53eb89f8aaddaf9fb84f881ea79a84a77f8d19afa  ubuntu-themes-c5bd237813a35a86c2eb3484f0635da306882765.tar.gz"
+sha512sums="577aa02fe72e0862d7eeb25c4f301b1d3e2d47e191761f4890ad572726ab6afde0adfd1a6de9a6f865412cf2cb738aa9cf90595aff401962c32de8b86951efe3  ubuntu-themes-2992fa55a80f214b72c4cb01703191258a19fddb.tar.gz"

@@ -1,19 +1,17 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity-system-compositor
-pkgver=0_git20200414
-_commit="b38dc1299fcd0e5b11e8e28c9f95564682f05a4c"
+pkgver=0_git20200813
+_commit="783ddfb220ddb4633d3f3978ad6c42fa94cbf7d0"
 pkgrel=0
 pkgdesc="System compositor using the Mir display server"
 arch="all"
 url="https://github.com/ubports/unity-system-compositor"
 license="GPL-3.0-only"
-makedepends="$depends_dev cmake cmake-extras gtest-dev gmock gdk-pixbuf-dev mir-dev dbus-dev"
+makedepends="$depends_dev cmake cmake-extras gtest-dev gmock gdk-pixbuf-dev mir-dev dbus-dev lomiri-deviceinfo-dev"
 checkdepends="dbus"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity-system-compositor/archive/$_commit.tar.gz
-	0001-Use-GMock-config-from-cmake-extras.patch
-	0002-Adapt-to-upstream-mir-1.6-changes.patch
-	0003-spinner-Add-support-for-wayland-backend.patch"
+	0001-Add-missing-stdexcept-header.patch"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -36,7 +34,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="80251c429aecbc57cd59307715be2a720eada70a49e45e4a0f7745b0d589b957b16a4948197017246c4caa11e56ad174a34dc63bc9f45849738afd80a5854a30  unity-system-compositor-b38dc1299fcd0e5b11e8e28c9f95564682f05a4c.tar.gz
-70238fa2ebd6aa201463524c214f849db671888660c89fa76d776c8e092d93b6233a88601b60ebcc917d3601c367c35c1ba8b2fae1e953fa84e5f1f43c6bbd55  0001-Use-GMock-config-from-cmake-extras.patch
-45de9167f5bb4df3e70e70bbb8a05669d1f7ff7e1be86d01fbc577aa165729aec6e00982d559cd012c267ba4b3c4681729e80baa6bee6fe8108dfc4d64525d51  0002-Adapt-to-upstream-mir-1.6-changes.patch
-46e993944c9bccf83c8735ac020e64fd25937b03b484730b69e12daa00d4795e3bfacf1ce23a58489c29fa0e6f05e7625c871bfa5ec10d154048fa1c96273f39  0003-spinner-Add-support-for-wayland-backend.patch"
+sha512sums="5ea7784a106290d0e6ec72df56d2cb93356a127c6913519aafca038d3ee090162d18cebf90686ec41786e7d32370cf6e42933d85c69d0b1a78366424ffbc94d4  unity-system-compositor-783ddfb220ddb4633d3f3978ad6c42fa94cbf7d0.tar.gz
+4f2a78f62ff242118f86e7ad25b680521a6faa1f86f7840ac20786dd075499409ff6501d3b691c14b465c62941d646fcbd5ecd907c4749f7e5694ce8baedba0b  0001-Add-missing-stdexcept-header.patch"

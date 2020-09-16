@@ -1,7 +1,7 @@
-From 92e89590885e0b279a39899c9968e87040b7ab02 Mon Sep 17 00:00:00 2001
+From d58022eb731523015870388a6a9bcbc656a8b8a5 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Thu, 5 Mar 2020 13:36:06 +0100
-Subject: [PATCH 2/4] Don't hardcode Debian-specific python3 path
+Subject: [PATCH 1/7] Don't hardcode Debian-specific python3 path
 
 ---
  tests/tests.pro | 4 +++-
@@ -23,5 +23,5 @@ index bdd77a1c1..796029f82 100644
  
  SUBDIRS += api
 -- 
-2.25.2
+2.28.0
 

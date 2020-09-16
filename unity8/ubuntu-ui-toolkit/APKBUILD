@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-ui-toolkit
-pkgver=0_git20200204
-_commit="9fceb0f5b2082ea13acdbcdb55160d896db86367"
+pkgver=0_git20200722
+_commit="411dca17a083cb81ed85cd5d8e62c6a60af35999"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -11,15 +11,18 @@ license="LGPL-3.0-only"
 depends="qt5-qtfeedback qt5-qtgraphicaleffects"
 depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-dev libxi-dev eudev-dev mir-dev libevdev-dev qt5-qtgraphicaleffects qt5-qtfeedback-dev"
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
-checkdepends="diffutils bash"
+checkdepends="diffutils bash grep xvfb-run dbus-test-runner"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-ui-toolkit/archive/$_commit.tar.gz
-	0001-Add-include-to-math.h.patch
-	0002-Don-t-hardcode-Debian-specific-python3-path.patch
-	0003-Check-result-of-QTest-qWaitForWindowExposed.patch
-	0004-Fix-missing-sentinel-warning.patch
-	tests.patch"
+	0001-Don-t-hardcode-Debian-specific-python3-path.patch
+	0002-Remove-debian-isms-from-test-runner.patch
+	0003-Disable-Werror.patch
+	0004-Don-t-build-app-launch-profiler.patch
+	0005-Fixes-from-xenial_-_qt-5-12-branch.patch
+	0006-Compatibility-with-Qt-5.15.patch
+	0007-Register-Ubuntu.Test-plugin-as-module.patch
+	"
 subpackages="$pkgname-dev $pkgname-lang"
-options="!check" # components.api test fails
+options="!check" # several tests fail
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -28,16 +31,18 @@ build() {
 }
 
 check() {
-	make check
+	xvfb-run make check
 }
 
 package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="910db5b70147dae6c10563eda07129073473e89e4367fd2fa1aa62ac656a42b1f7062bfe451984cee3bbea73ae5873db63e66b2966442b90b25e3be0a79d11e6  ubuntu-ui-toolkit-9fceb0f5b2082ea13acdbcdb55160d896db86367.tar.gz
-4eb30bec1a457aacf969cb83dc847f7fa95a77e5e8672771253205b170dd0776541c71f0da9adf8e6178af92b4d50c455fa4b863a8492f6bb8048ceb4ed172a4  0001-Add-include-to-math.h.patch
-22f6cb444e9e132ecc9b74cfe1f5b28ab5c4b8e53c248176eae7d35357796364ec769577c8293d89364546659b04ba4d429a5b6731c41fcb87f73c8bdcb8d9e8  0002-Don-t-hardcode-Debian-specific-python3-path.patch
-a89da826f470d335e8d3c208063f031792dd99d547c3a1979db6e4bdc5fe0adecc6fea3cba8a4687626d561c1826ff1f7232cdd136ece6713b6dc616aa79ec28  0003-Check-result-of-QTest-qWaitForWindowExposed.patch
-7bdc17548ba76b6b841d5687c03ba859566efc0442915faac5d7c6d034372766198e5b5e7538bdac598259a9d89ca086fa5a973aa1e1d9a110befb2d2ee265b1  0004-Fix-missing-sentinel-warning.patch
-3636aec91f98fc87b4d7407494daaffa1a9146442fbaaaf78956cda907364b53d115b1feea1e30e04a2538c0c0446c90b98731b0b4467cf7e3abcb6a550a4265  tests.patch"
+sha512sums="f1fe3548cc3bb3809e022c70750c414207d4426e19866f149262939d9ce36d3f51fa54cfa1f4f944862150fbaf6c715ba39b3f3df490d65b9e7dcadc038dc2ec  ubuntu-ui-toolkit-411dca17a083cb81ed85cd5d8e62c6a60af35999.tar.gz
+dd75ce7a65dd3abe8e32614b5e29edcb12737f2270171c73247103752c7653ab817de566828288b3a10118b7ab1bc6327dc428af2147975db99d44087bfa2f33  0001-Don-t-hardcode-Debian-specific-python3-path.patch
+007bfc051e6560b85e692b79dea7cd875cfdf6f3c9402a9ed3fa4bea39f3521fdb721d152aea62eb01a848af51509800f7cf34c51528689972365e3aa2493821  0002-Remove-debian-isms-from-test-runner.patch
+dd78d8f97f73de710a3b7665456f755ed5da327c9173b0d99fc252c6efa38ce0f68161ba0e6c94299f403ed0d47c3162c9c4a07006d1525a0614dc0254291de3  0003-Disable-Werror.patch
+dd294f3019d25b4c2cec0494e9dcb3ccbdd180e420f2cb774a3a6c722bf0678a1348c829c927760d6d204c0402129dc65b0a5ae900da664dad791154de24f6fa  0004-Don-t-build-app-launch-profiler.patch
+9cf87e73c8fb8083bc4691f4aba12aba9a687ae049ba076cfdd2540530cee3970190d08d030a00337d4a8d73159652985dc2ce7b54532f79234558deb98e2115  0005-Fixes-from-xenial_-_qt-5-12-branch.patch
+73a8d4f149e1f483a1f226604d2f39c5cdb88f9a330dfec79f907ee7bb03c5cdd7e03a95c07c184db7f3f0d2d05de8a74d3bec2432c43b841a3c288e0968f429  0006-Compatibility-with-Qt-5.15.patch
+ed39702a16c21b0426c608e27556920f18dedc7266550f249c8ddd8454a0f414f60dd0c49065ca8c37a98f01da61ede2f46ef19276e027c65d45b7a4729d4cc6  0007-Register-Ubuntu.Test-plugin-as-module.patch"

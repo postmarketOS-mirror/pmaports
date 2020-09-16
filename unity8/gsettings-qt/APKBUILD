@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=gsettings-qt
-pkgver=0_git20180418
-_commit="c8ecb2bf269f4ed0a4477bad262751d77ae6bb72"
+pkgver=0_git20200715
+_commit="e12a1df31013eb940b035602951af11cee16a758"
 pkgrel=0
 pkgdesc="Library to access GSettings from Qt"
 url="https://github.com/ubports/gsettings-qt"
@@ -11,12 +11,7 @@ depends_dev="qt5-qtdeclarative-dev"
 makedepends="$depends_dev qt5-qtbase-dev"
 checkdepends="xvfb-run"
 subpackages="$pkgname-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gsettings-qt/archive/$_commit.tar.gz
-	0001-Replace-deprecated-g_settings_list_keys-usage.patch
-	0002-Fix-tests-under-Qt-5.14.patch
-	0003-Fix-make-install-on-Alpine-Linux.patch
-	0004-Fix-missing-sentinel-warning.patch
-	0005-Declare-libgsettings-qt-dependency-for-cpptest-gsett.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gsettings-qt/archive/$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -32,9 +27,4 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="696e10212369f02a811b7b56f2a2b496383dcd6d008f83b6f71da4d70fa3f26cfafe35ce4689eacd6d15d4cdd0ba3d632b33de045022f74e6f7b828062011b35  gsettings-qt-c8ecb2bf269f4ed0a4477bad262751d77ae6bb72.tar.gz
-9009d0772e7edce7e11401be2b97aca3c11ae8b6f3936cf2a673ed2ad320a71366de9542ddeccf7227e9ecd8c00d9757521f3276edc0e9d7eabef3235634b992  0001-Replace-deprecated-g_settings_list_keys-usage.patch
-0a20d84ee966794fb5e617368ac3316a54ce6cd703ecd49a6e8a16e905d3c262e5cbc6ba82ddd6f36732a85cb8015a3f018f0234b1efcf7c166b6b5ddfaf15dd  0002-Fix-tests-under-Qt-5.14.patch
-6ab59edb79f1cffc53763006ec44a4758bb8537f6a022d54ee175bb91c3164fd09da6209915f0899e0b97c59048562c253817ac4a6ae2a4d6f23c151029a480a  0003-Fix-make-install-on-Alpine-Linux.patch
-ddcff259cbbd8a78685751456773ce95f5f0859552b34378dbc5c3dbf8277aed9d5a7bf199359fe51bb5931f06f09b7a5f94281a115615faca2f787ae34adf4b  0004-Fix-missing-sentinel-warning.patch
-19f87b47fb3e3974e238a317ff393da7721c4f090689f1660084d237ec5a60bfc2b65a0723eb27e1832407257b163900580be7457a2ffc73a4273b0acb7bbbe5  0005-Declare-libgsettings-qt-dependency-for-cpptest-gsett.patch"
+sha512sums="6dd6d2290c29afd3404a82249c7429c6932b1e2eb33c37bad1440f04f6715a9dc7264fd0348c11d0dc8be4c78d7f1cc59f547cbcbf219f954e29cb5c58833d28  gsettings-qt-e12a1df31013eb940b035602951af11cee16a758.tar.gz"

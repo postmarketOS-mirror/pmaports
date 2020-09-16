@@ -9,9 +9,10 @@ arch="all"
 url="https://github.com/ubports/url-dispatcher"
 license="LGPL-3.0-only"
 depends_dev="ubuntu-app-launch-dev json-glib-dev click-dev libapparmor-dev"
-makedepends="$depends_dev cmake dbus-test-runner cmake-extras glib-dev gtest-dev gmock intltool"
+makedepends="$depends_dev cmake dbus-test-runner cmake-extras glib-dev gtest-dev gmock intltool dbus-test-runner-dev"
 checkdepends="py3-dbusmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/url-dispatcher/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/url-dispatcher/archive/$_commit.tar.gz
+	0001-Add-missing-header.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # several tests hang
@@ -34,4 +35,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="f26576fa67777c041236e9fe6e6ad5607a240e63959872abc752d4023443b3473da55af39f3d19c888470e639229e84eecde75dcfa6e0b8622b1ee5634ac8f19  url-dispatcher-b9a83f539b6d0c51b7f2397d40aed1132366672b.tar.gz"
+sha512sums="f26576fa67777c041236e9fe6e6ad5607a240e63959872abc752d4023443b3473da55af39f3d19c888470e639229e84eecde75dcfa6e0b8622b1ee5634ac8f19  url-dispatcher-b9a83f539b6d0c51b7f2397d40aed1132366672b.tar.gz
+0feb04f79a2fff0c1faa2c4c029374aff3582c14503e95c56c08b6e11ad72e76bfc93895a6bef0f141a102509f7164cd33a3d52323a11ab1a32e22bebe49e87d  0001-Add-missing-header.patch"

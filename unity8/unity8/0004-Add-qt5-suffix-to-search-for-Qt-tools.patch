@@ -1,7 +1,7 @@
-From ac1e3a077e6be1a7467f53bb551c06e0185b56d9 Mon Sep 17 00:00:00 2001
+From b604dcdf339cc3fcfad447abc0b021643b3abe8a Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:25:24 +0100
-Subject: [PATCH 5/6] Add -qt5 suffix to search for Qt tools
+Subject: [PATCH 4/5] Add -qt5 suffix to search for Qt tools
 
 ---
  cmake/modules/QmlTest.cmake | 4 ++--
@@ -25,10 +25,10 @@ index bfa27134f..7faf06668 100644
          ARGS -input ${CMAKE_CURRENT_SOURCE_DIR}/${PATH}/tst_${COMPONENT_NAME}.qml ${QMLTEST_ARGS}
      )
 diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-index 65a874083..8a36dec83 100644
+index 899747cce..707c4a3d6 100644
 --- a/tests/CMakeLists.txt
 +++ b/tests/CMakeLists.txt
-@@ -130,11 +130,11 @@ endfunction()
+@@ -134,11 +134,11 @@ endfunction()
  if(DEFINED ENV{DEB_BUILD_MULTIARCH})
    set(QDBUSXML2CPP_EXECUTABLE "/usr/lib/$ENV{DEB_BUILD_MULTIARCH}/qt5/bin/qdbusxml2cpp")
  else()
@@ -43,5 +43,5 @@ index 65a874083..8a36dec83 100644
  
  install(DIRECTORY data graphics
 -- 
-2.26.2
+2.28.0
 

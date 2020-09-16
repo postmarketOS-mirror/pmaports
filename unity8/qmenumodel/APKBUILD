@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qmenumodel
-pkgver=0_git20180727
+pkgver=0_git20171227
 pkgrel=0
-_commit="30e3dc541966abfd2ac1436caec7cd4bebdf996e"
+_commit="f2367433aef6e289eb527e342e48b21392dde843"
 pkgdesc='qmenumodel'
 arch="all"
 url="https://github.com/ubports/qmenumodel"
@@ -32,4 +32,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="36fb9314703aed90862f405792ff9eaac3761972dfd51591ba2270809681d0a0035151241a9efb20595ea5a66860398041be8cf8d0b5865253cbb16475373172  qmenumodel-30e3dc541966abfd2ac1436caec7cd4bebdf996e.tar.gz"
+sha512sums="17a97ffddac91a26647db8229924d3195c49c60602afa89c82928e7493bf04495d0cbfe8c38c61d8dafd3db1335063e3da7f1926faa9e177cb7aa2b384aab533  qmenumodel-f2367433aef6e289eb527e342e48b21392dde843.tar.gz"

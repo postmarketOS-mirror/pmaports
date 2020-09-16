@@ -1,0 +1,29 @@
+From 2c312bffea50b52ec16eefababe297487b13890f Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Wed, 16 Sep 2020 19:24:08 +0200
+Subject: [PATCH] Allow changing of CONFIG_PATH during compile-time
+
+This allows for e.g. a distribution to change the config path to a
+different directory.
+
+    cmake -B build -DCONFIG_PATH=/etc/lomiri-deviceinfo
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5a9c05e..d5b4234 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -17,7 +17,7 @@ set(TARGET deviceinfo)
+ 
+ include_directories(headers)
+ 
+-set(CONFIG_PATH ${CMAKE_INSTALL_FULL_SYSCONFDIR}/deviceinfo)
++set(CONFIG_PATH CACHE STRING ${CMAKE_INSTALL_FULL_SYSCONFDIR}/deviceinfo)
+ install(DIRECTORY configs/ DESTINATION ${CONFIG_PATH})
+ 
+ add_subdirectory(headers)
+-- 
+2.28.0
+

@@ -1,7 +1,7 @@
-From b554aa3c0e57521041db0777576f2a67aa9e12c5 Mon Sep 17 00:00:00 2001
+From 99760a9903e405b6e0508f5cae6122cf8c4b1320 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 22:19:51 +0100
-Subject: [PATCH 6/6] Link against libintl
+Subject: [PATCH 5/5] Link against libintl
 
 ---
  plugins/LightDM/FullLightDM/CMakeLists.txt             | 1 +
@@ -23,12 +23,12 @@ index 0d0154172..e9c804bff 100644
  
  add_unity8_plugin(FullLightDM 0.1 LightDM/FullLightDM TARGETS FullLightDM-qml)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 8dd6614f5..386493848 100644
+index b35d99f91..940909e6a 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -52,6 +52,7 @@ target_link_libraries(${SHELL_APP}
+@@ -48,6 +48,7 @@ target_link_libraries(${SHELL_APP}
      Qt5::DBus Qt5::Gui Qt5::Qml Qt5::Quick Qt5::Test
-     ${ANDROID_PROPERTIES_LDFLAGS} ${GSETTINGS_QT_LDFLAGS}
+     ${GSETTINGS_QT_LDFLAGS}
      UbuntuGestures connectivity-qt1 unity8-private
 +    intl
      )
@@ -75,5 +75,5 @@ index c35cbff8f..67918cfc8 100644
  target_include_directories(GreeterPromptsModelTestExec PUBLIC
      ${CMAKE_SOURCE_DIR}/plugins/LightDM
 -- 
-2.26.2
+2.28.0
 

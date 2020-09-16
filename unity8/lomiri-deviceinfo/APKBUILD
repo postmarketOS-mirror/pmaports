@@ -1,0 +1,35 @@
+# Maintainer: Luca Weiss <luca@z3ntu.xyz>
+pkgname=lomiri-deviceinfo
+pkgver=0_git20200904
+_commit="a830f334a7cfe97723a2ba2811771ce39d381398"
+pkgrel=0
+pkgdesc="Library to detect and configure devices"
+arch="all"
+url="https://github.com/ubports/deviceinfo"
+license="GPL-3.0-only"
+makedepends="cmake cmake-extras gtest-dev"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/deviceinfo/archive/$_commit.tar.gz
+	0001-Allow-changing-of-CONFIG_PATH-during-compile-time.patch"
+subpackages="$pkgname-dev"
+builddir="$srcdir/deviceinfo-$_commit"
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCONFIG_PATH=/etc/lomiri-deviceinfo
+	cmake --build build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --build build --target install
+}
+
+sha512sums="1afe0767156d843143d8ef0a75de0e99cbefc2ff44deaf2210826b91b44d72d483040ed52c731b8888811244ea691bf8afb419fde8b238e42a8778c19f09f90d  lomiri-deviceinfo-a830f334a7cfe97723a2ba2811771ce39d381398.tar.gz
+6c1b7f1c03a0d522aaa86bf22753a897316d488ea5226df6f87f9c53b5345e2f3f61b97b4d4754aa5c1ea9b05e411bbf65bdd72dfcd9e90b179c1941abd1a8ac  0001-Allow-changing-of-CONFIG_PATH-during-compile-time.patch"

@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity-api
-pkgver=0_git20200226
-_commit="989301571498a86ce99174379045e85b8549c2d9"
+pkgver=0_git20200512
+_commit="e2994d7f034b9453bd198f838084cd2148a1c023"
 pkgrel=0
 pkgdesc="API for Unity shell integration"
 url="https://github.com/ubports/unity-api"
@@ -12,7 +12,6 @@ makedepends="$depends_dev cmake cmake-extras qt5-qtdeclarative-dev libqtdbustest
 checkdepends="dbus"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity-api/archive/$_commit.tar.gz
 	qmltestrunner.patch
-	0001-Add-Mir-AttachedState.patch
 	0001-GlibMemory.h-remove-GRefString-from-smart-pointers.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -35,7 +34,6 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="226a5f0c05978ced41b48587c14db9a811a0fd709c51e43579ba9f88ba79f3a2b735e977b3c1fbcbe7aab4527b0b0fdbc7049ba76ffe22590687f833ea5685b2  unity-api-989301571498a86ce99174379045e85b8549c2d9.tar.gz
+sha512sums="5523f23821bafb749d935ccc7fcf6cefbe6d3c48d8100f0f36cd327ebe42319c7895d2488f1e04e91494511e572a8a7e783e33494901efb435b21bb52d2db895  unity-api-e2994d7f034b9453bd198f838084cd2148a1c023.tar.gz
 04c316667ed5892c55278b01377d4d9c1a6ae14a330bfa594e5e54371d37441747684ab553799cb5e7804f4c68d181e78caeb8279491b9f5302a4e70095c74af  qmltestrunner.patch
-d6a05624bfbec5da87ac4dfdb34f8387dd969f1226d29be73c059216dd76191b3084364e45c88d8c9da15d9632f121d7b9a134fecd08532c8cc60427b39e5ab5  0001-Add-Mir-AttachedState.patch
 8861b0abd252d897f184e5cc748cb42ac3ca25d8c32a806248294e28c1d17b9304a296ff1933d5955cd00b53c17526e3fa233a6a14913133136fbe0a780038f9  0001-GlibMemory.h-remove-GRefString-from-smart-pointers.patch"

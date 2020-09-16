@@ -1,7 +1,14 @@
-dpkg-architecture isn't available on Alpine
+From 09d6f4295e6c1cda434bd60b4e66730b0b5a45dc Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sun, 23 Aug 2020 14:09:54 +0200
+Subject: [PATCH 2/7] Remove debian-isms from test runner
+
+---
+ tests/unit/runtest.sh | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
 diff --git a/tests/unit/runtest.sh b/tests/unit/runtest.sh
-index f15ed1776..c88ffba45 100755
+index c1c041435..bd72a0d6d 100755
 --- a/tests/unit/runtest.sh
 +++ b/tests/unit/runtest.sh
 @@ -88,13 +88,7 @@ function create_test_cmd {
@@ -19,3 +26,6 @@ index f15ed1776..c88ffba45 100755
  
    if [[ 'minimal custom' == *$_MINIMAL* ]]; then
        _CMD="$_CMD -p -platform -p $_MINIMAL"
+-- 
+2.28.0
+

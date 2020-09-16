@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity8
-pkgver=0_git20200527
-_commit="34f8f8881053a3065a4bced9551c192eaacfdda9"
+pkgver=0_git20200908
+_commit="9cc6008d99c53d455f2b534087f75926748e09d0"
 pkgrel=0
 pkgdesc="A convergent desktop environment"
 arch="all"
@@ -10,15 +10,15 @@ url="https://github.com/ubports/unity8"
 license="GPL-3.0 LGPL-2.1"
 depends="qt5-qtgraphicaleffects qt5-qtbase-sqlite settings-components gsettings-ubuntu-touch-schemas qtmir suru-icon-theme gsettings-desktop-schemas unity-system-compositor"
 depends_dev="qt5-qtbase-dev qt5-qtdeclarative-dev unity-api-dev geonames-dev qmenumodel-dev qmenumodel gnome-desktop-dev ubuntu-app-launch-dev ubuntu-ui-toolkit-dev libqtdbustest libqtdbusmock indicator-network-dev gsettings-qt-dev libusermetrics-dev lightdm-qt5 lightdm-qt5-dev ubuntu-download-manager-dev linux-pam-dev"
-makedepends="$depends_dev cmake cmake-extras dbus-test-runner doxygen graphviz system-settings"
+makedepends="$depends_dev cmake cmake-extras dbus-test-runner doxygen graphviz system-settings lomiri-deviceinfo-dev"
 checkdepends="py3-dbusmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity8/archive/$_commit.tar.gz
-	0001-AndroidAway.patch
-	0002-NoDpkgParse.patch
-	0003-UAL3.patch
-	0004-Add-missing-includes.patch
-	0005-Add-qt5-suffix-to-search-for-Qt-tools.patch
-	0006-Link-against-libintl.patch"
+	0001-NoDpkgParse.patch
+	0002-UAL3.patch
+	0003-Add-missing-includes.patch
+	0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
+	0005-Link-against-libintl.patch
+	"
 subpackages="$pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -45,10 +45,9 @@ package() {
 	rm -r "$pkgdir"/usr/lib/unity8/qml/mocks/QMenuModel/
 }
 
-sha512sums="8f9caf9fe8e6814e68b30902d5016accc9a03f87514f5dfd7dd0245cf126d2127d9c73bbb0cd04898f3206e324d51d81d459711656bb8fa70bed9907b0de1a71  unity8-34f8f8881053a3065a4bced9551c192eaacfdda9.tar.gz
-60377259b9469efcae17ee5989d29e083d972bb3c1500c813e98789902631fa05707518cda82374ffa7b273e94523b72117dc01f1361465f17e2217350bb7dbb  0001-AndroidAway.patch
-f80a8df669f2d66c7edc2da790bbebc42d3767dac620d5c20ddc98719d251ba8b011ee58a9df5c1194e0d0accd8080c0f51e322613eb6ad8d6254029c223e158  0002-NoDpkgParse.patch
-b9a9f3e997aa0d90c140db24828b4ce74282113881ac033439ffa3e894c6fdb13becf918498f37b5312a051480e0fe3e566022cbdd995b7aa5ead239b6727e08  0003-UAL3.patch
-a28f7cb9fcd0e4a79f9081de4875b9dde42da254ee6e19b9a7a6effba68338280e864c69e5c71d13c5a63f8fb828254230f03d935264e5777bdb86f2ca6e312d  0004-Add-missing-includes.patch
-38c3ec2e1ed3cf8588e5116abbc4f2d3f8b39596c9d7193c61012531cbfd1bfbb53fb5a68ba64137e314dcbd1cbcbb12345d63fbbabeec68ef79daffb710ed2a  0005-Add-qt5-suffix-to-search-for-Qt-tools.patch
-0cf14290c8c5923833f22693f49ef2a97df1cf046ecf4768d36b5662979ce5850fe80fa44db98fe6a83824a9dab055bc720b182702fd7f514c8b05da713c8363  0006-Link-against-libintl.patch"
+sha512sums="da86d3d296e00c7860d8182e74d4732cca505bc2e8430daffe31af5b3e0c30a02c6d678f6d1d7d47f2868c207dd8f1d53230cfa58ef602d1b8b145ea2c27d2b8  unity8-9cc6008d99c53d455f2b534087f75926748e09d0.tar.gz
+29a1b21f000eeae61b2281b3da6a0a1c6f8ac9cfb16dd72cfd4217ae69b83c71f0f418b11b45edc8fbf829e67a764687c9b0dae256abfd6eed9ed0b68af7248c  0001-NoDpkgParse.patch
+01fd6536ad8efb9a5ee8db489cdc84fe406bbeadfaccd82a32dc063272a83f119618477e3e8365356c101e3f02eb304abae063dce9b0788280297f950638afdc  0002-UAL3.patch
+2b04226993fd0a0540f33b49bf39b57dc2acf6869d47da74e01a675e9aa9e41ec598a52873a1b3f898d442f7c0b13c79abb7405677bc63cc387ceaa8129a67cf  0003-Add-missing-includes.patch
+fa1e937a464ccc1bea1a2f29599cb325f3ea76d0848aeb7816142af3f350c8ac0bea8a534b0e13bfb02875849004fa3e71f8c331504976c060177e6dec071b0f  0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
+9773246b5d946c7dc62ebb75d88016c70348fce2ceb0991436863e810ab5eab96d4405253cef3897fd1bc211ecf81824d3c938ed85fb74b2cc6911012ff8a109  0005-Link-against-libintl.patch"

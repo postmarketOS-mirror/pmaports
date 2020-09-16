@@ -1,0 +1,82 @@
+From 8719b42fdc4841977a5f0223a12c9353afd00bc4 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sun, 23 Aug 2020 13:57:13 +0200
+Subject: [PATCH 3/7] Disable Werror
+
+---
+ features/ubuntu_common.prf                    | 2 +-
+ features/ubuntu_qml_plugin.prf                | 2 +-
+ features/ubuntu_qt_module.prf                 | 2 +-
+ src/UbuntuToolkit/tools/privates/privates.pro | 2 +-
+ src/UbuntuToolkit/tools/tools.pro             | 2 +-
+ tests/unit/plugin_dependency.pri              | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/features/ubuntu_common.prf b/features/ubuntu_common.prf
+index 8855c0cfc..35c4d4119 100644
+--- a/features/ubuntu_common.prf
++++ b/features/ubuntu_common.prf
+@@ -50,4 +50,4 @@ greaterThan(QT_MAJOR_VERSION, 5)| \
+ CONFIG += no_keywords
+ 
+ # Make all warnings into errors.
+-CONFIG += warnings_are_errors
++#CONFIG += warnings_are_errors
+diff --git a/features/ubuntu_qml_plugin.prf b/features/ubuntu_qml_plugin.prf
+index 4d165fc51..ae787dd6e 100644
+--- a/features/ubuntu_qml_plugin.prf
++++ b/features/ubuntu_qml_plugin.prf
+@@ -75,4 +75,4 @@ load(ubuntu_enable_testing)
+ 
+ # warnings_are_errors depending on the compiler version, sometimes it doesn't
+ # add the required flags (for instance for recent clang version on old Qt).
+-!contains(QMAKE_CXXFLAGS_WARN_ON, -Werror): QMAKE_CXXFLAGS_WARN_ON += -Werror
++#!contains(QMAKE_CXXFLAGS_WARN_ON, -Werror): QMAKE_CXXFLAGS_WARN_ON += -Werror
+diff --git a/features/ubuntu_qt_module.prf b/features/ubuntu_qt_module.prf
+index 09b2c1f90..d799b4536 100644
+--- a/features/ubuntu_qt_module.prf
++++ b/features/ubuntu_qt_module.prf
+@@ -20,4 +20,4 @@ CONFIG += dll
+ 
+ # warnings_are_errors depending on the compiler version, sometimes it doesn't
+ # add the required flags (for instance for recent clang version on old Qt).
+-!contains(QMAKE_CXXFLAGS_WARN_ON, -Werror): QMAKE_CXXFLAGS_WARN_ON += -Werror
++#!contains(QMAKE_CXXFLAGS_WARN_ON, -Werror): QMAKE_CXXFLAGS_WARN_ON += -Werror
+diff --git a/src/UbuntuToolkit/tools/privates/privates.pro b/src/UbuntuToolkit/tools/privates/privates.pro
+index b4b37b7f5..5f43b3c7c 100644
+--- a/src/UbuntuToolkit/tools/privates/privates.pro
++++ b/src/UbuntuToolkit/tools/privates/privates.pro
+@@ -1,5 +1,5 @@
+ TEMPLATE = app
+ TARGET = createprivateshapetextures
+ QT += gui svg
+-QMAKE_CXXFLAGS += -Werror -Wno-unused-variable
++QMAKE_CXXFLAGS += -Wno-unused-variable
+ SOURCES += createprivateshapetextures.cpp
+diff --git a/src/UbuntuToolkit/tools/tools.pro b/src/UbuntuToolkit/tools/tools.pro
+index f8e90f4d9..8a2c7c017 100644
+--- a/src/UbuntuToolkit/tools/tools.pro
++++ b/src/UbuntuToolkit/tools/tools.pro
+@@ -1,5 +1,5 @@
+ TEMPLATE = app
+ TARGET = createshapetextures
+ QT += gui svg
+-QMAKE_CXXFLAGS += -Werror -Wno-unused-variable
++QMAKE_CXXFLAGS += -Wno-unused-variable
+ SOURCES += createshapetextures.cpp
+diff --git a/tests/unit/plugin_dependency.pri b/tests/unit/plugin_dependency.pri
+index 42138ce74..adce6305e 100644
+--- a/tests/unit/plugin_dependency.pri
++++ b/tests/unit/plugin_dependency.pri
+@@ -12,7 +12,7 @@ LIBS += -L$$PLUGIN_BLD/Test -lUbuntuTest
+ LIBS += -L$${ROOT_BUILD_DIR}/lib -lUbuntuGestures
+ LIBS += -L$$PLUGIN_BLD/UbuntuToolkit -lUbuntuToolkit
+ DEFINES += QUICK_TEST_SOURCE_DIR=\"\\\"$$_PRO_FILE_PWD_\\\"\"
+-QMAKE_CXXFLAGS += -Werror
++#QMAKE_CXXFLAGS += -Werror
+ 
+ DEFINES+=UBUNTU_COMPONENT_PATH='\\"$${ROOT_BUILD_DIR}/qml/Ubuntu/Components\\"'
+ DEFINES+=UBUNTU_QML_IMPORT_PATH='\\"$${ROOT_BUILD_DIR}/qml\\"'
+-- 
+2.28.0
+

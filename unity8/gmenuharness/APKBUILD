@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=gmenuharness
-pkgver=0_git20191129
-_commit="dd11bfbdc0efac14a957321944a67865e6de4903"
+pkgver=0_git20200517
+_commit="c7242648fa0a85b6ff810db8676deb7e51974182"
 pkgrel=0
 pkgdesc="Library to test GMenuModel structures."
 url="https://github.com/ubports/gmenuharness"
@@ -9,8 +9,7 @@ arch="all"
 license="LGPL-3.0-only"
 makedepends="cmake cmake-extras qt5-qtbase-dev unity-api-dev glib-dev gtest-dev gmock libqtdbustest"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archive/$_commit.tar.gz
-	0001-Add-missing-header-include.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests fail under QEMU
@@ -31,5 +30,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="9279d25df94042905908a3b814cad03bfc43a59b210fdff45092aca57ca71e7afb633867d20cd3a30b0dccad1964b338f59147d3f2b8327dd4111bf07bb05ab7  gmenuharness-dd11bfbdc0efac14a957321944a67865e6de4903.tar.gz
-3b4d93b57a6b4c440e98d5dc08e3b1e67857662b12dbee27912f442dc7daffc0b2fb1703da42dba09b2c3d81eaa7a2130aea7c69964abf8f03bf49e5e9cf1712  0001-Add-missing-header-include.patch"
+sha512sums="f1602f4f7a4b18c93dfb03f6ada85ccaea1c839b2ee6fd881780ec7e261d778bddb39e1d6911f795e7e066930b414f28f2f947e3912e81e7625fed73865e4c0a  gmenuharness-c7242648fa0a85b6ff810db8676deb7e51974182.tar.gz"
