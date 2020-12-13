@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=unity8
-pkgver=0_git20200908
-_commit="9cc6008d99c53d455f2b534087f75926748e09d0"
+pkgver=0_git20201130
+_commit="39876885449df890f936edcb5b7bc6a63e80f0a0"
 pkgrel=0
 pkgdesc="A convergent desktop environment"
 arch="all"
@@ -45,7 +45,7 @@ package() {
 	rm -r "$pkgdir"/usr/lib/unity8/qml/mocks/QMenuModel/
 }
 
-sha512sums="da86d3d296e00c7860d8182e74d4732cca505bc2e8430daffe31af5b3e0c30a02c6d678f6d1d7d47f2868c207dd8f1d53230cfa58ef602d1b8b145ea2c27d2b8  unity8-9cc6008d99c53d455f2b534087f75926748e09d0.tar.gz
+sha512sums="5411f37375e52c63c6b7259cd3101e4ae020d17c84088c8168d3b36067fdd1eb45dbaf82e4908a1c42ba2c2fefb782acfe0a99ac3f140c7283b5be238f387db4  unity8-39876885449df890f936edcb5b7bc6a63e80f0a0.tar.gz
 29a1b21f000eeae61b2281b3da6a0a1c6f8ac9cfb16dd72cfd4217ae69b83c71f0f418b11b45edc8fbf829e67a764687c9b0dae256abfd6eed9ed0b68af7248c  0001-NoDpkgParse.patch
 01fd6536ad8efb9a5ee8db489cdc84fe406bbeadfaccd82a32dc063272a83f119618477e3e8365356c101e3f02eb304abae063dce9b0788280297f950638afdc  0002-UAL3.patch
 2b04226993fd0a0540f33b49bf39b57dc2acf6869d47da74e01a675e9aa9e41ec598a52873a1b3f898d442f7c0b13c79abb7405677bc63cc387ceaa8129a67cf  0003-Add-missing-includes.patch
