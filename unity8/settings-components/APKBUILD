@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=settings-components
-pkgver=0_git20200527
+pkgver=0_git20201125
 pkgrel=0
-_commit="406898e9603c415ee8abbc743af57e2c4bbdc9ff"
+_commit="2d304cd2f6918645096a6240668f0483bed513fa"
 pkgdesc="Ubuntu settings components for Unity8"
 arch="all"
 url="https://github.com/ubports/settings-components"
@@ -31,5 +31,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="b915e35fb8cadb9d20fb39e708a329fbf13c543eafc9829ee8ea2143f2a9dd54e724dfc9650ffa0a787642515664fa77583c258aa52cc4fcbcf3466572138929  settings-components-406898e9603c415ee8abbc743af57e2c4bbdc9ff.tar.gz
+sha512sums="1cd2774bbe1b14eb9907013fae1cb0ab1dfe510983301593ed5eb3be3e39c5cb0550c3151208e6256ca98b8e504ce7d8f8245945f2c00481537a8d6e3dbfe178  settings-components-2d304cd2f6918645096a6240668f0483bed513fa.tar.gz
 0cbe24ba24468ccfae80b6d6b49c68b55e44561ac7914645746af15ee252c12341f2b401390cffbed520963d1cb7da6980f99520ee820528de964b8a714b87b4  qmltestrunner.patch"

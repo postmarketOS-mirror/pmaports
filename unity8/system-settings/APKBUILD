@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=system-settings
-pkgver=0_git20200827
-_commit="54ac6bfc292228395d42618c40e96f102ed9a6f4"
+pkgver=0_git20201218
+_commit="e96000c97a54a305c9eef35bf7eedb017d31c44f"
 pkgrel=0
 pkgdesc="System Settings application for Unity8"
 url="https://github.com/ubports/system-settings"
@@ -33,6 +33,6 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="8efe2fe7ccb4e542e81d422c3ec01a2f5d5444870036e7611b6d2b52ba93cde23f480296db38c9f859ffbb578333d357cbff64cf56a981a3209a2dfa6d652cb1  system-settings-54ac6bfc292228395d42618c40e96f102ed9a6f4.tar.gz
+sha512sums="48e34aa6f7a96e10841db83843f7a281022e004b268e6172052e76c6c3ccafa6096aaf82da6036defdb3d69868e6a80c706485cb0e01b3d9cb439c21744bf474  system-settings-e96000c97a54a305c9eef35bf7eedb017d31c44f.tar.gz
 33ca29fd7f34e5f44aa9245ed4a303d8d8b2d0fdcf0b433e36787be1a1122f63d8fbfcb15ece2a49d853c4aee48ec48b954d5f2c16e72e125f3a90a5875e71be  0002-Don-t-build-update-components.patch
 11a1003ac08ba5b8739c371b8d2d953f31c666c7a9f6926420f7aab94665298ce8ca0782979a3ea48bc67d800b48b4eeba030f2fc86e422b0cafae7319b7db98  0003-Use-qmltestrunner-qt5.patch"

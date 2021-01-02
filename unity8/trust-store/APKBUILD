@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=trust-store
-pkgver=0_git20200527
-_commit="a1953c80c0ba8e60bdbb088f7068ce3d28361340"
+pkgver=0_git20201008
+_commit="ad94b8bcdfeafc7ff7c80bc3693f8fecb4b9b70e"
 pkgrel=0
 pkgdesc="An API for creating, reading, updating and deleting trust requests answered by users."
 url="https://github.com/ubports/trust-store"
@@ -10,7 +10,6 @@ license="LGPL-3.0-only"
 makedepends="cmake cmake-extras mir-dev boost-dev process-cpp-dev dbus-cpp-dev properties-cpp-dev libapparmor-dev libapparmor qt5-qtdeclarative-dev gtest-dev gmock"
 checkdepends="coreutils"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	link_with_libintl.patch
 	no_werror.patch"
 subpackages="$pkgname-dev $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
@@ -32,6 +31,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="e5db0c61be7bd932b9c680ff01fbc6d307572bd83052d2313c6691e5bff0a1fd354252d10cea7dda728c1eb4537d4b0668199e7fdb0d39536c7849a84ccaa756  trust-store-a1953c80c0ba8e60bdbb088f7068ce3d28361340.tar.gz
-8a632fb81a063f0e35aa0040f775656dbf5f4fef7a6383ef2320b31d30c5561444fada85602c7837062413e99c4171f5ac44c7e52678fc3fb1a7a5487cc7a297  link_with_libintl.patch
+sha512sums="7726f163630351a3595bf1ba00eca187150aef1c1ca6b097c8c284e99a92f3774866db817d3ae118359470439e2dfaf7efff0d0d7ddadb3a88eab87043cf4668  trust-store-ad94b8bcdfeafc7ff7c80bc3693f8fecb4b9b70e.tar.gz
 b839985eaedbab84240a619f5775b4b1d4a22cb38aec3314d125665550889cde845ba86f065346dc83aac8a03900feae62c69db69e4cb2983b9f20128c373ffb  no_werror.patch"

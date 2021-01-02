@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-ui-toolkit
-pkgver=0_git20200722
-_commit="411dca17a083cb81ed85cd5d8e62c6a60af35999"
+pkgver=0_git20201106
+_commit="201d27b3efcdcb10d14f8aedada7b28a463b3eac"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -13,13 +13,9 @@ depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
 checkdepends="diffutils bash grep xvfb-run dbus-test-runner"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-ui-toolkit/archive/$_commit.tar.gz
-	0001-Don-t-hardcode-Debian-specific-python3-path.patch
 	0002-Remove-debian-isms-from-test-runner.patch
 	0003-Disable-Werror.patch
 	0004-Don-t-build-app-launch-profiler.patch
-	0005-Fixes-from-xenial_-_qt-5-12-branch.patch
-	0006-Compatibility-with-Qt-5.15.patch
-	0007-Register-Ubuntu.Test-plugin-as-module.patch
 	"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # several tests fail
@@ -38,11 +34,7 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="f1fe3548cc3bb3809e022c70750c414207d4426e19866f149262939d9ce36d3f51fa54cfa1f4f944862150fbaf6c715ba39b3f3df490d65b9e7dcadc038dc2ec  ubuntu-ui-toolkit-411dca17a083cb81ed85cd5d8e62c6a60af35999.tar.gz
-dd75ce7a65dd3abe8e32614b5e29edcb12737f2270171c73247103752c7653ab817de566828288b3a10118b7ab1bc6327dc428af2147975db99d44087bfa2f33  0001-Don-t-hardcode-Debian-specific-python3-path.patch
+sha512sums="6494739cf890fb3a5df2db177d3363e6fe197e7f307d6c6ddedd964285af7cee7668ae59f09923be4f4640fbfc0ebb8967e2a6fc4ac653ba694108d85297ab2b  ubuntu-ui-toolkit-201d27b3efcdcb10d14f8aedada7b28a463b3eac.tar.gz
 007bfc051e6560b85e692b79dea7cd875cfdf6f3c9402a9ed3fa4bea39f3521fdb721d152aea62eb01a848af51509800f7cf34c51528689972365e3aa2493821  0002-Remove-debian-isms-from-test-runner.patch
 dd78d8f97f73de710a3b7665456f755ed5da327c9173b0d99fc252c6efa38ce0f68161ba0e6c94299f403ed0d47c3162c9c4a07006d1525a0614dc0254291de3  0003-Disable-Werror.patch
-dd294f3019d25b4c2cec0494e9dcb3ccbdd180e420f2cb774a3a6c722bf0678a1348c829c927760d6d204c0402129dc65b0a5ae900da664dad791154de24f6fa  0004-Don-t-build-app-launch-profiler.patch
-9cf87e73c8fb8083bc4691f4aba12aba9a687ae049ba076cfdd2540530cee3970190d08d030a00337d4a8d73159652985dc2ce7b54532f79234558deb98e2115  0005-Fixes-from-xenial_-_qt-5-12-branch.patch
-73a8d4f149e1f483a1f226604d2f39c5cdb88f9a330dfec79f907ee7bb03c5cdd7e03a95c07c184db7f3f0d2d05de8a74d3bec2432c43b841a3c288e0968f429  0006-Compatibility-with-Qt-5.15.patch
-ed39702a16c21b0426c608e27556920f18dedc7266550f249c8ddd8454a0f414f60dd0c49065ca8c37a98f01da61ede2f46ef19276e027c65d45b7a4729d4cc6  0007-Register-Ubuntu.Test-plugin-as-module.patch"
+dd294f3019d25b4c2cec0494e9dcb3ccbdd180e420f2cb774a3a6c722bf0678a1348c829c927760d6d204c0402129dc65b0a5ae900da664dad791154de24f6fa  0004-Don-t-build-app-launch-profiler.patch"

@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=ubuntu-download-manager
-pkgver=0_git20200118
-_commit="6d1d305da3f6e9c3bfba278fb7268b80c48ef7fd"
-pkgrel=1
+pkgver=0_git20201109
+_commit="e955a151cd872d1cd42cabb65a14b5b62e19780f"
+pkgrel=0
 pkgdesc="Provides a service for downloading files while an application is suspended"
 arch="all"
 url="https://github.com/ubports/ubuntu-download-manager"
@@ -12,7 +12,6 @@ depends_dev="qt5-qtdeclarative-dev boost-dev glog-dev libnih-dev"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock"
 checkdepends="dbus-test-runner xvfb-run"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-download-manager/archive/$_commit.tar.gz
-	0001-Enable-and-fix-qml-tests.patch
 	0001-Disable-Werror.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -36,6 +35,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="6fd4ff502609db21ddde239ea2a9e087ce42b6d9fe69aa451a4383c03333f95a9d704375096599d81bec36ac69e76c0983d1f2ad3cd41b2aac737cfe3f911030  ubuntu-download-manager-6d1d305da3f6e9c3bfba278fb7268b80c48ef7fd.tar.gz
-de80e718e08a554ac8d33118c6500a02b0c703d8eedd5578c532662b6dad017c4fccc376fb2cf7339494a455585f718770ab28508065dc3a2c8c76d7b10c527e  0001-Enable-and-fix-qml-tests.patch
+sha512sums="8576dc6b5b8e52740c7af49ab7e2ae81f80b51710a715169ff8f9e0c394d51785cbb0454f1aabfb97d092ce2e5a540ed7b9cc3ed286bba0a770a05af543a9fbc  ubuntu-download-manager-e955a151cd872d1cd42cabb65a14b5b62e19780f.tar.gz
 2f7465955e0aeb583a2b1c13b4faa34f1dbeb251d87a476639f36198218ace071239447ee3e137c023bb1a9ea304f6c9331eff5aeb54e0d5e660a50a5326cbc4  0001-Disable-Werror.patch"

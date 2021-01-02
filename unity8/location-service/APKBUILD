@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=location-service
-pkgver=0_git20190628
+pkgver=0_git20200818
 pkgrel=0
-_commit="73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639"
+_commit="7dc0ae2c146ed5887405bd63ded75da4e5a2f0ea"
 pkgdesc="Location service aggregating position/velocity/heading updates and exporting them over dbus"
 arch="all"
 url="https://github.com/ubports/location-service"
@@ -34,4 +34,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="0b56411c67b8724ecad1b5534b5f4b6c7d2fc57176453c40bfea8a3789120f9cfe5c8bd253527dcb31d9ee5682bcbdd313d02cca675a06f51f5073eae37b3574  location-service-73a5b8a78f8a0e2ad1d8627a7fcb1bccdfe9a639.tar.gz"
+sha512sums="a3c6688a922e65ed35d5641f8ef9b27ed7423cbbc82382b822cd0490a5f2258918889869f56f17d86b1a28681599f62c18da438d457e793c74696071b71c8a2c  location-service-7dc0ae2c146ed5887405bd63ded75da4e5a2f0ea.tar.gz"
