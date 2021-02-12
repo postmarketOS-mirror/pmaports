@@ -1,0 +1,25 @@
+From c457acd78a73e19d4f9129e7a18a9a59db2ed46c Mon Sep 17 00:00:00 2001
+From: Alan Griffiths <alan@octopull.co.uk>
+Date: Mon, 8 Jun 2020 14:32:35 +0100
+Subject: [PATCH] Add missing include
+
+---
+ src/miral/cursor_theme.cpp | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/miral/cursor_theme.cpp b/src/miral/cursor_theme.cpp
+index 7dfa6d05d0..5e3fbe75aa 100644
+--- a/src/miral/cursor_theme.cpp
++++ b/src/miral/cursor_theme.cpp
+@@ -25,6 +25,8 @@
+ 
+ #include <boost/throw_exception.hpp>
+ 
++#include <algorithm>
++
+ #define MIR_LOG_COMPONENT "miral"
+ #include <mir/log.h>
+ 
+-- 
+2.30.1
+

@@ -14,6 +14,8 @@ makedepends="$depends_dev cmake lttng-ust-tools libxkbcommon-dev gtest-dev gmock
 checkdepends="wlcs grep bash"
 source="
 	$pkgname-$pkgver.tar.gz::https://github.com/MirServer/mir/archive/v$pkgver.tar.gz
+	0001-Add-missing-include.patch
+	0001-Fix-compiler-errors.patch
 	lttng_no_sdt.patch
 	temp.patch
 "
@@ -39,5 +41,7 @@ package() {
 }
 
 sha512sums="1e205afa1495b28189ca72e5e573b410df6f7e01476764e1981ae93bb3a88172272727e74701787b6ea4b7b1797db4ba45ec803c7c0198f3bbe9788eb7b4fd79  mir-1.8.1.tar.gz
+695ac584f9b6453e1220ad43dfc5a2da17a63f15258692bc85558f3d4031ea1c9cbc1990371c40056bd32ff403c2747146e81e32cf3f6c2614545de679d5545d  0001-Add-missing-include.patch
+0c67ef5e45e3a5f2be4280f746509439555595b4c3020889d33b527e36d0268162c15da499fadb0cc6622c1606a30265e6d588cdcaa118b399c0756dcc81fd81  0001-Fix-compiler-errors.patch
 c27e7b43f19044f2aac6d85d0403e2d9bae8e7c11b47b9964940c4e194dc49bc88a4b3828c7227358d90a9ef24e2d2fca94ea66ce9fb659cd9b5ec5fcefd522d  lttng_no_sdt.patch
 dbaa27da5a0d85ba0839f8cb57555c93bde28e210332eceae1a14d5f9f86ae3923133def710e9af8b8626ba233a82c0d2179dc9472e3175275c272d31fae3ce7  temp.patch"
