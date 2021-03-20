@@ -1,47 +1,42 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=dbus-cpp
-pkgver=5.0.1_git20180409
-pkgrel=2
-_commit="967dc1caf0efe0a1286c308e8e8dd1bf7da5f3ee"
+pkgver=5.0.2
+pkgrel=0
 pkgdesc="A header-only dbus-binding leveraging C++-11"
-url="https://code.launchpad.net/dbus-cpp"
+url="https://gitlab.com/ubports/core/lib-cpp/dbus-cpp"
 arch="all"
-license="LGPL3"
-depends="dbus libxml2 boost properties-cpp"
-depends_dev="boost-dev"
-makedepends="$depends_dev cmake cmake-extras libxml2-dev properties-cpp-dev dbus-dev linux-headers process-cpp-dev gtest-dev gmock"
+license="LGPL-3.0-only"
+depends=""
+depends_dev=""
+makedepends="cmake cmake-extras boost-dev libxml2-dev dbus-dev properties-cpp-dev process-cpp-dev gtest-dev"
+checkdepends="dbus coreutils"
 install=""
 subpackages="$pkgname-dev"
-source="https://github.com/lib-cpp/dbus-cpp/archive/$_commit.tar.gz
-	boost_io_context.patch
-	gcc9.patch
-"
-builddir="$srcdir/$pkgname-$_commit"
-options="!check" # 53% tests passed, 7 tests failed out of 15
+source="https://gitlab.com/ubports/core/lib-cpp/dbus-cpp/-/archive/$pkgver/dbus-cpp-$pkgver.tar.gz
+	0001-Explicitly-build-dbus-cppc-helper-as-static-library.patch"
+builddir="$srcdir/dbus-cpp-$pkgver"
 
 build() {
-	mkdir "$builddir"/build
-	cd "$builddir"/build
-	cmake .. \
-		-DCMAKE_INSTALL_LIBDIR=/usr/lib \
+	if [ "$CBUILD" != "$CHOST" ]; then
+		CMAKE_CROSSOPTS="-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_HOST_SYSTEM_NAME=Linux"
+	fi
+	cmake -B build \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DDBUS_CPP_VERSION_MAJOR=5 \
-		-DDBUS_CPP_VERSION_MINOR=0 \
-		-DDBUS_CPP_VERSION_PATCH=0
-	make
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DBUILD_SHARED_LIBS=True \
+		-DCMAKE_BUILD_TYPE=None \
+		$CMAKE_CROSSOPTS .
+	cmake --build build
 }
 
 check() {
-	cd "$builddir"/build
-	make test
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="6db299307eb966600d488aa31db2814095c562c9c62a46b614ec1fa361f3c17900bbbe3da021629e6b7279ad99bf193393772302bfc8f6b5ea80ef3497fb7f46  967dc1caf0efe0a1286c308e8e8dd1bf7da5f3ee.tar.gz
-55862c347f2aeabd00b3d547b34c7b3c5bbbb3f40a76cb2e20711c6168b4780db36436f631cf33f1b6ff48f3e6a83480db1df69cafa7e8a25e5f06df9ea53829  boost_io_context.patch
-e4870139bc24d24f1fdebacf94d0c3881ac931f52fba3b26c8615532287ba042960ca393dec1a66009650183916d8bcb7512f2e84eca7f1d37ff8d616821b1ec  gcc9.patch"
+sha512sums="3f6ccc50ce72ac6f3ecf19eff99784ea3dc220d3c36034642df6ad8c9f2636ca5fc897087a8f412c4d0aaaf00836bf71aac648aa68a04ccf030ef85f06c2cc42  dbus-cpp-5.0.2.tar.gz
+c064dc072b30c2446a6405a74f09a115c30d060f65a2495f23281488f153d825165ce9d80018b8efb34f709b471303238771385fe9ca672dbebf1dd9e10f3494  0001-Explicitly-build-dbus-cppc-helper-as-static-library.patch"
