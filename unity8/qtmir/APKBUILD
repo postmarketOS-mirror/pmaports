@@ -1,21 +1,19 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20200610
-# branch xenial_-_edge_-_wayland
-_commit="26e772fce520a2a7013039a14ed93679ee44af31"
+pkgver=0_git20210323
+_commit="824e8b5bf92c2374d331af99e6845ea594ec0ea5"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
-url="https://github.com/ubports/qtmir"
+url="https://gitlab.com/ubports/core/qtmir"
 license="LGPL-3.0-only"
 makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/qtmir/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
 	0001-Revert-Use-app-launch-2.patch
 	0002-Disable-Werror.patch
-	0003-Fix-compilation-with-Qt-5.14.patch
-	gmock.patch"
+	"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -35,8 +33,6 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="014b79967bc0b45180ebc6d067016b059b535c8c22b3278ccfbb3f761fcbb7daa93a4bda3fd5a264e3b1054e3fe625e8fa81822a986df5ccf640c6841a1bbe03  qtmir-26e772fce520a2a7013039a14ed93679ee44af31.tar.gz
+sha512sums="bc117d043f72561c4021f28610650a1494af5eb2b71c429e7afb50f5b167a01113c6d837d2a5879a977c4badaad2e2eb183d399248f21857a376569652d02454  qtmir-824e8b5bf92c2374d331af99e6845ea594ec0ea5.tar.gz
 ac86979c4ed44076ed28c60b8a7f34359370b6e635c10e13ae54a6f3f04fa26256b6fbf234cf0fbc86aa4895652c7b19da011e14f560e39f6fc1b0de0ac1db65  0001-Revert-Use-app-launch-2.patch
-9b96da0d68fae98b0cd328ca469ea5d2fdd7cf7ed44cec793064b2649cd6fd14004583c7eb3251581e7cfaba5a0517341670410d9ae6aa6a8ef133696d232b52  0002-Disable-Werror.patch
-68216e7e954e8b83b547b0c37f6daf9fd4b148cd4e173b1d8eb786c7062aeb937de245cdd9c9bcfd871be16b65e56b43e613a16c0cdee3b9758a1a5188148e1b  0003-Fix-compilation-with-Qt-5.14.patch
-81ed47a62e04dc522b58a03f7e6e7f919c5fedf874cccd3df3e61e4e31cc09e812cd88617f7e1a74b4ad3ff824690d77ea0de80da5c46d7a0d27d877c2c5c30f  gmock.patch"
+9b96da0d68fae98b0cd328ca469ea5d2fdd7cf7ed44cec793064b2649cd6fd14004583c7eb3251581e7cfaba5a0517341670410d9ae6aa6a8ef133696d232b52  0002-Disable-Werror.patch"
