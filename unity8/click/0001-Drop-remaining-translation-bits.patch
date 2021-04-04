@@ -1,0 +1,30 @@
+From d5aa4b8ce02308fd27b8773cc2b69bac0c2652ec Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sun, 4 Apr 2021 14:17:10 +0200
+Subject: [PATCH] Drop remaining translation bits
+
+The code requiring this was removed already.
+
+grep: po/Makefile.in: No such file or directory
+config.status: error: po/Makefile.in.in was not created by intltoolize.
+---
+ configure.ac | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a00314b..698ae05 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -7,9 +7,6 @@ AM_CONFIG_HEADER([config.h])
+ AC_USE_SYSTEM_EXTENSIONS
+ LT_INIT([disable-static])
+ 
+-AC_SUBST([GETTEXT_PACKAGE], [click])
+-IT_PROG_INTLTOOL
+-
+ AC_PROG_CC
+ CFLAGS="$CFLAGS -Wall"
+ 
+-- 
+2.31.1
+
