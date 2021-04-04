@@ -1,17 +1,17 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=libusermetrics
-pkgver=0_git20200517
-_commit="9288e37e18fafb2d2af918f6b644639af9661273"
+pkgver=0_git20210322
+_commit="7dbcb2ee699ca54479c9b4ed4ac64c2f4a8d74e0"
 pkgrel=0
 pkgdesc='Library for exporting anonymous metrics about users'
 arch="all"
-url="https://github.com/ubports/libusermetrics"
+url="https://gitlab.com/ubports/core/libusermetrics"
 license="GPL-3.0 LGPL-3.0 LGPL-2.1"
 depends_dev="qt5-qtxmlpatterns-dev libapparmor-dev gsettings-qt-dev qt5-qtdeclarative-dev click-dev qdjango-dev"
 makedepends="$depends_dev cmake-extras qt5-qtbase-dev libapparmor libqtdbustest intltool gtest-dev gmock"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/libusermetrics/archive/$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/libusermetrics/-/archive/$_commit/libusermetrics-$_commit.tar.gz"
 subpackages="$pkgname-dev $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -32,4 +32,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="3974f26ebdcd93b452ad663a3c4dd64a4acbc51c80e78464ce4719c02057fad3f5909f1067380ab9097297053fcd21c130daf41c0788a153da78020385820265  libusermetrics-9288e37e18fafb2d2af918f6b644639af9661273.tar.gz"
+sha512sums="8c3201e3f40c0f4ee1999e6094299e132fa139849f42a579344add2bc5553de4a5503f258a4e0914039d40acc0d2d755670c072e31c482ec8033caf4ae46324e  libusermetrics-7dbcb2ee699ca54479c9b4ed4ac64c2f4a8d74e0.tar.gz"
