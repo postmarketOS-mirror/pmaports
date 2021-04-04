@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=ubuntu-ui-toolkit
-pkgver=0_git20201106
-_commit="201d27b3efcdcb10d14f8aedada7b28a463b3eac"
+pkgname=lomiri-ui-toolkit
+pkgver=0_git20210331
+_commit="b6d370d714c16efceba3f62896f01e82656ae562"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -12,7 +12,7 @@ depends="qt5-qtfeedback qt5-qtgraphicaleffects"
 depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-dev libxi-dev eudev-dev mir-dev libevdev-dev qt5-qtgraphicaleffects qt5-qtfeedback-dev"
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
 checkdepends="diffutils bash grep xvfb-run dbus-test-runner"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-ui-toolkit/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-ui-toolkit/-/archive/$_commit/lomiri-ui-toolkit-$_commit.tar.gz
 	0002-Remove-debian-isms-from-test-runner.patch
 	0003-Disable-Werror.patch
 	0004-Don-t-build-app-launch-profiler.patch
@@ -34,7 +34,7 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="6494739cf890fb3a5df2db177d3363e6fe197e7f307d6c6ddedd964285af7cee7668ae59f09923be4f4640fbfc0ebb8967e2a6fc4ac653ba694108d85297ab2b  ubuntu-ui-toolkit-201d27b3efcdcb10d14f8aedada7b28a463b3eac.tar.gz
+sha512sums="9ab56a0239d38be1d8fd7244b8c997dc62f02bf235465b3bb9eb0caba13920d5c8cb2810a5957f7adba49e417158485ff763c34d6e9d9fd7b4e348a1e6ae5662  lomiri-ui-toolkit-b6d370d714c16efceba3f62896f01e82656ae562.tar.gz
 007bfc051e6560b85e692b79dea7cd875cfdf6f3c9402a9ed3fa4bea39f3521fdb721d152aea62eb01a848af51509800f7cf34c51528689972365e3aa2493821  0002-Remove-debian-isms-from-test-runner.patch
 dd78d8f97f73de710a3b7665456f755ed5da327c9173b0d99fc252c6efa38ce0f68161ba0e6c94299f403ed0d47c3162c9c4a07006d1525a0614dc0254291de3  0003-Disable-Werror.patch
 dd294f3019d25b4c2cec0494e9dcb3ccbdd180e420f2cb774a3a6c722bf0678a1348c829c927760d6d204c0402129dc65b0a5ae900da664dad791154de24f6fa  0004-Don-t-build-app-launch-profiler.patch"
