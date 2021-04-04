@@ -8,7 +8,7 @@ pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
 url="https://gitlab.com/ubports/core/qtmir"
 license="LGPL-3.0-only"
-makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev url-dispatcher-dev cgmanager-dev lttng-ust-tools"
+makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev ubuntu-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev lomiri-url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
 source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
 	0001-Revert-Use-app-launch-2.patch

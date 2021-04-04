@@ -8,7 +8,7 @@ pkgdesc="Platform API for system level capabilities"
 arch="all"
 url='https://github.com/ubports/platform-api'
 license="GPL-3.0-only AND LGPL-3.0-only"
-depends_dev="process-cpp-dev url-dispatcher-dev location-service-dev"
+depends_dev="process-cpp-dev lomiri-url-dispatcher-dev location-service-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-cpp-dev gtest-dev gmock"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
 	0002-Only-use-Hybris-when-available.patch"
