@@ -7,7 +7,7 @@ pkgdesc="Content sharing/picking infrastructure and service, designed to allow a
 url="https://gitlab.com/ubports/core/content-hub"
 arch="all"
 license="GPL-3.0 LGPL-3.0"
-depends_dev="qt5-qtdeclarative-dev lomiri-app-launch-dev gsettings-qt-dev libnih-dev ubuntu-download-manager-dev libnotify-dev libapparmor-dev lomiri-ui-toolkit-dev"
+depends_dev="qt5-qtdeclarative-dev lomiri-app-launch-dev gsettings-qt-dev libnih-dev lomiri-download-manager-dev libnotify-dev libapparmor-dev lomiri-ui-toolkit-dev"
 makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev pthread-cancel-noop"
 checkdepends="gmock dbus-test-runner xvfb-run"
 # Build without crossdirect as long as we need the LD_PRELOAD
