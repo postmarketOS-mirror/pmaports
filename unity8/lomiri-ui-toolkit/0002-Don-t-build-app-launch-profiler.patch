@@ -1,18 +1,18 @@
-From 7f431fa134dd757d6d238a2d3c124051e52258e8 Mon Sep 17 00:00:00 2001
+From 481eb1c21cd60455737fa288a62941bd0aa12350 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 15 Sep 2020 17:48:47 +0200
-Subject: [PATCH 4/7] Don't build app-launch-profiler
+Subject: [PATCH 2/2] Don't build app-launch-profiler
 
 ---
- ubuntu-sdk.pro | 2 +-
+ lomiri-sdk.pro | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/ubuntu-sdk.pro b/ubuntu-sdk.pro
-index 716c3055e..647b53ad1 100644
---- a/ubuntu-sdk.pro
-+++ b/ubuntu-sdk.pro
+diff --git a/lomiri-sdk.pro b/lomiri-sdk.pro
+index a180b037f..e987f2b30 100644
+--- a/lomiri-sdk.pro
++++ b/lomiri-sdk.pro
 @@ -11,7 +11,7 @@ load(qt_parts)
- src_uitk_launcher.subdir = ubuntu-ui-toolkit-launcher
+ src_uitk_launcher.subdir = lomiri-ui-toolkit-launcher
  src_uitk_launcher.depends = sub-src
  
 -SUBDIRS += po app-launch-profiler src_uitk_launcher apicheck
@@ -21,5 +21,5 @@ index 716c3055e..647b53ad1 100644
      SUBDIRS += documentation
  }
 -- 
-2.28.0
+2.31.1
 

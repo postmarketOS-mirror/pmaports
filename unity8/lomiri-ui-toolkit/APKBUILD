@@ -13,9 +13,8 @@ depends_dev="libnih-dev qt5-qtsvg-dev qt5-qtpim-dev qt5-qtsystems-dev lttng-ust-
 makedepends="$depends_dev qt5-qttools-dev qt5-qtdeclarative-dev"
 checkdepends="diffutils bash grep xvfb-run dbus-test-runner"
 source="https://gitlab.com/ubports/core/lomiri-ui-toolkit/-/archive/$_commit/lomiri-ui-toolkit-$_commit.tar.gz
-	0002-Remove-debian-isms-from-test-runner.patch
-	0003-Disable-Werror.patch
-	0004-Don-t-build-app-launch-profiler.patch
+	0001-Remove-debian-isms-from-test-runner.patch
+	0002-Don-t-build-app-launch-profiler.patch
 	"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # several tests fail
@@ -35,6 +34,5 @@ package() {
 }
 
 sha512sums="9ab56a0239d38be1d8fd7244b8c997dc62f02bf235465b3bb9eb0caba13920d5c8cb2810a5957f7adba49e417158485ff763c34d6e9d9fd7b4e348a1e6ae5662  lomiri-ui-toolkit-b6d370d714c16efceba3f62896f01e82656ae562.tar.gz
-007bfc051e6560b85e692b79dea7cd875cfdf6f3c9402a9ed3fa4bea39f3521fdb721d152aea62eb01a848af51509800f7cf34c51528689972365e3aa2493821  0002-Remove-debian-isms-from-test-runner.patch
-dd78d8f97f73de710a3b7665456f755ed5da327c9173b0d99fc252c6efa38ce0f68161ba0e6c94299f403ed0d47c3162c9c4a07006d1525a0614dc0254291de3  0003-Disable-Werror.patch
-dd294f3019d25b4c2cec0494e9dcb3ccbdd180e420f2cb774a3a6c722bf0678a1348c829c927760d6d204c0402129dc65b0a5ae900da664dad791154de24f6fa  0004-Don-t-build-app-launch-profiler.patch"
+7423ea0f4edececdeab09c4c91686e981ecedc2b7b39d147d604eb1bd8cdb26a1c3b4fad848215a1a8db1197bd3a58fb82651b0e298c52181632ae629c307d9a  0001-Remove-debian-isms-from-test-runner.patch
+46a12139eeb09b4a7baba4c020103bff8c7885d65fc88ec2e2f4cbf6d93f0aed8d853da316619cb3bafdde5853517dab0b372132d91a03870b9e06a839a854df  0002-Don-t-build-app-launch-profiler.patch"
