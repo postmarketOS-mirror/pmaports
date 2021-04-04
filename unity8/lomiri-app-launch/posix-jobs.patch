@@ -1,0 +1,19 @@
+diff --git a/liblomiri-app-launch/jobs-base.cpp b/liblomiri-app-launch/jobs-base.cpp
+index 6a3c204..c46f928 100644
+--- a/liblomiri-app-launch/jobs-base.cpp
++++ b/liblomiri-app-launch/jobs-base.cpp
+@@ -58,10 +58,10 @@ Base::~Base()
+     one right now. */
+ std::shared_ptr<Base> Base::determineFactory(const std::shared_ptr<Registry::Impl>& registry)
+ {
+-     g_debug("Building a systemd jobs manager");
+-     return std::make_shared<jobs::manager::SystemD>(registry);
+-//     g_debug("Building a POSIX jobs manager");
+-//     return std::make_shared<jobs::manager::POSIX>(registry);
++//     g_debug("Building a systemd jobs manager");
++//     return std::make_shared<jobs::manager::SystemD>(registry);
++     g_debug("Building a POSIX jobs manager");
++     return std::make_shared<jobs::manager::POSIX>(registry);
+ }
+ 
+ const std::list<std::string>& Base::getAllApplicationJobs() const
