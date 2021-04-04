@@ -1,16 +1,16 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=unity-api
-pkgver=0_git20201016
-_commit="6cddff437ebc802d18672e70936d45125e181e4a"
+pkgname=lomiri-api
+pkgver=0_git20210318
+_commit="a93a9cbf728241611346876fc4752522b974b8e9"
 pkgrel=0
 pkgdesc="API for Unity shell integration"
-url="https://github.com/ubports/unity-api"
+url="https://gitlab.com/ubports/core/lomiri-api"
 arch="all"
 license="LGPL-3.0"
-makedepends="$depends_dev cmake cmake-extras qt5-qtdeclarative-dev libqtdbustest gtest-dev gmock"
+makedepends="cmake cmake-extras qt5-qtdeclarative-dev libqtdbustest gtest-dev gmock"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity-api/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-api/-/archive/$_commit/lomiri-api-$_commit.tar.gz
 	qmltestrunner.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -33,5 +33,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="78616dcfb798ff24c531413707cf3cf96d4ca53e9f08d6acbcd04bbd9d96a0d2f7a1870b281e4b695e4f20fcb3aae1e207942ea8c167febfeacb0ad5edba8e3f  unity-api-6cddff437ebc802d18672e70936d45125e181e4a.tar.gz
+sha512sums="45939b4fca3bfda5b275ab18377f28ad177eb0a3da8b7b3a323a061d6df5f1ebd5d5f480ad300e24bf1afa09d5c9ea9a0d86eca923fbf81fc1afd851abcc806d  lomiri-api-a93a9cbf728241611346876fc4752522b974b8e9.tar.gz
 04c316667ed5892c55278b01377d4d9c1a6ae14a330bfa594e5e54371d37441747684ab553799cb5e7804f4c68d181e78caeb8279491b9f5302a4e70095c74af  qmltestrunner.patch"
