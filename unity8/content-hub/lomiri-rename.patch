@@ -1,0 +1,602 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b40a0ca..20fa3e4 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -60,13 +60,13 @@ find_package(Qt5Gui)
+ find_package(PkgConfig REQUIRED)
+ pkg_check_modules(GLIB REQUIRED glib-2.0)
+ pkg_check_modules(GIO REQUIRED gio-unix-2.0)
+-pkg_check_modules(UBUNTU_LAUNCH REQUIRED ubuntu-app-launch-3)
++pkg_check_modules(UBUNTU_LAUNCH REQUIRED lomiri-app-launch-0)
+ #pkg_check_modules(LIBERTINE REQUIRED libertine)
+ pkg_check_modules(GSETTINGS REQUIRED gsettings-qt)
+ pkg_check_modules(NIH REQUIRED libnih)
+ pkg_check_modules(NIH_DBUS REQUIRED libnih-dbus)
+ pkg_check_modules(DBUS REQUIRED dbus-1)
+-pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER REQUIRED ubuntu-download-manager-client)
++pkg_check_modules(UBUNTU_DOWNLOAD_MANAGER REQUIRED lomiri-download-manager-client)
+ pkg_check_modules(NOTIFY REQUIRED libnotify)
+ pkg_check_modules(MIRCLIENT REQUIRED mirclient)
+ pkg_check_modules(APPARMOR REQUIRED libapparmor)
+diff --git a/doc/qml/pages/mainpage.qdoc b/doc/qml/pages/mainpage.qdoc
+index 3b82cc6..d52561c 100644
+--- a/doc/qml/pages/mainpage.qdoc
++++ b/doc/qml/pages/mainpage.qdoc
+@@ -67,7 +67,7 @@ other one. We refer to this component as the content hub. \sa {ContentHub}
+ 
+ \qml
+ import QtQuick 2.0
+-import Ubuntu.Components 1.1
++import Lomiri.Components 1.1
+ import Ubuntu.Content 1.1
+ 
+ Rectangle {
+diff --git a/examples/export-qml/app-exporter.qml b/examples/export-qml/app-exporter.qml
+index ed85eee..5f4be0a 100644
+--- a/examples/export-qml/app-exporter.qml
++++ b/examples/export-qml/app-exporter.qml
+@@ -1,7 +1,7 @@
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
+-import Ubuntu.Components.Popups 0.1
+-import Ubuntu.Components.ListItems 0.1 as ListItem
++import Lomiri.Components 0.1
++import Lomiri.Components.Popups 0.1
++import Lomiri.Components.ListItems 0.1 as ListItem
+ import Ubuntu.Content 0.1
+ 
+ MainView {
+diff --git a/examples/export-qml/export.qml b/examples/export-qml/export.qml
+index 5936310..99d9ba6 100644
+--- a/examples/export-qml/export.qml
++++ b/examples/export-qml/export.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
++import Lomiri.Components 0.1
+ import Ubuntu.Content 0.1
+ 
+ MainView {
+diff --git a/examples/import-qml/import.qml b/examples/import-qml/import.qml
+index 94f53ef..8f81cb9 100644
+--- a/examples/import-qml/import.qml
++++ b/examples/import-qml/import.qml
+@@ -1,6 +1,6 @@
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
+-import Ubuntu.Components.ListItems 0.1 as ListItem
++import Lomiri.Components 0.1
++import Lomiri.Components.ListItems 0.1 as ListItem
+ import Ubuntu.Content 0.1
+ 
+ MainView {
+diff --git a/examples/picker-qml/picker.qml b/examples/picker-qml/picker.qml
+index 6d0d14d..aa03d74 100644
+--- a/examples/picker-qml/picker.qml
++++ b/examples/picker-qml/picker.qml
+@@ -1,7 +1,7 @@
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
+-import Ubuntu.Components.ListItems 0.1 as ListItem
+-import Ubuntu.Components.Popups 0.1
++import Lomiri.Components 0.1
++import Lomiri.Components.ListItems 0.1 as ListItem
++import Lomiri.Components.Popups 0.1
+ 
+ import Ubuntu.Content 0.1
+ 
+diff --git a/import/Ubuntu/Content/ContentPageHeader.qml b/import/Ubuntu/Content/ContentPageHeader.qml
+index 42dec66..9ac91ef 100644
+--- a/import/Ubuntu/Content/ContentPageHeader.qml
++++ b/import/Ubuntu/Content/ContentPageHeader.qml
+@@ -17,8 +17,8 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
+-import Ubuntu.Components.ListItems 1.3 as ListItem
++import Lomiri.Components 1.3
++import Lomiri.Components.ListItems 1.3 as ListItem
+ 
+ /*
+  * Component to use as page header in the ContentPeerPicker
+diff --git a/import/Ubuntu/Content/ContentPeerPicker10.qml b/import/Ubuntu/Content/ContentPeerPicker10.qml
+index 4c1cfe0..e4aadfe 100644
+--- a/import/Ubuntu/Content/ContentPeerPicker10.qml
++++ b/import/Ubuntu/Content/ContentPeerPicker10.qml
+@@ -15,9 +15,9 @@
+  */
+ 
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
+-import Ubuntu.Components.Popups 0.1
+-import Ubuntu.Components.ListItems 0.1 as ListItem
++import Lomiri.Components 0.1
++import Lomiri.Components.Popups 0.1
++import Lomiri.Components.ListItems 0.1 as ListItem
+ import Ubuntu.Content 0.1
+ 
+ /*!
+diff --git a/import/Ubuntu/Content/ContentPeerPicker11.qml b/import/Ubuntu/Content/ContentPeerPicker11.qml
+index d8baed6..fec9a56 100644
+--- a/import/Ubuntu/Content/ContentPeerPicker11.qml
++++ b/import/Ubuntu/Content/ContentPeerPicker11.qml
+@@ -15,9 +15,9 @@
+  */
+ 
+ import QtQuick 2.0
+-import Ubuntu.Components 1.1
+-import Ubuntu.Components.Popups 0.1
+-import Ubuntu.Components.ListItems 0.1 as ListItem
++import Lomiri.Components 1.1
++import Lomiri.Components.Popups 0.1
++import Lomiri.Components.ListItems 0.1 as ListItem
+ import Ubuntu.Content 1.1
+ 
+ /*!
+diff --git a/import/Ubuntu/Content/ContentPeerPicker13.qml b/import/Ubuntu/Content/ContentPeerPicker13.qml
+index 4ace6dc..4cdcb5e 100644
+--- a/import/Ubuntu/Content/ContentPeerPicker13.qml
++++ b/import/Ubuntu/Content/ContentPeerPicker13.qml
+@@ -15,9 +15,9 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
+-import Ubuntu.Components.Popups 1.3
+-import Ubuntu.Components.ListItems 1.3 as ListItem
++import Lomiri.Components 1.3
++import Lomiri.Components.Popups 1.3
++import Lomiri.Components.ListItems 1.3 as ListItem
+ import Ubuntu.Content 1.3
+ 
+ /*!
+diff --git a/import/Ubuntu/Content/ContentTransferHint.qml b/import/Ubuntu/Content/ContentTransferHint.qml
+index da5db9f..ce54c7b 100644
+--- a/import/Ubuntu/Content/ContentTransferHint.qml
++++ b/import/Ubuntu/Content/ContentTransferHint.qml
+@@ -15,8 +15,8 @@
+  */
+ 
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
+-import Ubuntu.Components.Popups 0.1
++import Lomiri.Components 0.1
++import Lomiri.Components.Popups 0.1
+ import Ubuntu.Content 0.1
+ 
+ /*!
+diff --git a/import/Ubuntu/Content/ResponsiveGridView.qml b/import/Ubuntu/Content/ResponsiveGridView.qml
+index 8cfaa09..a33ebf4 100644
+--- a/import/Ubuntu/Content/ResponsiveGridView.qml
++++ b/import/Ubuntu/Content/ResponsiveGridView.qml
+@@ -15,7 +15,7 @@
+  */
+ 
+ import QtQuick 2.0
+-import Ubuntu.Components 0.1
++import Lomiri.Components 0.1
+ 
+ /*
+    Essentially a GridView where you can specify the maximum number of columns it can have.
+diff --git a/import/Ubuntu/Content/contenthub.cpp b/import/Ubuntu/Content/contenthub.cpp
+index 838e4ee..c96c5c0 100644
+--- a/import/Ubuntu/Content/contenthub.cpp
++++ b/import/Ubuntu/Content/contenthub.cpp
+@@ -38,7 +38,7 @@
+  * Example usage for importing content:
+  * \qml
+  * import QtQuick 2.0
+- * import Ubuntu.Components 0.1
++ * import Lomiri.Components 0.1
+  * import Ubuntu.Content 0.1
+  *
+  * MainView {
+diff --git a/src/com/ubuntu/applicationmanager/application_manager.h b/src/com/ubuntu/applicationmanager/application_manager.h
+index d3c4a15..b68712b 100644
+--- a/src/com/ubuntu/applicationmanager/application_manager.h
++++ b/src/com/ubuntu/applicationmanager/application_manager.h
+@@ -19,12 +19,12 @@
+ #include <string>
+ #include "../content/detail/mir-helper.h"
+ #include <glib.h>
+-#include <ubuntu-app-launch/appid.h>
+-#include <ubuntu-app-launch/application.h>
+-#include <ubuntu-app-launch/registry.h>
++#include <lomiri-app-launch/appid.h>
++#include <lomiri-app-launch/application.h>
++#include <lomiri-app-launch/registry.h>
+ 
+ 
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ namespace com
+ {
+diff --git a/src/com/ubuntu/content/detail/app_manager.cpp b/src/com/ubuntu/content/detail/app_manager.cpp
+index fb49f9b..26c5a35 100644
+--- a/src/com/ubuntu/content/detail/app_manager.cpp
++++ b/src/com/ubuntu/content/detail/app_manager.cpp
+@@ -18,14 +18,14 @@
+ #include "debug.h"
+ #include "mir-helper.h"
+ 
+-#include <ubuntu-app-launch.h>
+-#include <ubuntu-app-launch/appid.h>
+-#include <ubuntu-app-launch/helper.h>
+-#include <ubuntu-app-launch/application.h>
+-#include <ubuntu-app-launch/registry.h>
++#include <lomiri-app-launch.h>
++#include <lomiri-app-launch/appid.h>
++#include <lomiri-app-launch/helper.h>
++#include <lomiri-app-launch/application.h>
++#include <lomiri-app-launch/registry.h>
+ 
+ namespace cucd = com::ubuntu::content::detail;
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ /*!
+  * \reimp
+@@ -92,6 +92,6 @@ std::shared_ptr<ual::Helper::Instance> cucd::AppManager::invoke_application_with
+  */
+ bool cucd::AppManager::is_application_started(const std::string &app_id)
+ {
+-    GPid pid = ubuntu_app_launch_get_primary_pid(app_id.c_str());
++    GPid pid = lomiri_app_launch_get_primary_pid(app_id.c_str());
+     return pid != 0;
+ }
+diff --git a/src/com/ubuntu/content/detail/paste.cpp b/src/com/ubuntu/content/detail/paste.cpp
+index 83cdc41..dfb5b7b 100644
+--- a/src/com/ubuntu/content/detail/paste.cpp
++++ b/src/com/ubuntu/content/detail/paste.cpp
+@@ -24,8 +24,8 @@
+ #include <com/ubuntu/content/hub.h>
+ #include <com/ubuntu/content/store.h>
+ #include <com/ubuntu/content/paste.h>
+-#include <ubuntu/download_manager/download.h>
+-#include <ubuntu/download_manager/manager.h>
++#include <lomiri/download_manager/download.h>
++#include <lomiri/download_manager/manager.h>
+ 
+ namespace cuc = com::ubuntu::content;
+ namespace cucd = com::ubuntu::content::detail;
+diff --git a/src/com/ubuntu/content/detail/transfer.cpp b/src/com/ubuntu/content/detail/transfer.cpp
+index acd1308..bc9be9d 100644
+--- a/src/com/ubuntu/content/detail/transfer.cpp
++++ b/src/com/ubuntu/content/detail/transfer.cpp
+@@ -25,13 +25,13 @@
+ #include <com/ubuntu/content/hub.h>
+ #include <com/ubuntu/content/store.h>
+ #include <com/ubuntu/content/transfer.h>
+-#include <ubuntu/download_manager/download.h>
+-#include <ubuntu/download_manager/manager.h>
+-#include <ubuntu-app-launch/application.h>
++#include <lomiri/download_manager/download.h>
++#include <lomiri/download_manager/manager.h>
++#include <lomiri-app-launch/application.h>
+ 
+ namespace cuc = com::ubuntu::content;
+ namespace cucd = com::ubuntu::content::detail;
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ struct cucd::Transfer::Private
+ {
+@@ -242,7 +242,7 @@ void cucd::Transfer::Download()
+         dir.mkpath(d->store);
+         download->setDestinationDir(d->store);
+         connect(download, SIGNAL(finished(QString)), this, SLOT(DownloadComplete(QString)));
+-        connect(download, SIGNAL(error(Ubuntu::DownloadManager::Error*)), this, SLOT(DownloadError(Ubuntu::DownloadManager::Error*)));
++        connect(download, SIGNAL(error(Lomiri::DownloadManager::Error*)), this, SLOT(DownloadError(Lomiri::DownloadManager::Error*)));
+         QVariantMap metadata = download->metadata();
+         metadata["app-id"] = d->destination;
+         download->setMetadata(metadata);
+@@ -282,7 +282,7 @@ void cucd::Transfer::DownloadComplete(QString destFilePath)
+     Q_EMIT(StateChanged(d->state));
+ }
+ 
+-void cucd::Transfer::DownloadError(Ubuntu::DownloadManager::Error* error)
++void cucd::Transfer::DownloadError(Lomiri::DownloadManager::Error* error)
+ {
+     TRACE() << __PRETTY_FUNCTION__;
+     qWarning() << "Download manager error: " << error->errorString();
+diff --git a/src/com/ubuntu/content/detail/transfer.h b/src/com/ubuntu/content/detail/transfer.h
+index eb3d953..4feac83 100644
+--- a/src/com/ubuntu/content/detail/transfer.h
++++ b/src/com/ubuntu/content/detail/transfer.h
+@@ -24,11 +24,11 @@
+ #include <QStringList>
+ #include <QtDBus/QDBusMessage>
+ #include <QtDBus/QDBusContext>
+-#include <ubuntu/download_manager/error.h>
+-#include <ubuntu-app-launch/application.h>
+-#include <ubuntu-app-launch/helper.h>
++#include <lomiri/download_manager/error.h>
++#include <lomiri-app-launch/application.h>
++#include <lomiri-app-launch/helper.h>
+ 
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ namespace com
+ {
+@@ -92,7 +92,7 @@ Q_SIGNALS:
+     void SetDownloadId(QString DownloadId);
+     void DownloadComplete(QString destFilePath);
+     void Download();
+-    void DownloadError(Ubuntu::DownloadManager::Error* error);
++    void DownloadError(Lomiri::DownloadManager::Error* error);
+     QString ContentType();
+     void AddItemsFromDir(QDir dir);
+     std::shared_ptr<ual::Helper::Instance> HelperInstance();
+diff --git a/src/com/ubuntu/content/peer.cpp b/src/com/ubuntu/content/peer.cpp
+index 300b361..0d33c41 100644
+--- a/src/com/ubuntu/content/peer.cpp
++++ b/src/com/ubuntu/content/peer.cpp
+@@ -22,7 +22,7 @@
+ #include "utils.cpp"
+ 
+ namespace cuc = com::ubuntu::content;
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ struct cuc::Peer::Private
+ {
+diff --git a/src/com/ubuntu/content/service/registry.cpp b/src/com/ubuntu/content/service/registry.cpp
+index ee54794..95de359 100644
+--- a/src/com/ubuntu/content/service/registry.cpp
++++ b/src/com/ubuntu/content/service/registry.cpp
+@@ -24,7 +24,7 @@
+ #include <com/ubuntu/content/type.h>
+ #include <gio/gdesktopappinfo.h>
+ //#include <libertine.h>
+-#include <ubuntu-app-launch.h>
++#include <lomiri-app-launch.h>
+ 
+ // Begin anonymous namespace
+ namespace {
+@@ -74,7 +74,7 @@ QMap<QString, QVector<QString>> libertine_apps()
+ 
+     Q_FOREACH(QString app, appIds)
+     {
+-        ret = ubuntu_app_launch_application_info(app.toStdString().c_str(), &dir, &file);
++        ret = lomiri_app_launch_application_info(app.toStdString().c_str(), &dir, &file);
+         if (ret)
+         {
+             GKeyFile *key_file = g_key_file_new();
+@@ -185,7 +185,7 @@ Registry::Registry() :
+                     if (app.empty() || ver.empty())
+                         peer = QString::fromStdString(pkg);
+                     else
+-                        peer = QString::fromLocal8Bit(ubuntu_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str()));
++                        peer = QString::fromLocal8Bit(lomiri_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str()));
+                     install_source_for_type(type, cuc::Peer{peer.id(), true});
+                 }
+             }
+@@ -214,7 +214,7 @@ cuc::Peer Registry::default_source_for_type(cuc::Type type)
+             std::string ver = as[2].toStdString();
+             if (app.empty() || ver.empty())
+                 return cuc::Peer(QString::fromStdString(pkg));
+-            return cuc::Peer(QString::fromLocal8Bit(ubuntu_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str())), true);
++            return cuc::Peer(QString::fromLocal8Bit(lomiri_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str())), true);
+         }
+     }
+ 
+@@ -281,7 +281,7 @@ void Registry::enumerate_known_sources_for_type(cuc::Type type, const std::funct
+                 if (app.empty() || ver.empty())
+                     defaultPeer = QString::fromStdString(pkg) == k;
+                 else
+-                    defaultPeer = QString::fromLocal8Bit(ubuntu_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str())) == k;
++                    defaultPeer = QString::fromLocal8Bit(lomiri_app_launch_triplet_to_app_id(pkg.c_str(), app.c_str(), ver.c_str())) == k;
+             }
+         }
+         for_each(cuc::Peer{k, defaultPeer});
+diff --git a/src/com/ubuntu/content/transfer_p.h b/src/com/ubuntu/content/transfer_p.h
+index b307db5..f8bfc13 100644
+--- a/src/com/ubuntu/content/transfer_p.h
++++ b/src/com/ubuntu/content/transfer_p.h
+@@ -23,12 +23,12 @@
+ 
+ #include <com/ubuntu/content/item.h>
+ #include <com/ubuntu/content/transfer.h>
+-#include <ubuntu-app-launch/application.h>
++#include <lomiri-app-launch/application.h>
+ 
+ #include <QObject>
+ #include <QVector>
+ 
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ namespace com
+ {
+diff --git a/src/com/ubuntu/content/utils.cpp b/src/com/ubuntu/content/utils.cpp
+index 1439e0d..cde4d4b 100644
+--- a/src/com/ubuntu/content/utils.cpp
++++ b/src/com/ubuntu/content/utils.cpp
+@@ -35,9 +35,9 @@
+ #include "com/ubuntu/content/type.h"
+ #include <unistd.h>
+ //#include <liblibertine/libertine.h>
+-#include <ubuntu-app-launch/appid.h>
+-#include <ubuntu-app-launch/application.h>
+-#include <ubuntu-app-launch/registry.h>
++#include <lomiri-app-launch/appid.h>
++#include <lomiri-app-launch/application.h>
++#include <lomiri-app-launch/registry.h>
+ 
+ #include <sys/apparmor.h>
+ /* need to be exposed in libapparmor but for now ... */
+@@ -45,7 +45,7 @@
+ #define AA_MAY_READ (1 << 2)
+ 
+ namespace cuc = com::ubuntu::content;
+-namespace ual = ubuntu::app_launch;
++namespace ual = lomiri::app_launch;
+ 
+ namespace {
+ 
+diff --git a/src/helper/exec-tool.c b/src/helper/exec-tool.c
+index 1f2cad8..9b8d6c7 100644
+--- a/src/helper/exec-tool.c
++++ b/src/helper/exec-tool.c
+@@ -19,7 +19,7 @@
+ 
+ #include <glib.h>
+ #include <gio/gio.h>
+-#include <ubuntu-app-launch.h>
++#include <lomiri-app-launch.h>
+ 
+ gchar *
+ build_exec (const gchar * appid, const gchar * directory)
+@@ -68,7 +68,7 @@ build_dir (const gchar * appid)
+         gchar * package = NULL;
+ 
+         /* 'Parse' the App ID */
+-        if (!ubuntu_app_launch_app_id_parse(appid, &package, NULL, NULL)) {
++        if (!lomiri_app_launch_app_id_parse(appid, &package, NULL, NULL)) {
+                 g_warning("Unable to parse App ID: '%s'", appid);
+                 return NULL;
+         }
+@@ -121,7 +121,7 @@ main (int argc, char * argv[])
+         g_warning("content-hub main exec: '%s'", exec);
+         g_warning("content-hub main dir: '%s'", dir);
+ 
+-        gboolean sended = ubuntu_app_launch_helper_set_exec(exec, dir);
++        gboolean sended = lomiri_app_launch_helper_set_exec(exec, dir);
+         g_free(exec);
+         g_free(dir);
+ 
+diff --git a/tools/clipboard/ClipboardItemDelegate.qml b/tools/clipboard/ClipboardItemDelegate.qml
+index 3603618..9dd9551 100644
+--- a/tools/clipboard/ClipboardItemDelegate.qml
++++ b/tools/clipboard/ClipboardItemDelegate.qml
+@@ -17,7 +17,7 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
++import Lomiri.Components 1.3
+ 
+ ListItem {
+     id: clipboardItem
+diff --git a/tools/clipboard/PreviewImagePage.qml b/tools/clipboard/PreviewImagePage.qml
+index fee40ba..2c6d7ed 100644
+--- a/tools/clipboard/PreviewImagePage.qml
++++ b/tools/clipboard/PreviewImagePage.qml
+@@ -17,7 +17,7 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
++import Lomiri.Components 1.3
+ 
+ Page {
+     id: previewImagePage
+diff --git a/tools/clipboard/PreviewTextPage.qml b/tools/clipboard/PreviewTextPage.qml
+index 8cb8608..543657c 100644
+--- a/tools/clipboard/PreviewTextPage.qml
++++ b/tools/clipboard/PreviewTextPage.qml
+@@ -17,8 +17,8 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
+-import Ubuntu.Components.ListItems 1.3 as ListItem
++import Lomiri.Components 1.3
++import Lomiri.Components.ListItems 1.3 as ListItem
+ import Ubuntu.Web 0.2
+ import com.canonical.Oxide 1.15
+ import clipboardapp.private 0.1
+diff --git a/tools/clipboard/main.qml b/tools/clipboard/main.qml
+index 23c8c57..a4e6440 100644
+--- a/tools/clipboard/main.qml
++++ b/tools/clipboard/main.qml
+@@ -17,7 +17,7 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
++import Lomiri.Components 1.3
+ import Ubuntu.Content 1.3
+ import clipboardapp.private 0.1
+ 
+diff --git a/tools/peer-picker/ContentPageHeader.qml b/tools/peer-picker/ContentPageHeader.qml
+index 42dec66..9ac91ef 100644
+--- a/tools/peer-picker/ContentPageHeader.qml
++++ b/tools/peer-picker/ContentPageHeader.qml
+@@ -17,8 +17,8 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
+-import Ubuntu.Components.ListItems 1.3 as ListItem
++import Lomiri.Components 1.3
++import Lomiri.Components.ListItems 1.3 as ListItem
+ 
+ /*
+  * Component to use as page header in the ContentPeerPicker
+diff --git a/tools/peer-picker/PeerPicker.qml b/tools/peer-picker/PeerPicker.qml
+index 7f48a12..acca4ea 100644
+--- a/tools/peer-picker/PeerPicker.qml
++++ b/tools/peer-picker/PeerPicker.qml
+@@ -15,9 +15,9 @@
+  */
+ 
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
+-import Ubuntu.Components.Popups 1.3
+-import Ubuntu.Components.ListItems 1.3 as ListItem
++import Lomiri.Components 1.3
++import Lomiri.Components.Popups 1.3
++import Lomiri.Components.ListItems 1.3 as ListItem
+ import Ubuntu.Content 1.3
+ 
+ Page {
+diff --git a/tools/peer-picker/ResponsiveGridView.qml b/tools/peer-picker/ResponsiveGridView.qml
+index 7d6ab7d..88cf86a 100644
+--- a/tools/peer-picker/ResponsiveGridView.qml
++++ b/tools/peer-picker/ResponsiveGridView.qml
+@@ -15,7 +15,7 @@
+  */
+ 
+ import QtQuick 2.0
+-import Ubuntu.Components 1.3
++import Lomiri.Components 1.3
+ 
+ /*
+    Essentially a GridView where you can specify the maximum number of columns it can have.
+diff --git a/tools/peer-picker/main.qml b/tools/peer-picker/main.qml
+index fd2fb8f..68be429 100644
+--- a/tools/peer-picker/main.qml
++++ b/tools/peer-picker/main.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.4
+-import Ubuntu.Components 1.3
++import Lomiri.Components 1.3
+ import Ubuntu.Content 1.3
+ 
+ MainView {
+diff --git a/tools/send/exporter.cpp b/tools/send/exporter.cpp
+index 2efeaf8..96c2f17 100644
+--- a/tools/send/exporter.cpp
++++ b/tools/send/exporter.cpp
+@@ -19,7 +19,7 @@
+ #include <QCoreApplication>
+ #include <QStringList>
+ #include <QUrlQuery>
+-#include <ubuntu-app-launch.h>
++#include <lomiri-app-launch.h>
+ 
+ #include "autoexporter.h"
+ #include "debug.h"
+@@ -87,7 +87,7 @@ int main(int argc, char *argv[])
+     TRACE() << "VER:" << ver;
+     TRACE() << "HANDLER:" << handler.c_str();
+ 
+-    appId = QString::fromLocal8Bit(ubuntu_app_launch_triplet_to_app_id(pkg, app, ver));
++    appId = QString::fromLocal8Bit(lomiri_app_launch_triplet_to_app_id(pkg, app, ver));
+     if (appId.isNull())
+         appId = QString(pkg);
+ 
