@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=url-dispatcher
-pkgver=0_git20200925
-_commit="58a498dbd19e46f3baa17629bb8b56be860cb738"
+pkgname=lomiri-url-dispatcher
+pkgver=0_git20210323
+_commit="ef11846cacf67e42cc35533d7d115e59b371e8c7"
 pkgrel=0
 pkgdesc="Service to allow sending of URLs and get handlers started"
 arch="all"
@@ -11,7 +11,7 @@ license="LGPL-3.0-only"
 depends_dev="ubuntu-app-launch-dev json-glib-dev click-dev libapparmor-dev"
 makedepends="$depends_dev cmake dbus-test-runner cmake-extras glib-dev gtest-dev gmock intltool dbus-test-runner-dev"
 checkdepends="py3-dbusmock"
-source="https://gitlab.com/ubports/core/url-dispatcher/-/archive/$_commit/url-dispatcher-$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/lomiri-url-dispatcher/-/archive/$_commit/lomiri-url-dispatcher-$_commit.tar.gz"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # several tests hang
@@ -34,4 +34,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="208e7c2f233f67dd05489b9dd46499b71a364387a154cee0fd630c23224a2416fd133f3022d8890ae13156f7f4c0c3ca37c8c6e39d9552b35d4f02395cb120cc  url-dispatcher-58a498dbd19e46f3baa17629bb8b56be860cb738.tar.gz"
+sha512sums="ac4dad2baf621827702dad08b1fae1b9d22139c5a5356892c0f0a0502ec470d3d90ec3f4f1098f1ad497c9b9ab5ec30b26167d8f78fff00529f27e6c34160ea6  lomiri-url-dispatcher-ef11846cacf67e42cc35533d7d115e59b371e8c7.tar.gz"
