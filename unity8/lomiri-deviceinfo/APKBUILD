@@ -7,7 +7,7 @@ pkgdesc="Library to detect and configure devices"
 arch="all"
 url="https://gitlab.com/ubports/core/deviceinfo"
 license="GPL-3.0-only"
-makedepends="cmake cmake-extras gtest-dev"
+makedepends="cmake cmake-extras gtest-dev yaml-cpp-dev"
 source="https://gitlab.com/ubports/core/deviceinfo/-/archive/$_commit/deviceinfo-$_commit.tar.gz
 	0001-Allow-changing-of-CONFIG_PATH-during-compile-time.patch"
 subpackages="$pkgname-dev"
