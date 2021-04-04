@@ -1,0 +1,29 @@
+diff --git a/liblomiri-app-launch/application.cpp b/liblomiri-app-launch/application.cpp
+index 7519291..d2fe3bb 100644
+--- a/liblomiri-app-launch/application.cpp
++++ b/liblomiri-app-launch/application.cpp
+@@ -17,9 +17,7 @@
+  *     Ted Gould <ted.gould@canonical.com>
+  */
+ 
+-extern "C" {
+ #include "lomiri-app-launch.h"
+-}
+ 
+ #include "application.h"
+ #include "info-watcher.h"
+diff --git a/liblomiri-app-launch/lomiri-app-launch.cpp b/liblomiri-app-launch/lomiri-app-launch.cpp
+index d7e114e..03227be 100644
+--- a/liblomiri-app-launch/lomiri-app-launch.cpp
++++ b/liblomiri-app-launch/lomiri-app-launch.cpp
+@@ -17,8 +17,9 @@
+  *     Ted Gould <ted.gould@canonical.com>
+  */
+ 
+-extern "C" {
+ #include "lomiri-app-launch.h"
++
++extern "C" {
+ #include <gio/gio.h>
+ #include <gio/gunixfdlist.h>
+ #include <string.h>
