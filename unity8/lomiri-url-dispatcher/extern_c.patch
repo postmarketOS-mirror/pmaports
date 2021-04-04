@@ -1,0 +1,48 @@
+diff --git a/service/overlay-tracker.cpp b/service/overlay-tracker.cpp
+index e34cad4..8f828ea 100644
+--- a/service/overlay-tracker.cpp
++++ b/service/overlay-tracker.cpp
+@@ -17,9 +17,7 @@
+  *   Ted Gould <ted.gould@canonical.com>
+  */
+ 
+-extern "C" {
+ #include "overlay-tracker.h"
+-}
+ 
+ #include "overlay-tracker-iface.h"
+ #include "overlay-tracker-mir.h"
+diff --git a/service/overlay-tracker.h b/service/overlay-tracker.h
+index a7d4e29..38ef4a8 100644
+--- a/service/overlay-tracker.h
++++ b/service/overlay-tracker.h
+@@ -22,8 +22,15 @@
+ 
+ typedef struct _OverlayTracker OverlayTracker;
+ 
++#ifdef __cplusplus
++extern "C" {
++#endif
++
+ OverlayTracker * overlay_tracker_new ();
+ void overlay_tracker_delete (OverlayTracker * tracker);
+ gboolean overlay_tracker_add (OverlayTracker * tracker, const char * appid, unsigned long pid, const char * url);
+ gboolean overlay_tracker_badurl (OverlayTracker * tracker, unsigned long pid, const char * url);
+ 
++#ifdef __cplusplus
++}
++#endif
+diff --git a/service/service.cpp b/service/service.cpp
+index 69e1fe3..3cb1285 100644
+--- a/service/service.cpp
++++ b/service/service.cpp
+@@ -15,9 +15,7 @@
+  *
+  */
+ 
+-extern "C" {
+ #include "dispatcher.h"
+-}
+ 
+ #include <glib.h>
+ #include <glib-unix.h>

@@ -11,7 +11,8 @@ license="LGPL-3.0-only"
 depends_dev="lomiri-app-launch-dev json-glib-dev click-dev libapparmor-dev"
 makedepends="$depends_dev cmake dbus-test-runner cmake-extras glib-dev gtest-dev gmock intltool dbus-test-runner-dev"
 checkdepends="py3-dbusmock"
-source="https://gitlab.com/ubports/core/lomiri-url-dispatcher/-/archive/$_commit/lomiri-url-dispatcher-$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/lomiri-url-dispatcher/-/archive/$_commit/lomiri-url-dispatcher-$_commit.tar.gz
+	extern_c.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # several tests hang
@@ -34,4 +35,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="ac4dad2baf621827702dad08b1fae1b9d22139c5a5356892c0f0a0502ec470d3d90ec3f4f1098f1ad497c9b9ab5ec30b26167d8f78fff00529f27e6c34160ea6  lomiri-url-dispatcher-ef11846cacf67e42cc35533d7d115e59b371e8c7.tar.gz"
+sha512sums="ac4dad2baf621827702dad08b1fae1b9d22139c5a5356892c0f0a0502ec470d3d90ec3f4f1098f1ad497c9b9ab5ec30b26167d8f78fff00529f27e6c34160ea6  lomiri-url-dispatcher-ef11846cacf67e42cc35533d7d115e59b371e8c7.tar.gz
+2b8007d6669ab8cde50d712522be125e8242cfb7dbebeefedcc1176c6a7ac5047dbf97ef17e2e97d16b02e28b590eb518b09ebc94e87aaf38824931648c7ffa2  extern_c.patch"
