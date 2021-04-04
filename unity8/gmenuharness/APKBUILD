@@ -7,9 +7,11 @@ pkgdesc="Library to test GMenuModel structures."
 url="https://github.com/ubports/gmenuharness"
 arch="all"
 license="LGPL-3.0-only"
-makedepends="cmake cmake-extras qt5-qtbase-dev unity-api-dev glib-dev gtest-dev gmock libqtdbustest"
+makedepends="cmake cmake-extras qt5-qtbase-dev lomiri-api-dev glib-dev gtest-dev gmock libqtdbustest"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archive/$_commit.tar.gz
+	lomiri-rename.patch
+	"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests fail under QEMU
@@ -30,4 +32,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="f1602f4f7a4b18c93dfb03f6ada85ccaea1c839b2ee6fd881780ec7e261d778bddb39e1d6911f795e7e066930b414f28f2f947e3912e81e7625fed73865e4c0a  gmenuharness-c7242648fa0a85b6ff810db8676deb7e51974182.tar.gz"
+sha512sums="f1602f4f7a4b18c93dfb03f6ada85ccaea1c839b2ee6fd881780ec7e261d778bddb39e1d6911f795e7e066930b414f28f2f947e3912e81e7625fed73865e4c0a  gmenuharness-c7242648fa0a85b6ff810db8676deb7e51974182.tar.gz
+5a3b0a9aec8a7aafbbad6d3536544f3b9ad3bed2cb5858ace767315905e2fe76cd3384a827864d5a29a3795dd89435b7258e8889ea4869eb7bf297873ae7d126  lomiri-rename.patch"
