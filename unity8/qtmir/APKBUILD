@@ -11,8 +11,7 @@ license="LGPL-3.0-only"
 makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev lomiri-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev lomiri-url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
 source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
-	0001-Revert-Use-app-launch-2.patch
-	0002-Disable-Werror.patch
+	0001-Use-unsigned-int-instead-of-uint.patch
 	"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -34,5 +33,4 @@ package() {
 }
 
 sha512sums="bc117d043f72561c4021f28610650a1494af5eb2b71c429e7afb50f5b167a01113c6d837d2a5879a977c4badaad2e2eb183d399248f21857a376569652d02454  qtmir-824e8b5bf92c2374d331af99e6845ea594ec0ea5.tar.gz
-ac86979c4ed44076ed28c60b8a7f34359370b6e635c10e13ae54a6f3f04fa26256b6fbf234cf0fbc86aa4895652c7b19da011e14f560e39f6fc1b0de0ac1db65  0001-Revert-Use-app-launch-2.patch
-9b96da0d68fae98b0cd328ca469ea5d2fdd7cf7ed44cec793064b2649cd6fd14004583c7eb3251581e7cfaba5a0517341670410d9ae6aa6a8ef133696d232b52  0002-Disable-Werror.patch"
+90c89bd8cdf583b1f2787ae3c2c93f450bbf34d7c35248d25c627a1cd8587528451e201ea6605c4a3ef0953eb390c7007c5863565be9db9528bd0fe7b6b11f3e  0001-Use-unsigned-int-instead-of-uint.patch"
