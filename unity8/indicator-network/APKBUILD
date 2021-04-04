@@ -11,7 +11,8 @@ license="GPL-3.0"
 depends_dev="glib-dev lomiri-api-dev ofono-dev networkmanager-dev libsecret-dev lomiri-url-dispatcher-dev qt5-qtdeclarative-dev libqofono-dev"
 makedepends="$depends_dev cmake-extras gtest-dev gmock libqtdbustest libqtdbusmock gmenuharness-dev intltool"
 checkdepends="py3-dbusmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/indicator-network/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/indicator-network/archive/$_commit.tar.gz
+	lomiri-rename.patch"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests are broken in general at the moment
@@ -33,4 +34,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz"
+sha512sums="4312e5a6b226cbc003484213b892b197982ec57fd0ae7c57609cd3533a159673782aeb49a40c4e1e0d2b9e5addace9b2a79b455ebc9d39694b283ce7f4d114cf  indicator-network-2539978c51684822733fbbd7ebb6971d671492a0.tar.gz
+0d3bfc0b464ccd84849cce605d9367570ba9217ff783323437152ec5cb59bc6c8bb3f1748c9b37065266f334ddead39f1080fa28cd73a2af2ed351d0fac3481e  lomiri-rename.patch"
