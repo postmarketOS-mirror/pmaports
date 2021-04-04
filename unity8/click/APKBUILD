@@ -1,16 +1,16 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=click
-pkgver=0_git20200517
-_commit="06912463aa63b407fcaf895bce6c9cd537bf6914"
+pkgver=0_git20210325
+_commit="c01ac0e7d190552045484e204b5d3a0ad96a2e1e"
 pkgrel=0
 pkgdesc="Click is a simplified packaging format"
-url="https://github.com/ubports/click"
+url="https://gitlab.com/ubports/core/click"
 arch="all"
 license="GPL-3.0-only"
 depends_dev="libgee-dev gobject-introspection-dev"
 makedepends="$depends_dev cmake intltool vala gobject-introspection autoconf libtool automake json-glib-dev py3-setuptools"
 subpackages="$pkgname-dev $pkgname-doc"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/click/archive/$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/click/-/archive/$_commit/click-$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Needs dpkg
 
@@ -36,4 +36,4 @@ package() {
 	sed -i s/+ubports//g "$pkgdir"/usr/lib/pkgconfig/*.pc
 }
 
-sha512sums="a93da86606f13227b7cacaf1227d6fb3999dffc523a3500d71ce011c0cf7b685aef9a2a14501cd3d7af3699d165c8053f901725e3ea77a8afe4d1d5c7af8c2dc  click-06912463aa63b407fcaf895bce6c9cd537bf6914.tar.gz"
+sha512sums="1e3a3e5c6efd4baf541e3aa825b27586d195599c9adf615de5d5ba479b683150c91bdc3813d9b3d0dd43f626a18521e01edd06a499e81407f35c980776390102  click-c01ac0e7d190552045484e204b5d3a0ad96a2e1e.tar.gz"
