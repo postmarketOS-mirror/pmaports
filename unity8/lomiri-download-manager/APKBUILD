@@ -1,17 +1,17 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=ubuntu-download-manager
-pkgver=0_git20201109
-_commit="e955a151cd872d1cd42cabb65a14b5b62e19780f"
+pkgname=lomiri-download-manager
+pkgver=0_git20210325
+_commit="8989e305e4b5f35bbb0cd311b22208a61cfb6df8"
 pkgrel=0
 pkgdesc="Provides a service for downloading files while an application is suspended"
 arch="all"
-url="https://github.com/ubports/ubuntu-download-manager"
+url="https://gitlab.com/ubports/core/lomiri-download-manager"
 license="LGPL-3.0-only"
 depends_dev="qt5-qtdeclarative-dev boost-dev glog-dev libnih-dev"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock"
 checkdepends="dbus-test-runner xvfb-run"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/ubuntu-download-manager/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-download-manager/-/archive/$_commit/lomiri-download-manager-$_commit.tar.gz
 	0001-Disable-Werror.patch"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -35,5 +35,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="8576dc6b5b8e52740c7af49ab7e2ae81f80b51710a715169ff8f9e0c394d51785cbb0454f1aabfb97d092ce2e5a540ed7b9cc3ed286bba0a770a05af543a9fbc  ubuntu-download-manager-e955a151cd872d1cd42cabb65a14b5b62e19780f.tar.gz
+sha512sums="a92f46d4e4cc300fd670bc3157be53f385759f23ea8ef4d2d572846ae4ff68fb24872792fb77c7b9c57059186d32258a0964a83b82f1177b505c861a4d4f0178  lomiri-download-manager-8989e305e4b5f35bbb0cd311b22208a61cfb6df8.tar.gz
 2f7465955e0aeb583a2b1c13b4faa34f1dbeb251d87a476639f36198218ace071239447ee3e137c023bb1a9ea304f6c9331eff5aeb54e0d5e660a50a5326cbc4  0001-Disable-Werror.patch"
