@@ -1,0 +1,238 @@
+From 233732da6440d735b52ed4cab87f4fac622aaf5f Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sun, 4 Apr 2021 13:13:24 +0200
+Subject: [PATCH] Move glib includes outside of extern "C"
+
+Recent glib versions throw this error otherwise:
+
+In file included from /usr/include/glib-2.0/glib/gatomic.h:31,
+                 from /usr/include/glib-2.0/glib/gthread.h:32,
+                 from /usr/include/glib-2.0/glib/gasyncqueue.h:32,
+                 from /usr/include/glib-2.0/glib.h:32,
+                 from /home/pmos/build/src/qmenumodel-0.8.0/libqmenumodel/src/converter.cpp:22:
+/usr/include/c++/10.2.1/type_traits:56:3: error: template with C linkage
+   56 |   template<typename _Tp, _Tp __v>
+      |   ^~~~~~~~
+/home/pmos/build/src/qmenumodel-0.8.0/libqmenumodel/src/converter.cpp:21:1: note: 'extern "C"' linkage started here
+   21 | extern "C" {
+      | ^~~~~~~~~~
+---
+ libqmenumodel/src/converter.cpp            | 2 --
+ libqmenumodel/src/menunode.h               | 2 --
+ libqmenumodel/src/qdbusactiongroup.cpp     | 2 --
+ libqmenumodel/src/qdbusmenumodel.cpp       | 2 --
+ libqmenumodel/src/qdbusobject.cpp          | 2 --
+ libqmenumodel/src/qmenumodel.cpp           | 2 --
+ libqmenumodel/src/qmenumodelevents.cpp     | 2 --
+ libqmenumodel/src/unitymenumodelevents.cpp | 2 --
+ tests/client/cachetest.cpp                 | 2 --
+ tests/client/convertertest.cpp             | 2 --
+ tests/client/modelsignalstest.cpp          | 2 --
+ tests/client/modeltest.cpp                 | 2 --
+ tests/client/qmltest.cpp                   | 2 --
+ tests/client/treetest.cpp                  | 2 --
+ 14 files changed, 28 deletions(-)
+
+diff --git a/libqmenumodel/src/converter.cpp b/libqmenumodel/src/converter.cpp
+index 459e77f..49ced63 100644
+--- a/libqmenumodel/src/converter.cpp
++++ b/libqmenumodel/src/converter.cpp
+@@ -18,9 +18,7 @@
+  *      Marco Trevisan <marco.trevisan@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <glib.h>
+-}
+ 
+ #include "converter.h"
+ 
+diff --git a/libqmenumodel/src/menunode.h b/libqmenumodel/src/menunode.h
+index e647a37..8c27111 100644
+--- a/libqmenumodel/src/menunode.h
++++ b/libqmenumodel/src/menunode.h
+@@ -25,9 +25,7 @@
+ #include <QMap>
+ #include <QVariant>
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ class MenuNode
+ {
+diff --git a/libqmenumodel/src/qdbusactiongroup.cpp b/libqmenumodel/src/qdbusactiongroup.cpp
+index 76e28ed..edbb073 100644
+--- a/libqmenumodel/src/qdbusactiongroup.cpp
++++ b/libqmenumodel/src/qdbusactiongroup.cpp
+@@ -26,10 +26,8 @@
+ // Qt
+ #include <QCoreApplication>
+ 
+-extern "C" {
+ #include <glib.h>
+ #include <gio/gio.h>
+-}
+ 
+ /*!
+     \qmltype QDBusActionGroup
+diff --git a/libqmenumodel/src/qdbusmenumodel.cpp b/libqmenumodel/src/qdbusmenumodel.cpp
+index f8b4a51..207584e 100644
+--- a/libqmenumodel/src/qdbusmenumodel.cpp
++++ b/libqmenumodel/src/qdbusmenumodel.cpp
+@@ -17,9 +17,7 @@
+  *      Renato Araujo Oliveira Filho <renato@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ #include "qdbusmenumodel.h"
+ #include "qmenumodelevents.h"
+diff --git a/libqmenumodel/src/qdbusobject.cpp b/libqmenumodel/src/qdbusobject.cpp
+index fab2df7..c440009 100644
+--- a/libqmenumodel/src/qdbusobject.cpp
++++ b/libqmenumodel/src/qdbusobject.cpp
+@@ -17,10 +17,8 @@
+  *      Renato Araujo Oliveira Filho <renato@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <glib-object.h>
+ #include <gio/gio.h>
+-}
+ 
+ #include "qdbusobject.h"
+ #include "qmenumodelevents.h"
+diff --git a/libqmenumodel/src/qmenumodel.cpp b/libqmenumodel/src/qmenumodel.cpp
+index e77419f..7b720ae 100644
+--- a/libqmenumodel/src/qmenumodel.cpp
++++ b/libqmenumodel/src/qmenumodel.cpp
+@@ -18,9 +18,7 @@
+  *      Olivier Tilloy <olivier.tilloy@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ #include "qmenumodel.h"
+ #include "menunode.h"
+diff --git a/libqmenumodel/src/qmenumodelevents.cpp b/libqmenumodel/src/qmenumodelevents.cpp
+index c705d5c..f5c6485 100644
+--- a/libqmenumodel/src/qmenumodelevents.cpp
++++ b/libqmenumodel/src/qmenumodelevents.cpp
+@@ -17,10 +17,8 @@
+  *      Nicholas Dedekind <nick.dedekind@canonical.com
+  */
+ 
+-extern "C" {
+ #include <glib-object.h>
+ #include <gio/gio.h>
+-}
+ 
+ #include "qmenumodelevents.h"
+ 
+diff --git a/libqmenumodel/src/unitymenumodelevents.cpp b/libqmenumodel/src/unitymenumodelevents.cpp
+index 68dacde..46a9517 100644
+--- a/libqmenumodel/src/unitymenumodelevents.cpp
++++ b/libqmenumodel/src/unitymenumodelevents.cpp
+@@ -17,10 +17,8 @@
+  *      Nicholas Dedekind <nick.dedekind@canonical.com
+  */
+ 
+-extern "C" {
+ #include <glib-object.h>
+ #include <gio/gio.h>
+-}
+ 
+ #include "unitymenumodelevents.h"
+ #include "unitymenumodel.h"
+diff --git a/tests/client/cachetest.cpp b/tests/client/cachetest.cpp
+index 8ad65af..188020a 100644
+--- a/tests/client/cachetest.cpp
++++ b/tests/client/cachetest.cpp
+@@ -20,9 +20,7 @@
+ 
+ #include "qmenumodel.h"
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ #include <QtTest>
+ 
+diff --git a/tests/client/convertertest.cpp b/tests/client/convertertest.cpp
+index 43127a7..095a022 100644
+--- a/tests/client/convertertest.cpp
++++ b/tests/client/convertertest.cpp
+@@ -18,9 +18,7 @@
+  *      Marco Trevisan <marco.trevisan@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <glib.h>
+-}
+ 
+ #include "converter.h"
+ 
+diff --git a/tests/client/modelsignalstest.cpp b/tests/client/modelsignalstest.cpp
+index 3064778..fe28932 100644
+--- a/tests/client/modelsignalstest.cpp
++++ b/tests/client/modelsignalstest.cpp
+@@ -23,9 +23,7 @@
+ #include <QtTest>
+ #include <QDebug>
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ 
+ class MenuModelTestClass : public QMenuModel
+diff --git a/tests/client/modeltest.cpp b/tests/client/modeltest.cpp
+index 7bc9706..e6ae82d 100644
+--- a/tests/client/modeltest.cpp
++++ b/tests/client/modeltest.cpp
+@@ -25,9 +25,7 @@
+ #include <QtTest>
+ #include <QDebug>
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ class ModelTest : public QObject
+ {
+diff --git a/tests/client/qmltest.cpp b/tests/client/qmltest.cpp
+index 1f1e494..94080df 100644
+--- a/tests/client/qmltest.cpp
++++ b/tests/client/qmltest.cpp
+@@ -17,9 +17,7 @@
+  *      Renato Araujo Oliveira Filho <renato@canonical.com>
+  */
+ 
+-extern "C" {
+ #include <glib-object.h>
+-}
+ 
+ #include "qdbusmenumodel.h"
+ #include "dbusmenuscript.h"
+diff --git a/tests/client/treetest.cpp b/tests/client/treetest.cpp
+index 3c2827b..baa1554 100644
+--- a/tests/client/treetest.cpp
++++ b/tests/client/treetest.cpp
+@@ -20,9 +20,7 @@
+ 
+ #include "qmenumodel.h"
+ 
+-extern "C" {
+ #include <gio/gio.h>
+-}
+ 
+ #include <QtTest>
+ 
+-- 
+2.31.1
+
