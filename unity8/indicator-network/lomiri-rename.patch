@@ -1,16 +1,85 @@
+From 246d1b73aca3538f002e7812f877825d5f217428 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Mon, 5 Apr 2021 17:12:18 +0200
+Subject: [PATCH] Rename to Lomiri
+
+TODO: 'namespace ubuntu'?
+---
+ CMakeLists.txt                                |  8 ++---
+ src/agent/CredentialStore.h                   |  4 +--
+ .../connectivityqt/connectivity.h             |  4 +--
+ .../connectivity-qt/connectivityqt/modem.h    |  4 +--
+ .../connectivityqt/modems-list-model.h        |  4 +--
+ .../connectivityqt/openvpn-connection.h       |  2 +-
+ .../connectivityqt/pptp-connection.h          |  2 +-
+ .../connectivity-qt/connectivityqt/sim.h      |  4 +--
+ .../connectivityqt/sims-list-model.h          |  4 +--
+ .../connectivityqt/vpn-connection.h           |  4 +--
+ .../vpn-connections-list-model.h              |  4 +--
+ .../connectivity-service/dbus-modem.h         |  4 +--
+ src/indicator/connectivity-service/dbus-sim.h |  4 +--
+ .../dbus-vpn-connection.h                     |  4 +--
+ .../menuitems/ethernet-connection-item.h      |  4 +--
+ src/indicator/menuitems/ethernet-link-item.h  |  4 +--
+ src/indicator/menuitems/section.h             |  2 +-
+ src/indicator/menuitems/settings-item.h       |  4 +--
+ src/indicator/menuitems/vpn-item.h            |  4 +--
+ src/indicator/menuitems/wwan-link-item.h      |  2 +-
+ .../connection/active-connection-manager.h    |  2 +-
+ .../nmofono/connection/active-connection.h    |  4 +--
+ .../connection/active-vpn-connection.h        |  4 +--
+ .../nmofono/connection/available-connection.h |  4 +--
+ .../nmofono/ethernet/ethernet-link.h          |  4 +--
+ src/indicator/nmofono/flight-mode-toggle.h    |  4 +--
+ src/indicator/nmofono/link.h                  |  4 +--
+ .../nmofono/null-flight-mode-toggle.h         |  2 +-
+ .../nmofono/urfkill-flight-mode-toggle.h      |  2 +-
+ .../nmofono/vpn/openvpn-connection.h          |  4 +--
+ src/indicator/nmofono/vpn/pptp-connection.h   |  4 +--
+ src/indicator/nmofono/vpn/vpn-connection.h    |  4 +--
+ src/indicator/nmofono/vpn/vpn-manager.h       |  2 +-
+ .../wifi/network-manager-wifi-toggle.h        |  2 +-
+ .../nmofono/wifi/urfkill-wifi-toggle.h        |  2 +-
+ src/indicator/nmofono/wifi/wifi-link.h        |  4 +--
+ src/indicator/nmofono/wifi/wifi-toggle.h      |  4 +--
+ .../sections/ethernet-link-section.h          |  2 +-
+ src/indicator/sections/ethernet-section.h     |  2 +-
+ src/indicator/sections/quick-access-section.h |  2 +-
+ src/indicator/sections/vpn-section.h          |  4 +--
+ src/indicator/sections/wifi-section.h         |  2 +-
+ src/indicator/sections/wwan-section.h         |  2 +-
+ src/indicator/vpn-status-notifier.h           |  4 +--
+ src/menumodel-cpp/action-group-exporter.cpp   |  4 +--
+ src/menumodel-cpp/gio-helpers/util.cpp        |  4 +--
+ src/url-dispatcher-cpp/url-dispatcher.cpp     | 10 +++---
+ src/util/dbus-property-cache.h                |  4 +--
+ .../indicator-network-test-base.cpp           |  2 +-
+ .../integration/indicator-network-test-base.h | 36 +++++++++----------
+ tests/integration/test-indicator-desktop.cpp  |  2 +-
+ tests/integration/test-indicator-phone.cpp    |  2 +-
+ tests/integration/test-indicator-vpn.cpp      |  2 +-
+ .../unit/menumodel-cpp/test-menu-exporter.cpp |  4 +--
+ tests/unit/secret-agent/test-secret-agent.cpp |  6 ++--
+ 55 files changed, 113 insertions(+), 113 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 031664d..5b90c52 100644
+index 031664da..a41ea634 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -48,7 +48,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
+@@ -47,10 +47,10 @@ pkg_check_modules(
+ include_directories(${GLIB_INCLUDE_DIRS})
  
  pkg_check_modules(
-   UNITY_API REQUIRED
+-  UNITY_API REQUIRED
 -  libunity-api
++  LOMIRI_API REQUIRED
 +  liblomiri-api
  )
- include_directories(${UNITY_API_INCLUDE_DIRS})
+-include_directories(${UNITY_API_INCLUDE_DIRS})
++include_directories(${LOMIRI_API_INCLUDE_DIRS})
  
+ set(OFONO_REQUIRED_VERSION 1.12)
+ pkg_check_modules(
 @@ -74,7 +74,7 @@ include_directories(${Qt5DBus_INCLUDE_DIRS})
  pkg_check_modules(NM REQUIRED libnm REQUIRED)
  include_directories(${NM_INCLUDE_DIRS})
@@ -21,7 +90,7 @@ index 031664d..5b90c52 100644
  
  find_package(Threads REQUIRED)
 diff --git a/src/agent/CredentialStore.h b/src/agent/CredentialStore.h
-index 58dff4c..9d6b314 100644
+index 58dff4c2..9d6b314b 100644
 --- a/src/agent/CredentialStore.h
 +++ b/src/agent/CredentialStore.h
 @@ -18,7 +18,7 @@
@@ -43,7 +112,7 @@ index 58dff4c..9d6b314 100644
  	CredentialStore();
  
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/connectivity.h b/src/connectivity-api/connectivity-qt/connectivityqt/connectivity.h
-index 7aa05a6..1780306 100644
+index 7aa05a60..1780306c 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/connectivity.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/connectivity.h
 @@ -26,7 +26,7 @@
@@ -65,7 +134,7 @@ index 7aa05a6..1780306 100644
      Q_DISABLE_COPY(Connectivity)
  
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/modem.h b/src/connectivity-api/connectivity-qt/connectivityqt/modem.h
-index 72f111c..f3d2e68 100644
+index 72f111c8..f3d2e68a 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/modem.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/modem.h
 @@ -23,7 +23,7 @@
@@ -87,7 +156,7 @@ index 72f111c..f3d2e68 100644
      Modem(const QDBusObjectPath& path,
            const QDBusConnection& connection,
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/modems-list-model.h b/src/connectivity-api/connectivity-qt/connectivityqt/modems-list-model.h
-index a6b62cf..5661941 100644
+index a6b62cf2..56619417 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/modems-list-model.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/modems-list-model.h
 @@ -25,7 +25,7 @@
@@ -109,7 +178,7 @@ index a6b62cf..5661941 100644
      enum Roles
      {
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/openvpn-connection.h b/src/connectivity-api/connectivity-qt/connectivityqt/openvpn-connection.h
-index ddae6ac..2f51df4 100644
+index ddae6acd..2f51df41 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/openvpn-connection.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/openvpn-connection.h
 @@ -29,7 +29,7 @@ class Q_DECL_EXPORT OpenvpnConnection : public VpnConnection
@@ -122,7 +191,7 @@ index ddae6ac..2f51df4 100644
      Q_ENUMS(ConnectionType)
      enum ConnectionType
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/pptp-connection.h b/src/connectivity-api/connectivity-qt/connectivityqt/pptp-connection.h
-index 91317ae..3cd6643 100644
+index 91317aee..3cd66437 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/pptp-connection.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/pptp-connection.h
 @@ -29,7 +29,7 @@ class Q_DECL_EXPORT PptpConnection : public VpnConnection
@@ -135,7 +204,7 @@ index 91317ae..3cd6643 100644
      Q_ENUMS(MppeType)
      enum class MppeType
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/sim.h b/src/connectivity-api/connectivity-qt/connectivityqt/sim.h
-index 56e8145..53994f4 100644
+index 56e81450..53994f47 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/sim.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/sim.h
 @@ -23,7 +23,7 @@
@@ -157,7 +226,7 @@ index 56e8145..53994f4 100644
      Sim(const QDBusObjectPath& path, const QDBusConnection& connection, QObject* parent = 0);
  
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/sims-list-model.h b/src/connectivity-api/connectivity-qt/connectivityqt/sims-list-model.h
-index d0bce41..776c848 100644
+index d0bce41b..776c848b 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/sims-list-model.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/sims-list-model.h
 @@ -24,7 +24,7 @@
@@ -179,7 +248,7 @@ index d0bce41..776c848 100644
      enum Roles
      {
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connection.h b/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connection.h
-index d5c534b..43d254c 100644
+index d5c534b2..43d254cd 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connection.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connection.h
 @@ -23,7 +23,7 @@
@@ -201,7 +270,7 @@ index d5c534b..43d254c 100644
      Q_ENUMS(Type)
  
 diff --git a/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connections-list-model.h b/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connections-list-model.h
-index 8157794..a6ad0a4 100644
+index 8157794b..a6ad0a4c 100644
 --- a/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connections-list-model.h
 +++ b/src/connectivity-api/connectivity-qt/connectivityqt/vpn-connections-list-model.h
 @@ -22,7 +22,7 @@
@@ -223,7 +292,7 @@ index 8157794..a6ad0a4 100644
      enum Roles
      {
 diff --git a/src/indicator/connectivity-service/dbus-modem.h b/src/indicator/connectivity-service/dbus-modem.h
-index face194..b9c46ef 100644
+index face1948..b9c46efa 100644
 --- a/src/indicator/connectivity-service/dbus-modem.h
 +++ b/src/indicator/connectivity-service/dbus-modem.h
 @@ -27,7 +27,7 @@
@@ -245,7 +314,7 @@ index face194..b9c46ef 100644
      DBusModem(nmofono::wwan::Modem::Ptr modem, const QDBusConnection& connection);
  
 diff --git a/src/indicator/connectivity-service/dbus-sim.h b/src/indicator/connectivity-service/dbus-sim.h
-index 20ddf09..34431cf 100644
+index 20ddf09a..34431cf3 100644
 --- a/src/indicator/connectivity-service/dbus-sim.h
 +++ b/src/indicator/connectivity-service/dbus-sim.h
 @@ -27,7 +27,7 @@
@@ -267,7 +336,7 @@ index 20ddf09..34431cf 100644
      DBusSim(nmofono::wwan::Sim::Ptr sim, const QDBusConnection& connection);
  
 diff --git a/src/indicator/connectivity-service/dbus-vpn-connection.h b/src/indicator/connectivity-service/dbus-vpn-connection.h
-index 8a125a2..876abef 100644
+index 8a125a2f..876abef3 100644
 --- a/src/indicator/connectivity-service/dbus-vpn-connection.h
 +++ b/src/indicator/connectivity-service/dbus-vpn-connection.h
 @@ -27,7 +27,7 @@
@@ -289,7 +358,7 @@ index 8a125a2..876abef 100644
      DBusVpnConnection(nmofono::vpn::VpnConnection::SPtr vpnConnection, const QDBusConnection& connection);
  
 diff --git a/src/indicator/menuitems/ethernet-connection-item.h b/src/indicator/menuitems/ethernet-connection-item.h
-index ea248f9..3fbe4fd 100644
+index ea248f94..3fbe4fdd 100644
 --- a/src/indicator/menuitems/ethernet-connection-item.h
 +++ b/src/indicator/menuitems/ethernet-connection-item.h
 @@ -23,7 +23,7 @@
@@ -311,7 +380,7 @@ index ea248f9..3fbe4fd 100644
      EthernetConnectionItem() = delete;
      ~EthernetConnectionItem() = default;
 diff --git a/src/indicator/menuitems/ethernet-link-item.h b/src/indicator/menuitems/ethernet-link-item.h
-index 50be3b9..4c03370 100644
+index 50be3b97..4c033706 100644
 --- a/src/indicator/menuitems/ethernet-link-item.h
 +++ b/src/indicator/menuitems/ethernet-link-item.h
 @@ -21,7 +21,7 @@
@@ -333,7 +402,7 @@ index 50be3b9..4c03370 100644
      EthernetLinkItem(nmofono::ethernet::EthernetLink::SPtr link, bool isSettingsMenu);
      ~EthernetLinkItem() = default;
 diff --git a/src/indicator/menuitems/section.h b/src/indicator/menuitems/section.h
-index f4d3a98..5478444 100644
+index f4d3a982..54784441 100644
 --- a/src/indicator/menuitems/section.h
 +++ b/src/indicator/menuitems/section.h
 @@ -23,7 +23,7 @@
@@ -346,7 +415,7 @@ index f4d3a98..5478444 100644
  class Section
  {
 diff --git a/src/indicator/menuitems/settings-item.h b/src/indicator/menuitems/settings-item.h
-index 7007e48..ae61d9f 100644
+index 7007e48e..ae61d9fd 100644
 --- a/src/indicator/menuitems/settings-item.h
 +++ b/src/indicator/menuitems/settings-item.h
 @@ -23,14 +23,14 @@
@@ -367,7 +436,7 @@ index 7007e48..ae61d9f 100644
      SettingsItem() = delete;
  
 diff --git a/src/indicator/menuitems/vpn-item.h b/src/indicator/menuitems/vpn-item.h
-index 19499e8..687cc9a 100644
+index 19499e85..687cc9a2 100644
 --- a/src/indicator/menuitems/vpn-item.h
 +++ b/src/indicator/menuitems/vpn-item.h
 @@ -21,7 +21,7 @@
@@ -389,7 +458,7 @@ index 19499e8..687cc9a 100644
      VpnItem(nmofono::vpn::VpnConnection::SPtr connection);
      ~VpnItem() = default;
 diff --git a/src/indicator/menuitems/wwan-link-item.h b/src/indicator/menuitems/wwan-link-item.h
-index 6fb30f2..a6ce203 100644
+index 6fb30f29..a6ce2038 100644
 --- a/src/indicator/menuitems/wwan-link-item.h
 +++ b/src/indicator/menuitems/wwan-link-item.h
 @@ -28,7 +28,7 @@ class WwanLinkItem : public Section
@@ -402,7 +471,7 @@ index 6fb30f2..a6ce203 100644
      WwanLinkItem(nmofono::wwan::Modem::Ptr, nmofono::Manager::Ptr manager);
      virtual ~WwanLinkItem();
 diff --git a/src/indicator/nmofono/connection/active-connection-manager.h b/src/indicator/nmofono/connection/active-connection-manager.h
-index c59dfb6..a682c25 100644
+index c59dfb6d..a682c255 100644
 --- a/src/indicator/nmofono/connection/active-connection-manager.h
 +++ b/src/indicator/nmofono/connection/active-connection-manager.h
 @@ -35,7 +35,7 @@ class ActiveConnectionManager: public QObject
@@ -415,7 +484,7 @@ index c59dfb6..a682c25 100644
      ActiveConnectionManager(const QDBusConnection& systemConnection);
  
 diff --git a/src/indicator/nmofono/connection/active-connection.h b/src/indicator/nmofono/connection/active-connection.h
-index 91f4ed0..93e1a07 100644
+index 91f4ed02..93e1a074 100644
 --- a/src/indicator/nmofono/connection/active-connection.h
 +++ b/src/indicator/nmofono/connection/active-connection.h
 @@ -22,7 +22,7 @@
@@ -437,7 +506,7 @@ index 91f4ed0..93e1a07 100644
      enum class State
      {
 diff --git a/src/indicator/nmofono/connection/active-vpn-connection.h b/src/indicator/nmofono/connection/active-vpn-connection.h
-index 1fac538..c5236d2 100644
+index 1fac538e..c5236d2f 100644
 --- a/src/indicator/nmofono/connection/active-vpn-connection.h
 +++ b/src/indicator/nmofono/connection/active-vpn-connection.h
 @@ -24,7 +24,7 @@
@@ -459,7 +528,7 @@ index 1fac538..c5236d2 100644
      enum class State
      {
 diff --git a/src/indicator/nmofono/connection/available-connection.h b/src/indicator/nmofono/connection/available-connection.h
-index 7dd1243..142ae96 100644
+index 7dd1243e..142ae960 100644
 --- a/src/indicator/nmofono/connection/available-connection.h
 +++ b/src/indicator/nmofono/connection/available-connection.h
 @@ -22,7 +22,7 @@
@@ -481,7 +550,7 @@ index 7dd1243..142ae96 100644
      AvailableConnection(const QDBusObjectPath& path, const QDBusConnection& systemConnection);
  
 diff --git a/src/indicator/nmofono/ethernet/ethernet-link.h b/src/indicator/nmofono/ethernet/ethernet-link.h
-index e803a51..fcc2585 100644
+index e803a51f..fcc25854 100644
 --- a/src/indicator/nmofono/ethernet/ethernet-link.h
 +++ b/src/indicator/nmofono/ethernet/ethernet-link.h
 @@ -26,7 +26,7 @@
@@ -503,7 +572,7 @@ index e803a51..fcc2585 100644
      EthernetLink(std::shared_ptr<OrgFreedesktopNetworkManagerDeviceInterface> dev,
                   std::shared_ptr<OrgFreedesktopNetworkManagerSettingsInterface> settings,
 diff --git a/src/indicator/nmofono/flight-mode-toggle.h b/src/indicator/nmofono/flight-mode-toggle.h
-index 53b8406..2656859 100644
+index 53b8406d..26568593 100644
 --- a/src/indicator/nmofono/flight-mode-toggle.h
 +++ b/src/indicator/nmofono/flight-mode-toggle.h
 @@ -20,7 +20,7 @@
@@ -525,7 +594,7 @@ index 53b8406..2656859 100644
      FlightModeToggle() = default;
  
 diff --git a/src/indicator/nmofono/link.h b/src/indicator/nmofono/link.h
-index 6f50596..35a0234 100644
+index 6f505967..35a02343 100644
 --- a/src/indicator/nmofono/link.h
 +++ b/src/indicator/nmofono/link.h
 @@ -22,7 +22,7 @@
@@ -547,7 +616,7 @@ index 6f50596..35a0234 100644
      Link(const Link&) = delete;
      virtual ~Link() = default;
 diff --git a/src/indicator/nmofono/null-flight-mode-toggle.h b/src/indicator/nmofono/null-flight-mode-toggle.h
-index 1855a52..cb1313c 100644
+index 1855a523..cb1313c1 100644
 --- a/src/indicator/nmofono/null-flight-mode-toggle.h
 +++ b/src/indicator/nmofono/null-flight-mode-toggle.h
 @@ -26,7 +26,7 @@ namespace nmofono {
@@ -560,7 +629,7 @@ index 1855a52..cb1313c 100644
      NullFlightModeToggle();
  
 diff --git a/src/indicator/nmofono/urfkill-flight-mode-toggle.h b/src/indicator/nmofono/urfkill-flight-mode-toggle.h
-index a6a02d5..fa7978b 100644
+index a6a02d5a..fa7978b4 100644
 --- a/src/indicator/nmofono/urfkill-flight-mode-toggle.h
 +++ b/src/indicator/nmofono/urfkill-flight-mode-toggle.h
 @@ -28,7 +28,7 @@ namespace nmofono {
@@ -573,7 +642,7 @@ index a6a02d5..fa7978b 100644
      UrfkillFlightModeToggle(const QDBusConnection& systemBus);
  
 diff --git a/src/indicator/nmofono/vpn/openvpn-connection.h b/src/indicator/nmofono/vpn/openvpn-connection.h
-index d23e1f7..1982d41 100644
+index d23e1f7f..1982d419 100644
 --- a/src/indicator/nmofono/vpn/openvpn-connection.h
 +++ b/src/indicator/nmofono/vpn/openvpn-connection.h
 @@ -22,7 +22,7 @@
@@ -595,7 +664,7 @@ index d23e1f7..1982d41 100644
      enum class ConnectionType
      {
 diff --git a/src/indicator/nmofono/vpn/pptp-connection.h b/src/indicator/nmofono/vpn/pptp-connection.h
-index 6e27727..5bbe4a4 100644
+index 6e27727a..5bbe4a43 100644
 --- a/src/indicator/nmofono/vpn/pptp-connection.h
 +++ b/src/indicator/nmofono/vpn/pptp-connection.h
 @@ -22,7 +22,7 @@
@@ -617,7 +686,7 @@ index 6e27727..5bbe4a4 100644
      enum class MppeType
      {
 diff --git a/src/indicator/nmofono/vpn/vpn-connection.h b/src/indicator/nmofono/vpn/vpn-connection.h
-index cbac3b0..f2d0793 100644
+index cbac3b01..f2d0793f 100644
 --- a/src/indicator/nmofono/vpn/vpn-connection.h
 +++ b/src/indicator/nmofono/vpn/vpn-connection.h
 @@ -29,7 +29,7 @@
@@ -639,7 +708,7 @@ index cbac3b0..f2d0793 100644
      enum class Type
      {
 diff --git a/src/indicator/nmofono/vpn/vpn-manager.h b/src/indicator/nmofono/vpn/vpn-manager.h
-index 8760fb1..7e4c36a 100644
+index 8760fb10..7e4c36a8 100644
 --- a/src/indicator/nmofono/vpn/vpn-manager.h
 +++ b/src/indicator/nmofono/vpn/vpn-manager.h
 @@ -33,7 +33,7 @@ class VpnManager: public QObject
@@ -652,7 +721,7 @@ index 8760fb1..7e4c36a 100644
      VpnManager(connection::ActiveConnectionManager::SPtr activeConnectionManager, const QDBusConnection& systemConnection);
  
 diff --git a/src/indicator/nmofono/wifi/network-manager-wifi-toggle.h b/src/indicator/nmofono/wifi/network-manager-wifi-toggle.h
-index 00501f3..8c3becb 100644
+index 00501f3f..8c3becb6 100644
 --- a/src/indicator/nmofono/wifi/network-manager-wifi-toggle.h
 +++ b/src/indicator/nmofono/wifi/network-manager-wifi-toggle.h
 @@ -31,7 +31,7 @@ namespace wifi
@@ -665,7 +734,7 @@ index 00501f3..8c3becb 100644
      NetworkManagerWifiToggle(const QDBusConnection& systemConnection);
  
 diff --git a/src/indicator/nmofono/wifi/urfkill-wifi-toggle.h b/src/indicator/nmofono/wifi/urfkill-wifi-toggle.h
-index 864b6f9..374850a 100644
+index 864b6f98..374850ae 100644
 --- a/src/indicator/nmofono/wifi/urfkill-wifi-toggle.h
 +++ b/src/indicator/nmofono/wifi/urfkill-wifi-toggle.h
 @@ -33,7 +33,7 @@ namespace wifi
@@ -678,7 +747,7 @@ index 864b6f9..374850a 100644
      UrfkillWifiToggle(const QDBusConnection& systemConnection);
  
 diff --git a/src/indicator/nmofono/wifi/wifi-link.h b/src/indicator/nmofono/wifi/wifi-link.h
-index 7c128ac..11bdc06 100644
+index 7c128aca..11bdc067 100644
 --- a/src/indicator/nmofono/wifi/wifi-link.h
 +++ b/src/indicator/nmofono/wifi/wifi-link.h
 @@ -23,7 +23,7 @@
@@ -700,7 +769,7 @@ index 7c128ac..11bdc06 100644
  
      enum class Mode
 diff --git a/src/indicator/nmofono/wifi/wifi-toggle.h b/src/indicator/nmofono/wifi/wifi-toggle.h
-index 513dd82..3ecad49 100644
+index 513dd82c..3ecad49e 100644
 --- a/src/indicator/nmofono/wifi/wifi-toggle.h
 +++ b/src/indicator/nmofono/wifi/wifi-toggle.h
 @@ -22,7 +22,7 @@
@@ -722,7 +791,7 @@ index 513dd82..3ecad49 100644
      enum class State
      {
 diff --git a/src/indicator/sections/ethernet-link-section.h b/src/indicator/sections/ethernet-link-section.h
-index 47032b2..c15b73b 100644
+index 47032b29..c15b73b2 100644
 --- a/src/indicator/sections/ethernet-link-section.h
 +++ b/src/indicator/sections/ethernet-link-section.h
 @@ -27,7 +27,7 @@
@@ -735,7 +804,7 @@ index 47032b2..c15b73b 100644
      explicit EthernetLinkSection(nmofono::Manager::Ptr manager, nmofono::ethernet::EthernetLink::SPtr link, bool isSettingsMenu);
  
 diff --git a/src/indicator/sections/ethernet-section.h b/src/indicator/sections/ethernet-section.h
-index b7e502f..610a7f9 100644
+index b7e502f9..610a7f99 100644
 --- a/src/indicator/sections/ethernet-section.h
 +++ b/src/indicator/sections/ethernet-section.h
 @@ -26,7 +26,7 @@
@@ -748,7 +817,7 @@ index b7e502f..610a7f9 100644
      explicit EthernetSection(nmofono::Manager::Ptr manager, bool isSettingsMenu);
  
 diff --git a/src/indicator/sections/quick-access-section.h b/src/indicator/sections/quick-access-section.h
-index 4940795..366339b 100644
+index 49407954..366339ba 100644
 --- a/src/indicator/sections/quick-access-section.h
 +++ b/src/indicator/sections/quick-access-section.h
 @@ -32,7 +32,7 @@ class QuickAccessSection : public Section
@@ -761,7 +830,7 @@ index 4940795..366339b 100644
      QuickAccessSection(nmofono::Manager::Ptr manager, SwitchItem::Ptr flightModeSwitch);
      virtual ~QuickAccessSection();
 diff --git a/src/indicator/sections/vpn-section.h b/src/indicator/sections/vpn-section.h
-index fbe658d..af90dc5 100644
+index fbe658d4..af90dc5c 100644
 --- a/src/indicator/sections/vpn-section.h
 +++ b/src/indicator/sections/vpn-section.h
 @@ -22,7 +22,7 @@
@@ -783,7 +852,7 @@ index fbe658d..af90dc5 100644
      explicit VpnSection(nmofono::vpn::VpnManager::SPtr vpnManager);
      virtual ~VpnSection() = default;
 diff --git a/src/indicator/sections/wifi-section.h b/src/indicator/sections/wifi-section.h
-index 6aba9fb..3f2f686 100644
+index 6aba9fb8..3f2f6862 100644
 --- a/src/indicator/sections/wifi-section.h
 +++ b/src/indicator/sections/wifi-section.h
 @@ -30,7 +30,7 @@ class WifiSection : public Section
@@ -796,7 +865,7 @@ index 6aba9fb..3f2f686 100644
      explicit WifiSection(nmofono::Manager::Ptr manager, SwitchItem::Ptr wifiSwitch);
      virtual ~WifiSection();
 diff --git a/src/indicator/sections/wwan-section.h b/src/indicator/sections/wwan-section.h
-index 42638e3..39dbec5 100644
+index 42638e31..39dbec51 100644
 --- a/src/indicator/sections/wwan-section.h
 +++ b/src/indicator/sections/wwan-section.h
 @@ -29,7 +29,7 @@ class WwanSection : public Section
@@ -809,7 +878,7 @@ index 42638e3..39dbec5 100644
      explicit WwanSection(nmofono::Manager::Ptr modemManager, SwitchItem::Ptr mobileDataSwitch, SwitchItem::Ptr hotspotSwitch);
      virtual ~WwanSection();
 diff --git a/src/indicator/vpn-status-notifier.h b/src/indicator/vpn-status-notifier.h
-index ae87f12..9cb3e29 100644
+index ae87f12d..9cb3e291 100644
 --- a/src/indicator/vpn-status-notifier.h
 +++ b/src/indicator/vpn-status-notifier.h
 @@ -22,12 +22,12 @@
@@ -828,7 +897,7 @@ index ae87f12..9cb3e29 100644
      VpnStatusNotifier(nmofono::connection::ActiveConnectionManager::SPtr activeConnectionManager,
              notify::NotificationManager::SPtr notificationManager);
 diff --git a/src/menumodel-cpp/action-group-exporter.cpp b/src/menumodel-cpp/action-group-exporter.cpp
-index 77ef82e..8a7aad7 100644
+index 77ef82e8..8a7aad7a 100644
 --- a/src/menumodel-cpp/action-group-exporter.cpp
 +++ b/src/menumodel-cpp/action-group-exporter.cpp
 @@ -19,11 +19,11 @@
@@ -846,7 +915,7 @@ index 77ef82e..8a7aad7 100644
  ActionGroupExporter::ActionGroupExporter(SessionBus::Ptr sessionBus,
                                           ActionGroup::Ptr actionGroup,
 diff --git a/src/menumodel-cpp/gio-helpers/util.cpp b/src/menumodel-cpp/gio-helpers/util.cpp
-index 58ae07a..14e788d 100644
+index 58ae07a0..14e788df 100644
 --- a/src/menumodel-cpp/gio-helpers/util.cpp
 +++ b/src/menumodel-cpp/gio-helpers/util.cpp
 @@ -19,11 +19,11 @@
@@ -864,7 +933,7 @@ index 58ae07a..14e788d 100644
  void runGMainloop(guint ms)
  {
 diff --git a/src/url-dispatcher-cpp/url-dispatcher.cpp b/src/url-dispatcher-cpp/url-dispatcher.cpp
-index fe1bee2..62a7bdd 100644
+index fe1bee2b..36975ca3 100644
 --- a/src/url-dispatcher-cpp/url-dispatcher.cpp
 +++ b/src/url-dispatcher-cpp/url-dispatcher.cpp
 @@ -19,7 +19,7 @@
@@ -884,7 +953,7 @@ index fe1bee2..62a7bdd 100644
 -                          url_dispatcher_cb,
 -                          new std::function<void(std::string, bool)>{cb});
 +        lomiri_url_dispatch_send(url.c_str(),
-+               	                 url_dispatcher_cb,
++                                 url_dispatcher_cb,
 +                                 new std::function<void(std::string, bool)>{cb});
      } else {
 -        url_dispatch_send(url.c_str(), url_dispatcher_cb, nullptr);
@@ -892,7 +961,7 @@ index fe1bee2..62a7bdd 100644
      }
  }
 diff --git a/src/util/dbus-property-cache.h b/src/util/dbus-property-cache.h
-index 347ce40..62a2972 100644
+index 347ce405..62a29721 100644
 --- a/src/util/dbus-property-cache.h
 +++ b/src/util/dbus-property-cache.h
 @@ -24,7 +24,7 @@
@@ -913,3 +982,182 @@ index 347ce40..62a2972 100644
  
      DBusPropertyCache(const QString &service, const QString& interface,
                        const QString &path, const QDBusConnection &connection);
+diff --git a/tests/integration/indicator-network-test-base.cpp b/tests/integration/indicator-network-test-base.cpp
+index 6bae60e7..822eb22a 100644
+--- a/tests/integration/indicator-network-test-base.cpp
++++ b/tests/integration/indicator-network-test-base.cpp
+@@ -34,7 +34,7 @@ using namespace QtDBusMock;
+ using namespace std;
+ using namespace testing;
+ using namespace connectivityqt;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ IndicatorNetworkTestBase::IndicatorNetworkTestBase() :
+     dbusMock(dbusTestRunner)
+diff --git a/tests/integration/indicator-network-test-base.h b/tests/integration/indicator-network-test-base.h
+index 69f4fbf5..bd8053bd 100644
+--- a/tests/integration/indicator-network-test-base.h
++++ b/tests/integration/indicator-network-test-base.h
+@@ -28,8 +28,8 @@
+ #include <libqtdbustest/QProcessDBusService.h>
+ #include <libqtdbusmock/DBusMock.h>
+ 
+-#include <unity/gmenuharness/MatchUtils.h>
+-#include <unity/gmenuharness/MenuMatcher.h>
++#include <lomiri/gmenuharness/MatchUtils.h>
++#include <lomiri/gmenuharness/MenuMatcher.h>
+ 
+ #include <NetworkManager.h>
+ #include <gmock/gmock.h>
+@@ -162,13 +162,13 @@ protected:
+ 
+     void setDataUsageIndicationSetting(bool value);
+ 
+-    static unity::gmenuharness::MenuMatcher::Parameters phoneParameters();
++    static lomiri::gmenuharness::MenuMatcher::Parameters phoneParameters();
+ 
+-    static unity::gmenuharness::MenuMatcher::Parameters phoneEthernetSettingsParameters();
++    static lomiri::gmenuharness::MenuMatcher::Parameters phoneEthernetSettingsParameters();
+ 
+-    static unity::gmenuharness::MenuMatcher::Parameters phoneWifiSettingsParameters();
++    static lomiri::gmenuharness::MenuMatcher::Parameters phoneWifiSettingsParameters();
+ 
+-    static unity::gmenuharness::MenuMatcher::Parameters unlockSimParameters(std::string const& busName, int exportId);
++    static lomiri::gmenuharness::MenuMatcher::Parameters unlockSimParameters(std::string const& busName, int exportId);
+ 
+     void startIndicator();
+ 
+@@ -256,36 +256,36 @@ protected:
+ 
+     static QString firstModem();
+ 
+-    static unity::gmenuharness::MenuItemMatcher flightModeSwitch(bool toggled = false);
+-    static unity::gmenuharness::MenuItemMatcher mobileDataSwitch(bool toggled = false);
++    static lomiri::gmenuharness::MenuItemMatcher flightModeSwitch(bool toggled = false);
++    static lomiri::gmenuharness::MenuItemMatcher mobileDataSwitch(bool toggled = false);
+ 
+-    static unity::gmenuharness::MenuItemMatcher accessPoint(const std::string& ssid, Secure secure,
++    static lomiri::gmenuharness::MenuItemMatcher accessPoint(const std::string& ssid, Secure secure,
+                 ApMode apMode, ConnectionStatus connectionStatus, uchar strength = 100);
+ 
+-    static unity::gmenuharness::MenuItemMatcher wifiEnableSwitch(bool toggled = true);
++    static lomiri::gmenuharness::MenuItemMatcher wifiEnableSwitch(bool toggled = true);
+ 
+-    static unity::gmenuharness::MenuItemMatcher wifiSettings();
++    static lomiri::gmenuharness::MenuItemMatcher wifiSettings();
+ 
+-    static unity::gmenuharness::MenuItemMatcher modemInfo(const std::string& simIdentifier,
++    static lomiri::gmenuharness::MenuItemMatcher modemInfo(const std::string& simIdentifier,
+                 const std::string& label,
+                 const std::string& statusIcon,
+                 bool locked = false,
+                 const std::string& connectivityIcon = "");
+ 
+-    static unity::gmenuharness::MenuItemMatcher ethernetInfo(const std::string& label,
++    static lomiri::gmenuharness::MenuItemMatcher ethernetInfo(const std::string& label,
+                                                              const std::string& status,
+                                                              Toggle autoConnect = Toggle::enabled);
+ 
+-    static unity::gmenuharness::MenuItemMatcher radio(const std::string& label,
++    static lomiri::gmenuharness::MenuItemMatcher radio(const std::string& label,
+                                                       Toggle toggled);
+ 
+-    static unity::gmenuharness::MenuItemMatcher cellularSettings();
++    static lomiri::gmenuharness::MenuItemMatcher cellularSettings();
+ 
+-    static unity::gmenuharness::MenuItemMatcher ethernetSettings();
++    static lomiri::gmenuharness::MenuItemMatcher ethernetSettings();
+ 
+-    static unity::gmenuharness::MenuItemMatcher vpnSettings();
++    static lomiri::gmenuharness::MenuItemMatcher vpnSettings();
+ 
+-    static unity::gmenuharness::MenuItemMatcher vpnConnection(const std::string& name, ConnectionStatus connected = ConnectionStatus::disconnected);
++    static lomiri::gmenuharness::MenuItemMatcher vpnConnection(const std::string& name, ConnectionStatus connected = ConnectionStatus::disconnected);
+ 
+     static connectivityqt::Sim* getModemSim(const QAbstractItemModel& model, int idx)
+     {
+diff --git a/tests/integration/test-indicator-desktop.cpp b/tests/integration/test-indicator-desktop.cpp
+index 2e87a6a6..99c26b04 100644
+--- a/tests/integration/test-indicator-desktop.cpp
++++ b/tests/integration/test-indicator-desktop.cpp
+@@ -24,7 +24,7 @@
+ 
+ using namespace std;
+ using namespace testing;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ namespace
+ {
+diff --git a/tests/integration/test-indicator-phone.cpp b/tests/integration/test-indicator-phone.cpp
+index 620121de..30066ff3 100644
+--- a/tests/integration/test-indicator-phone.cpp
++++ b/tests/integration/test-indicator-phone.cpp
+@@ -30,7 +30,7 @@
+ using namespace std;
+ using namespace testing;
+ using namespace connectivityqt;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ namespace
+ {
+diff --git a/tests/integration/test-indicator-vpn.cpp b/tests/integration/test-indicator-vpn.cpp
+index 3d5c16ae..1b066d2a 100644
+--- a/tests/integration/test-indicator-vpn.cpp
++++ b/tests/integration/test-indicator-vpn.cpp
+@@ -24,7 +24,7 @@
+ 
+ using namespace std;
+ using namespace testing;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ namespace
+ {
+diff --git a/tests/unit/menumodel-cpp/test-menu-exporter.cpp b/tests/unit/menumodel-cpp/test-menu-exporter.cpp
+index f87abce8..f4490969 100644
+--- a/tests/unit/menumodel-cpp/test-menu-exporter.cpp
++++ b/tests/unit/menumodel-cpp/test-menu-exporter.cpp
+@@ -29,12 +29,12 @@
+ #include <QSignalSpy>
+ #include <gmock/gmock.h>
+ #include <gtest/gtest.h>
+-#include <unity/gmenuharness/MenuMatcher.h>
++#include <lomiri/gmenuharness/MenuMatcher.h>
+ 
+ using namespace std;
+ using namespace testing;
+ using namespace QtDBusTest;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ namespace
+ {
+diff --git a/tests/unit/secret-agent/test-secret-agent.cpp b/tests/unit/secret-agent/test-secret-agent.cpp
+index 6b88052b..6025b76c 100644
+--- a/tests/unit/secret-agent/test-secret-agent.cpp
++++ b/tests/unit/secret-agent/test-secret-agent.cpp
+@@ -26,15 +26,15 @@
+ #include <QSignalSpy>
+ #include <gmock/gmock.h>
+ #include <gtest/gtest.h>
+-#include <unity/gmenuharness/MatchUtils.h>
+-#include <unity/gmenuharness/MenuMatcher.h>
++#include <lomiri/gmenuharness/MatchUtils.h>
++#include <lomiri/gmenuharness/MenuMatcher.h>
+ 
+ using namespace std;
+ using namespace testing;
+ using namespace QtDBusTest;
+ using namespace QtDBusMock;
+ using namespace agent;
+-namespace mh = unity::gmenuharness;
++namespace mh = lomiri::gmenuharness;
+ 
+ namespace {
+ 
+-- 
+2.31.1
+
