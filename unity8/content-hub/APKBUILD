@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=content-hub
-pkgver=0_git20190129
-_commit="3f046207beec0441a5e2cd567e63becaafd181eb" # TODO old "bionic" branch - ubports hasn't migrated this
+pkgver=0_git20210406
+_commit="5b8cac554670ed5cf2006dea32c2c47a899142fb"
 pkgrel=0
 pkgdesc="Content sharing/picking infrastructure and service, designed to allow apps to securely and efficiently exchange content"
 url="https://gitlab.com/ubports/core/content-hub"
@@ -12,10 +12,9 @@ makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev pthread-cance
 checkdepends="gmock dbus-test-runner xvfb-run"
 # Build without crossdirect as long as we need the LD_PRELOAD
 options="!check !pmb:crossdirect" # 92% tests passed, 1 tests failed out of 12
-#source="https://gitlab.com/ubports/core/content-hub/-/archive/$_commit/content-hub-$_commit.tar.gz
-source="https://gitlab.com/z3ntu/content-hub/-/archive/$_commit/content-hub-$_commit.tar.gz
+source="https://gitlab.com/ubports/core/content-hub/-/archive/$_commit/content-hub-$_commit.tar.gz
 	0001-Use-qmlplugindump-qt5.patch
-	lomiri-rename.patch"
+	"
 subpackages="$pkgname-dev $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -38,6 +37,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="b0d7b0c7d47941f88e4aa6ce5e57f900419c16d1cbd8efa07dcdd8f50194f4961e6263e59ca37ddb671e4ce6c5aa55d292887765a3f98ea20d40a5c71602d19b  content-hub-3f046207beec0441a5e2cd567e63becaafd181eb.tar.gz
-f5a13fbbf2a26342a043474b5911ad4949e6b61f36116197e9c614d2e399f4dcb6adbab08376764756d68d45cfd55215dd49aa5cdfe5926b61d928a8424ba767  0001-Use-qmlplugindump-qt5.patch
-c236376b65d4b0cafbda9a135008b5394c993eee861302b9ea85cece2b5b7a08a8146a852569b093646b9e447bfc86ae0ba509b8e466c60e12bdfc338d54a1f9  lomiri-rename.patch"
+sha512sums="60ebc5d878f8fb4b380cd1d806152d47e5ebf9f2fa1ade3c726de0a88ccc3825a4e24f59628ee8186e08d0c3414b0d76a881143d42f28e74dd774d71d89aa995  content-hub-5b8cac554670ed5cf2006dea32c2c47a899142fb.tar.gz
+f5a13fbbf2a26342a043474b5911ad4949e6b61f36116197e9c614d2e399f4dcb6adbab08376764756d68d45cfd55215dd49aa5cdfe5926b61d928a8424ba767  0001-Use-qmlplugindump-qt5.patch"
