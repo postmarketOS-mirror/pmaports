@@ -1,15 +1,15 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=settings-components
-pkgver=0_git20201125
+pkgname=lomiri-settings-components
+pkgver=0_git20210326
 pkgrel=0
-_commit="2d304cd2f6918645096a6240668f0483bed513fa"
+_commit="c2054fe672ad08d9f79591b0ddc2f93cafa9f43d"
 pkgdesc="Ubuntu settings components for Unity8"
 arch="all"
-url="https://github.com/ubports/settings-components"
+url="https://gitlab.com/ubports/core/lomiri-settings-components"
 license="GPL-3.0-only AND LGPL-3.0-only"
 makedepends="cmake cmake-extras qt5-qtdeclarative-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/settings-components/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-settings-components/-/archive/$_commit/lomiri-settings-components-$_commit.tar.gz
 	qmltestrunner.patch"
 subpackages="$pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
@@ -31,5 +31,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="1cd2774bbe1b14eb9907013fae1cb0ab1dfe510983301593ed5eb3be3e39c5cb0550c3151208e6256ca98b8e504ce7d8f8245945f2c00481537a8d6e3dbfe178  settings-components-2d304cd2f6918645096a6240668f0483bed513fa.tar.gz
+sha512sums="176a0d33910af45d0760b069ee0b1abe1c1d85a6884388962a5aed3213184a2e0fe0f1e71cfb081fb3e6d53cbf39be48f09790134ffa379f64f3e889b2195f94  lomiri-settings-components-c2054fe672ad08d9f79591b0ddc2f93cafa9f43d.tar.gz
 0cbe24ba24468ccfae80b6d6b49c68b55e44561ac7914645746af15ee252c12341f2b401390cffbed520963d1cb7da6980f99520ee820528de964b8a714b87b4  qmltestrunner.patch"
