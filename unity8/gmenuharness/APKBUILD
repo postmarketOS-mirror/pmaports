@@ -1,17 +1,15 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=gmenuharness
-pkgver=0_git20200517
-_commit="c7242648fa0a85b6ff810db8676deb7e51974182"
+pkgver=0_git20210407
+_commit="e39664917c09c3d8580a041182d6fce41de29863"
 pkgrel=0
 pkgdesc="Library to test GMenuModel structures."
-url="https://github.com/ubports/gmenuharness"
+url="https://gitlab.com/ubports/core/gmenuharness"
 arch="all"
 license="LGPL-3.0-only"
 makedepends="cmake cmake-extras qt5-qtbase-dev lomiri-api-dev glib-dev gtest-dev gmock libqtdbustest"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gmenuharness/archive/$_commit.tar.gz
-	lomiri-rename.patch
-	"
+source="https://gitlab.com/ubports/core/gmenuharness/-/archive/$_commit/gmenuharness-$_commit.tar.gz"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests fail under QEMU
@@ -32,5 +30,4 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="f1602f4f7a4b18c93dfb03f6ada85ccaea1c839b2ee6fd881780ec7e261d778bddb39e1d6911f795e7e066930b414f28f2f947e3912e81e7625fed73865e4c0a  gmenuharness-c7242648fa0a85b6ff810db8676deb7e51974182.tar.gz
-a32a51db47578ae4fbf67db1b7eb272dff2609dc9e5c30d9a03e2e2fb1e2f616ecaed1b00ac8771e421c03eabd32b6382048a92a73a958d5c557c196c679ce0b  lomiri-rename.patch"
+sha512sums="2014f385f13b755bf82a76db2f0f2a22f542cf9e7129d0019b4a0f55cd2506fe110ac8509f81a02541c61dbd61ff8b945348fc8eb21abc2933133aed29f20a0f  gmenuharness-e39664917c09c3d8580a041182d6fce41de29863.tar.gz"
