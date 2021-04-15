@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=lomiri-system-settings
-pkgver=0_git20210409
-_commit="61e6f13bc51702c048dd80b5ad9a1029f289bc09"
+pkgver=0_git20210414
+_commit="732f5f9f570a6a9b5b2fbafc02af96335b52e4cc"
 pkgrel=0
 pkgdesc="System Settings application for Unity8"
 url="https://gitlab.com/ubports/core/lomiri-system-settings"
@@ -33,6 +33,6 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="f7b640921c1e20849baf6f894e1aa66f06eca15de4a3e03ae9e65d5bcf4bcbaefb11593be50dc227d8171a23742058fe4de60cca84cdf88d80ceff823ce98d92  lomiri-system-settings-61e6f13bc51702c048dd80b5ad9a1029f289bc09.tar.gz
-33ca29fd7f34e5f44aa9245ed4a303d8d8b2d0fdcf0b433e36787be1a1122f63d8fbfcb15ece2a49d853c4aee48ec48b954d5f2c16e72e125f3a90a5875e71be  0002-Don-t-build-update-components.patch
+sha512sums="7b7d014d80ac882c13d3cb3f76fe5496b8aaac2521f9f692b3a3adfbee0a5ac678a058c76c69124e0c26482c0ca8b7d16bed4c85a953a3e476010b40828a3ce8  lomiri-system-settings-732f5f9f570a6a9b5b2fbafc02af96335b52e4cc.tar.gz
+5be4bef564fc19bdbab435b06ce9e515d38c47a3cf2f1a9aa5da12e2204f0994a5da8d2d7f3f6dfd400376dc1b801d7e302da48a49ea57416ec31c7702d7c282  0002-Don-t-build-update-components.patch
 11a1003ac08ba5b8739c371b8d2d953f31c666c7a9f6926420f7aab94665298ce8ca0782979a3ea48bc67d800b48b4eeba030f2fc86e422b0cafae7319b7db98  0003-Use-qmltestrunner-qt5.patch"

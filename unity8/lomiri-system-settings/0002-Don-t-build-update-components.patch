@@ -10,7 +10,7 @@ Subject: [PATCH 2/3] Don't build update components
  3 files changed, 21 insertions(+), 26 deletions(-)
 
 diff --git a/plugins/system-update/CMakeLists.txt b/plugins/system-update/CMakeLists.txt
-index 57488cc5..e2b6bc0f 100644
+index 5591214e..bfa36799 100644
 --- a/plugins/system-update/CMakeLists.txt
 +++ b/plugins/system-update/CMakeLists.txt
 @@ -17,7 +17,6 @@ set(QML_SOURCES
@@ -34,13 +34,13 @@ index 57488cc5..e2b6bc0f 100644
      Qt5::Sql
  
 -    apt-pkg
-     uss-systemimage
+     lss-systemimage
  )
  
-diff --git a/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt b/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
-index 373dfaf4..13d372a6 100644
---- a/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
-+++ b/tests/mocks/Ubuntu/SystemSettings/Update/CMakeLists.txt
+diff --git a/tests/mocks/Lomiri/SystemSettings/Update/CMakeLists.txt b/tests/mocks/Lomiri/SystemSettings/Update/CMakeLists.txt
+index edee18b7..717501dc 100644
+--- a/tests/mocks/Lomiri/SystemSettings/Update/CMakeLists.txt
++++ b/tests/mocks/Lomiri/SystemSettings/Update/CMakeLists.txt
 @@ -3,12 +3,10 @@ include_directories(
      ${CMAKE_SOURCE_DIR}/src
      ${CMAKE_SOURCE_DIR}/plugins/system-update
@@ -55,67 +55,47 @@ index 373dfaf4..13d372a6 100644
  
  set(MOCK_SYSTEMUPDATE_SRCS
 diff --git a/tests/plugins/CMakeLists.txt b/tests/plugins/CMakeLists.txt
-index 538f6d90..42231449 100644
+index 411a6482..ac846390 100644
 --- a/tests/plugins/CMakeLists.txt
 +++ b/tests/plugins/CMakeLists.txt
-@@ -2,7 +2,7 @@
- include(QmlTest)
+@@ -3,8 +3,6 @@ include(QmlTest)
  
- add_subdirectory(security-privacy)
--add_subdirectory(system-update)
-+#add_subdirectory(system-update)
+ # TODO(Ratchanan): separate the plugin to an independent package
+ # add_subdirectory(security-privacy)
+-# TODO(Ratchanan): separate the plugin to an independent package
+-# add_subdirectory(system-update)
  add_subdirectory(bluetooth)
  add_subdirectory(wifi)
  add_subdirectory(notifications)
-@@ -29,28 +29,28 @@ set(SYSTEMUPDATE_IMPORT_PATHS
+@@ -32,31 +30,8 @@ set(SYSTEMUPDATE_IMPORT_PATHS
      ${CMAKE_SOURCE_DIR}/src
      ${CMAKE_BINARY_DIR}/tests/utils/modules
      ${CMAKE_BINARY_DIR}/tests/mocks/
 -    ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
-+#    ${CMAKE_SOURCE_DIR}/tests/plugins/system-update
  )
  
--add_qml_test(system-update systemupdate_update
--    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
--)
+-# TODO(Ratchanan): separate the system-update plugin to an independent package
 -
--add_qml_test(system-update systemupdate_global
--    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
--)
+-# add_qml_test(system-update systemupdate_update
+-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-# )
 -
--add_qml_test(system-update systemupdate_pagecomponent
--    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
--)
+-# add_qml_test(system-update systemupdate_global
+-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-# )
 -
--add_qml_test(system-update systemupdate_entrycomponent
--    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
--)
+-# add_qml_test(system-update systemupdate_pagecomponent
+-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-# )
 -
--add_qml_test(system-update systemupdate_download_handler
--    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
--)
-+#add_qml_test(system-update systemupdate_update
-+#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-+#)
-+#
-+#add_qml_test(system-update systemupdate_global
-+#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-+#)
-+#
-+#add_qml_test(system-update systemupdate_pagecomponent
-+#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-+#)
-+#
-+#add_qml_test(system-update systemupdate_entrycomponent
-+#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-+#)
-+#
-+#add_qml_test(system-update systemupdate_download_handler
-+#    IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
-+#)
- 
+-# add_qml_test(system-update systemupdate_entrycomponent
+-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-# )
+-
+-# add_qml_test(system-update systemupdate_download_handler
+-#     IMPORT_PATHS ${SYSTEMUPDATE_IMPORT_PATHS}
+-# )
+-
  add_qml_test(main MainWindow
      IMPORT_PATHS
--- 
-2.26.2
-
+     ${CMAKE_BINARY_DIR}/tests/mocks/
