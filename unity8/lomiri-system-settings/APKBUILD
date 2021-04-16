@@ -9,7 +9,7 @@ url="https://gitlab.com/ubports/core/lomiri-system-settings"
 arch="all"
 license="GPL-3.0-only"
 depends="lomiri-ui-toolkit lomiri-settings-components"
-makedepends="cmake qt5-qtbase-dev upower-dev networkmanager-dev accountsservice-ubuntu-dev geonames-dev icu-dev libqtdbusmock gsettings-qt-dev click-dev gnome-desktop-dev trust-store-dev qt5-qtdeclarative-dev qt5-qtdeclarative intltool"
+makedepends="cmake cmake-extras qt5-qtbase-dev upower-dev networkmanager-dev accountsservice-ubuntu-dev geonames-dev icu-dev libqtdbusmock gsettings-qt-dev click-dev gnome-desktop-dev trust-store-dev qt5-qtdeclarative-dev qt5-qtdeclarative intltool"
 checkdepends="xvfb-run py3-xdg py3-dbusmock"
 source="https://gitlab.com/ubports/core/lomiri-system-settings/-/archive/$_commit/lomiri-system-settings-$_commit.tar.gz
 	0002-Don-t-build-update-components.patch
