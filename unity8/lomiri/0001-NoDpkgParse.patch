@@ -1,14 +1,14 @@
-From 96875eaa99913eda4419a82e62307f26f93dbf40 Mon Sep 17 00:00:00 2001
+From a25a3b2118a5393161ccbf78ab3abc7b2e317279 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:23:11 +0100
-Subject: [PATCH 1/5] NoDpkgParse
+Subject: [PATCH 1/4] NoDpkgParse
 
 ---
  data/CMakeLists.txt | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
-index 2cb8c2d5a..ec10a81ea 100644
+index 98e7095ed..7bd5b27e8 100644
 --- a/data/CMakeLists.txt
 +++ b/data/CMakeLists.txt
 @@ -20,8 +20,8 @@ install(FILES
@@ -18,10 +18,10 @@ index 2cb8c2d5a..ec10a81ea 100644
 -add_custom_target(pkgversion ALL COMMAND dpkg-parsechangelog -l${CMAKE_SOURCE_DIR}/debian/changelog --show-field version > ${CMAKE_CURRENT_BINARY_DIR}/version)
 +#add_custom_target(pkgversion ALL COMMAND dpkg-parsechangelog -l${CMAKE_SOURCE_DIR}/debian/changelog --show-field version > ${CMAKE_CURRENT_BINARY_DIR}/version)
  
- install(FILES com.canonical.Unity8.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
- install(FILES com.canonical.Unity.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
--install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/unity8)
-+#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/unity8)
+ install(FILES com.ubports.Lomiri.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
+ install(FILES com.ubports.Lomiri.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/lomiri)
++#install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/lomiri)
 -- 
-2.28.0
+2.31.1
 

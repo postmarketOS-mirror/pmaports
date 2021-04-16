@@ -1,7 +1,7 @@
-From 99760a9903e405b6e0508f5cae6122cf8c4b1320 Mon Sep 17 00:00:00 2001
+From 867edf312808675aecaf4fb1fe9c737d189c9c7d Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 22:19:51 +0100
-Subject: [PATCH 5/5] Link against libintl
+Subject: [PATCH 4/4] Link against libintl
 
 ---
  plugins/LightDM/FullLightDM/CMakeLists.txt             | 1 +
@@ -11,7 +11,7 @@ Subject: [PATCH 5/5] Link against libintl
  4 files changed, 6 insertions(+)
 
 diff --git a/plugins/LightDM/FullLightDM/CMakeLists.txt b/plugins/LightDM/FullLightDM/CMakeLists.txt
-index 0d0154172..e9c804bff 100644
+index d9bba5fc3..226b68606 100644
 --- a/plugins/LightDM/FullLightDM/CMakeLists.txt
 +++ b/plugins/LightDM/FullLightDM/CMakeLists.txt
 @@ -27,6 +27,7 @@ target_link_libraries(FullLightDM-qml
@@ -21,21 +21,21 @@ index 0d0154172..e9c804bff 100644
 +    intl
      )
  
- add_unity8_plugin(FullLightDM 0.1 LightDM/FullLightDM TARGETS FullLightDM-qml)
+ add_lomiri_plugin(FullLightDM 0.1 LightDM/FullLightDM TARGETS FullLightDM-qml)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index b35d99f91..940909e6a 100644
+index 61f057404..b805e41a8 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -48,6 +48,7 @@ target_link_libraries(${SHELL_APP}
-     Qt5::DBus Qt5::Gui Qt5::Qml Qt5::Quick Qt5::Test
-     ${GSETTINGS_QT_LDFLAGS}
-     UbuntuGestures connectivity-qt1 unity8-private
+@@ -57,6 +57,7 @@ target_link_libraries(${SHELL_APP}
+     LomiriGestures
+     connectivity-qt1
+     lomiri-private
 +    intl
-     )
+ )
  
  if (ENABLE_TOUCH_EMULATION)
 diff --git a/tests/mocks/AccountsService/CMakeLists.txt b/tests/mocks/AccountsService/CMakeLists.txt
-index c10e2dab8..b6a3a4563 100644
+index 15ab27e0a..8b97868c0 100644
 --- a/tests/mocks/AccountsService/CMakeLists.txt
 +++ b/tests/mocks/AccountsService/CMakeLists.txt
 @@ -17,6 +17,7 @@ add_library(MockAccountsService-qml MODULE
@@ -45,9 +45,9 @@ index c10e2dab8..b6a3a4563 100644
 +    intl
      )
  
- add_unity8_mock(AccountsService 0.1 AccountsService
+ add_lomiri_mock(AccountsService 0.1 AccountsService
 diff --git a/tests/plugins/LightDM/IntegratedLightDM/CMakeLists.txt b/tests/plugins/LightDM/IntegratedLightDM/CMakeLists.txt
-index c35cbff8f..67918cfc8 100644
+index 1a5643824..ee32d54d5 100644
 --- a/tests/plugins/LightDM/IntegratedLightDM/CMakeLists.txt
 +++ b/tests/plugins/LightDM/IntegratedLightDM/CMakeLists.txt
 @@ -15,6 +15,7 @@ add_dependencies(GreeterDBusTestExec MockLightDM)
@@ -75,5 +75,5 @@ index c35cbff8f..67918cfc8 100644
  target_include_directories(GreeterPromptsModelTestExec PUBLIC
      ${CMAKE_SOURCE_DIR}/plugins/LightDM
 -- 
-2.28.0
+2.31.1
 

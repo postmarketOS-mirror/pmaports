@@ -1,23 +1,24 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=unity8
-pkgver=0_git20201130
-_commit="39876885449df890f936edcb5b7bc6a63e80f0a0"
+pkgname=lomiri
+pkgver=0_git20210414
+_commit="2bf97a56bc40cc3da5bfd212cb4c3a54bfaa2961"
 pkgrel=0
 pkgdesc="A convergent desktop environment"
 arch="all"
-url="https://github.com/ubports/unity8"
+url="https://gitlab.com/ubports/core/lomiri"
 license="GPL-3.0 LGPL-2.1"
 depends="qt5-qtgraphicaleffects qt5-qtbase-sqlite lomiri-settings-components gsettings-ubuntu-touch-schemas qtmir suru-icon-theme gsettings-desktop-schemas unity-system-compositor"
 depends_dev="qt5-qtbase-dev qt5-qtdeclarative-dev lomiri-api-dev geonames-dev qmenumodel-dev qmenumodel gnome-desktop-dev lomiri-app-launch-dev lomiri-ui-toolkit-dev libqtdbustest libqtdbusmock indicator-network-dev gsettings-qt-dev libusermetrics-dev lightdm-qt5 lightdm-qt5-dev lomiri-download-manager-dev linux-pam-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-test-runner doxygen graphviz lomiri-system-settings lomiri-deviceinfo-dev"
 checkdepends="py3-dbusmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity8/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri/-/archive/$_commit/lomiri-$_commit.tar.gz
 	0001-NoDpkgParse.patch
-	0002-UAL3.patch
-	0003-Add-missing-includes.patch
-	0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
-	0005-Link-against-libintl.patch
+	0002-Add-missing-includes.patch
+	0003-Add-qt5-suffix-to-search-for-Qt-tools.patch
+	0004-Link-against-libintl.patch
+	no-android.patch
+	disable-lights.patch
 	"
 subpackages="$pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
@@ -42,12 +43,13 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 	# Remove this mock as apk thinks, it conflicts with the qmenumodel package
 	# conflicts: qmenumodel-0_git20180727-r0[so:libqmenumodel.so.0=0]
-	rm -r "$pkgdir"/usr/lib/unity8/qml/mocks/QMenuModel/
+	rm -r "$pkgdir"/usr/lib/lomiri/qml/mocks/QMenuModel/
 }
 
-sha512sums="5411f37375e52c63c6b7259cd3101e4ae020d17c84088c8168d3b36067fdd1eb45dbaf82e4908a1c42ba2c2fefb782acfe0a99ac3f140c7283b5be238f387db4  unity8-39876885449df890f936edcb5b7bc6a63e80f0a0.tar.gz
-29a1b21f000eeae61b2281b3da6a0a1c6f8ac9cfb16dd72cfd4217ae69b83c71f0f418b11b45edc8fbf829e67a764687c9b0dae256abfd6eed9ed0b68af7248c  0001-NoDpkgParse.patch
-01fd6536ad8efb9a5ee8db489cdc84fe406bbeadfaccd82a32dc063272a83f119618477e3e8365356c101e3f02eb304abae063dce9b0788280297f950638afdc  0002-UAL3.patch
-2b04226993fd0a0540f33b49bf39b57dc2acf6869d47da74e01a675e9aa9e41ec598a52873a1b3f898d442f7c0b13c79abb7405677bc63cc387ceaa8129a67cf  0003-Add-missing-includes.patch
-fa1e937a464ccc1bea1a2f29599cb325f3ea76d0848aeb7816142af3f350c8ac0bea8a534b0e13bfb02875849004fa3e71f8c331504976c060177e6dec071b0f  0004-Add-qt5-suffix-to-search-for-Qt-tools.patch
-9773246b5d946c7dc62ebb75d88016c70348fce2ceb0991436863e810ab5eab96d4405253cef3897fd1bc211ecf81824d3c938ed85fb74b2cc6911012ff8a109  0005-Link-against-libintl.patch"
+sha512sums="cf520d797d8a532c60c89b99974403897d35e7290bec9a20a046031cf15165905d9cd384c5e9f58242bba52f679dedf752a1416938ff5f6a1f223242aefdd8fe  lomiri-2bf97a56bc40cc3da5bfd212cb4c3a54bfaa2961.tar.gz
+c3528363a396f1a921a21f5d2d8e529878b40800ff0bd3bdddd98a68cbcadf59692d12df04274963660a62ac9c1fff01c8f78f8f2910546aa9cc558b672893b7  0001-NoDpkgParse.patch
+526662b9b0c0306ac64d2b10368c539c37c7291e9cb2f4142733b95ec2f9d82cde6a1887837927dc591a84086735f9d0ec665217888ae7b9b4e0a8027c15c4f3  0002-Add-missing-includes.patch
+c6b739c4d6142c4bc11d17bcfff6ea54abbf5813c3049c8de457a378de790e32febb721a47a650b9fd4c65abc761c02c1045933d459c940a8e91618b119531a4  0003-Add-qt5-suffix-to-search-for-Qt-tools.patch
+e4898804c49a7532c24e4c879c04ae7444e9581ce7559d9a32e3e683cb6a0d3ab1f0e8a12a944d161a37af4a8a071b91f6aef40f6a03766cb89574d70a8e98d1  0004-Link-against-libintl.patch
+bd9c798af9d70a71de1a4e390d9a1f1eace8d7d27d744f3c73f0a22866a279b2a40ce5511a59199b4db8af254b81781c3ba5dc1defd645f1fcb326ae9e71472c  no-android.patch
+9be867583eb12636cca80dbd377a1325c1435f11ad28973ef912671dca0af00db9bbf26d1dcb568b21a6ab861fb56ba20f63c2558b875a2fc89e0c068795c78c  disable-lights.patch"

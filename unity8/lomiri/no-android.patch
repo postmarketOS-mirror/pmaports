@@ -1,0 +1,45 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index b805e41a8..f8afd609f 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -43,15 +43,10 @@ if (ENABLE_TOUCH_EMULATION)
+     set(SOURCE_FILES ${SOURCE_FILES} MouseTouchAdaptor.cpp)
+ endif()
+ 
+-pkg_check_modules(ANDROID_PROPERTIES REQUIRED libandroid-properties)
+ add_executable(${SHELL_APP} ${SOURCE_FILES})
+ 
+-if (NOT "${ANDROID_PROPERTIES_INCLUDE_DIRS}" STREQUAL "")
+-    set_target_properties(${SHELL_APP} PROPERTIES INCLUDE_DIRECTORIES ${ANDROID_PROPERTIES_INCLUDE_DIRS})
+-endif()
+ target_link_libraries(${SHELL_APP}
+     Qt5::DBus Qt5::Gui Qt5::Qml Qt5::Quick Qt5::Test
+-    ${ANDROID_PROPERTIES_LDFLAGS}
+     ${GSETTINGS_QT_LDFLAGS}
+     ${QTMIRSERVER_LDFLAGS}
+     LomiriGestures
+diff --git a/src/LomiriApplication.cpp b/src/LomiriApplication.cpp
+index efb811bdd..cb9e60b1c 100644
+--- a/src/LomiriApplication.cpp
++++ b/src/LomiriApplication.cpp
+@@ -27,9 +27,6 @@
+ 
+ #include <libintl.h>
+ 
+-// libandroid-properties
+-#include <hybris/properties/properties.h>
+-
+ // qtmir
+ #include <qtmir/displayconfigurationstorage.h>
+ 
+@@ -56,9 +53,7 @@ LomiriApplication::LomiriApplication(int & argc, char ** argv)
+     setupQmlEngine();
+ 
+     if (m_qmlArgs.deviceName().isEmpty()) {
+-        char buffer[200];
+-        property_get("ro.product.device", buffer /* value */, "desktop" /* default_value*/);
+-        m_qmlArgs.setDeviceName(QString(buffer));
++        m_qmlArgs.setDeviceName("desktop");
+     }
+ 
+     // The testability driver is only loaded by QApplication but not by QGuiApplication.
