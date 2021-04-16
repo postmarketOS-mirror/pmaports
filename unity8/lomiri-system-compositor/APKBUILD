@@ -1,16 +1,16 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
-pkgname=unity-system-compositor
-pkgver=0_git20200813
-_commit="783ddfb220ddb4633d3f3978ad6c42fa94cbf7d0"
+pkgname=lomiri-system-compositor
+pkgver=0_git20210416
+_commit="9565fe5eb6b4451b08cb0b31d8020ae411d626a4"
 pkgrel=0
 pkgdesc="System compositor using the Mir display server"
 arch="all"
-url="https://github.com/ubports/unity-system-compositor"
+url="https://gitlab.com/ubports/core/lomiri-system-compositor"
 license="GPL-3.0-only"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock gdk-pixbuf-dev mir-dev dbus-dev lomiri-deviceinfo-dev"
 checkdepends="dbus"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/unity-system-compositor/archive/$_commit.tar.gz
+source="https://gitlab.com/ubports/core/lomiri-system-compositor/-/archive/$_commit/lomiri-system-compositor-$_commit.tar.gz
 	0001-Add-missing-stdexcept-header.patch"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -34,5 +34,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="5ea7784a106290d0e6ec72df56d2cb93356a127c6913519aafca038d3ee090162d18cebf90686ec41786e7d32370cf6e42933d85c69d0b1a78366424ffbc94d4  unity-system-compositor-783ddfb220ddb4633d3f3978ad6c42fa94cbf7d0.tar.gz
+sha512sums="bdc758580932c7ca170de30421e522bececbb8877239df761dfadb2fab295f963e798abb98cb5d98be7600a098f092fb41a4271542b5b9eb74b81f74151d3773  lomiri-system-compositor-9565fe5eb6b4451b08cb0b31d8020ae411d626a4.tar.gz
 4f2a78f62ff242118f86e7ad25b680521a6faa1f86f7840ac20786dd075499409ff6501d3b691c14b465c62941d646fcbd5ecd907c4749f7e5694ce8baedba0b  0001-Add-missing-stdexcept-header.patch"
