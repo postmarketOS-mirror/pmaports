@@ -1,17 +1,17 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=gsettings-qt
-pkgver=0_git20200715
-_commit="e12a1df31013eb940b035602951af11cee16a758"
+pkgver=0_git20200909
+_commit="ce56e46b67c11276ec5f44b6a3a1c3f5a46aafed"
 pkgrel=0
 pkgdesc="Library to access GSettings from Qt"
-url="https://github.com/ubports/gsettings-qt"
+url="https://gitlab.com/ubports/core/gsettings-qt"
 arch="all"
 license="LGPL-3.0-only"
 depends_dev="qt5-qtdeclarative-dev"
 makedepends="$depends_dev qt5-qtbase-dev"
 checkdepends="xvfb-run"
 subpackages="$pkgname-dev"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/gsettings-qt/archive/$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/gsettings-qt/-/archive/$_commit/gsettings-qt-$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -27,4 +27,4 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="6dd6d2290c29afd3404a82249c7429c6932b1e2eb33c37bad1440f04f6715a9dc7264fd0348c11d0dc8be4c78d7f1cc59f547cbcbf219f954e29cb5c58833d28  gsettings-qt-e12a1df31013eb940b035602951af11cee16a758.tar.gz"
+sha512sums="7d4903cc5ff43a0da21f266c3e2b90574b38de382ef85e7dd2ca80b6d29abd3a72a073fac6fb79e3de0b6310e709576fa741a6ac0e2fff0c50817dc27e7720e2  gsettings-qt-ce56e46b67c11276ec5f44b6a3a1c3f5a46aafed.tar.gz"
