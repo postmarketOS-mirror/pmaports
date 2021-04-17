@@ -1,7 +1,7 @@
 From 5d120ddcfd27fa3ef9ac363a6157beb422c33dda Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 11:11:14 +0200
-Subject: [PATCH] Rename to Lomiri
+Subject: [PATCH 1/2] Rename to Lomiri
 
 ---
  demos/qtmir-demo-shell/ResizeArea.qml                  |  2 +-

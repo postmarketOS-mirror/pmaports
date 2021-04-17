@@ -1,0 +1,201 @@
+From c0f244a182079a26f2dbee22f891d7d4a7b78718 Mon Sep 17 00:00:00 2001
+From: Marius Gripsgard <marius@ubports.com>
+Date: Wed, 29 Jan 2020 03:42:11 +0100
+Subject: [PATCH 2/2] Port to gl::Texture using SGTexture
+
+This ports to mir's new gl::Texture but keeps the existing
+MirBufferSGTexture implementation.
+
+Huge thanks to @RAOF!
+---
+ .../Lomiri/Application/mirbuffersgtexture.cpp | 39 +++++++++++--------
+ .../Lomiri/Application/mirbuffersgtexture.h   |  8 +++-
+ src/platforms/mirserver/miral/mirbuffer.cpp   | 22 ++---------
+ src/platforms/mirserver/miral/mirbuffer.h     |  3 +-
+ 4 files changed, 33 insertions(+), 39 deletions(-)
+
+diff --git a/src/modules/Lomiri/Application/mirbuffersgtexture.cpp b/src/modules/Lomiri/Application/mirbuffersgtexture.cpp
+index 63436456..1b961b24 100644
+--- a/src/modules/Lomiri/Application/mirbuffersgtexture.cpp
++++ b/src/modules/Lomiri/Application/mirbuffersgtexture.cpp
+@@ -20,6 +20,7 @@
+ #include <mir/geometry/size.h>
+ 
+ // Qt
++#include <QMutexLocker>
+ #include <QtGui/QOpenGLFunctions>
+ 
+ namespace mg = mir::geometry;
+@@ -29,10 +30,8 @@ MirBufferSGTexture::MirBufferSGTexture()
+     , m_width(0)
+     , m_height(0)
+     , m_textureId(0)
++    , m_needsUpdate(false)
+ {
+-    auto f = QOpenGLContext::currentContext()->functions();
+-    f->glGenTextures(1, &m_textureId);
+-
+     setFiltering(QSGTexture::Linear);
+     setHorizontalWrapMode(QSGTexture::ClampToEdge);
+     setVerticalWrapMode(QSGTexture::ClampToEdge);
+@@ -40,14 +39,12 @@ MirBufferSGTexture::MirBufferSGTexture()
+ 
+ MirBufferSGTexture::~MirBufferSGTexture()
+ {
+-    if (m_textureId) {
+-        auto f = QOpenGLContext::currentContext()->functions();
+-        f->glDeleteTextures(1, &m_textureId);
+-    }
+ }
+ 
+ void MirBufferSGTexture::freeBuffer()
+ {
++    QMutexLocker locker(&m_mutex);
++
+     m_mirBuffer.reset();
+     m_width = 0;
+     m_height = 0;
+@@ -55,10 +52,13 @@ void MirBufferSGTexture::freeBuffer()
+ 
+ void MirBufferSGTexture::setBuffer(const std::shared_ptr<mir::graphics::Buffer>& buffer)
+ {
++    QMutexLocker locker(&m_mutex);
++
+     m_mirBuffer.reset(buffer);
+     mg::Size size = m_mirBuffer.size();
+     m_height = size.height.as_int();
+     m_width = size.width.as_int();
++    m_needsUpdate = true;
+ }
+ 
+ bool MirBufferSGTexture::hasBuffer() const
+@@ -68,6 +68,18 @@ bool MirBufferSGTexture::hasBuffer() const
+ 
+ int MirBufferSGTexture::textureId() const
+ {
++    QMutexLocker locker(&m_mutex);
++
++    if (m_needsUpdate)
++    {
++        GLint existing_binding;
++        auto f = QOpenGLContext::currentContext()->functions();
++        f->glGetIntegerv(GL_TEXTURE_BINDING_2D, &existing_binding);
++        m_mirBuffer.bind();
++        f->glGetIntegerv(GL_TEXTURE_BINDING_2D, &m_textureId);
++        f->glBindTexture(GL_TEXTURE_2D, existing_binding);
++        m_needsUpdate = false;
++    }
+     return m_textureId;
+ }
+ 
+@@ -83,17 +95,10 @@ bool MirBufferSGTexture::hasAlphaChannel() const
+ 
+ void MirBufferSGTexture::bind()
+ {
+-    Q_ASSERT(hasBuffer());
++    QMutexLocker locker(&m_mutex);
+ 
+-    auto f = QOpenGLContext::currentContext()->functions();
+-
+-    f->glBindTexture(GL_TEXTURE_2D, m_textureId);
++    Q_ASSERT(hasBuffer());
+     updateBindOptions(true/* force */);
+ 
+-    m_mirBuffer.bind_to_texture();
+-    m_mirBuffer.secure_for_render();
+-
+-    // Fix for lp:1583088 - For non-GL clients, Mir uploads the client pixel buffer to a GL texture.
+-    // But as it does so, it changes some GL state and neglects to restore it, which breaks Qt's rendering.
+-    f->glPixelStorei(GL_UNPACK_ALIGNMENT, 4); // 4 is the default which Qt uses
++    m_mirBuffer.bind();
+ }
+diff --git a/src/modules/Lomiri/Application/mirbuffersgtexture.h b/src/modules/Lomiri/Application/mirbuffersgtexture.h
+index b740f1b7..0c44a2e5 100644
+--- a/src/modules/Lomiri/Application/mirbuffersgtexture.h
++++ b/src/modules/Lomiri/Application/mirbuffersgtexture.h
+@@ -23,6 +23,8 @@
+ 
+ #include <QtGui/qopengl.h>
+ 
++#include <QMutex>
++
+ class MirBufferSGTexture : public QSGTexture
+ {
+     Q_OBJECT
+@@ -42,10 +44,12 @@ public:
+     void bind() override;
+ 
+ private:
+-    miral::GLBuffer m_mirBuffer;
++    mutable miral::GLBuffer m_mirBuffer;
+     int m_width;
+     int m_height;
+-    GLuint m_textureId;
++    mutable GLint m_textureId;
++    mutable bool m_needsUpdate;
++    mutable QMutex m_mutex;
+ };
+ 
+ #endif // MIRBUFFERSGTEXTURE_H
+diff --git a/src/platforms/mirserver/miral/mirbuffer.cpp b/src/platforms/mirserver/miral/mirbuffer.cpp
+index 5e30c53d..0f649e0b 100644
+--- a/src/platforms/mirserver/miral/mirbuffer.cpp
++++ b/src/platforms/mirserver/miral/mirbuffer.cpp
+@@ -17,12 +17,10 @@
+ #include "mirbuffer.h"
+ 
+ #include <mir/graphics/buffer.h>
+-#include <mir/renderer/gl/texture_source.h>
++#include "mir/graphics/texture.h"
+ 
+ #include <stdexcept>
+ 
+-using mir::renderer::gl::TextureSource;
+-
+ miral::GLBuffer::GLBuffer() = default;
+ miral::GLBuffer::~GLBuffer() = default;
+ miral::GLBuffer::GLBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer) :
+@@ -57,23 +55,11 @@ void miral::GLBuffer::reset()
+     wrapped.reset();
+ }
+ 
+-void miral::GLBuffer::bind_to_texture()
+-{
+-    if (auto const texture_source = dynamic_cast<TextureSource*>(wrapped->native_buffer_base()))
+-    {
+-        texture_source->gl_bind_to_texture();
+-    }
+-    else
+-    {
+-        throw std::logic_error("Buffer does not support GL rendering");
+-    }
+-}
+-
+-void miral::GLBuffer::secure_for_render()
++void miral::GLBuffer::bind()
+ {
+-    if (auto const texture_source = dynamic_cast<TextureSource*>(wrapped->native_buffer_base()))
++    if (auto const texture = dynamic_cast<mir::graphics::gl::Texture*>(wrapped->native_buffer_base()))
+     {
+-        texture_source->secure_for_render();
++        texture->bind();
+     }
+     else
+     {
+diff --git a/src/platforms/mirserver/miral/mirbuffer.h b/src/platforms/mirserver/miral/mirbuffer.h
+index 06fb48d7..cabfdc36 100644
+--- a/src/platforms/mirserver/miral/mirbuffer.h
++++ b/src/platforms/mirserver/miral/mirbuffer.h
+@@ -38,8 +38,7 @@ public:
+ 
+     void reset();
+     void reset(std::shared_ptr<mir::graphics::Buffer> const& buffer);
+-    void bind_to_texture();
+-    void secure_for_render();
++    void bind();
+ 
+ private:
+     std::shared_ptr<mir::graphics::Buffer> wrapped;
+-- 
+2.31.1
+

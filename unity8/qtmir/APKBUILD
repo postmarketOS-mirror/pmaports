@@ -12,6 +12,7 @@ makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarat
 checkdepends="py3-dbusmock dbus"
 source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
 	0001-Rename-to-Lomiri.patch
+	0002-Port-to-gl-Texture-using-SGTexture.patch
 	"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -33,4 +34,5 @@ package() {
 }
 
 sha512sums="6a5a60cba73ff21093c6a4b9da19845c6fd677e66e4651181f183ebe8759d8502350bd7eba2defc472e53dc30f30295e4d6107f89be3fa435b8558f4504d59cd  qtmir-a208802983dea55fe25cc064eda32abd326ae495.tar.gz
-4d4933bb1f1767452f8c824f4b19cb97aa6371c19ac7febe63aa4ae74c437b161774de01702045c284a5a233e5f44fa5743161dd4ddacf5b279f24af7570e4e9  0001-Rename-to-Lomiri.patch"
+b6c87e4e4c897e12613a254d21eb18976c64715f916e84c0cc103dc3fb1d0f3c9b7c198c66d3d89b2fd305311e8a7db0ab7003dfa75b7f3ee9ee3a3f3e4131c2  0001-Rename-to-Lomiri.patch
+a99688d8dd5987b832906b588865ae6ff21d3c82c9ca4c948ad94c9a4ddacfc75c2916f2dc83562d66266336970863415b776c14d8ad8a8a9ccc41490ba4eb50  0002-Port-to-gl-Texture-using-SGTexture.patch"
