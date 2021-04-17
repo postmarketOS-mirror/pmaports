@@ -1,7 +1,7 @@
-From 2b27267464f0965aa4376f56da8a04d28904b652 Mon Sep 17 00:00:00 2001
+From e5d04549d0d292ac9dc2c27c52666e0930587570 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
-Date: Tue, 15 Sep 2020 20:00:46 +0200
-Subject: [PATCH] Add missing <stdexcept> header
+Date: Tue, 22 Sep 2020 00:26:45 +0200
+Subject: [PATCH 2/2] Add missing <stdexcept> header (#17)
 
 ---
  spinner/mir/eglapp.cpp         | 2 ++
@@ -35,7 +35,7 @@ index d0ea356..d1c4e08 100644
  #include <GLES2/gl2.h>
  
 diff --git a/spinner/wayland/waylandegl.cpp b/spinner/wayland/waylandegl.cpp
-index 1385500..dfc4ac2 100644
+index 2ca2b61..008f9b2 100644
 --- a/spinner/wayland/waylandegl.cpp
 +++ b/spinner/wayland/waylandegl.cpp
 @@ -19,6 +19,7 @@
@@ -47,5 +47,5 @@ index 1385500..dfc4ac2 100644
  #include <GLES2/gl2.h>
  
 -- 
-2.28.0
+2.31.1
 

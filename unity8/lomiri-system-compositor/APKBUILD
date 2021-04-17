@@ -11,7 +11,9 @@ license="GPL-3.0-only"
 makedepends="$depends_dev cmake cmake-extras gtest-dev gmock gdk-pixbuf-dev mir-dev dbus-dev lomiri-deviceinfo-dev"
 checkdepends="dbus"
 source="https://gitlab.com/ubports/core/lomiri-system-compositor/-/archive/$_commit/lomiri-system-compositor-$_commit.tar.gz
-	0001-Add-missing-stdexcept-header.patch"
+	0001-spinner-Add-support-for-wayland-backend.patch
+	0002-Add-missing-stdexcept-header-17.patch
+	"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -35,4 +37,5 @@ package() {
 }
 
 sha512sums="bdc758580932c7ca170de30421e522bececbb8877239df761dfadb2fab295f963e798abb98cb5d98be7600a098f092fb41a4271542b5b9eb74b81f74151d3773  lomiri-system-compositor-9565fe5eb6b4451b08cb0b31d8020ae411d626a4.tar.gz
-4f2a78f62ff242118f86e7ad25b680521a6faa1f86f7840ac20786dd075499409ff6501d3b691c14b465c62941d646fcbd5ecd907c4749f7e5694ce8baedba0b  0001-Add-missing-stdexcept-header.patch"
+93f02b1d138797561d14df697fe01afa56af454b6b8c0a5d317d6e62a2dd78d614bd64dfc57b5c16ef18ae42a4a7dadc64a2109ac87392feedc9373f682e05da  0001-spinner-Add-support-for-wayland-backend.patch
+d9921be03cacac1e891125852a38fbb1c3789d03dda635cc2f0d4d1f1e2f5e3423bdecf9f27d670dcda81c32fd827846c168d1bd476eb07580b48cb135095e28  0002-Add-missing-stdexcept-header-17.patch"
