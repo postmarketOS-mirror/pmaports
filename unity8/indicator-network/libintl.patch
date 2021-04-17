@@ -1,0 +1,12 @@
+diff --git a/tests/utils/main.cpp b/tests/utils/main.cpp
+index 7eb23681..cf2df57a 100644
+--- a/tests/utils/main.cpp
++++ b/tests/utils/main.cpp
+@@ -22,6 +22,7 @@
+ #include <QCoreApplication>
+ #include <QTimer>
+ #include <gtest/gtest.h>
++#include <libintl.h>
+ 
+ #include <libqtdbusmock/DBusMock.h>
+ 

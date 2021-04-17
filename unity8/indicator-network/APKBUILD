@@ -11,7 +11,8 @@ license="GPL-3.0"
 depends_dev="glib-dev lomiri-api-dev ofono-dev networkmanager-dev libsecret-dev lomiri-url-dispatcher-dev qt5-qtdeclarative-dev libqofono-dev"
 makedepends="$depends_dev cmake-extras gtest-dev gmock libqtdbustest libqtdbusmock gmenuharness-dev intltool"
 checkdepends="py3-dbusmock"
-source="https://gitlab.com/ubports/core/indicator-network/-/archive/$_commit/indicator-network-$_commit.tar.gz"
+source="https://gitlab.com/ubports/core/indicator-network/-/archive/$_commit/indicator-network-$_commit.tar.gz
+	libintl.patch"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Tests are broken in general at the moment
@@ -33,4 +34,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="d668c3a7471876356b3079d6667926ca4a8e518884e922693a74aad15526072ea4ab9c7cc054320dba7253c2b6289ca562786914addf7228b26c8d515b5d698e  indicator-network-ba1be27f8fc00dbaa5e4c42694e92711ba61a21d.tar.gz"
+sha512sums="d668c3a7471876356b3079d6667926ca4a8e518884e922693a74aad15526072ea4ab9c7cc054320dba7253c2b6289ca562786914addf7228b26c8d515b5d698e  indicator-network-ba1be27f8fc00dbaa5e4c42694e92711ba61a21d.tar.gz
+262045cb91898d0135a6fc09d3091aae369e4af34c0c89d741336a75ea43fce82835c054f3c8b9c44a1ddc707c6039dc586b6761c0c54f30b5464c1b8e70eefa  libintl.patch"
