@@ -1,7 +1,7 @@
 From 867edf312808675aecaf4fb1fe9c737d189c9c7d Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 22:19:51 +0100
-Subject: [PATCH 4/4] Link against libintl
+Subject: [PATCH 4/6] Link against libintl
 
 ---
  plugins/LightDM/FullLightDM/CMakeLists.txt             | 1 +

@@ -1,3 +1,27 @@
+From 75ff030434a04a51127a2d1b7190e15d0ab5546f Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 11:16:53 +0200
+Subject: [PATCH 5/6] We do not have Android stuff
+
+---
+ plugins/CMakeLists.txt    | 2 +-
+ src/CMakeLists.txt        | 5 -----
+ src/LomiriApplication.cpp | 7 +------
+ 3 files changed, 2 insertions(+), 12 deletions(-)
+
+diff --git a/plugins/CMakeLists.txt b/plugins/CMakeLists.txt
+index 4d53e21bd..09ac97dae 100644
+--- a/plugins/CMakeLists.txt
++++ b/plugins/CMakeLists.txt
+@@ -16,7 +16,7 @@ add_subdirectory(Cursor)
+ add_subdirectory(GlobalShortcut)
+ add_subdirectory(Greeter)
+ add_subdirectory(LightDM)
+-add_subdirectory(Lights)
++#add_subdirectory(Lights)
+ add_subdirectory(Powerd)
+ add_subdirectory(ScreenshotDirectory)
+ add_subdirectory(SessionBroadcast)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index b805e41a8..f8afd609f 100644
 --- a/src/CMakeLists.txt
@@ -43,3 +67,6 @@ index efb811bdd..cb9e60b1c 100644
      }
  
      // The testability driver is only loaded by QApplication but not by QGuiApplication.
+-- 
+2.31.1
+

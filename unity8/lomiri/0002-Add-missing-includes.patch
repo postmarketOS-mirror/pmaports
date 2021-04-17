@@ -1,7 +1,7 @@
 From 4572b57b45065b0ea875102e68a1c363d86c06d9 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:24:14 +0100
-Subject: [PATCH 2/4] Add missing includes
+Subject: [PATCH 2/6] Add missing includes
 
 ---
  .../LightDM/IntegratedLightDM/liblightdm/UsersModelPrivate.h    | 2 ++

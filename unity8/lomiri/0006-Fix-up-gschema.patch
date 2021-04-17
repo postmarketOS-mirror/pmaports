@@ -1,0 +1,89 @@
+From 48d9338050764ffd508efde86b07e9ebe70afeea Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 11:18:06 +0200
+Subject: [PATCH 6/6] Fix up gschema
+
+---
+ data/com.ubports.Lomiri.gschema.xml | 59 ++++++++++++++---------------
+ 1 file changed, 28 insertions(+), 31 deletions(-)
+
+diff --git a/data/com.ubports.Lomiri.gschema.xml b/data/com.ubports.Lomiri.gschema.xml
+index b7a05eba4..cbb164608 100644
+--- a/data/com.ubports.Lomiri.gschema.xml
++++ b/data/com.ubports.Lomiri.gschema.xml
+@@ -5,6 +5,34 @@
+     <value nick="Automatic" value="2" />
+   </enum>
+ 
++  <schema path="/com/ubports/lomiri/greeter/" id="com.ubports.Lomiri.Greeter" gettext-domain="lomiri">
++    <key type="x" name="locked-out-time">
++      <default>0</default>
++      <summary>When the greeter was last locked.</summary>
++      <description>If too many unsuccessful login attempts have been made in a row, the greeter locks you out for a while.  This unix timestamp indicates when you were locked out, so lomiri knows when to let you back in.</description>
++    </key>
++  </schema>
++
++  <!-- From unity7 TODO Remove unused -->
++  <enum id="form-factor-enum">
++    <value nick="Automatic" value="0" />
++    <value nick="Desktop" value="1" />
++    <value nick="Netbook" value="2" />
++    <value nick="TV" value="3" />
++  </enum>
++  <enum id="home-expanded-enum">
++    <value nick="Not Expanded" value="0" />
++    <value nick="Expanded" value="1" />
++  </enum>
++  <enum id="launcher-position-enum">
++    <value nick="Left" value="0" />
++    <value nick="Bottom" value="1" />
++  </enum>
++  <enum id="desktop-type-enum">
++    <value nick="Ubuntu" value="0" />
++    <value nick="UbuntuKylin" value="1" />
++  </enum>
++
+   <schema path="/com/ubports/lomiri/" id="com.ubports.Lomiri" gettext-domain="lomiri">
+     <key enum="usage-mode-enum" name="usage-mode">
+       <default>"Automatic"</default>
+@@ -73,37 +101,6 @@
+       <summary>Force enable workspaces</summary>
+       <description>Forces workspaces availability even when not in windowed mode</description>
+     </key>
+-  </schema>
+-
+-  <schema path="/com/ubports/lomiri/greeter/" id="com.ubports.Lomiri.Greeter" gettext-domain="lomiri">
+-    <key type="x" name="locked-out-time">
+-      <default>0</default>
+-      <summary>When the greeter was last locked.</summary>
+-      <description>If too many unsuccessful login attempts have been made in a row, the greeter locks you out for a while.  This unix timestamp indicates when you were locked out, so lomiri knows when to let you back in.</description>
+-    </key>
+-  </schema>
+-
+-  <!-- From unity7 TODO Remove unused -->
+-  <enum id="form-factor-enum">
+-    <value nick="Automatic" value="0" />
+-    <value nick="Desktop" value="1" />
+-    <value nick="Netbook" value="2" />
+-    <value nick="TV" value="3" />
+-  </enum>
+-  <enum id="home-expanded-enum">
+-    <value nick="Not Expanded" value="0" />
+-    <value nick="Expanded" value="1" />
+-  </enum>
+-  <enum id="launcher-position-enum">
+-    <value nick="Left" value="0" />
+-    <value nick="Bottom" value="1" />
+-  </enum>
+-  <enum id="desktop-type-enum">
+-    <value nick="Ubuntu" value="0" />
+-    <value nick="UbuntuKylin" value="1" />
+-  </enum>
+-
+-  <schema path="/com/ubports/lomiri/" id="com.ubports.Lomiri" gettext-domain="lomiri">
+     <key enum="form-factor-enum" name="form-factor">
+       <default>"Automatic"</default>
+       <summary>The form factor Lomiri should target.</summary>
+-- 
+2.31.1
+
