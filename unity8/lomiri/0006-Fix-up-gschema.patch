@@ -1,7 +1,7 @@
 From 48d9338050764ffd508efde86b07e9ebe70afeea Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 11:18:06 +0200
-Subject: [PATCH 6/6] Fix up gschema
+Subject: [PATCH 6/8] Fix up gschema
 
 ---
  data/com.ubports.Lomiri.gschema.xml | 59 ++++++++++++++---------------

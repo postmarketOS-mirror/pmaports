@@ -1,7 +1,7 @@
 From 75ff030434a04a51127a2d1b7190e15d0ab5546f Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 11:16:53 +0200
-Subject: [PATCH 5/6] We do not have Android stuff
+Subject: [PATCH 5/8] We do not have Android stuff
 
 ---
  plugins/CMakeLists.txt    | 2 +-
