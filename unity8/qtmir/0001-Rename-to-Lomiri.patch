@@ -1,0 +1,1156 @@
+From 5d120ddcfd27fa3ef9ac363a6157beb422c33dda Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 11:11:14 +0200
+Subject: [PATCH] Rename to Lomiri
+
+---
+ demos/qtmir-demo-shell/ResizeArea.qml                  |  2 +-
+ demos/qtmir-demo-shell/Shell.qml                       |  2 +-
+ demos/qtmir-demo-shell/TitleBar.qml                    |  2 +-
+ demos/qtmir-demo-shell/Window.qml                      |  2 +-
+ demos/qtmir-demo-shell/WindowBufferSized.qml           |  2 +-
+ demos/qtmir-demo-shell/WindowModelDebugView.qml        |  2 +-
+ demos/qtmir-demo-shell/qml-demo-shell.qmlproject       |  2 +-
+ include/qtmir/windowmanagementpolicy.h                 |  2 +-
+ src/common/debughelpers.cpp                            |  2 +-
+ src/common/windowcontrollerinterface.h                 |  2 +-
+ src/common/windowmodelnotifier.h                       |  2 +-
+ src/common/workspacecontrollerinterface.h              |  2 +-
+ src/modules/CMakeLists.txt                             |  2 +-
+ .../{Unity => Lomiri}/Application/CMakeLists.txt       | 10 +++++-----
+ .../{Unity => Lomiri}/Application/application.cpp      |  2 +-
+ .../{Unity => Lomiri}/Application/application.h        |  2 +-
+ .../Application/application_manager.cpp                |  4 ++--
+ .../Application/application_manager.h                  |  2 +-
+ .../{Unity => Lomiri}/Application/applicationinfo.h    |  0
+ .../Application/com.canonical.qtmir.gschema.xml        |  0
+ .../Application/compositortextureprovider.cpp          |  0
+ .../Application/compositortextureprovider.h            |  0
+ .../{Unity => Lomiri}/Application/dbusfocusinfo.cpp    |  0
+ .../{Unity => Lomiri}/Application/dbusfocusinfo.h      |  0
+ .../{Unity => Lomiri}/Application/gscopedpointer.h     |  0
+ .../Application/mirbuffersgtexture.cpp                 |  0
+ .../{Unity => Lomiri}/Application/mirbuffersgtexture.h |  0
+ .../{Unity => Lomiri}/Application/mirsurface.cpp       |  0
+ src/modules/{Unity => Lomiri}/Application/mirsurface.h |  0
+ .../Application/mirsurfaceinterface.h                  |  2 +-
+ .../{Unity => Lomiri}/Application/mirsurfaceitem.cpp   |  0
+ .../{Unity => Lomiri}/Application/mirsurfaceitem.h     |  2 +-
+ .../Application/mirsurfacelistmodel.cpp                |  0
+ .../Application/mirsurfacelistmodel.h                  |  0
+ .../{Unity => Lomiri}/Application/objectlistmodel.h    |  0
+ src/modules/{Unity => Lomiri}/Application/plugin.cpp   |  6 +++---
+ .../{Unity => Lomiri}/Application/proc_info.cpp        |  0
+ src/modules/{Unity => Lomiri}/Application/proc_info.h  |  0
+ src/modules/Lomiri/Application/qmldir                  |  2 ++
+ src/modules/{Unity => Lomiri}/Application/session.cpp  |  0
+ src/modules/{Unity => Lomiri}/Application/session.h    |  0
+ .../{Unity => Lomiri}/Application/session_interface.h  |  2 +-
+ .../Application/sessionmap_interface.h                 |  0
+ .../{Unity => Lomiri}/Application/sessionmodel.h       |  0
+ src/modules/{Unity => Lomiri}/Application/settings.cpp |  0
+ src/modules/{Unity => Lomiri}/Application/settings.h   |  0
+ .../{Unity => Lomiri}/Application/settings_interface.h |  0
+ .../{Unity => Lomiri}/Application/sharedwakelock.cpp   |  0
+ .../{Unity => Lomiri}/Application/sharedwakelock.h     |  0
+ .../{Unity => Lomiri}/Application/surfacemanager.cpp   |  2 +-
+ .../{Unity => Lomiri}/Application/surfacemanager.h     |  2 +-
+ .../{Unity => Lomiri}/Application/taskcontroller.cpp   |  2 +-
+ .../{Unity => Lomiri}/Application/taskcontroller.h     |  0
+ src/modules/{Unity => Lomiri}/Application/timer.cpp    |  0
+ src/modules/{Unity => Lomiri}/Application/timer.h      |  0
+ .../{Unity => Lomiri}/Application/timesource.cpp       |  0
+ src/modules/{Unity => Lomiri}/Application/timesource.h |  0
+ .../{Unity => Lomiri}/Application/tracepoints.tp       |  0
+ .../Application/upstart/applicationinfo.cpp            |  0
+ .../Application/upstart/applicationinfo.h              |  0
+ .../Application/upstart/taskcontroller.cpp             |  0
+ .../Application/upstart/taskcontroller.h               |  0
+ .../{Unity => Lomiri}/Application/windowmodel.cpp      |  2 +-
+ .../{Unity => Lomiri}/Application/windowmodel.h        |  0
+ src/modules/{Unity => Lomiri}/CMakeLists.txt           |  0
+ src/modules/Unity/Application/qmldir                   |  2 --
+ src/platforms/mirserver/cursor.cpp                     |  2 +-
+ src/platforms/mirserver/cursor.h                       |  2 +-
+ tests/framework/CMakeLists.txt                         |  2 +-
+ tests/framework/fake_application_info.h                |  2 +-
+ tests/framework/fake_mirsurface.h                      |  4 ++--
+ tests/framework/fake_session.h                         |  6 +++---
+ tests/framework/mock_application_info.h                |  2 +-
+ tests/framework/mock_proc_info.h                       |  2 +-
+ tests/framework/mock_session.h                         |  2 +-
+ tests/framework/mock_sessionmap.h                      |  2 +-
+ tests/framework/mock_settings.h                        |  2 +-
+ tests/framework/mock_shared_wakelock.h                 |  2 +-
+ tests/framework/mock_task_controller.h                 |  2 +-
+ tests/framework/qtmir_test.h                           | 10 +++++-----
+ tests/modules/Application/CMakeLists.txt               |  2 +-
+ tests/modules/Application/application_test.cpp         |  4 ++--
+ tests/modules/ApplicationManager/CMakeLists.txt        |  2 +-
+ .../ApplicationManager/application_manager_test.cpp    |  4 ++--
+ tests/modules/General/objectlistmodel_test.cpp         |  2 +-
+ tests/modules/Session/CMakeLists.txt                   |  2 +-
+ tests/modules/Session/session_test.cpp                 |  4 ++--
+ tests/modules/Session/taskcontroller_test.cpp          |  2 +-
+ tests/modules/SharedWakelock/CMakeLists.txt            |  2 +-
+ tests/modules/SharedWakelock/sharedwakelock_test.cpp   |  2 +-
+ tests/modules/SurfaceManager/CMakeLists.txt            |  2 +-
+ tests/modules/SurfaceManager/surface_manager_test.cpp  |  4 ++--
+ tests/modules/WindowManager/CMakeLists.txt             |  2 +-
+ tests/modules/WindowManager/mirsurface_test.cpp        |  6 +++---
+ tests/modules/WindowManager/mirsurfaceitem_test.cpp    |  4 ++--
+ tests/modules/WindowManager/windowmodel_test.cpp       |  4 ++--
+ 96 files changed, 80 insertions(+), 80 deletions(-)
+ rename src/modules/{Unity => Lomiri}/Application/CMakeLists.txt (92%)
+ rename src/modules/{Unity => Lomiri}/Application/application.cpp (99%)
+ rename src/modules/{Unity => Lomiri}/Application/application.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/application_manager.cpp (99%)
+ rename src/modules/{Unity => Lomiri}/Application/application_manager.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/applicationinfo.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/com.canonical.qtmir.gschema.xml (100%)
+ rename src/modules/{Unity => Lomiri}/Application/compositortextureprovider.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/compositortextureprovider.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/dbusfocusinfo.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/dbusfocusinfo.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/gscopedpointer.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirbuffersgtexture.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirbuffersgtexture.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurface.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurface.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurfaceinterface.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurfaceitem.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurfaceitem.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurfacelistmodel.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/mirsurfacelistmodel.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/objectlistmodel.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/plugin.cpp (93%)
+ rename src/modules/{Unity => Lomiri}/Application/proc_info.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/proc_info.h (100%)
+ create mode 100644 src/modules/Lomiri/Application/qmldir
+ rename src/modules/{Unity => Lomiri}/Application/session.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/session.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/session_interface.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/sessionmap_interface.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/sessionmodel.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/settings.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/settings.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/settings_interface.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/sharedwakelock.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/sharedwakelock.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/surfacemanager.cpp (99%)
+ rename src/modules/{Unity => Lomiri}/Application/surfacemanager.h (99%)
+ rename src/modules/{Unity => Lomiri}/Application/taskcontroller.cpp (98%)
+ rename src/modules/{Unity => Lomiri}/Application/taskcontroller.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/timer.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/timer.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/timesource.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/timesource.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/tracepoints.tp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/upstart/applicationinfo.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/upstart/applicationinfo.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/upstart/taskcontroller.cpp (100%)
+ rename src/modules/{Unity => Lomiri}/Application/upstart/taskcontroller.h (100%)
+ rename src/modules/{Unity => Lomiri}/Application/windowmodel.cpp (98%)
+ rename src/modules/{Unity => Lomiri}/Application/windowmodel.h (100%)
+ rename src/modules/{Unity => Lomiri}/CMakeLists.txt (100%)
+ delete mode 100644 src/modules/Unity/Application/qmldir
+
+diff --git a/demos/qtmir-demo-shell/ResizeArea.qml b/demos/qtmir-demo-shell/ResizeArea.qml
+index 7c5750a3..fe61e23e 100644
+--- a/demos/qtmir-demo-shell/ResizeArea.qml
++++ b/demos/qtmir-demo-shell/ResizeArea.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.4
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ 
+ MouseArea {
+     id: root
+diff --git a/demos/qtmir-demo-shell/Shell.qml b/demos/qtmir-demo-shell/Shell.qml
+index 25262e04..6c012f9a 100644
+--- a/demos/qtmir-demo-shell/Shell.qml
++++ b/demos/qtmir-demo-shell/Shell.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.4
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ import Mir.Pointer 0.1
+ 
+ FocusScope {
+diff --git a/demos/qtmir-demo-shell/TitleBar.qml b/demos/qtmir-demo-shell/TitleBar.qml
+index 06e0baea..3d9376a3 100644
+--- a/demos/qtmir-demo-shell/TitleBar.qml
++++ b/demos/qtmir-demo-shell/TitleBar.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.4
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ 
+ Rectangle {
+     id: root
+diff --git a/demos/qtmir-demo-shell/Window.qml b/demos/qtmir-demo-shell/Window.qml
+index ba150ebe..d751f438 100644
+--- a/demos/qtmir-demo-shell/Window.qml
++++ b/demos/qtmir-demo-shell/Window.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.0
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ 
+ Rectangle {
+     id: root
+diff --git a/demos/qtmir-demo-shell/WindowBufferSized.qml b/demos/qtmir-demo-shell/WindowBufferSized.qml
+index 3645b9df..3d573df8 100644
+--- a/demos/qtmir-demo-shell/WindowBufferSized.qml
++++ b/demos/qtmir-demo-shell/WindowBufferSized.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.0
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ 
+ Rectangle {
+     id: root
+diff --git a/demos/qtmir-demo-shell/WindowModelDebugView.qml b/demos/qtmir-demo-shell/WindowModelDebugView.qml
+index f051fe73..27328edc 100644
+--- a/demos/qtmir-demo-shell/WindowModelDebugView.qml
++++ b/demos/qtmir-demo-shell/WindowModelDebugView.qml
+@@ -1,5 +1,5 @@
+ import QtQuick 2.0
+-import Unity.Application 0.1
++import Lomiri.Application 0.1
+ 
+ Column {
+     id: root
+diff --git a/demos/qtmir-demo-shell/qml-demo-shell.qmlproject b/demos/qtmir-demo-shell/qml-demo-shell.qmlproject
+index 9daa8b68..640fc1ed 100644
+--- a/demos/qtmir-demo-shell/qml-demo-shell.qmlproject
++++ b/demos/qtmir-demo-shell/qml-demo-shell.qmlproject
+@@ -16,5 +16,5 @@ Project {
+         directory: "."
+     }
+     /* List of plugin directories passed to QML runtime */
+-    importPaths: [ "../src/modules/Unity/Application" ]
++    importPaths: [ "../src/modules/Lomiri/Application" ]
+ }
+diff --git a/include/qtmir/windowmanagementpolicy.h b/include/qtmir/windowmanagementpolicy.h
+index 0550dd8c..8e4b5b5e 100644
+--- a/include/qtmir/windowmanagementpolicy.h
++++ b/include/qtmir/windowmanagementpolicy.h
+@@ -26,7 +26,7 @@
+ #include <miral/set_window_managment_policy.h>
+ #endif
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/Mir.h>
+ 
+ using namespace mir::geometry;
+diff --git a/src/common/debughelpers.cpp b/src/common/debughelpers.cpp
+index 4f832885..c8e18ad1 100644
+--- a/src/common/debughelpers.cpp
++++ b/src/common/debughelpers.cpp
+@@ -19,7 +19,7 @@
+ 
+ #include <mir_toolkit/event.h>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/ApplicationInfoInterface.h>
+ #include <lomiri/shell/application/Mir.h>
+ 
+diff --git a/src/common/windowcontrollerinterface.h b/src/common/windowcontrollerinterface.h
+index fb5ce5d9..a95754e2 100644
+--- a/src/common/windowcontrollerinterface.h
++++ b/src/common/windowcontrollerinterface.h
+@@ -25,7 +25,7 @@
+ #include <QSize>
+ #include <QMargins>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/Mir.h>
+ 
+ namespace qtmir {
+diff --git a/src/common/windowmodelnotifier.h b/src/common/windowmodelnotifier.h
+index 12394ee3..010fdfa9 100644
+--- a/src/common/windowmodelnotifier.h
++++ b/src/common/windowmodelnotifier.h
+@@ -25,7 +25,7 @@
+ #include <miral/window_info.h>
+ #include <miral/window_management_policy.h>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/Mir.h>
+ 
+ namespace qtmir {
+diff --git a/src/common/workspacecontrollerinterface.h b/src/common/workspacecontrollerinterface.h
+index 6cb0ad6d..07a14388 100644
+--- a/src/common/workspacecontrollerinterface.h
++++ b/src/common/workspacecontrollerinterface.h
+@@ -26,7 +26,7 @@
+ 
+ #include <functional>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/Mir.h>
+ 
+ namespace miral { class Workspace; }
+diff --git a/src/modules/CMakeLists.txt b/src/modules/CMakeLists.txt
+index a2b110ca..4fd57797 100644
+--- a/src/modules/CMakeLists.txt
++++ b/src/modules/CMakeLists.txt
+@@ -11,4 +11,4 @@ macro(add_qml_plugin PLUGIN VERSION PATH)
+     export_qmlplugin(${PLUGIN} ${VERSION} ${PATH} DESTINATION ${QML_MODULE_INSTALL_DIR} ${ARGN})
+ endmacro()
+ 
+-add_subdirectory(Unity)
++add_subdirectory(Lomiri)
+diff --git a/src/modules/Unity/Application/CMakeLists.txt b/src/modules/Lomiri/Application/CMakeLists.txt
+similarity index 92%
+rename from src/modules/Unity/Application/CMakeLists.txt
+rename to src/modules/Lomiri/Application/CMakeLists.txt
+index 3c968912..85101804 100644
+--- a/src/modules/Unity/Application/CMakeLists.txt
++++ b/src/modules/Lomiri/Application/CMakeLists.txt
+@@ -33,7 +33,7 @@ add_definitions(-DBYTE_ORDER=__BYTE_ORDER)
+ 
+ # Generate tracepoints.c and .h from tracepoints.tp
+ add_lttng_gen_tp(NAME tracepoints)
+-add_custom_target(UnityApplication_LTTNG
++add_custom_target(LomiriApplication_LTTNG
+     DEPENDS tracepoints.h tracepoints.c
+ )
+ 
+@@ -77,17 +77,17 @@ set(QMLMIRPLUGIN_SRC
+     settings_interface.h
+ )
+ 
+-add_library(unityapplicationplugin SHARED
++add_library(lomiriapplicationplugin SHARED
+     ${QMLMIRPLUGIN_SRC}
+ )
+-add_dependencies(unityapplicationplugin UnityApplication_LTTNG)
++add_dependencies(lomiriapplicationplugin LomiriApplication_LTTNG)
+ 
+ # Frig for files that still rely on mirserver-dev
+ string(REPLACE ";" " -I" QTMIR_ADD_MIRSERVER "-I ${MIRSERVER_INCLUDE_DIRS}")
+ set_source_files_properties(mirsurface.cpp         PROPERTIES COMPILE_FLAGS "${CMAKE_CXXFLAGS} ${QTMIR_ADD_MIRSERVER}")
+ 
+ target_link_libraries(
+-    unityapplicationplugin
++    lomiriapplicationplugin
+ 
+     ${CMAKE_THREAD_LIBS_INIT}
+ 
+@@ -109,5 +109,5 @@ target_link_libraries(
+ 
+ 
+ # install
+-add_qml_plugin(Unity.Application 0.1 Unity/Application TARGETS unityapplicationplugin)
++add_qml_plugin(Lomiri.Application 0.1 Lomiri/Application TARGETS lomiriapplicationplugin)
+ install(FILES com.canonical.qtmir.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
+diff --git a/src/modules/Unity/Application/application.cpp b/src/modules/Lomiri/Application/application.cpp
+similarity index 99%
+rename from src/modules/Unity/Application/application.cpp
+rename to src/modules/Lomiri/Application/application.cpp
+index 53246613..f4ead7e7 100644
+--- a/src/modules/Unity/Application/application.cpp
++++ b/src/modules/Lomiri/Application/application.cpp
+@@ -30,7 +30,7 @@
+ #include "logging.h"
+ #include "initialsurfacesizes.h"
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirSurfaceInterface.h>
+ 
+ // std
+diff --git a/src/modules/Unity/Application/application.h b/src/modules/Lomiri/Application/application.h
+similarity index 99%
+rename from src/modules/Unity/Application/application.h
+rename to src/modules/Lomiri/Application/application.h
+index f9ebc0d4..0fbfaf08 100644
+--- a/src/modules/Unity/Application/application.h
++++ b/src/modules/Lomiri/Application/application.h
+@@ -26,7 +26,7 @@
+ #include <QSharedPointer>
+ #include <QVector>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/ApplicationInfoInterface.h>
+ 
+ #include "mirsurfacelistmodel.h"
+diff --git a/src/modules/Unity/Application/application_manager.cpp b/src/modules/Lomiri/Application/application_manager.cpp
+similarity index 99%
+rename from src/modules/Unity/Application/application_manager.cpp
+rename to src/modules/Lomiri/Application/application_manager.cpp
+index 60413bec..3daa577e 100644
+--- a/src/modules/Unity/Application/application_manager.cpp
++++ b/src/modules/Lomiri/Application/application_manager.cpp
+@@ -46,7 +46,7 @@
+ // std
+ #include <csignal>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirSurfaceInterface.h>
+ 
+ namespace ms = mir::scene;
+@@ -79,7 +79,7 @@ ApplicationManager* ApplicationManager::create()
+     NativeInterface *nativeInterface = dynamic_cast<NativeInterface*>(QGuiApplication::platformNativeInterface());
+ 
+     if (!nativeInterface) {
+-        qCritical() << "ERROR: Unity.Application QML plugin requires use of the 'mirserver' QPA plugin";
++        qCritical() << "ERROR: Lomiri.Application QML plugin requires use of the 'mirserver' QPA plugin";
+         QGuiApplication::quit();
+         return nullptr;
+     }
+diff --git a/src/modules/Unity/Application/application_manager.h b/src/modules/Lomiri/Application/application_manager.h
+similarity index 99%
+rename from src/modules/Unity/Application/application_manager.h
+rename to src/modules/Lomiri/Application/application_manager.h
+index c49f6e21..3e4db2fe 100644
+--- a/src/modules/Unity/Application/application_manager.h
++++ b/src/modules/Lomiri/Application/application_manager.h
+@@ -29,7 +29,7 @@
+ #include "sessionmap_interface.h"
+ #include "taskcontroller.h"
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/ApplicationManagerInterface.h>
+ 
+ namespace mir {
+diff --git a/src/modules/Unity/Application/applicationinfo.h b/src/modules/Lomiri/Application/applicationinfo.h
+similarity index 100%
+rename from src/modules/Unity/Application/applicationinfo.h
+rename to src/modules/Lomiri/Application/applicationinfo.h
+diff --git a/src/modules/Unity/Application/com.canonical.qtmir.gschema.xml b/src/modules/Lomiri/Application/com.canonical.qtmir.gschema.xml
+similarity index 100%
+rename from src/modules/Unity/Application/com.canonical.qtmir.gschema.xml
+rename to src/modules/Lomiri/Application/com.canonical.qtmir.gschema.xml
+diff --git a/src/modules/Unity/Application/compositortextureprovider.cpp b/src/modules/Lomiri/Application/compositortextureprovider.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/compositortextureprovider.cpp
+rename to src/modules/Lomiri/Application/compositortextureprovider.cpp
+diff --git a/src/modules/Unity/Application/compositortextureprovider.h b/src/modules/Lomiri/Application/compositortextureprovider.h
+similarity index 100%
+rename from src/modules/Unity/Application/compositortextureprovider.h
+rename to src/modules/Lomiri/Application/compositortextureprovider.h
+diff --git a/src/modules/Unity/Application/dbusfocusinfo.cpp b/src/modules/Lomiri/Application/dbusfocusinfo.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/dbusfocusinfo.cpp
+rename to src/modules/Lomiri/Application/dbusfocusinfo.cpp
+diff --git a/src/modules/Unity/Application/dbusfocusinfo.h b/src/modules/Lomiri/Application/dbusfocusinfo.h
+similarity index 100%
+rename from src/modules/Unity/Application/dbusfocusinfo.h
+rename to src/modules/Lomiri/Application/dbusfocusinfo.h
+diff --git a/src/modules/Unity/Application/gscopedpointer.h b/src/modules/Lomiri/Application/gscopedpointer.h
+similarity index 100%
+rename from src/modules/Unity/Application/gscopedpointer.h
+rename to src/modules/Lomiri/Application/gscopedpointer.h
+diff --git a/src/modules/Unity/Application/mirbuffersgtexture.cpp b/src/modules/Lomiri/Application/mirbuffersgtexture.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/mirbuffersgtexture.cpp
+rename to src/modules/Lomiri/Application/mirbuffersgtexture.cpp
+diff --git a/src/modules/Unity/Application/mirbuffersgtexture.h b/src/modules/Lomiri/Application/mirbuffersgtexture.h
+similarity index 100%
+rename from src/modules/Unity/Application/mirbuffersgtexture.h
+rename to src/modules/Lomiri/Application/mirbuffersgtexture.h
+diff --git a/src/modules/Unity/Application/mirsurface.cpp b/src/modules/Lomiri/Application/mirsurface.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/mirsurface.cpp
+rename to src/modules/Lomiri/Application/mirsurface.cpp
+diff --git a/src/modules/Unity/Application/mirsurface.h b/src/modules/Lomiri/Application/mirsurface.h
+similarity index 100%
+rename from src/modules/Unity/Application/mirsurface.h
+rename to src/modules/Lomiri/Application/mirsurface.h
+diff --git a/src/modules/Unity/Application/mirsurfaceinterface.h b/src/modules/Lomiri/Application/mirsurfaceinterface.h
+similarity index 99%
+rename from src/modules/Unity/Application/mirsurfaceinterface.h
+rename to src/modules/Lomiri/Application/mirsurfaceinterface.h
+index f3c4777e..881c0f94 100644
+--- a/src/modules/Unity/Application/mirsurfaceinterface.h
++++ b/src/modules/Lomiri/Application/mirsurfaceinterface.h
+@@ -17,7 +17,7 @@
+ #ifndef QTMIR_MIRSURFACEINTERFACE_H
+ #define QTMIR_MIRSURFACEINTERFACE_H
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirSurfaceInterface.h>
+ 
+ #include "session_interface.h"
+diff --git a/src/modules/Unity/Application/mirsurfaceitem.cpp b/src/modules/Lomiri/Application/mirsurfaceitem.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/mirsurfaceitem.cpp
+rename to src/modules/Lomiri/Application/mirsurfaceitem.cpp
+diff --git a/src/modules/Unity/Application/mirsurfaceitem.h b/src/modules/Lomiri/Application/mirsurfaceitem.h
+similarity index 99%
+rename from src/modules/Unity/Application/mirsurfaceitem.h
+rename to src/modules/Lomiri/Application/mirsurfaceitem.h
+index 4b925f17..ca909c21 100644
+--- a/src/modules/Unity/Application/mirsurfaceitem.h
++++ b/src/modules/Lomiri/Application/mirsurfaceitem.h
+@@ -23,7 +23,7 @@
+ #include <QMutex>
+ #include <QTimer>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirSurfaceItemInterface.h>
+ 
+ #include "mirsurfaceinterface.h"
+diff --git a/src/modules/Unity/Application/mirsurfacelistmodel.cpp b/src/modules/Lomiri/Application/mirsurfacelistmodel.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/mirsurfacelistmodel.cpp
+rename to src/modules/Lomiri/Application/mirsurfacelistmodel.cpp
+diff --git a/src/modules/Unity/Application/mirsurfacelistmodel.h b/src/modules/Lomiri/Application/mirsurfacelistmodel.h
+similarity index 100%
+rename from src/modules/Unity/Application/mirsurfacelistmodel.h
+rename to src/modules/Lomiri/Application/mirsurfacelistmodel.h
+diff --git a/src/modules/Unity/Application/objectlistmodel.h b/src/modules/Lomiri/Application/objectlistmodel.h
+similarity index 100%
+rename from src/modules/Unity/Application/objectlistmodel.h
+rename to src/modules/Lomiri/Application/objectlistmodel.h
+diff --git a/src/modules/Unity/Application/plugin.cpp b/src/modules/Lomiri/Application/plugin.cpp
+similarity index 93%
+rename from src/modules/Unity/Application/plugin.cpp
+rename to src/modules/Lomiri/Application/plugin.cpp
+index 97a595f4..90cccc75 100644
+--- a/src/modules/Unity/Application/plugin.cpp
++++ b/src/modules/Lomiri/Application/plugin.cpp
+@@ -55,14 +55,14 @@ QObject* surfaceManagerSingleton(QQmlEngine* /*engine*/, QJSEngine* /*scriptEngi
+ }
+ } // anonymous namespace
+ 
+-class UnityApplicationPlugin : public QQmlExtensionPlugin {
++class LomiriApplicationPlugin : public QQmlExtensionPlugin {
+     Q_OBJECT
+     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface/1.0")
+ 
+     virtual void registerTypes(const char* uri)
+     {
+-        qCDebug(QTMIR_APPLICATIONS) << "UnityApplicationPlugin::registerTypes - this=" << this << "uri=" << uri;
+-        Q_ASSERT(QLatin1String(uri) == QLatin1String("Unity.Application"));
++        qCDebug(QTMIR_APPLICATIONS) << "LomiriApplicationPlugin::registerTypes - this=" << this << "uri=" << uri;
++        Q_ASSERT(QLatin1String(uri) == QLatin1String("Lomiri.Application"));
+ 
+         qRegisterMetaType<qtmir::ApplicationManager*>("ApplicationManager*"); //need for queueing signals
+         qRegisterMetaType<qtmir::Application*>("Application*");
+diff --git a/src/modules/Unity/Application/proc_info.cpp b/src/modules/Lomiri/Application/proc_info.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/proc_info.cpp
+rename to src/modules/Lomiri/Application/proc_info.cpp
+diff --git a/src/modules/Unity/Application/proc_info.h b/src/modules/Lomiri/Application/proc_info.h
+similarity index 100%
+rename from src/modules/Unity/Application/proc_info.h
+rename to src/modules/Lomiri/Application/proc_info.h
+diff --git a/src/modules/Lomiri/Application/qmldir b/src/modules/Lomiri/Application/qmldir
+new file mode 100644
+index 00000000..3d332a9f
+--- /dev/null
++++ b/src/modules/Lomiri/Application/qmldir
+@@ -0,0 +1,2 @@
++module Lomiri.Application
++plugin lomiriapplicationplugin
+diff --git a/src/modules/Unity/Application/session.cpp b/src/modules/Lomiri/Application/session.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/session.cpp
+rename to src/modules/Lomiri/Application/session.cpp
+diff --git a/src/modules/Unity/Application/session.h b/src/modules/Lomiri/Application/session.h
+similarity index 100%
+rename from src/modules/Unity/Application/session.h
+rename to src/modules/Lomiri/Application/session.h
+diff --git a/src/modules/Unity/Application/session_interface.h b/src/modules/Lomiri/Application/session_interface.h
+similarity index 99%
+rename from src/modules/Unity/Application/session_interface.h
+rename to src/modules/Lomiri/Application/session_interface.h
+index 62bf64cb..f4631068 100644
+--- a/src/modules/Unity/Application/session_interface.h
++++ b/src/modules/Lomiri/Application/session_interface.h
+@@ -20,7 +20,7 @@
+ #include <functional>
+ #include <memory>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/ApplicationInfoInterface.h>
+ 
+ // local
+diff --git a/src/modules/Unity/Application/sessionmap_interface.h b/src/modules/Lomiri/Application/sessionmap_interface.h
+similarity index 100%
+rename from src/modules/Unity/Application/sessionmap_interface.h
+rename to src/modules/Lomiri/Application/sessionmap_interface.h
+diff --git a/src/modules/Unity/Application/sessionmodel.h b/src/modules/Lomiri/Application/sessionmodel.h
+similarity index 100%
+rename from src/modules/Unity/Application/sessionmodel.h
+rename to src/modules/Lomiri/Application/sessionmodel.h
+diff --git a/src/modules/Unity/Application/settings.cpp b/src/modules/Lomiri/Application/settings.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/settings.cpp
+rename to src/modules/Lomiri/Application/settings.cpp
+diff --git a/src/modules/Unity/Application/settings.h b/src/modules/Lomiri/Application/settings.h
+similarity index 100%
+rename from src/modules/Unity/Application/settings.h
+rename to src/modules/Lomiri/Application/settings.h
+diff --git a/src/modules/Unity/Application/settings_interface.h b/src/modules/Lomiri/Application/settings_interface.h
+similarity index 100%
+rename from src/modules/Unity/Application/settings_interface.h
+rename to src/modules/Lomiri/Application/settings_interface.h
+diff --git a/src/modules/Unity/Application/sharedwakelock.cpp b/src/modules/Lomiri/Application/sharedwakelock.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/sharedwakelock.cpp
+rename to src/modules/Lomiri/Application/sharedwakelock.cpp
+diff --git a/src/modules/Unity/Application/sharedwakelock.h b/src/modules/Lomiri/Application/sharedwakelock.h
+similarity index 100%
+rename from src/modules/Unity/Application/sharedwakelock.h
+rename to src/modules/Lomiri/Application/sharedwakelock.h
+diff --git a/src/modules/Unity/Application/surfacemanager.cpp b/src/modules/Lomiri/Application/surfacemanager.cpp
+similarity index 99%
+rename from src/modules/Unity/Application/surfacemanager.cpp
+rename to src/modules/Lomiri/Application/surfacemanager.cpp
+index eef8b908..b8bc7838 100644
+--- a/src/modules/Unity/Application/surfacemanager.cpp
++++ b/src/modules/Lomiri/Application/surfacemanager.cpp
+@@ -55,7 +55,7 @@ SurfaceManager::SurfaceManager()
+     auto nativeInterface = dynamic_cast<NativeInterface*>(QGuiApplication::platformNativeInterface());
+ 
+     if (!nativeInterface) {
+-        qFatal("ERROR: Unity.Application QML plugin requires use of the 'mirserver' QPA plugin");
++        qFatal("ERROR: Lomiri.Application QML plugin requires use of the 'mirserver' QPA plugin");
+     }
+ 
+     m_sessionMap = ApplicationManager::singleton();
+diff --git a/src/modules/Unity/Application/surfacemanager.h b/src/modules/Lomiri/Application/surfacemanager.h
+similarity index 99%
+rename from src/modules/Unity/Application/surfacemanager.h
+rename to src/modules/Lomiri/Application/surfacemanager.h
+index 3c0dad9f..ae964a16 100644
+--- a/src/modules/Unity/Application/surfacemanager.h
++++ b/src/modules/Lomiri/Application/surfacemanager.h
+@@ -20,7 +20,7 @@
+ // common
+ #include "windowmodelnotifier.h"
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/SurfaceManagerInterface.h>
+ 
+ #include <QVector>
+diff --git a/src/modules/Unity/Application/taskcontroller.cpp b/src/modules/Lomiri/Application/taskcontroller.cpp
+similarity index 98%
+rename from src/modules/Unity/Application/taskcontroller.cpp
+rename to src/modules/Lomiri/Application/taskcontroller.cpp
+index 1af36d11..5d27ec39 100644
+--- a/src/modules/Unity/Application/taskcontroller.cpp
++++ b/src/modules/Lomiri/Application/taskcontroller.cpp
+@@ -40,7 +40,7 @@ TaskController::TaskController(QObject *parent)
+     NativeInterface *nativeInterface = dynamic_cast<NativeInterface*>(QGuiApplication::platformNativeInterface());
+ 
+     if (!nativeInterface) {
+-        qFatal("ERROR: Unity.Application QML plugin requires use of the 'mirserver' QPA plugin");
++        qFatal("ERROR: Lomiri.Application QML plugin requires use of the 'mirserver' QPA plugin");
+     }
+ 
+     m_promptSessionManager = nativeInterface->thePromptSessionManager();
+diff --git a/src/modules/Unity/Application/taskcontroller.h b/src/modules/Lomiri/Application/taskcontroller.h
+similarity index 100%
+rename from src/modules/Unity/Application/taskcontroller.h
+rename to src/modules/Lomiri/Application/taskcontroller.h
+diff --git a/src/modules/Unity/Application/timer.cpp b/src/modules/Lomiri/Application/timer.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/timer.cpp
+rename to src/modules/Lomiri/Application/timer.cpp
+diff --git a/src/modules/Unity/Application/timer.h b/src/modules/Lomiri/Application/timer.h
+similarity index 100%
+rename from src/modules/Unity/Application/timer.h
+rename to src/modules/Lomiri/Application/timer.h
+diff --git a/src/modules/Unity/Application/timesource.cpp b/src/modules/Lomiri/Application/timesource.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/timesource.cpp
+rename to src/modules/Lomiri/Application/timesource.cpp
+diff --git a/src/modules/Unity/Application/timesource.h b/src/modules/Lomiri/Application/timesource.h
+similarity index 100%
+rename from src/modules/Unity/Application/timesource.h
+rename to src/modules/Lomiri/Application/timesource.h
+diff --git a/src/modules/Unity/Application/tracepoints.tp b/src/modules/Lomiri/Application/tracepoints.tp
+similarity index 100%
+rename from src/modules/Unity/Application/tracepoints.tp
+rename to src/modules/Lomiri/Application/tracepoints.tp
+diff --git a/src/modules/Unity/Application/upstart/applicationinfo.cpp b/src/modules/Lomiri/Application/upstart/applicationinfo.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/upstart/applicationinfo.cpp
+rename to src/modules/Lomiri/Application/upstart/applicationinfo.cpp
+diff --git a/src/modules/Unity/Application/upstart/applicationinfo.h b/src/modules/Lomiri/Application/upstart/applicationinfo.h
+similarity index 100%
+rename from src/modules/Unity/Application/upstart/applicationinfo.h
+rename to src/modules/Lomiri/Application/upstart/applicationinfo.h
+diff --git a/src/modules/Unity/Application/upstart/taskcontroller.cpp b/src/modules/Lomiri/Application/upstart/taskcontroller.cpp
+similarity index 100%
+rename from src/modules/Unity/Application/upstart/taskcontroller.cpp
+rename to src/modules/Lomiri/Application/upstart/taskcontroller.cpp
+diff --git a/src/modules/Unity/Application/upstart/taskcontroller.h b/src/modules/Lomiri/Application/upstart/taskcontroller.h
+similarity index 100%
+rename from src/modules/Unity/Application/upstart/taskcontroller.h
+rename to src/modules/Lomiri/Application/upstart/taskcontroller.h
+diff --git a/src/modules/Unity/Application/windowmodel.cpp b/src/modules/Lomiri/Application/windowmodel.cpp
+similarity index 98%
+rename from src/modules/Unity/Application/windowmodel.cpp
+rename to src/modules/Lomiri/Application/windowmodel.cpp
+index 79aa3aa4..35fcd987 100644
+--- a/src/modules/Unity/Application/windowmodel.cpp
++++ b/src/modules/Lomiri/Application/windowmodel.cpp
+@@ -32,7 +32,7 @@ WindowModel::WindowModel()
+     auto nativeInterface = dynamic_cast<NativeInterface*>(QGuiApplication::platformNativeInterface());
+ 
+     if (!nativeInterface) {
+-        qFatal("ERROR: Unity.Application QML plugin requires use of the 'mirserver' QPA plugin");
++        qFatal("ERROR: Lomiri.Application QML plugin requires use of the 'mirserver' QPA plugin");
+     }
+ 
+     m_windowController = static_cast<WindowControllerInterface*>(nativeInterface->nativeResourceForIntegration("WindowController"));
+diff --git a/src/modules/Unity/Application/windowmodel.h b/src/modules/Lomiri/Application/windowmodel.h
+similarity index 100%
+rename from src/modules/Unity/Application/windowmodel.h
+rename to src/modules/Lomiri/Application/windowmodel.h
+diff --git a/src/modules/Unity/CMakeLists.txt b/src/modules/Lomiri/CMakeLists.txt
+similarity index 100%
+rename from src/modules/Unity/CMakeLists.txt
+rename to src/modules/Lomiri/CMakeLists.txt
+diff --git a/src/modules/Unity/Application/qmldir b/src/modules/Unity/Application/qmldir
+deleted file mode 100644
+index 26457022..00000000
+--- a/src/modules/Unity/Application/qmldir
++++ /dev/null
+@@ -1,2 +0,0 @@
+-module Unity.Application
+-plugin unityapplicationplugin
+diff --git a/src/platforms/mirserver/cursor.cpp b/src/platforms/mirserver/cursor.cpp
+index 15b494dc..bbe5392a 100644
+--- a/src/platforms/mirserver/cursor.cpp
++++ b/src/platforms/mirserver/cursor.cpp
+@@ -22,7 +22,7 @@
+ 
+ #include <QQuickWindow>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirMousePointerInterface.h>
+ 
+ namespace qtmir {
+diff --git a/src/platforms/mirserver/cursor.h b/src/platforms/mirserver/cursor.h
+index 75025422..17fb7c2c 100644
+--- a/src/platforms/mirserver/cursor.h
++++ b/src/platforms/mirserver/cursor.h
+@@ -21,7 +21,7 @@
+ #include <QMutex>
+ #include <QPointer>
+ 
+-// Unity API
++// Lomiri API
+ #include <lomiri/shell/application/MirPlatformCursor.h>
+ 
+ namespace qtmir {
+diff --git a/tests/framework/CMakeLists.txt b/tests/framework/CMakeLists.txt
+index 3b28205c..c9409fa5 100644
+--- a/tests/framework/CMakeLists.txt
++++ b/tests/framework/CMakeLists.txt
+@@ -46,7 +46,7 @@ add_library(qtmir-test-framework-static STATIC
+ target_link_libraries(
+     qtmir-test-framework-static
+ 
+-    unityapplicationplugin
++    lomiriapplicationplugin
+ 
+     ${GTEST_BOTH_LIBRARIES}
+     ${GMOCK_LIBRARIES}
+diff --git a/tests/framework/fake_application_info.h b/tests/framework/fake_application_info.h
+index ad3d59e8..2303da73 100644
+--- a/tests/framework/fake_application_info.h
++++ b/tests/framework/fake_application_info.h
+@@ -17,7 +17,7 @@
+ #ifndef FAKE_APPLICATION_INFO_H
+ #define FAKE_APPLICATION_INFO_H
+ 
+-#include <Unity/Application/applicationinfo.h>
++#include <Lomiri/Application/applicationinfo.h>
+ 
+ namespace qtmir {
+ 
+diff --git a/tests/framework/fake_mirsurface.h b/tests/framework/fake_mirsurface.h
+index fc2ec9f6..e8cec80f 100644
+--- a/tests/framework/fake_mirsurface.h
++++ b/tests/framework/fake_mirsurface.h
+@@ -17,8 +17,8 @@
+ #ifndef FAKE_MIRSURFACEINTERFACE_H
+ #define FAKE_MIRSURFACEINTERFACE_H
+ 
+-#include <Unity/Application/mirsurfaceinterface.h>
+-#include <Unity/Application/mirsurfacelistmodel.h>
++#include <Lomiri/Application/mirsurfaceinterface.h>
++#include <Lomiri/Application/mirsurfacelistmodel.h>
+ 
+ #include <QSharedPointer>
+ #include <QSGTexture>
+diff --git a/tests/framework/fake_session.h b/tests/framework/fake_session.h
+index fad20266..328cb5b0 100644
+--- a/tests/framework/fake_session.h
++++ b/tests/framework/fake_session.h
+@@ -14,9 +14,9 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <Unity/Application/session_interface.h>
+-#include <Unity/Application/sessionmodel.h>
+-#include <Unity/Application/mirsurfacelistmodel.h>
++#include <Lomiri/Application/session_interface.h>
++#include <Lomiri/Application/sessionmodel.h>
++#include <Lomiri/Application/mirsurfacelistmodel.h>
+ #include <QDebug>
+ 
+ #ifndef QTMIR_FAKE_SESSION_H
+diff --git a/tests/framework/mock_application_info.h b/tests/framework/mock_application_info.h
+index afca6c5d..f8eec8fe 100644
+--- a/tests/framework/mock_application_info.h
++++ b/tests/framework/mock_application_info.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_APPLICATION_INFO_H
+ #define MOCK_APPLICATION_INFO_H
+ 
+-#include <Unity/Application/applicationinfo.h>
++#include <Lomiri/Application/applicationinfo.h>
+ 
+ #include <gmock/gmock.h>
+ 
+diff --git a/tests/framework/mock_proc_info.h b/tests/framework/mock_proc_info.h
+index f2479752..715ce608 100644
+--- a/tests/framework/mock_proc_info.h
++++ b/tests/framework/mock_proc_info.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_PROC_INFO_H
+ #define MOCK_PROC_INFO_H
+ 
+-#include <Unity/Application/proc_info.h>
++#include <Lomiri/Application/proc_info.h>
+ 
+ #include <gmock/gmock.h>
+ 
+diff --git a/tests/framework/mock_session.h b/tests/framework/mock_session.h
+index d9f6de3e..fead39c5 100644
+--- a/tests/framework/mock_session.h
++++ b/tests/framework/mock_session.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_QTMIR_SESSION_H
+ #define MOCK_QTMIR_SESSION_H
+ 
+-#include <Unity/Application/session_interface.h>
++#include <Lomiri/Application/session_interface.h>
+ #include "promptsession.h"
+ #include <gmock/gmock.h>
+ 
+diff --git a/tests/framework/mock_sessionmap.h b/tests/framework/mock_sessionmap.h
+index a988d19e..68858c89 100644
+--- a/tests/framework/mock_sessionmap.h
++++ b/tests/framework/mock_sessionmap.h
+@@ -19,7 +19,7 @@
+ 
+ #include <gmock/gmock.h>
+ 
+-#include <Unity/Application/sessionmap_interface.h>
++#include <Lomiri/Application/sessionmap_interface.h>
+ 
+ struct MockSessionMap : public qtmir::SessionMapInterface
+ {
+diff --git a/tests/framework/mock_settings.h b/tests/framework/mock_settings.h
+index c192ef0b..8d65d8c8 100644
+--- a/tests/framework/mock_settings.h
++++ b/tests/framework/mock_settings.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_SETTINGS_H
+ #define MOCK_SETTINGS_H
+ 
+-#include <Unity/Application/settings_interface.h>
++#include <Lomiri/Application/settings_interface.h>
+ #include <QVariant>
+  
+ #include <gmock/gmock.h>
+diff --git a/tests/framework/mock_shared_wakelock.h b/tests/framework/mock_shared_wakelock.h
+index 0f47c354..b8136ec2 100644
+--- a/tests/framework/mock_shared_wakelock.h
++++ b/tests/framework/mock_shared_wakelock.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_SHARED_WAKELOCK_H
+ #define MOCK_SHARED_WAKELOCK_H
+ 
+-#include <Unity/Application/sharedwakelock.h>
++#include <Lomiri/Application/sharedwakelock.h>
+ 
+ #include <gmock/gmock.h>
+ 
+diff --git a/tests/framework/mock_task_controller.h b/tests/framework/mock_task_controller.h
+index 321a70d1..9e25d8d3 100644
+--- a/tests/framework/mock_task_controller.h
++++ b/tests/framework/mock_task_controller.h
+@@ -17,7 +17,7 @@
+ #ifndef MOCK_TASK_CONTROLLER_H
+ #define MOCK_TASK_CONTROLLER_H
+ 
+-#include <Unity/Application/taskcontroller.h>
++#include <Lomiri/Application/taskcontroller.h>
+ #include <QMap>
+ 
+ #include <core/posix/fork.h>
+diff --git a/tests/framework/qtmir_test.h b/tests/framework/qtmir_test.h
+index 75bdcd8d..ac47ac1f 100644
+--- a/tests/framework/qtmir_test.h
++++ b/tests/framework/qtmir_test.h
+@@ -23,11 +23,11 @@
+ 
+ #include <QSharedPointer>
+ 
+-#include <Unity/Application/application.h>
+-#include <Unity/Application/application_manager.h>
+-#include <Unity/Application/session_interface.h>
+-#include <Unity/Application/sharedwakelock.h>
+-#include <Unity/Application/proc_info.h>
++#include <Lomiri/Application/application.h>
++#include <Lomiri/Application/application_manager.h>
++#include <Lomiri/Application/session_interface.h>
++#include <Lomiri/Application/sharedwakelock.h>
++#include <Lomiri/Application/proc_info.h>
+ #include "promptsessionmanager.h"
+ 
+ #include "mock_proc_info.h"
+diff --git a/tests/modules/Application/CMakeLists.txt b/tests/modules/Application/CMakeLists.txt
+index 36480801..03316df1 100644
+--- a/tests/modules/Application/CMakeLists.txt
++++ b/tests/modules/Application/CMakeLists.txt
+@@ -28,7 +28,7 @@ target_link_libraries(
+ 
+   Qt5::Test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   -L${CMAKE_BINARY_DIR}/tests/framework
+   qtmir-test-framework-static
+diff --git a/tests/modules/Application/application_test.cpp b/tests/modules/Application/application_test.cpp
+index d528ed2f..1b527cb8 100644
+--- a/tests/modules/Application/application_test.cpp
++++ b/tests/modules/Application/application_test.cpp
+@@ -25,8 +25,8 @@
+ #include <mock_application_info.h>
+ #include <mock_session.h>
+ 
+-#include <Unity/Application/session.h>
+-#include <Unity/Application/timesource.h>
++#include <Lomiri/Application/session.h>
++#include <Lomiri/Application/timesource.h>
+ 
+ #include <QScopedPointer>
+ #include <QSignalSpy>
+diff --git a/tests/modules/ApplicationManager/CMakeLists.txt b/tests/modules/ApplicationManager/CMakeLists.txt
+index d9151de1..f994d841 100644
+--- a/tests/modules/ApplicationManager/CMakeLists.txt
++++ b/tests/modules/ApplicationManager/CMakeLists.txt
+@@ -26,7 +26,7 @@ target_link_libraries(
+ 
+   Qt5::Test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   -L${CMAKE_BINARY_DIR}/tests/framework
+   qtmir-test-framework-static
+diff --git a/tests/modules/ApplicationManager/application_manager_test.cpp b/tests/modules/ApplicationManager/application_manager_test.cpp
+index 79ae505e..742829a0 100644
+--- a/tests/modules/ApplicationManager/application_manager_test.cpp
++++ b/tests/modules/ApplicationManager/application_manager_test.cpp
+@@ -19,8 +19,8 @@
+ #include <condition_variable>
+ #include <QSignalSpy>
+ 
+-#include <Unity/Application/session.h>
+-#include <Unity/Application/timer.h>
++#include <Lomiri/Application/session.h>
++#include <Lomiri/Application/timer.h>
+ 
+ #include <fake_mirsurface.h>
+ #include <mock_application_info.h>
+diff --git a/tests/modules/General/objectlistmodel_test.cpp b/tests/modules/General/objectlistmodel_test.cpp
+index a2bbd88f..968e0602 100644
+--- a/tests/modules/General/objectlistmodel_test.cpp
++++ b/tests/modules/General/objectlistmodel_test.cpp
+@@ -14,7 +14,7 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <Unity/Application/objectlistmodel.h>
++#include <Lomiri/Application/objectlistmodel.h>
+ 
+ #include <gtest/gtest.h>
+ #include <gmock/gmock.h>
+diff --git a/tests/modules/Session/CMakeLists.txt b/tests/modules/Session/CMakeLists.txt
+index c3e80176..62cd9bb1 100644
+--- a/tests/modules/Session/CMakeLists.txt
++++ b/tests/modules/Session/CMakeLists.txt
+@@ -25,7 +25,7 @@ add_dependencies(session_test qtmir-test-framework-static)
+ target_link_libraries(
+   session_test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   Qt5::Test
+ 
+diff --git a/tests/modules/Session/session_test.cpp b/tests/modules/Session/session_test.cpp
+index 115c499f..06759422 100644
+--- a/tests/modules/Session/session_test.cpp
++++ b/tests/modules/Session/session_test.cpp
+@@ -18,8 +18,8 @@
+ #include <fake_mirsurface.h>
+ 
+ #include "promptsession.h"
+-#include <Unity/Application/application.h>
+-#include <Unity/Application/session.h>
++#include <Lomiri/Application/application.h>
++#include <Lomiri/Application/session.h>
+ 
+ #include <QSignalSpy>
+ 
+diff --git a/tests/modules/Session/taskcontroller_test.cpp b/tests/modules/Session/taskcontroller_test.cpp
+index 4db97b5f..77d0ae1e 100644
+--- a/tests/modules/Session/taskcontroller_test.cpp
++++ b/tests/modules/Session/taskcontroller_test.cpp
+@@ -19,7 +19,7 @@
+ #include <QSignalSpy>
+ 
+ #include "promptsession.h"
+-#include <Unity/Application/session.h>
++#include <Lomiri/Application/session.h>
+ 
+ #include "qtmir_test.h"
+ 
+diff --git a/tests/modules/SharedWakelock/CMakeLists.txt b/tests/modules/SharedWakelock/CMakeLists.txt
+index ad07ae05..47b015ba 100644
+--- a/tests/modules/SharedWakelock/CMakeLists.txt
++++ b/tests/modules/SharedWakelock/CMakeLists.txt
+@@ -18,7 +18,7 @@ add_executable(sharedwakelock_test ${SHARED_WAKELOCK_TEST_SOURCES})
+ target_link_libraries(
+   sharedwakelock_test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   Qt5::Test
+ 
+diff --git a/tests/modules/SharedWakelock/sharedwakelock_test.cpp b/tests/modules/SharedWakelock/sharedwakelock_test.cpp
+index eada879d..a016b407 100644
+--- a/tests/modules/SharedWakelock/sharedwakelock_test.cpp
++++ b/tests/modules/SharedWakelock/sharedwakelock_test.cpp
+@@ -14,7 +14,7 @@
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+ 
+-#include <Unity/Application/sharedwakelock.h>
++#include <Lomiri/Application/sharedwakelock.h>
+ 
+ #include <libqtdbusmock/DBusMock.h>
+ 
+diff --git a/tests/modules/SurfaceManager/CMakeLists.txt b/tests/modules/SurfaceManager/CMakeLists.txt
+index 59a735e7..1cb84d0d 100644
+--- a/tests/modules/SurfaceManager/CMakeLists.txt
++++ b/tests/modules/SurfaceManager/CMakeLists.txt
+@@ -25,7 +25,7 @@ add_dependencies(surfacemanager_test qtmir-test-framework-static)
+ target_link_libraries(
+   surfacemanager_test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   Qt5::Test
+ 
+diff --git a/tests/modules/SurfaceManager/surface_manager_test.cpp b/tests/modules/SurfaceManager/surface_manager_test.cpp
+index 8f470638..346d4ce2 100644
+--- a/tests/modules/SurfaceManager/surface_manager_test.cpp
++++ b/tests/modules/SurfaceManager/surface_manager_test.cpp
+@@ -18,8 +18,8 @@
+ #include <QSignalSpy>
+ 
+ // the test subject
+-#include <Unity/Application/surfacemanager.h>
+-#include <Unity/Application/mirsurface.h>
++#include <Lomiri/Application/surfacemanager.h>
++#include <Lomiri/Application/mirsurface.h>
+ 
+ // miral
+ #include <miral/window.h>
+diff --git a/tests/modules/WindowManager/CMakeLists.txt b/tests/modules/WindowManager/CMakeLists.txt
+index 78bc356c..ffe8cca6 100644
+--- a/tests/modules/WindowManager/CMakeLists.txt
++++ b/tests/modules/WindowManager/CMakeLists.txt
+@@ -27,7 +27,7 @@ add_executable(windowmanager_test ${MIR_WINDOW_MANAGER_TEST_SOURCES})
+ target_link_libraries(
+   windowmanager_test
+ 
+-  unityapplicationplugin
++  lomiriapplicationplugin
+ 
+   Qt5::Test
+ 
+diff --git a/tests/modules/WindowManager/mirsurface_test.cpp b/tests/modules/WindowManager/mirsurface_test.cpp
+index 5ae8d350..1e860571 100644
+--- a/tests/modules/WindowManager/mirsurface_test.cpp
++++ b/tests/modules/WindowManager/mirsurface_test.cpp
+@@ -29,10 +29,10 @@ struct MirEvent {}; // otherwise won't compile otherwise due to incomplete type
+ #include "windowmodelnotifier.h"
+ 
+ // the test subject
+-#include <Unity/Application/mirsurface.h>
++#include <Lomiri/Application/mirsurface.h>
+ 
+-#include <Unity/Application/timer.h>
+-#include <Unity/Application/compositortextureprovider.h>
++#include <Lomiri/Application/timer.h>
++#include <Lomiri/Application/compositortextureprovider.h>
+ 
+ // mirtest
+ #include <mir/test/doubles/stub_session.h>
+diff --git a/tests/modules/WindowManager/mirsurfaceitem_test.cpp b/tests/modules/WindowManager/mirsurfaceitem_test.cpp
+index 37311a9c..ee2613bd 100644
+--- a/tests/modules/WindowManager/mirsurfaceitem_test.cpp
++++ b/tests/modules/WindowManager/mirsurfaceitem_test.cpp
+@@ -25,9 +25,9 @@ struct MirEvent {}; // otherwise won't compile otherwise due to incomplete type
+ #include <private/qquickitem_p.h>
+ 
+ // the test subject
+-#include <Unity/Application/mirsurfaceitem.h>
++#include <Lomiri/Application/mirsurfaceitem.h>
+ // and friends
+-#include <Unity/Application/mirsurface.h>
++#include <Lomiri/Application/mirsurface.h>
+ 
+ // tests/framework
+ #include <fake_mirsurface.h>
+diff --git a/tests/modules/WindowManager/windowmodel_test.cpp b/tests/modules/WindowManager/windowmodel_test.cpp
+index c2dba868..9e1f8b42 100644
+--- a/tests/modules/WindowManager/windowmodel_test.cpp
++++ b/tests/modules/WindowManager/windowmodel_test.cpp
+@@ -22,8 +22,8 @@
+ 
+ #include "mirqtconversion.h"
+ #include "windowmodelnotifier.h"
+-#include "Unity/Application/mirsurface.h"
+-#include "Unity/Application/windowmodel.h"
++#include <Lomiri/Application/mirsurface.h>
++#include <Lomiri/Application/windowmodel.h>
+ 
+ #include <mir/test/doubles/stub_surface.h>
+ #include <mir/test/doubles/stub_session.h>
+-- 
+2.31.1
+

@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20210323
-_commit="824e8b5bf92c2374d331af99e6845ea594ec0ea5"
+pkgver=0_git20210407
+_commit="a208802983dea55fe25cc064eda32abd326ae495"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
@@ -11,7 +11,7 @@ license="LGPL-3.0-only"
 makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev lomiri-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev lomiri-url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
 source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
-	0001-Use-unsigned-int-instead-of-uint.patch
+	0001-Rename-to-Lomiri.patch
 	"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -32,5 +32,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="bc117d043f72561c4021f28610650a1494af5eb2b71c429e7afb50f5b167a01113c6d837d2a5879a977c4badaad2e2eb183d399248f21857a376569652d02454  qtmir-824e8b5bf92c2374d331af99e6845ea594ec0ea5.tar.gz
-90c89bd8cdf583b1f2787ae3c2c93f450bbf34d7c35248d25c627a1cd8587528451e201ea6605c4a3ef0953eb390c7007c5863565be9db9528bd0fe7b6b11f3e  0001-Use-unsigned-int-instead-of-uint.patch"
+sha512sums="6a5a60cba73ff21093c6a4b9da19845c6fd677e66e4651181f183ebe8759d8502350bd7eba2defc472e53dc30f30295e4d6107f89be3fa435b8558f4504d59cd  qtmir-a208802983dea55fe25cc064eda32abd326ae495.tar.gz
+4d4933bb1f1767452f8c824f4b19cb97aa6371c19ac7febe63aa4ae74c437b161774de01702045c284a5a233e5f44fa5743161dd4ddacf5b279f24af7570e4e9  0001-Rename-to-Lomiri.patch"
