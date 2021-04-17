@@ -1,0 +1,596 @@
+From 0659dbab89d3a172d723f6f9b63b8ae9090bae5f Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 12:55:49 +0200
+Subject: [PATCH 3/6] Link properly to hunspell
+
+The pkg-config file describes how to link to hunspell, so use it.
+New hunspell provides e.g. libhunspell-1.7.so
+---
+ plugins/ar/src/src.pro       | 3 ++-
+ plugins/az/src/src.pro       | 3 ++-
+ plugins/bg/src/src.pro       | 3 ++-
+ plugins/bs/src/src.pro       | 3 ++-
+ plugins/ca/src/src.pro       | 3 ++-
+ plugins/cs/src/src.pro       | 3 ++-
+ plugins/da/src/src.pro       | 3 ++-
+ plugins/de/src/src.pro       | 3 ++-
+ plugins/el/src/src.pro       | 3 ++-
+ plugins/en/src/src.pro       | 3 ++-
+ plugins/en@dv/src/src.pro    | 3 ++-
+ plugins/eo/src/src.pro       | 3 ++-
+ plugins/es/src/src.pro       | 3 ++-
+ plugins/fa/src/src.pro       | 3 ++-
+ plugins/fi/src/src.pro       | 3 ++-
+ plugins/fr-ch/src/src.pro    | 3 ++-
+ plugins/fr/src/src.pro       | 3 ++-
+ plugins/gd/src/src.pro       | 3 ++-
+ plugins/he/src/src.pro       | 3 ++-
+ plugins/hr/src/src.pro       | 3 ++-
+ plugins/hu/src/src.pro       | 3 ++-
+ plugins/is/src/src.pro       | 3 ++-
+ plugins/it/src/src.pro       | 3 ++-
+ plugins/ko/src/src.pro       | 1 -
+ plugins/lt/src/src.pro       | 3 ++-
+ plugins/lv/src/src.pro       | 3 ++-
+ plugins/mk/src/src.pro       | 3 ++-
+ plugins/nb/src/src.pro       | 3 ++-
+ plugins/nl/src/src.pro       | 3 ++-
+ plugins/pl/src/src.pro       | 3 ++-
+ plugins/pt/src/src.pro       | 3 ++-
+ plugins/ro/src/src.pro       | 3 ++-
+ plugins/ru/src/src.pro       | 3 ++-
+ plugins/sl/src/src.pro       | 3 ++-
+ plugins/sr/src/src.pro       | 3 ++-
+ plugins/sv/src/src.pro       | 3 ++-
+ plugins/tr/src/src.pro       | 3 ++-
+ plugins/uk/src/src.pro       | 3 ++-
+ tests/testlayout/src/src.pro | 3 ++-
+ 39 files changed, 76 insertions(+), 39 deletions(-)
+
+diff --git a/plugins/ar/src/src.pro b/plugins/ar/src/src.pro
+index 5c00116c..8a23dbf5 100644
+--- a/plugins/ar/src/src.pro
++++ b/plugins/ar/src/src.pro
+@@ -40,7 +40,8 @@ OTHER_FILES += \
+     arabicplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/az/src/src.pro b/plugins/az/src/src.pro
+index 3f39f66e..8bd4f52b 100644
+--- a/plugins/az/src/src.pro
++++ b/plugins/az/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     free_ebook.txt \
+     azerbaijaniplugin.json
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/bg/src/src.pro b/plugins/bg/src/src.pro
+index b389ce7b..8c96b543 100644
+--- a/plugins/bg/src/src.pro
++++ b/plugins/bg/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     bulgarianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/bs/src/src.pro b/plugins/bs/src/src.pro
+index 141f0a3d..5d2b7359 100644
+--- a/plugins/bs/src/src.pro
++++ b/plugins/bs/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     bosnianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/ca/src/src.pro b/plugins/ca/src/src.pro
+index d851ef4a..8dffcec9 100644
+--- a/plugins/ca/src/src.pro
++++ b/plugins/ca/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     catalanplugin.json \
+     paulina_buxareu.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/cs/src/src.pro b/plugins/cs/src/src.pro
+index 1c53f411..d3ce9629 100644
+--- a/plugins/cs/src/src.pro
++++ b/plugins/cs/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     czechplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/da/src/src.pro b/plugins/da/src/src.pro
+index 8c19aaa4..75c7c19b 100644
+--- a/plugins/da/src/src.pro
++++ b/plugins/da/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     danishplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/de/src/src.pro b/plugins/de/src/src.pro
+index ff0f1376..c57376ca 100644
+--- a/plugins/de/src/src.pro
++++ b/plugins/de/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     germanplugin.json \
+     buddenbrooks.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/el/src/src.pro b/plugins/el/src/src.pro
+index 5bdc8ea5..7296c783 100644
+--- a/plugins/el/src/src.pro
++++ b/plugins/el/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     greekplugin.json \
+     grazia_deledda-christos_alexandridis.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/en/src/src.pro b/plugins/en/src/src.pro
+index fcf5522f..838af99a 100644
+--- a/plugins/en/src/src.pro
++++ b/plugins/en/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     englishplugin.json \
+     the_picture_of_dorian_gray.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/en@dv/src/src.pro b/plugins/en@dv/src/src.pro
+index 21bbe5ce..761d81b2 100644
+--- a/plugins/en@dv/src/src.pro
++++ b/plugins/en@dv/src/src.pro
+@@ -28,7 +28,8 @@ INSTALLS += target
+ OTHER_FILES += \
+     englishdvorakplugin.json \
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/eo/src/src.pro b/plugins/eo/src/src.pro
+index 19f1b41d..143e02fc 100644
+--- a/plugins/eo/src/src.pro
++++ b/plugins/eo/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     esperantoplugin.json \
+     alicio_en_mirlando.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/es/src/src.pro b/plugins/es/src/src.pro
+index 00018938..34da2372 100644
+--- a/plugins/es/src/src.pro
++++ b/plugins/es/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     spanishplugin.json \
+     el_quijote.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/fa/src/src.pro b/plugins/fa/src/src.pro
+index 7299789d..cd4595d9 100644
+--- a/plugins/fa/src/src.pro
++++ b/plugins/fa/src/src.pro
+@@ -40,7 +40,8 @@ OTHER_FILES += \
+     persianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/fi/src/src.pro b/plugins/fi/src/src.pro
+index 07e9c6f1..c0d1be14 100644
+--- a/plugins/fi/src/src.pro
++++ b/plugins/fi/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     finnishplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/fr-ch/src/src.pro b/plugins/fr-ch/src/src.pro
+index e0afa3a0..8eef6972 100644
+--- a/plugins/fr-ch/src/src.pro
++++ b/plugins/fr-ch/src/src.pro
+@@ -28,7 +28,8 @@ INSTALLS += target
+ OTHER_FILES += \
+     frenchplugin.json \
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/fr/src/src.pro b/plugins/fr/src/src.pro
+index a20581c1..d328b64e 100644
+--- a/plugins/fr/src/src.pro
++++ b/plugins/fr/src/src.pro
+@@ -45,7 +45,8 @@ OTHER_FILES += \
+     frenchplugin.json \
+     les_trois_mousquetaires.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/gd/src/src.pro b/plugins/gd/src/src.pro
+index 396f3cdd..ff9736ed 100644
+--- a/plugins/gd/src/src.pro
++++ b/plugins/gd/src/src.pro
+@@ -42,7 +42,8 @@ OTHER_FILES += \
+     gaelicplugin.json \
+     teacsa.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/he/src/src.pro b/plugins/he/src/src.pro
+index 2e0bbb2f..86790d1f 100644
+--- a/plugins/he/src/src.pro
++++ b/plugins/he/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     hebrewplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/hr/src/src.pro b/plugins/hr/src/src.pro
+index 0ec65dab..101a5ae9 100644
+--- a/plugins/hr/src/src.pro
++++ b/plugins/hr/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     croatianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/hu/src/src.pro b/plugins/hu/src/src.pro
+index 782c6581..9136e373 100644
+--- a/plugins/hu/src/src.pro
++++ b/plugins/hu/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     hungarianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/is/src/src.pro b/plugins/is/src/src.pro
+index f6c07799..3dd47db4 100644
+--- a/plugins/is/src/src.pro
++++ b/plugins/is/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     icelandicplugin.json \
+     althingi_umraedur_2004_2005.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/it/src/src.pro b/plugins/it/src/src.pro
+index df6b7fc2..60db3fdf 100644
+--- a/plugins/it/src/src.pro
++++ b/plugins/it/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     italianplugin.json \
+     la_francia_dal_primo_impero.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/ko/src/src.pro b/plugins/ko/src/src.pro
+index 27fcfa9d..c42d74e3 100644
+--- a/plugins/ko/src/src.pro
++++ b/plugins/ko/src/src.pro
+@@ -58,7 +58,6 @@ OTHER_FILES += \
+ # hunspell
+ CONFIG += link_pkgconfig
+ PKGCONFIG += hunspell
+-LIBS += -lhunspell
+ DEFINES += HAVE_HUNSPELL
+ 
+ # presage
+diff --git a/plugins/lt/src/src.pro b/plugins/lt/src/src.pro
+index 5ca07f95..99a937c0 100644
+--- a/plugins/lt/src/src.pro
++++ b/plugins/lt/src/src.pro
+@@ -40,7 +40,8 @@ OTHER_FILES += \
+     lithuanianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/lv/src/src.pro b/plugins/lv/src/src.pro
+index b409cf07..ebb4f3b0 100644
+--- a/plugins/lv/src/src.pro
++++ b/plugins/lv/src/src.pro
+@@ -40,7 +40,8 @@ OTHER_FILES += \
+     latvianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/mk/src/src.pro b/plugins/mk/src/src.pro
+index d2902a11..fc783306 100644
+--- a/plugins/mk/src/src.pro
++++ b/plugins/mk/src/src.pro
+@@ -25,7 +25,8 @@ PLUGIN_INSTALL_PATH = $${UBUNTU_KEYBOARD_LIB_DIR}/mk/
+ OTHER_FILES += \
+     macedonianplugin.json \
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/nb/src/src.pro b/plugins/nb/src/src.pro
+index 55d562d9..156cd8ec 100644
+--- a/plugins/nb/src/src.pro
++++ b/plugins/nb/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     norwegianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/nl/src/src.pro b/plugins/nl/src/src.pro
+index 48078df8..695ae383 100644
+--- a/plugins/nl/src/src.pro
++++ b/plugins/nl/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     dutchplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/pl/src/src.pro b/plugins/pl/src/src.pro
+index 8a32f22b..66eb2d50 100644
+--- a/plugins/pl/src/src.pro
++++ b/plugins/pl/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     polishplugin.json \
+     ziemia_obiecana_tom_pierwszy_4.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/pt/src/src.pro b/plugins/pt/src/src.pro
+index 1ce1aa14..18ca2112 100644
+--- a/plugins/pt/src/src.pro
++++ b/plugins/pt/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     portugueseplugin.json \
+     historias_sem_data.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/ro/src/src.pro b/plugins/ro/src/src.pro
+index 8806510b..7a97a3f0 100644
+--- a/plugins/ro/src/src.pro
++++ b/plugins/ro/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     romanianplugin.json \
+     amintiri_din_copilarie.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/ru/src/src.pro b/plugins/ru/src/src.pro
+index bbc19b11..6a9e187b 100644
+--- a/plugins/ru/src/src.pro
++++ b/plugins/ru/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     russianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/sl/src/src.pro b/plugins/sl/src/src.pro
+index 3ca6e40a..f001e016 100644
+--- a/plugins/sl/src/src.pro
++++ b/plugins/sl/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     slovenianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/sr/src/src.pro b/plugins/sr/src/src.pro
+index 363c2d57..3a88d89c 100644
+--- a/plugins/sr/src/src.pro
++++ b/plugins/sr/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     serbianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/sv/src/src.pro b/plugins/sv/src/src.pro
+index a0e4c362..54e6eaf6 100644
+--- a/plugins/sv/src/src.pro
++++ b/plugins/sv/src/src.pro
+@@ -44,7 +44,8 @@ OTHER_FILES += \
+     swedishplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/tr/src/src.pro b/plugins/tr/src/src.pro
+index 5d625258..1f5be493 100644
+--- a/plugins/tr/src/src.pro
++++ b/plugins/tr/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     free_ebook.txt \
+     turkishplugin.json
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/uk/src/src.pro b/plugins/uk/src/src.pro
+index 34423366..4d3abd96 100644
+--- a/plugins/uk/src/src.pro
++++ b/plugins/uk/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     ukrainianplugin.json \
+     free_ebook.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/tests/testlayout/src/src.pro b/tests/testlayout/src/src.pro
+index abe33210..0393546f 100644
+--- a/tests/testlayout/src/src.pro
++++ b/tests/testlayout/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     testlayoutplugin.json \
+     the_picture_of_dorian_gray.txt
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $${TOP_SRCDIR}/plugins/westernsupport
+ DEPENDPATH += $${TOP_SRCDIR}/plugins/westernsupport
+-- 
+2.31.1
+

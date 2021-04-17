@@ -1,0 +1,24 @@
+From 82ed9a51690aec8f88da15f53b114ed7807c63d6 Mon Sep 17 00:00:00 2001
+From: Marius Gripsgard <mariogrip@ubuntu.com>
+Date: Sun, 18 Feb 2018 16:11:07 +0100
+Subject: [PATCH 2/6] Fix a switch fall
+
+---
+ src/view/abstracttexteditor.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/view/abstracttexteditor.cpp b/src/view/abstracttexteditor.cpp
+index 6fbb7d3a..0d574f6c 100644
+--- a/src/view/abstracttexteditor.cpp
++++ b/src/view/abstracttexteditor.cpp
+@@ -620,6 +620,7 @@ void AbstractTextEditor::onKeyReleased(const Key &key)
+         
+     case Key::ActionCommand:
+         invokeAction(text, QKeySequence::fromString(key.commandSequence()));
++        break;
+ 
+     case Key::ActionLeftLayout:
+         Q_EMIT leftLayoutSelected();
+-- 
+2.31.1
+

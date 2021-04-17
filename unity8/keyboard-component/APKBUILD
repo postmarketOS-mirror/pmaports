@@ -1,0 +1,42 @@
+# Maintainer: Luca Weiss <luca@z3ntu.xyz>
+pkgname=keyboard-component
+pkgver=0_git20210406
+_commit="9d7863e168f83eb379b483351bedec07f812f693"
+pkgrel=0
+pkgdesc="Ubuntu Touch keyboard as maliit plugin"
+url="https://github.com/ubports/keyboard-component"
+arch="all"
+license="LGPL-3.0-only AND BSD-3-Clause"
+makedepends="qt5-qtbase-dev maliit-framework-dev libpinyin-dev gsettings-qt-dev hunspell-dev presage-dev anthy-dev libchewing-dev"
+checkdepends="xvfb-run bash"
+subpackages="$pkgname-dev"
+source="https://github.com/ubports/keyboard-component/archive/$_commit/keyboard-component-$_commit.tar.gz
+	0001-Fix-api-changes.patch
+	0002-Fix-a-switch-fall.patch
+	0003-Link-properly-to-hunspell.patch
+	0004-InputMethodHostProbe-mark-functions-as-override.patch
+	0005-Fix-up-inputmethodhostprobe-methods-for-maliit-2.0.0.patch
+	0006-Prefix-MALIIT-variables-with-MALIIT_PREFIX.patch
+	"
+builddir="$srcdir/$pkgname-$_commit"
+
+build() {
+	qmake-qt5 PREFIX=/usr
+	make
+}
+
+check() {
+	xvfb-run -a make check
+}
+
+package() {
+	make INSTALL_ROOT="$pkgdir" install
+}
+
+sha512sums="33188d426a327b69abbd9aeca050ae5ca159d9547a8fbe5489d43c84e3e8b256a6f45f7fdaebc73772d5e84388e58365df072189bf03a0141452729b1cb2d073  keyboard-component-9d7863e168f83eb379b483351bedec07f812f693.tar.gz
+a35029e0b5ca7d099db4f8f652a2987af67d1ceb8ae0f966d8491b2135397fa2dc4d98369eea75fb5e2a8cb44da3958802bda1215c424e758f5e459ebef9d718  0001-Fix-api-changes.patch
+4684e63655d82071cf822b6f36410f2fe5675875783cf258d59f13afe4966b1be7290e1296ce0db1eb9bd0cc8e1d4ea8c9e9388415ab077df127213588b7f6d5  0002-Fix-a-switch-fall.patch
+d68be53a2ddf3914719ca9618fd8f98ed667f59bb04909922d0010b5defa19108b03e63c0a942f22786aee47a02c62b4ac370d47caef15d9689a3a65515a6eaa  0003-Link-properly-to-hunspell.patch
+fb71e2cefdba7e926c1d33d25fa8617a043429d70203f12904b2e599c73cb5cf4689b9cb70722ea9cb7d2b881c42f0dd30961945f14e53fa7ab0264af649c426  0004-InputMethodHostProbe-mark-functions-as-override.patch
+b5520c12dceb00279e98ebf239c2fa8dd9eec36917a86ecf9c9cf1c6c747736d1c4995f8382d9dac6b2bfab98ac44f935527173501ad971a747cb1d831113851  0005-Fix-up-inputmethodhostprobe-methods-for-maliit-2.0.0.patch
+c4f01c13ae642beeb3979a1db43e1022cccf11fd4679937cd2acc954dd47d9015a735e3ad2b94628fdf4ad4a44e263cfbd1cbd11bfdf3ea7f9f8a128b4ac9c2e  0006-Prefix-MALIIT-variables-with-MALIIT_PREFIX.patch"

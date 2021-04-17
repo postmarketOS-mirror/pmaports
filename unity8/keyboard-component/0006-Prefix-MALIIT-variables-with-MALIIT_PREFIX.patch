@@ -1,0 +1,52 @@
+From 5b86ff27815dcb93a9fc005920352d63ee490b87 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 18:08:32 +0200
+Subject: [PATCH 6/6] Prefix MALIIT variables with MALIIT_PREFIX
+
+Otherwise the files will land somewhere where we don't want them during
+installation.
+---
+ config.pri            | 8 ++++----
+ src/plugin/plugin.pro | 2 +-
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/config.pri b/config.pri
+index 3bda05a1..b90616f1 100644
+--- a/config.pri
++++ b/config.pri
+@@ -50,15 +50,15 @@ enable-opengl {
+ 
+ UBUNTU_KEYBOARD_PACKAGENAME = ubuntu-keyboard
+ UBUNTU_KEYBOARD_VERSION = $$system(cat $$PWD/VERSION)
+-UBUNTU_KEYBOARD_DATA_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu"
+-UBUNTU_KEYBOARD_LIB_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib"
++UBUNTU_KEYBOARD_DATA_DIR = "$${MALIIT_PREFIX}/$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu"
++UBUNTU_KEYBOARD_LIB_DIR = "$${MALIIT_PREFIX}/$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/lib"
+ UBUNTU_KEYBOARD_TEST_DIR = "/usr/share/maliit/tests/ubuntu-keyboard"
+-UBUNTU_KEYBOARD_HEADERS_DIR = "$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
++UBUNTU_KEYBOARD_HEADERS_DIR = "$${MALIIT_PREFIX}/$${MALIIT_PLUGINS_DATA_DIR}/com/ubuntu/include"
+ 
+ PINYIN_DATA_DIR = "$$system(pkg-config --variable pkgdatadir libpinyin)/data"
+ 
+ DEFINES += UBUNTU_KEYBOARD_DATA_DIR=\\\"$${UBUNTU_KEYBOARD_DATA_DIR}\\\"
+-DEFINES += MALIIT_PLUGINS_DATA_DIR=\\\"$${MALIIT_PLUGINS_DATA_DIR}\\\"
++DEFINES += MALIIT_PLUGINS_DATA_DIR=\\\"$${MALIIT_PREFIX}/$${MALIIT_PLUGINS_DATA_DIR}\\\"
+ DEFINES += PINYIN_DATA_DIR=\\\"$${PINYIN_DATA_DIR}\\\"
+ 
+ unix {
+diff --git a/src/plugin/plugin.pro b/src/plugin/plugin.pro
+index 55356e8e..bbd9b157 100644
+--- a/src/plugin/plugin.pro
++++ b/src/plugin/plugin.pro
+@@ -40,7 +40,7 @@ SOURCES += \
+     keyboardsettings.cpp \
+ #    updatenotifier.cpp \
+ 
+-target.path += $${MALIIT_PLUGINS_DIR}
++target.path += $${MALIIT_PREFIX}/$${MALIIT_PLUGINS_DIR}
+ INSTALLS += target
+ 
+ include(../word-prediction.pri)
+-- 
+2.31.1
+

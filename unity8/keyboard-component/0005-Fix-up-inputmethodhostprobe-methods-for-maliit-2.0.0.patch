@@ -1,0 +1,65 @@
+From b166614df14b7c83d6586b89fe13162535860806 Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Sat, 17 Apr 2021 17:20:10 +0200
+Subject: [PATCH 5/6] Fix up inputmethodhostprobe methods for maliit 2.0.0
+
+---
+ tests/unittests/common/inputmethodhostprobe.cpp | 15 ---------------
+ tests/unittests/common/inputmethodhostprobe.h   | 11 ++++++-----
+ 2 files changed, 6 insertions(+), 20 deletions(-)
+
+diff --git a/tests/unittests/common/inputmethodhostprobe.cpp b/tests/unittests/common/inputmethodhostprobe.cpp
+index f2096319..35dec941 100644
+--- a/tests/unittests/common/inputmethodhostprobe.cpp
++++ b/tests/unittests/common/inputmethodhostprobe.cpp
+@@ -121,18 +121,3 @@ QList<Maliit::PreeditTextFormat> InputMethodHostProbe::lastPreeditTextFormatList
+ {
+     return m_last_preedit_text_format_list;
+ }
+-
+-void InputMethodHostProbe::registerWindow(QWindow*, Maliit::Position)
+-{
+-
+-}
+-
+-void InputMethodHostProbe::setScreenRegion(const QRegion&, QWindow*)
+-{
+-
+-}
+-
+-void InputMethodHostProbe::setInputMethodArea(const QRegion&, QWindow*)
+-{
+-
+-}
+diff --git a/tests/unittests/common/inputmethodhostprobe.h b/tests/unittests/common/inputmethodhostprobe.h
+index 13e3263a..cddb3335 100644
+--- a/tests/unittests/common/inputmethodhostprobe.h
++++ b/tests/unittests/common/inputmethodhostprobe.h
+@@ -98,8 +98,6 @@ public:
+     void setGlobalCorrectionEnabled(bool) override {}
+     void switchPlugin(Maliit::SwitchDirection) override {}
+     void switchPlugin(const QString&) override {}
+-    void setScreenRegion(const QRegion&) override {}
+-    void setInputMethodArea(const QRegion&) override {}
+     void setSelection(int, int) override {}
+     void setOrientationAngleLocked(bool) override {}
+     QList<MImPluginDescription> pluginDescriptions(Maliit::HandlerState) const override {return QList<MImPluginDescription>();}
+@@ -110,9 +108,12 @@ public:
+     void invokeAction(const QString &,
+                       const QKeySequence &) override {}
+ 
+-    void registerWindow(QWindow*, Maliit::Position) override;
+-    void setScreenRegion(const QRegion&, QWindow*) override;
+-    void setInputMethodArea(const QRegion&, QWindow*) override;
++    void registerWindow(QWindow*, Maliit::Position) override {}
++    void setScreenRegion(const QRegion&, QWindow*) override {}
++    void setInputMethodArea(const QRegion&, QWindow*) override {}
++    QVariant inputMethodQuery(Qt::InputMethodQuery, const QVariant&) const override {
++        return QVariant();
++    }
+ 
+ };
+ 
+-- 
+2.31.1
+
