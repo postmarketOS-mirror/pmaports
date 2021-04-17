@@ -3,13 +3,13 @@ pkgname=postmarketos-ui-lomiri
 pkgver=1
 pkgrel=0
 pkgdesc="(Wayland) Lomiri"
-url="https://unity8.io/"
+url="https://lomiri.com/"
 arch="noarch"
 license="GPL-3.0-or-later"
 depends="
-	unity8
-	postmarketos-artwork-wallpapers
+	lomiri
 	lomiri-system-settings
+	postmarketos-artwork-wallpapers
 "
 source="
 	000-gschema.override
