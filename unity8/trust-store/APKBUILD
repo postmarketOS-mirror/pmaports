@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=trust-store
-pkgver=0_git20201008
-_commit="ad94b8bcdfeafc7ff7c80bc3693f8fecb4b9b70e"
+pkgver=0_git20210216
+_commit="07af64bf1e4e6c168b5253defa6111b8958caf5d"
 pkgrel=0
 pkgdesc="An API for creating, reading, updating and deleting trust requests answered by users."
 url="https://github.com/ubports/trust-store"
@@ -31,5 +31,5 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="7726f163630351a3595bf1ba00eca187150aef1c1ca6b097c8c284e99a92f3774866db817d3ae118359470439e2dfaf7efff0d0d7ddadb3a88eab87043cf4668  trust-store-ad94b8bcdfeafc7ff7c80bc3693f8fecb4b9b70e.tar.gz
+sha512sums="9a6a92886a8a12c8e82a29ffb1e187638819940a6ab000212a8990069d8875a88b745539fef3b322f3981aa4c98e01076a09702bcae8bde232f7b917a9409e7e  trust-store-07af64bf1e4e6c168b5253defa6111b8958caf5d.tar.gz
 b839985eaedbab84240a619f5775b4b1d4a22cb38aec3314d125665550889cde845ba86f065346dc83aac8a03900feae62c69db69e4cb2983b9f20128c373ffb  no_werror.patch"
