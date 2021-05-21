@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=lomiri-app-launch
-pkgver=0_git20210323
+pkgver=0_git20210512
 pkgrel=0
-_commit="6db9025235d4e8517c970c39505d137d2a6f470a"
+_commit="2eda8693706a7bc6e648bc81695164629ceb5722"
 pkgdesc="Session init system job for Launching Applications"
 arch="all"
 url="https://gitlab.com/ubports/core/lomiri-app-launch"
@@ -13,7 +13,6 @@ makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative 
 checkdepends="gtest-dev gmock py3-dbusmock"
 source="https://gitlab.com/ubports/core/lomiri-app-launch/-/archive/$_commit/lomiri-app-launch-$_commit.tar.gz
 	posix-jobs.patch
-	extern_c.patch
 	"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
@@ -41,6 +40,7 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="866630b4d998af84aed3354875a1db85211a8feb3337f206cfda1fb3acf27275a2e506b42562c7ab6cb9d0a6a610db9d46718b07948a35cdede26f4929fd44b2  lomiri-app-launch-6db9025235d4e8517c970c39505d137d2a6f470a.tar.gz
+sha512sums="
+649b5e067766cea5e58b19a177cf7d30ac3d4e6ea802e9b9ecdb626a248d5e0ec8aa45640479f197385e70579ab6bf416168c33bb606ca9c76cdab4ba51775c5  lomiri-app-launch-2eda8693706a7bc6e648bc81695164629ceb5722.tar.gz
 a8500ef09a23ff375fa3aac89988b2072b875927c1a2cd19b65513ecb260a8316420e3887c3419b1f9d2a0f23811f5d315be4e8f9bc83c0379aa083853b5eab4  posix-jobs.patch
-2ec356bc18b4efcca33cafdaf076b732ada191a40aa581c70f2872c4a71792768cc2f11b7ab305494d52039b6e6328f8aa817908ae694a882df18066712f62a1  extern_c.patch"
+"

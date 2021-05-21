@@ -1,4 +1,4 @@
-From 0659dbab89d3a172d723f6f9b63b8ae9090bae5f Mon Sep 17 00:00:00 2001
+From d30d3e83b062862586b471467affd843cae6b13b Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 12:55:49 +0200
 Subject: [PATCH 3/6] Link properly to hunspell
@@ -8,6 +8,7 @@ New hunspell provides e.g. libhunspell-1.7.so
 ---
  plugins/ar/src/src.pro       | 3 ++-
  plugins/az/src/src.pro       | 3 ++-
+ plugins/be/src/src.pro       | 3 ++-
  plugins/bg/src/src.pro       | 3 ++-
  plugins/bs/src/src.pro       | 3 ++-
  plugins/ca/src/src.pro       | 3 ++-
@@ -45,7 +46,7 @@ New hunspell provides e.g. libhunspell-1.7.so
  plugins/tr/src/src.pro       | 3 ++-
  plugins/uk/src/src.pro       | 3 ++-
  tests/testlayout/src/src.pro | 3 ++-
- 39 files changed, 76 insertions(+), 39 deletions(-)
+ 40 files changed, 78 insertions(+), 40 deletions(-)
 
 diff --git a/plugins/ar/src/src.pro b/plugins/ar/src/src.pro
 index 5c00116c..8a23dbf5 100644
@@ -68,6 +69,20 @@ index 3f39f66e..8bd4f52b 100644
 @@ -41,7 +41,8 @@ OTHER_FILES += \
      free_ebook.txt \
      azerbaijaniplugin.json
+ 
+-LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
++PKGCONFIG += hunspell
++LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage
+ 
+ INCLUDEPATH += $$PWD/../../westernsupport
+ DEPENDPATH += $$PWD/../../westernsupport
+diff --git a/plugins/be/src/src.pro b/plugins/be/src/src.pro
+index a32f73cc..629a7db0 100644
+--- a/plugins/be/src/src.pro
++++ b/plugins/be/src/src.pro
+@@ -41,7 +41,8 @@ OTHER_FILES += \
+     belarusianplugin.json \
+     free_ebook.txt
  
 -LIBS += $${TOP_BUILDDIR}/plugins/plugins/libwesternsupport.a -lpresage -lhunspell
 +PKGCONFIG += hunspell

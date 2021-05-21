@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=lomiri-ui-toolkit
-pkgver=0_git20210331
-_commit="b6d370d714c16efceba3f62896f01e82656ae562"
+pkgver=0_git20210517
+_commit="039c68a89610c0db4cf32e7686db2b17199fbfb9"
 pkgrel=0
 pkgdesc='The Ubuntu UI toolkit used in Ubuntu Touch'
 arch="all"
@@ -33,6 +33,8 @@ package() {
 	make INSTALL_ROOT="$pkgdir" install
 }
 
-sha512sums="9ab56a0239d38be1d8fd7244b8c997dc62f02bf235465b3bb9eb0caba13920d5c8cb2810a5957f7adba49e417158485ff763c34d6e9d9fd7b4e348a1e6ae5662  lomiri-ui-toolkit-b6d370d714c16efceba3f62896f01e82656ae562.tar.gz
+sha512sums="
+340a2a494844fcf64de93d0a7e249060a4d4c8326d0c44da16533da7787dba63e1fb37f15d8fadc40e2f1b5a830db30814556445b24f83f2f38233dc072c9c2c  lomiri-ui-toolkit-039c68a89610c0db4cf32e7686db2b17199fbfb9.tar.gz
 7423ea0f4edececdeab09c4c91686e981ecedc2b7b39d147d604eb1bd8cdb26a1c3b4fad848215a1a8db1197bd3a58fb82651b0e298c52181632ae629c307d9a  0001-Remove-debian-isms-from-test-runner.patch
-46a12139eeb09b4a7baba4c020103bff8c7885d65fc88ec2e2f4cbf6d93f0aed8d853da316619cb3bafdde5853517dab0b372132d91a03870b9e06a839a854df  0002-Don-t-build-app-launch-profiler.patch"
+46a12139eeb09b4a7baba4c020103bff8c7885d65fc88ec2e2f4cbf6d93f0aed8d853da316619cb3bafdde5853517dab0b372132d91a03870b9e06a839a854df  0002-Don-t-build-app-launch-profiler.patch
+"

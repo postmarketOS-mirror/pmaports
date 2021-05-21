@@ -1,4 +1,4 @@
-From fae1adac2188c9b3271595d9342d1f9341eb26c4 Mon Sep 17 00:00:00 2001
+From 55aa5a1ad06eb57d241669cee44775bcba6f2eb1 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 13:03:18 +0200
 Subject: [PATCH 4/6] InputMethodHostProbe: mark functions as override

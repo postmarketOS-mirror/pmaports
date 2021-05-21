@@ -1,7 +1,7 @@
-From f61e0e3b75efbc74d7bbaca335ab00707c9ac373 Mon Sep 17 00:00:00 2001
+From 9b12aecff6d1cb57f577d50b04edb68563e0b92e Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Tue, 29 Jan 2019 19:25:24 +0100
-Subject: [PATCH 3/8] Add -qt5 suffix to search for Qt tools
+Subject: [PATCH 3/5] Add -qt5 suffix to search for Qt tools
 
 ---
  cmake/modules/QmlTest.cmake | 4 ++--

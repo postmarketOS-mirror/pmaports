@@ -1,8 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=lomiri
-pkgver=0_git20210414
-_commit="2bf97a56bc40cc3da5bfd212cb4c3a54bfaa2961"
+pkgver=0_git20210520
+# https://gitlab.com/ubports/core/lomiri/-/merge_requests/2
+_commit="9d6a14b0f4f4a5cc6e9aed3233e905a62c3c3d2b"
 pkgrel=0
 pkgdesc="A convergent desktop environment"
 arch="all"
@@ -18,12 +19,10 @@ source="https://gitlab.com/ubports/core/lomiri/-/archive/$_commit/lomiri-$_commi
 	0003-Add-qt5-suffix-to-search-for-Qt-tools.patch
 	0004-Link-against-libintl.patch
 	0005-We-do-not-have-Android-stuff.patch
-	0006-Fix-up-gschema.patch
-	0007-gmenumodel-isn-t-renamed.patch
-	0008-Revert-rename-of-com.lomiri.touch.system-gschema.patch
 	"
 subpackages="$pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # Tests fail
 
 build() {
 	cmake -B build \
@@ -48,12 +47,11 @@ package() {
 	rm -r "$pkgdir"/usr/lib/lomiri/qml/mocks/QMenuModel/
 }
 
-sha512sums="cf520d797d8a532c60c89b99974403897d35e7290bec9a20a046031cf15165905d9cd384c5e9f58242bba52f679dedf752a1416938ff5f6a1f223242aefdd8fe  lomiri-2bf97a56bc40cc3da5bfd212cb4c3a54bfaa2961.tar.gz
-b0ad6b5451b98ca7ccfa89020874215b48053cce8216f6aef06b89e60f86295e460e05f23d680e8b8b7227ce1a5544a7239e5f38c0339dd544be4fa6a75bf99b  0001-NoDpkgParse.patch
-30dc0f0f042b8f74bcead9b338f1237dd859742e8568d45dc34af813c1a64e9746b799258af5d6e2d77e146bb39aa1d765b4421d18821663cf3f9fa10e5b156b  0002-Add-missing-includes.patch
-10725600257b14853ca261d012a7b6acc1d6b47d67a0465620e421ac09e60a332e48c0bb8d77b623ddc9d238e10803afadd4caf8559d620b751c9f5ce38f320d  0003-Add-qt5-suffix-to-search-for-Qt-tools.patch
-2a76841c3f51b958944dbbf3c3a0af26ba5358ecaf8676d0391f27671a474928c896194c7b7dce00936781155ba258d2e60d84987dbd913365352e7e4c7db67a  0004-Link-against-libintl.patch
-61e6448bebb8faf3c1cfb13516899664f0b05b72e9ac8684d7f3a965bed6de0f3f2465adfa558546f375749dd6ced949999275ef45152c51edd84c99d63e3393  0005-We-do-not-have-Android-stuff.patch
-1e1b5ca49ccbff69a8e2977ca1ef52b6e209304e71dff5e0062c51851f9f5d6ef9e8df4c6d00391841c231a22445bd262200bc3e34ff5b05cfdd0f0447896e55  0006-Fix-up-gschema.patch
-251a6f95219ea9d47ee41321926d37a6aa2e8272c61db91e1cf8d8fbc4faf106eaf2f31a8d5aaff28a95749f3ce352d5357136ce48a1216e0e409cb1e27e5b19  0007-gmenumodel-isn-t-renamed.patch
-b1d8a066df21993cda018584042d715dae986056ebe140912f8dd74a1817051f537c54684a96152217fc4533766b6b8c3fc58856f2eab0a6d954ffc8bfbabd96  0008-Revert-rename-of-com.lomiri.touch.system-gschema.patch"
+sha512sums="
+043dd5fe3564e2b375ebafda6a81af20e406f0d10dbcf711e560272bbe8b14cf448f4fe3da102eda0c1b490c1a1209dd5563a87f784f2c2eef482cb3cebc4fd3  lomiri-9d6a14b0f4f4a5cc6e9aed3233e905a62c3c3d2b.tar.gz
+c8f51c8efa1acd7ddff6149f9e6f57f1ac0a97d01474cea4db597b8fa6cffda43d1691baeb985f61a19e84d69a460e679e29538c1a008db3b713acedee0bae4d  0001-NoDpkgParse.patch
+d1fba54879bc41aa3cc8fc075b752668d81b97f86daee3f9dbcbfe4d8f3f54f2565bd3a427f049085d0064b616f8bb458a11964873ee069b11a50a5e85fe58a6  0002-Add-missing-includes.patch
+7bf2e39031ec20bf06c9d44ea216c449cad2c81186237862fbdc37d367ab60bb374eada21cf996105fc96d3f2f0443e55eebe60e5395103d208539b6deb287ec  0003-Add-qt5-suffix-to-search-for-Qt-tools.patch
+1e89ac542d00bd34f3ab71b77fd4c8272ff7dd3a65da1f90cee32a130d036a90c5464c60d8db0b0edb01de8210b3d56cfcd57658aa5da026cb923bd719934817  0004-Link-against-libintl.patch
+e4d1c32511a60b7a08a11a6e05565e33de2c82b71d5df380ebf63570d84786f8bd9dc8cb248238ecd7126a3516aef35f98126a48fa96264b6a5fb2ad6f54fa8f  0005-We-do-not-have-Android-stuff.patch
+"

@@ -1,0 +1,494 @@
+From b27b44772de3be476a05831c0f14a63f56d79378 Mon Sep 17 00:00:00 2001
+From: Marius Gripsgard <marius@ubports.com>
+Date: Wed, 29 Jan 2020 03:42:11 +0100
+Subject: [PATCH] Add support for new gl::Texture buffers
+
+This ports to mir's new gl::Texture but keeps the existing
+gl::Texturesource implementation as fallback.
+
+I opted to use parent classes with overrides to implement the slightly
+different codepaths for each buffer type. Since we don't know the buffer
+type on contruction of MirBufferSGTexture it will act as a proxy once it
+know the buffer type. MirBufferSGTexture will figure out what type of
+buffer is used when it recive the first buffer, and then constructs a
+matching class. As texture types will never change once they are
+constructed, there is no need to do this vodoo detection on new buffers,
+saving us lots of cpu cycles.
+
+I didn't want to introduce gl commands into miral::buffer as this will
+be moved to miroil soon.
+---
+ .../QtMir/Application/mirbuffersgtexture.cpp  | 207 +++++++++++++++---
+ .../QtMir/Application/mirbuffersgtexture.h    |   6 +-
+ src/platforms/mirserver/miral/mirbuffer.cpp   |  71 ++++--
+ src/platforms/mirserver/miral/mirbuffer.h     |  34 ++-
+ 4 files changed, 258 insertions(+), 60 deletions(-)
+
+diff --git a/src/modules/QtMir/Application/mirbuffersgtexture.cpp b/src/modules/QtMir/Application/mirbuffersgtexture.cpp
+index 63436456..0c1b68a9 100644
+--- a/src/modules/QtMir/Application/mirbuffersgtexture.cpp
++++ b/src/modules/QtMir/Application/mirbuffersgtexture.cpp
+@@ -1,4 +1,5 @@
+ /*
++ * Copyright 2021 UBports Foundation.
+  * Copyright (C) 2013-2015 Canonical, Ltd.
+  *
+  * This program is free software: you can redistribute it and/or modify it under
+@@ -21,24 +22,89 @@
+ 
+ // Qt
+ #include <QtGui/QOpenGLFunctions>
++#include <QMutexLocker>
+ 
+ namespace mg = mir::geometry;
+ 
+-MirBufferSGTexture::MirBufferSGTexture()
+-    : QSGTexture()
++class MirGlBuffer
++{
++public:
++    MirGlBuffer(const std::shared_ptr<miral::GLBuffer>& buffer);
++    virtual ~MirGlBuffer();
++
++    static std::shared_ptr<MirGlBuffer> from_mir_buffer(const std::shared_ptr<mir::graphics::Buffer>& buffer);
++
++    void setBuffer(const std::shared_ptr<mir::graphics::Buffer>& buffer);
++    void freeBuffer();
++    bool hasBuffer() const;
++
++    int textureId();
++    QSize textureSize() const;
++    bool hasAlphaChannel() const;
++
++    void bind();
++
++    virtual void updateTextureId() = 0;
++    virtual void bindTexture() {};
++
++protected:
++    std::shared_ptr<miral::GLBuffer> m_mirBuffer;
++    GLuint m_textureId;
++
++private:
++    bool m_needsUpdate;
++    QMutex m_mutex;
++    int m_width;
++    int m_height;
++};
++
++class MirGlBufferTexture : public MirGlBuffer
++{
++public:
++    MirGlBufferTexture(const std::shared_ptr<miral::GLBuffer>& buffer) : MirGlBuffer(buffer) {}
++
++    void updateTextureId() override
++    {
++        auto f = QOpenGLContext::currentContext()->functions();
++
++        GLint current_binding;
++        f->glGetIntegerv(GL_TEXTURE_BINDING_2D, &current_binding);
++        m_mirBuffer->bind();
++        f->glGetIntegerv(GL_TEXTURE_BINDING_2D, (GLint*) &m_textureId);
++        f->glBindTexture(GL_TEXTURE_2D, (GLint) current_binding);
++    }
++};
++
++class MirGlBufferTexturesource : public MirGlBuffer
++{
++public:
++    MirGlBufferTexturesource(const std::shared_ptr<miral::GLBuffer>& buffer) : MirGlBuffer(buffer) {}
++
++    void updateTextureId() override
++    {
++        auto f = QOpenGLContext::currentContext()->functions();
++        if (!m_textureId)
++            f->glGenTextures(1, &m_textureId);
++        f->glBindTexture(GL_TEXTURE_2D, (GLint) m_textureId);
++    }
++
++    void bindTexture() override
++    {
++        auto f = QOpenGLContext::currentContext()->functions();
++        f->glBindTexture(GL_TEXTURE_2D, m_textureId);
++    }
++};
++
++MirGlBuffer::MirGlBuffer(const std::shared_ptr<miral::GLBuffer>& buffer) :
++    m_mirBuffer(buffer)
++    , m_textureId(0)
++    , m_needsUpdate(false)
+     , m_width(0)
+     , m_height(0)
+-    , m_textureId(0)
+ {
+-    auto f = QOpenGLContext::currentContext()->functions();
+-    f->glGenTextures(1, &m_textureId);
+-
+-    setFiltering(QSGTexture::Linear);
+-    setHorizontalWrapMode(QSGTexture::ClampToEdge);
+-    setVerticalWrapMode(QSGTexture::ClampToEdge);
+ }
+ 
+-MirBufferSGTexture::~MirBufferSGTexture()
++MirGlBuffer::~MirGlBuffer()
+ {
+     if (m_textureId) {
+         auto f = QOpenGLContext::currentContext()->functions();
+@@ -46,54 +112,133 @@ MirBufferSGTexture::~MirBufferSGTexture()
+     }
+ }
+ 
+-void MirBufferSGTexture::freeBuffer()
++std::shared_ptr<MirGlBuffer> MirGlBuffer::from_mir_buffer(const std::shared_ptr<mir::graphics::Buffer>& buffer) {
++    auto glBuffer = miral::GLBuffer::from_mir_buffer(buffer);
++    if (glBuffer->type() == miral::GLBuffer::Type::GLTextureSource)
++        return std::make_shared<MirGlBufferTexturesource>(glBuffer);
++    else
++        return std::make_shared<MirGlBufferTexture>(glBuffer);
++}
++
++void MirGlBuffer::freeBuffer()
+ {
+-    m_mirBuffer.reset();
++    QMutexLocker locker(&m_mutex);
++
++    if (!m_mirBuffer)
++        return;
++
++    m_mirBuffer->reset();
+     m_width = 0;
+     m_height = 0;
+ }
+ 
+-void MirBufferSGTexture::setBuffer(const std::shared_ptr<mir::graphics::Buffer>& buffer)
++void MirGlBuffer::setBuffer(const std::shared_ptr<mir::graphics::Buffer>& buffer)
+ {
+-    m_mirBuffer.reset(buffer);
+-    mg::Size size = m_mirBuffer.size();
++    QMutexLocker locker(&m_mutex);
++
++    m_mirBuffer->reset(buffer);
++
++    mg::Size size = m_mirBuffer->size();
+     m_height = size.height.as_int();
+     m_width = size.width.as_int();
++    m_needsUpdate = true;
+ }
+ 
+-bool MirBufferSGTexture::hasBuffer() const
++bool MirGlBuffer::hasBuffer() const
+ {
+-    return m_mirBuffer;
++    if (!m_mirBuffer)
++        return false;
++
++    return !m_mirBuffer->empty();
+ }
+ 
+-int MirBufferSGTexture::textureId() const
++int MirGlBuffer::textureId()
+ {
++    QMutexLocker locker(&m_mutex);
++
++    if (m_needsUpdate) {
++        updateTextureId();
++        m_needsUpdate = false;
++    }
++
+     return m_textureId;
+ }
+ 
+-QSize MirBufferSGTexture::textureSize() const
++QSize MirGlBuffer::textureSize() const
+ {
+     return QSize(m_width, m_height);
+ }
+ 
+-bool MirBufferSGTexture::hasAlphaChannel() const
++bool MirGlBuffer::hasAlphaChannel() const
+ {
+-    return m_mirBuffer.has_alpha_channel();
++    return m_mirBuffer->has_alpha_channel();
+ }
+ 
+-void MirBufferSGTexture::bind()
+-{
++void MirGlBuffer::bind() {
++    QMutexLocker locker(&m_mutex);
++
+     Q_ASSERT(hasBuffer());
+ 
+-    auto f = QOpenGLContext::currentContext()->functions();
++    m_mirBuffer->bind();
++}
+ 
+-    f->glBindTexture(GL_TEXTURE_2D, m_textureId);
+-    updateBindOptions(true/* force */);
++MirBufferSGTexture::MirBufferSGTexture()
++    : QSGTexture()
++{
++    setFiltering(QSGTexture::Linear);
++    setHorizontalWrapMode(QSGTexture::ClampToEdge);
++    setVerticalWrapMode(QSGTexture::ClampToEdge);
++}
++
++MirBufferSGTexture::~MirBufferSGTexture()
++{
++    m_mirBuffer.reset();
++}
++
++void MirBufferSGTexture::freeBuffer()
++{
++    if (!m_mirBuffer)
++        return;
+ 
+-    m_mirBuffer.bind_to_texture();
+-    m_mirBuffer.secure_for_render();
++    m_mirBuffer->freeBuffer();
++}
+ 
+-    // Fix for lp:1583088 - For non-GL clients, Mir uploads the client pixel buffer to a GL texture.
+-    // But as it does so, it changes some GL state and neglects to restore it, which breaks Qt's rendering.
+-    f->glPixelStorei(GL_UNPACK_ALIGNMENT, 4); // 4 is the default which Qt uses
++void MirBufferSGTexture::setBuffer(const std::shared_ptr<mir::graphics::Buffer>& buffer)
++{
++    // For performance reasons, lets not recreate
++    // the glbuffer class
++    if (!m_mirBuffer)
++        m_mirBuffer = MirGlBuffer::from_mir_buffer(buffer);
++    else  // If we alredy have a buffer class, lets reuse that
++        m_mirBuffer->setBuffer(buffer);
++}
++
++bool MirBufferSGTexture::hasBuffer() const
++{
++    if (!m_mirBuffer)
++        return false;
++
++    return m_mirBuffer->hasBuffer();
++}
++
++int MirBufferSGTexture::textureId() const
++{
++    return m_mirBuffer->textureId();
++}
++
++QSize MirBufferSGTexture::textureSize() const
++{
++    return m_mirBuffer->textureSize();
++}
++
++bool MirBufferSGTexture::hasAlphaChannel() const
++{
++    return m_mirBuffer->hasAlphaChannel();
++}
++
++void MirBufferSGTexture::bind()
++{
++    m_mirBuffer->bindTexture();
++    updateBindOptions(true/* force */);
++    m_mirBuffer->bind();
+ }
+diff --git a/src/modules/QtMir/Application/mirbuffersgtexture.h b/src/modules/QtMir/Application/mirbuffersgtexture.h
+index b740f1b7..51579d03 100644
+--- a/src/modules/QtMir/Application/mirbuffersgtexture.h
++++ b/src/modules/QtMir/Application/mirbuffersgtexture.h
+@@ -23,6 +23,7 @@
+ 
+ #include <QtGui/qopengl.h>
+ 
++class MirGlBuffer;
+ class MirBufferSGTexture : public QSGTexture
+ {
+     Q_OBJECT
+@@ -42,10 +43,7 @@ public:
+     void bind() override;
+ 
+ private:
+-    miral::GLBuffer m_mirBuffer;
+-    int m_width;
+-    int m_height;
+-    GLuint m_textureId;
++    std::shared_ptr<MirGlBuffer> m_mirBuffer;
+ };
+ 
+ #endif // MIRBUFFERSGTEXTURE_H
+diff --git a/src/platforms/mirserver/miral/mirbuffer.cpp b/src/platforms/mirserver/miral/mirbuffer.cpp
+index 5e30c53d..4d40003c 100644
+--- a/src/platforms/mirserver/miral/mirbuffer.cpp
++++ b/src/platforms/mirserver/miral/mirbuffer.cpp
+@@ -1,4 +1,5 @@
+ /*
++ * Copyright 2021 UBports Foundation.
+  * Copyright © 2017 Canonical Ltd.
+  *
+  * This program is free software: you can redistribute it and/or modify it
+@@ -17,27 +18,51 @@
+ #include "mirbuffer.h"
+ 
+ #include <mir/graphics/buffer.h>
++#include "mir/graphics/texture.h"
+ #include <mir/renderer/gl/texture_source.h>
+ 
+ #include <stdexcept>
+ 
+-using mir::renderer::gl::TextureSource;
++#include <QDebug>
+ 
+-miral::GLBuffer::GLBuffer() = default;
+ miral::GLBuffer::~GLBuffer() = default;
++
+ miral::GLBuffer::GLBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer) :
+     wrapped(buffer)
+ {
+ }
+ 
++std::shared_ptr<miral::GLBuffer> miral::GLBuffer::from_mir_buffer(std::shared_ptr<mir::graphics::Buffer> const& buffer)
++{
++    bool usingTextureSource = false;
++
++    // We would like to use gl::Texture, but if we cant, fallback to gl::textureSource
++    if (!dynamic_cast<mir::graphics::gl::Texture*>(buffer->native_buffer_base()))
++        // As textures will never change once inited, there is no need to do vodo magic
++        // on each bind(), so lets create class overrides to save some cpu cycles.
++        usingTextureSource = true;
++
++    qDebug() << "Mir buffer is" << (usingTextureSource ? "gl:TextureSource (old)" : "gl:Texture (new)");
++
++    if (usingTextureSource)
++        return std::make_shared<miral::GLTextureSourceBuffer>(buffer);
++    else
++        return std::make_shared<miral::GLTextureBuffer>(buffer);
++}
++
+ void miral::GLBuffer::reset(std::shared_ptr<mir::graphics::Buffer> const& buffer)
+ {
+     wrapped = buffer;
+ }
+ 
+-miral::GLBuffer::operator bool() const
++void miral::GLBuffer::reset()
++{
++    wrapped.reset();
++}
++
++bool miral::GLBuffer::empty()
+ {
+-    return !!wrapped;
++    return !wrapped;
+ }
+ 
+ bool miral::GLBuffer::has_alpha_channel() const
+@@ -52,31 +77,37 @@ mir::geometry::Size miral::GLBuffer::size() const
+     return wrapped->size();
+ }
+ 
+-void miral::GLBuffer::reset()
++miral::GLTextureSourceBuffer::GLTextureSourceBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer) :
++    GLBuffer(buffer)
+ {
+-    wrapped.reset();
+ }
+ 
+-void miral::GLBuffer::bind_to_texture()
++void miral::GLTextureSourceBuffer::bind()
+ {
+-    if (auto const texture_source = dynamic_cast<TextureSource*>(wrapped->native_buffer_base()))
+-    {
+-        texture_source->gl_bind_to_texture();
+-    }
+-    else
+-    {
++    if (!wrapped)
++        throw std::logic_error("Bind called without any buffers!");
++
++    if (auto const texsource = dynamic_cast<mir::renderer::gl::TextureSource*>(wrapped->native_buffer_base())) {
++        texsource->gl_bind_to_texture();
++        texsource->secure_for_render();
++    } else {
+         throw std::logic_error("Buffer does not support GL rendering");
+     }
+ }
+ 
+-void miral::GLBuffer::secure_for_render()
++miral::GLTextureBuffer::GLTextureBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer) :
++    GLBuffer(buffer)
+ {
+-    if (auto const texture_source = dynamic_cast<TextureSource*>(wrapped->native_buffer_base()))
+-    {
+-        texture_source->secure_for_render();
+-    }
+-    else
+-    {
++}
++
++void miral::GLTextureBuffer::bind()
++{
++    if (!wrapped)
++        throw std::logic_error("Bind called without any buffers!");
++
++    if (auto const texture = dynamic_cast<mir::graphics::gl::Texture*>(wrapped->native_buffer_base())) {
++        texture->bind();
++    } else {
+         throw std::logic_error("Buffer does not support GL rendering");
+     }
+ }
+diff --git a/src/platforms/mirserver/miral/mirbuffer.h b/src/platforms/mirserver/miral/mirbuffer.h
+index 06fb48d7..e19afd00 100644
+--- a/src/platforms/mirserver/miral/mirbuffer.h
++++ b/src/platforms/mirserver/miral/mirbuffer.h
+@@ -28,22 +28,46 @@ namespace miral
+ class GLBuffer
+ {
+ public:
+-    GLBuffer();
++    enum Type {
++        GLTexture = 0,
++        GLTextureSource = 1,
++    };
++
+     ~GLBuffer();
+     explicit GLBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer);
+ 
+-    operator bool() const;
+     bool has_alpha_channel() const;
+     mir::geometry::Size size() const;
+ 
++    virtual void bind() = 0;
++    virtual Type type() = 0;
++
+     void reset();
+     void reset(std::shared_ptr<mir::graphics::Buffer> const& buffer);
+-    void bind_to_texture();
+-    void secure_for_render();
++    bool empty();
++
++    static std::shared_ptr<GLBuffer> from_mir_buffer(std::shared_ptr<mir::graphics::Buffer> const& buffer);
+ 
+-private:
++protected:
+     std::shared_ptr<mir::graphics::Buffer> wrapped;
+ };
++
++class GLTextureSourceBuffer : public GLBuffer
++{
++public:
++    GLTextureSourceBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer);
++    void bind() override;
++    Type type() override { return Type::GLTextureSource; };
++};
++
++class GLTextureBuffer : public GLBuffer
++{
++public:
++    GLTextureBuffer(std::shared_ptr<mir::graphics::Buffer> const& buffer);
++    void bind() override;
++    Type type() override { return Type::GLTexture; };
++};
++
+ }
+ 
+ #endif //MIRAL_GLBUFFER_H
+-- 
+2.31.1
+

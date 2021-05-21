@@ -1,4 +1,4 @@
-From 5b86ff27815dcb93a9fc005920352d63ee490b87 Mon Sep 17 00:00:00 2001
+From 1a649d907b2a71802599540da88627a2669ae8cc Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 18:08:32 +0200
 Subject: [PATCH 6/6] Prefix MALIIT variables with MALIIT_PREFIX

@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=platform-api
-pkgver=0_git20200720
+pkgver=0_git20210520
 pkgrel=0
-_commit="dec173823d718ec8ffe9e8d21714819ea928c3e2"
+_commit="528721ae561a44cc65671313045c1b92c01b2ef0"
 pkgdesc="Platform API for system level capabilities"
 arch="all"
 url='https://github.com/ubports/platform-api'
@@ -31,5 +31,7 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="514287324d90acda84537a277f8e5b4158d3cf034fe18edefe1e1838dcbaab350bde09467e717e8a607f3655f1dc4ca021047e6f1202d5e776feeaf472cf1b6f  platform-api-dec173823d718ec8ffe9e8d21714819ea928c3e2.tar.gz
-1dceef13de9321c1aaa2f8530ff90c8cdf4359788453575b8e81eca12246f015ca03cc8e0721936b0762e6f087f55bb274049d4213e64b607c9977a69fac3042  0002-Only-use-Hybris-when-available.patch"
+sha512sums="
+7c8f1182c68a1c619ff1c485528b77c6ee317648c30448eb80a006e77a5c4a76001b5374ad85c6101f965fa18dc604650e0bdb2631e636d9dc0bb8d2f0230cbf  platform-api-528721ae561a44cc65671313045c1b92c01b2ef0.tar.gz
+1dceef13de9321c1aaa2f8530ff90c8cdf4359788453575b8e81eca12246f015ca03cc8e0721936b0762e6f087f55bb274049d4213e64b607c9977a69fac3042  0002-Only-use-Hybris-when-available.patch
+"

@@ -1,7 +1,7 @@
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=content-hub
-pkgver=0_git20210406
-_commit="5b8cac554670ed5cf2006dea32c2c47a899142fb"
+pkgver=0_git20210515
+_commit="0c1ba2d0a65813462408cda5293f2ee4b18ebbeb"
 pkgrel=0
 pkgdesc="Content sharing/picking infrastructure and service, designed to allow apps to securely and efficiently exchange content"
 url="https://gitlab.com/ubports/core/content-hub"
@@ -21,7 +21,8 @@ builddir="$srcdir/$pkgname-$_commit"
 build() {
 	cmake -B build \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DWerror=OFF
 	# Work around QEMU issue with pthread_cancel
 	# See https://gitlab.com/postmarketOS/pmaports/issues/190
 	LD_PRELOAD=/usr/lib/preload/pthread_cancel_noop.so \
@@ -37,5 +38,7 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="60ebc5d878f8fb4b380cd1d806152d47e5ebf9f2fa1ade3c726de0a88ccc3825a4e24f59628ee8186e08d0c3414b0d76a881143d42f28e74dd774d71d89aa995  content-hub-5b8cac554670ed5cf2006dea32c2c47a899142fb.tar.gz
-f5a13fbbf2a26342a043474b5911ad4949e6b61f36116197e9c614d2e399f4dcb6adbab08376764756d68d45cfd55215dd49aa5cdfe5926b61d928a8424ba767  0001-Use-qmlplugindump-qt5.patch"
+sha512sums="
+8e59db69af5983ee874747d287a84074b5b616051e611d56071691733766237dd53e4913caf3d150f94fd0c6ab3a5ee5c55b225d5253f22d8fe6ac10b7e97640  content-hub-0c1ba2d0a65813462408cda5293f2ee4b18ebbeb.tar.gz
+2ee8dbc957b22c123c3116ab7540a28c01fcab2664a2fa9707aabdaeff952900e96f7b8121338acfea2c2bd5a0b806f61835e2bcd8e3f17ed757841587365b0f  0001-Use-qmlplugindump-qt5.patch
+"

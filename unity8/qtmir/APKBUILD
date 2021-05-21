@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20210407
-_commit="a208802983dea55fe25cc064eda32abd326ae495"
+pkgver=0_git20210428
+_commit="1c237164e596b2646d8c580d181e86d0b1de427d"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
@@ -11,8 +11,7 @@ license="LGPL-3.0-only"
 makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev lomiri-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev lomiri-url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
 source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
-	0001-Rename-to-Lomiri.patch
-	0002-Port-to-gl-Texture-using-SGTexture.patch
+	0001-Add-support-for-new-gl-Texture-buffers.patch
 	"
 builddir="$srcdir/$pkgname-$_commit"
 
@@ -33,6 +32,7 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="6a5a60cba73ff21093c6a4b9da19845c6fd677e66e4651181f183ebe8759d8502350bd7eba2defc472e53dc30f30295e4d6107f89be3fa435b8558f4504d59cd  qtmir-a208802983dea55fe25cc064eda32abd326ae495.tar.gz
-b6c87e4e4c897e12613a254d21eb18976c64715f916e84c0cc103dc3fb1d0f3c9b7c198c66d3d89b2fd305311e8a7db0ab7003dfa75b7f3ee9ee3a3f3e4131c2  0001-Rename-to-Lomiri.patch
-a99688d8dd5987b832906b588865ae6ff21d3c82c9ca4c948ad94c9a4ddacfc75c2916f2dc83562d66266336970863415b776c14d8ad8a8a9ccc41490ba4eb50  0002-Port-to-gl-Texture-using-SGTexture.patch"
+sha512sums="
+c8ba81b734a0a80c75c78df9430d941fcbf7a1d9b6616d7a8a0352fa20ca6f61ebfcef72e5f1772da70ab192e12d7d947f81d97512d96569245b3fd851052cf1  qtmir-1c237164e596b2646d8c580d181e86d0b1de427d.tar.gz
+b259cf55ae491b5384d4e2dd675aabde2eab25447db58045ea8a7634fb8800f4ac8d74b30b23ca20671655e15140ffc41fb6d8adb5c9c8252dce4193c3f195c7  0001-Add-support-for-new-gl-Texture-buffers.patch
+"

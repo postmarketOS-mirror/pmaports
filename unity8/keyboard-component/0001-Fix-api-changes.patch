@@ -1,4 +1,4 @@
-From a5433b60653c2bbb058dd004aeadc3795b93da12 Mon Sep 17 00:00:00 2001
+From 53924f4510cfb769d725fd15d7f2308ab1f28ec0 Mon Sep 17 00:00:00 2001
 From: Marius Gripsgard <mariogrip@ubuntu.com>
 Date: Sun, 18 Feb 2018 15:53:30 +0100
 Subject: [PATCH 1/6] Fix api changes
@@ -10,7 +10,7 @@ Subject: [PATCH 1/6] Fix api changes
  3 files changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/debian/control b/debian/control
-index bed4dc35..d5573f9b 100644
+index d52f15b4..791f48b1 100644
 --- a/debian/control
 +++ b/debian/control
 @@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 9),

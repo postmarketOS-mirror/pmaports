@@ -1,7 +1,7 @@
-From 75ff030434a04a51127a2d1b7190e15d0ab5546f Mon Sep 17 00:00:00 2001
+From 29c3e87181a0951709223e0fb8271fbb68f2d64d Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 11:16:53 +0200
-Subject: [PATCH 5/8] We do not have Android stuff
+Subject: [PATCH 5/5] We do not have Android stuff
 
 ---
  plugins/CMakeLists.txt    | 2 +-
@@ -23,7 +23,7 @@ index 4d53e21bd..09ac97dae 100644
  add_subdirectory(ScreenshotDirectory)
  add_subdirectory(SessionBroadcast)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index b805e41a8..f8afd609f 100644
+index a09ffd44d..aa12301af 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -43,15 +43,10 @@ if (ENABLE_TOUCH_EMULATION)
@@ -43,7 +43,7 @@ index b805e41a8..f8afd609f 100644
      ${QTMIRSERVER_LDFLAGS}
      LomiriGestures
 diff --git a/src/LomiriApplication.cpp b/src/LomiriApplication.cpp
-index efb811bdd..cb9e60b1c 100644
+index f9e3ecb4b..21f53566e 100644
 --- a/src/LomiriApplication.cpp
 +++ b/src/LomiriApplication.cpp
 @@ -27,9 +27,6 @@
