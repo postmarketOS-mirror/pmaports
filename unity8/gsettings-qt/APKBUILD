@@ -13,6 +13,7 @@ checkdepends="xvfb-run"
 subpackages="$pkgname-dev"
 source="https://gitlab.com/ubports/core/gsettings-qt/-/archive/$_commit/gsettings-qt-$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # Test fails under QEMU
 
 build() {
 	qmake-qt5
