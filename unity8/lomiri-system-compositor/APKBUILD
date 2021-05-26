@@ -1,9 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=lomiri-system-compositor
-pkgver=0_git20210520
-# https://gitlab.com/ubports/core/lomiri-system-compositor/-/merge_requests/23
-_commit="6e6c59138d067430c3c6f8c4fd5a776d8ccbc8f5"
+pkgver=0_git20210526
+_commit="1f7870d47c6664541988a28bf49bdc9ecc488d07"
 pkgrel=0
 pkgdesc="System compositor using the Mir display server"
 arch="all"
@@ -38,7 +37,7 @@ package() {
 }
 
 sha512sums="
-4d6378274a75f4aa5e7008fe6a877a1ea137e34b6b1ce699b1c9aec3d195f1ce8ade10be9d35c3e710be2c844c292b0a3d3102c440f0668f4ca5afce8e3d42a2  lomiri-system-compositor-6e6c59138d067430c3c6f8c4fd5a776d8ccbc8f5.tar.gz
+c8fe0a28ee44d77f6c3bbfe6409733beefdf4b0c40b038acbf5ae6e8efdd4fcefd5a043153431941fbb84dca46cf3b565840f5b8c0c62595ce3087b33aff5516  lomiri-system-compositor-1f7870d47c6664541988a28bf49bdc9ecc488d07.tar.gz
 93f02b1d138797561d14df697fe01afa56af454b6b8c0a5d317d6e62a2dd78d614bd64dfc57b5c16ef18ae42a4a7dadc64a2109ac87392feedc9373f682e05da  0001-spinner-Add-support-for-wayland-backend.patch
 d9921be03cacac1e891125852a38fbb1c3789d03dda635cc2f0d4d1f1e2f5e3423bdecf9f27d670dcda81c32fd827846c168d1bd476eb07580b48cb135095e28  0002-Add-missing-stdexcept-header-17.patch
 "
