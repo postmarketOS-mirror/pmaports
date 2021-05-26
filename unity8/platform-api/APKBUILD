@@ -1,17 +1,16 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=platform-api
-pkgver=0_git20210520
+pkgver=0_git20210525
 pkgrel=0
-_commit="528721ae561a44cc65671313045c1b92c01b2ef0"
+_commit="a8f95a25d1b06437a030377b354cfac11edd4fe4"
 pkgdesc="Platform API for system level capabilities"
 arch="all"
 url='https://github.com/ubports/platform-api'
 license="GPL-3.0-only AND LGPL-3.0-only"
 depends_dev="process-cpp-dev lomiri-url-dispatcher-dev location-service-dev"
 makedepends="$depends_dev cmake cmake-extras dbus-cpp-dev gtest-dev gmock"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz
-	0002-Only-use-Hybris-when-available.patch"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/$pkgname/archive/$_commit.tar.gz"
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 
