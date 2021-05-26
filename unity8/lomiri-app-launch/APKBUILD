@@ -9,7 +9,7 @@ arch="all"
 url="https://gitlab.com/ubports/core/lomiri-app-launch"
 license="GPL-3.0"
 depends_dev="gobject-introspection-dev lttng-ust-dev json-glib-dev zeitgeist-dev lomiri-api-dev curl-dev properties-cpp-dev"
-makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative gtest-dev glib-dev mir-dev dbus-test-runner-dev lttng-ust-tools pthread-cancel-noop"
+makedepends="$depends_dev cmake cmake-extras dbus-test-runner qt5-qtdeclarative gtest-dev glib-dev mir-dev dbus-test-runner-dev lttng-ust-tools"
 checkdepends="gtest-dev gmock py3-dbusmock"
 source="https://gitlab.com/ubports/core/lomiri-app-launch/-/archive/$_commit/lomiri-app-launch-$_commit.tar.gz
 	posix-jobs.patch
@@ -17,18 +17,14 @@ source="https://gitlab.com/ubports/core/lomiri-app-launch/-/archive/$_commit/lom
 subpackages="$pkgname-dev"
 builddir="$srcdir/$pkgname-$_commit"
 # 23% tests passed, 10 tests failed out of 13
-# Build without crossdirect as long as we need the LD_PRELOAD
-options="!check !pmb:crossdirect"
+options="!check"
 
 build() {
 	cmake -B build \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib
-	# Work around QEMU issue with pthread_cancel
-	# See https://gitlab.com/postmarketOS/pmaports/issues/190
-	LD_PRELOAD=/usr/lib/preload/pthread_cancel_noop.so \
-		make -C build
+	make -C build
 }
 
 check() {

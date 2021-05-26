@@ -8,10 +8,9 @@ url="https://gitlab.com/ubports/core/content-hub"
 arch="all"
 license="GPL-3.0 LGPL-3.0"
 depends_dev="qt5-qtdeclarative-dev lomiri-app-launch-dev gsettings-qt-dev libnih-dev lomiri-download-manager-dev libnotify-dev libapparmor-dev lomiri-ui-toolkit-dev"
-makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev pthread-cancel-noop"
+makedepends="$depends_dev cmake cmake-extras libapparmor gtest-dev"
 checkdepends="gmock dbus-test-runner xvfb-run"
-# Build without crossdirect as long as we need the LD_PRELOAD
-options="!check !pmb:crossdirect" # 92% tests passed, 1 tests failed out of 12
+options="!check" # 92% tests passed, 1 tests failed out of 12
 source="https://gitlab.com/ubports/core/content-hub/-/archive/$_commit/content-hub-$_commit.tar.gz
 	0001-Use-qmlplugindump-qt5.patch
 	"
@@ -23,10 +22,7 @@ build() {
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DWerror=OFF
-	# Work around QEMU issue with pthread_cancel
-	# See https://gitlab.com/postmarketOS/pmaports/issues/190
-	LD_PRELOAD=/usr/lib/preload/pthread_cancel_noop.so \
-		make -C build
+	make -C build
 }
 
 check() {
