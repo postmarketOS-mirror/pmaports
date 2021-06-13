@@ -12,6 +12,7 @@ makedepends="cmake cmake-extras libqtdbustest networkmanager-dev qt5-qtbase-dev 
 checkdepends="py3-dbusmock procps"
 source="$pkgname-$_commit.tar.gz::https://github.com/ubports/libqtdbusmock/archive/$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
+options="!check" # Tests fail under QEMU
 
 build() {
 	cmake -B build \
