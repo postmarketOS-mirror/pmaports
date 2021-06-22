@@ -11,7 +11,8 @@ license="GPL-3.0 LGPL-3.0"
 depends_dev="boost-dev dbus-dev net-cpp-dev process-cpp-dev properties-cpp-dev json-c-dev libapparmor-dev gflags-dev glog-dev trust-store-dev"
 makedepends="$depends_dev cmake-extras gettext gtest-dev gmock dbus-cpp-dev"
 checkdepends="coreutils"
-source="$pkgname-$_commit.tar.gz::https://github.com/ubports/location-service/archive/$_commit.tar.gz"
+source="$pkgname-$_commit.tar.gz::https://github.com/ubports/location-service/archive/$_commit.tar.gz
+	boost.patch"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 builddir="$srcdir/$pkgname-$_commit"
 options="!check" # Several failures
@@ -34,4 +35,7 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="a3c6688a922e65ed35d5641f8ef9b27ed7423cbbc82382b822cd0490a5f2258918889869f56f17d86b1a28681599f62c18da438d457e793c74696071b71c8a2c  location-service-7dc0ae2c146ed5887405bd63ded75da4e5a2f0ea.tar.gz"
+sha512sums="
+a3c6688a922e65ed35d5641f8ef9b27ed7423cbbc82382b822cd0490a5f2258918889869f56f17d86b1a28681599f62c18da438d457e793c74696071b71c8a2c  location-service-7dc0ae2c146ed5887405bd63ded75da4e5a2f0ea.tar.gz
+221fedc01b5ef1709807599e623168b3b04e7727646ed081e9f0a8fed8a1e4cc8fbca5f3b50718609275bd7c9a11aed0ada2c9e7edf6882029e305cefbb8831c  boost.patch
+"

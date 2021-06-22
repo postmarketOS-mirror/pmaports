@@ -1,0 +1,12 @@
+diff --git a/include/location_service/com/ubuntu/location/optional.h b/include/location_service/com/ubuntu/location/optional.h
+index a4d917b..0b2a163 100644
+--- a/include/location_service/com/ubuntu/location/optional.h
++++ b/include/location_service/com/ubuntu/location/optional.h
+@@ -19,6 +19,7 @@
+ #define LOCATION_SERVICE_COM_UBUNTU_LOCATION_OPTIONAL_H_
+ 
+ #include <boost/optional.hpp>
++#include <boost/optional/optional_io.hpp>
+ 
+ namespace com
+ {
