@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=qtmir
-pkgver=0_git20210428
-_commit="1c237164e596b2646d8c580d181e86d0b1de427d"
+pkgver=0_git20210622
+_commit="25de4e690ef9dabe2f3b3e3766eb0bb391276cbd"
 pkgrel=0
 pkgdesc="QPA plugin to make Qt a Mir server"
 arch="all"
@@ -10,9 +10,7 @@ url="https://gitlab.com/ubports/core/qtmir"
 license="LGPL-3.0-only"
 makedepends="cmake cmake-extras gtest-dev mir-dev process-cpp-dev qt5-qtdeclarative-dev qt5-qtsensors-dev lomiri-app-launch-dev gsettings-qt-dev libqtdbustest libqtdbusmock content-hub-dev valgrind-dev lomiri-url-dispatcher-dev cgmanager-dev lttng-ust-tools"
 checkdepends="py3-dbusmock dbus"
-source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz
-	0001-Add-support-for-new-gl-Texture-buffers.patch
-	"
+source="https://gitlab.com/ubports/core/qtmir/-/archive/$_commit/qtmir-$_commit.tar.gz"
 builddir="$srcdir/$pkgname-$_commit"
 
 build() {
@@ -33,6 +31,5 @@ package() {
 }
 
 sha512sums="
-c8ba81b734a0a80c75c78df9430d941fcbf7a1d9b6616d7a8a0352fa20ca6f61ebfcef72e5f1772da70ab192e12d7d947f81d97512d96569245b3fd851052cf1  qtmir-1c237164e596b2646d8c580d181e86d0b1de427d.tar.gz
-b259cf55ae491b5384d4e2dd675aabde2eab25447db58045ea8a7634fb8800f4ac8d74b30b23ca20671655e15140ffc41fb6d8adb5c9c8252dce4193c3f195c7  0001-Add-support-for-new-gl-Texture-buffers.patch
+a74046d9733ee56d8354461cbbf7f8749879803d47b3252cd8463f85d13dd92546055f2f8002fbc3d327d80da55bd669e4ac6874e76ae179dfadfca21e79a241  qtmir-25de4e690ef9dabe2f3b3e3766eb0bb391276cbd.tar.gz
 "
