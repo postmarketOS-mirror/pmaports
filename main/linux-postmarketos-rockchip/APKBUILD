@@ -11,7 +11,7 @@
 
 pkgname=linux-postmarketos-rockchip
 pkgver=5.11.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Mainline kernel for rockchip devices"
 arch="aarch64"
 _carch="arm64"
@@ -25,6 +25,7 @@ makedepends="
 	findutils
 	flex
 	installkernel
+	linux-headers
 	openssl-dev
 	perl
 	rsync
@@ -66,5 +67,7 @@ package() {
 }
 
 
-sha512sums="16090ec6dea7a8c417ca7483b296902c9b55b423482ad8a881dffcaae76411806bc9502373efd6a51b0acefec3a44c19c5a7d42c5b76c1321183a4798a5959d3  linux-5.11.2.tar.xz
-25103c98349c1e91e2161b2cfe995f4fc376483d7660f47000cc67db2c0698bcd77cecda73379d9114a26c56d338bda1081f2a2faee63ee420d95434bda56138  config-postmarketos-rockchip.aarch64"
+sha512sums="
+16090ec6dea7a8c417ca7483b296902c9b55b423482ad8a881dffcaae76411806bc9502373efd6a51b0acefec3a44c19c5a7d42c5b76c1321183a4798a5959d3  linux-5.11.2.tar.xz
+abe590304f18e102de5c7796ba4dcd94773874aac05a71ffe64ad2d559e35e765c49ac76a3562424cc8dcb01cbd1431fd6337b450b97c4b190f1ab9581a46355  config-postmarketos-rockchip.aarch64
+"
