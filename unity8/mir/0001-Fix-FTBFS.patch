@@ -1,0 +1,25 @@
+From cbbf0b199fafa0956d6047b1201be131e75793cd Mon Sep 17 00:00:00 2001
+From: Alan Griffiths <alan@octopull.co.uk>
+Date: Thu, 3 Dec 2020 15:40:17 +0000
+Subject: [PATCH] Fix FTBFS
+
+---
+ tests/unit-tests/dispatch/test_threaded_dispatcher.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/unit-tests/dispatch/test_threaded_dispatcher.cpp b/tests/unit-tests/dispatch/test_threaded_dispatcher.cpp
+index 382699ab35..d96184fb59 100644
+--- a/tests/unit-tests/dispatch/test_threaded_dispatcher.cpp
++++ b/tests/unit-tests/dispatch/test_threaded_dispatcher.cpp
+@@ -290,7 +290,7 @@ TEST_F(ThreadedDispatcherTest, DISABLED_sets_thread_names_appropriately)
+ 
+     auto dispatched = std::make_shared<mt::Signal>();
+     constexpr int const threadcount{3};
+-    constexpr char const* threadname_base{"Madness Thread"};
++    static char const* const threadname_base{"Madness Thread"};
+     std::atomic<int> dispatch_count{0};
+ 
+     auto dispatchable = std::make_shared<mt::TestDispatchable>([dispatched, &dispatch_count]()
+-- 
+2.32.0
+

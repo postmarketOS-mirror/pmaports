@@ -1,0 +1,89 @@
+From 83153c649d13cfcadd87faff7420bcc5abe7b552 Mon Sep 17 00:00:00 2001
+From: Alan Griffiths <alan@octopull.co.uk>
+Date: Mon, 19 Oct 2020 10:47:11 +0100
+Subject: [PATCH] Delete obsolete gmock hack
+
+---
+ tests/include/gmock_set_arg.h           | 57 -------------------------
+ tests/unit-tests/scene/test_surface.cpp |  1 -
+ 2 files changed, 58 deletions(-)
+ delete mode 100644 tests/include/gmock_set_arg.h
+
+diff --git a/tests/include/gmock_set_arg.h b/tests/include/gmock_set_arg.h
+deleted file mode 100644
+index f5c212b728..0000000000
+--- a/tests/include/gmock_set_arg.h
++++ /dev/null
+@@ -1,57 +0,0 @@
+-/*
+- * Copyright © 2013 Canonical Ltd.
+- *
+- * This program is free software: you can redistribute it and/or modify it
+- * under the terms of the GNU General Public License version 2 or 3,
+- * as published by the Free Software Foundation.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+- *
+- * Authored by: Alan Griffiths <alan@octopull.co.uk>
+- */
+-
+-#ifndef GMOCK_SET_ARG_H_
+-#define GMOCK_SET_ARG_H_
+-
+-#include <gmock/gmock.h>
+-
+-namespace testing
+-{
+-namespace internal
+-{
+-template <size_t N, typename A, bool kIsProto>
+-class SetArgumentAction {
+- public:
+-  // Constructs an action that sets the variable pointed to by the
+-  // N-th function argument to 'value'.
+-  explicit SetArgumentAction(const A& value) : value_(value) {}
+-
+-  template <typename Result, typename ArgumentTuple>
+-  void Perform(const ArgumentTuple& args) const {
+-    static_assert(std::is_same<void, Result>::value, "Action must have void Result");
+-    ::std::get<N>(args) = value_;
+-  }
+-
+- private:
+-  const A value_;
+-
+-  GTEST_DISALLOW_ASSIGN_(SetArgumentAction);
+-};
+-}
+-template <size_t N, typename T>
+-PolymorphicAction<
+-  internal::SetArgumentAction<
+-    N, T, internal::IsAProtocolMessage<T>::value> >
+-SetArg(const T& x) {
+-  return MakePolymorphicAction(internal::SetArgumentAction<
+-      N, T, internal::IsAProtocolMessage<T>::value>(x));
+-}
+-}
+-
+-#endif /* GMOCK_SET_ARG_H_ */
+diff --git a/tests/unit-tests/scene/test_surface.cpp b/tests/unit-tests/scene/test_surface.cpp
+index 7937e18b30..eafab6e7da 100644
+--- a/tests/unit-tests/scene/test_surface.cpp
++++ b/tests/unit-tests/scene/test_surface.cpp
+@@ -34,7 +34,6 @@
+ #include "mir/test/fake_shared.h"
+ #include "mir/test/event_matchers.h"
+ 
+-#include "gmock_set_arg.h"
+ #include <gmock/gmock.h>
+ #include <gtest/gtest.h>
+ 
+-- 
+2.32.0
+
