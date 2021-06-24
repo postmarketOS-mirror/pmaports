@@ -1,9 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Luca Weiss <luca@z3ntu.xyz>
 pkgname=indicator-network
-pkgver=0_git20210519
-# https://gitlab.com/ubports/core/indicator-network/-/merge_requests/1
-_commit="b36982013efc64ade331a9b602f20e31e5720b0d"
+pkgver=0_git20210623
+_commit="ff8985a09c53a420d7d464a9540512b640dffdff"
 pkgrel=0
 pkgdesc="The 'Network' indicator for Ubuntu Touch"
 arch="all"
@@ -36,6 +35,6 @@ package() {
 }
 
 sha512sums="
-6320b21b6199dffaf1df3a55f01a862477cd47dada9a03960f31a6600ec82bbe9f1a8371215ef49310aad12eeb5715c55417f1814997cdd5ba2962d47e657bdd  indicator-network-b36982013efc64ade331a9b602f20e31e5720b0d.tar.gz
+08a6aa218eeb5f3f8d25d48475cf4bca9dfd6186bee98a396e868db15ca43342270d0ec1526c037ebdb1a9a555243aa0f0a513fa632938c67f8ed09603b66d73  indicator-network-ff8985a09c53a420d7d464a9540512b640dffdff.tar.gz
 262045cb91898d0135a6fc09d3091aae369e4af34c0c89d741336a75ea43fce82835c054f3c8b9c44a1ddc707c6039dc586b6761c0c54f30b5464c1b8e70eefa  libintl.patch
 "
