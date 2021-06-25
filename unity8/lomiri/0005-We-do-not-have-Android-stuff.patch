@@ -1,7 +1,7 @@
-From 29c3e87181a0951709223e0fb8271fbb68f2d64d Mon Sep 17 00:00:00 2001
+From dd0f625486ec248b89f4c9cf83b6d96a9382f780 Mon Sep 17 00:00:00 2001
 From: Luca Weiss <luca@z3ntu.xyz>
 Date: Sat, 17 Apr 2021 11:16:53 +0200
-Subject: [PATCH 5/5] We do not have Android stuff
+Subject: [PATCH 5/6] We do not have Android stuff
 
 ---
  plugins/CMakeLists.txt    | 2 +-
@@ -23,14 +23,19 @@ index 4d53e21bd..09ac97dae 100644
  add_subdirectory(ScreenshotDirectory)
  add_subdirectory(SessionBroadcast)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index a09ffd44d..aa12301af 100644
+index 39f2cccfd..1eff11e37 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -43,15 +43,10 @@ if (ENABLE_TOUCH_EMULATION)
+@@ -43,7 +43,6 @@ if (ENABLE_TOUCH_EMULATION)
      set(SOURCE_FILES ${SOURCE_FILES} MouseTouchAdaptor.cpp)
  endif()
  
 -pkg_check_modules(ANDROID_PROPERTIES REQUIRED libandroid-properties)
+ pkg_check_modules(SYSTEMD REQUIRED libsystemd)
+ 
+ include_directories(
+@@ -52,12 +51,8 @@ include_directories(
+ 
  add_executable(${SHELL_APP} ${SOURCE_FILES})
  
 -if (NOT "${ANDROID_PROPERTIES_INCLUDE_DIRS}" STREQUAL "")
@@ -41,7 +46,7 @@ index a09ffd44d..aa12301af 100644
 -    ${ANDROID_PROPERTIES_LDFLAGS}
      ${GSETTINGS_QT_LDFLAGS}
      ${QTMIRSERVER_LDFLAGS}
-     LomiriGestures
+     ${SYSTEMD_LDFLAGS}
 diff --git a/src/LomiriApplication.cpp b/src/LomiriApplication.cpp
 index f9e3ecb4b..21f53566e 100644
 --- a/src/LomiriApplication.cpp
@@ -68,5 +73,5 @@ index f9e3ecb4b..21f53566e 100644
  
      // The testability driver is only loaded by QApplication but not by QGuiApplication.
 -- 
-2.31.1
+2.32.0
 

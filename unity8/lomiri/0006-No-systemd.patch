@@ -1,0 +1,22 @@
+From a0ea80b4ce5dac95cdbb17f110edfda1aae4b70b Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Fri, 25 Jun 2021 10:16:19 +0200
+Subject: [PATCH 6/6] No systemd
+
+---
+ data/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/data/CMakeLists.txt b/data/CMakeLists.txt
+index 4d66d898e..230d0e78d 100644
+--- a/data/CMakeLists.txt
++++ b/data/CMakeLists.txt
+@@ -25,4 +25,4 @@ install(FILES
+ install(FILES com.lomiri.Shell.gschema.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/glib-2.0/schemas)
+ #install(FILES ${CMAKE_CURRENT_BINARY_DIR}/version DESTINATION ${CMAKE_INSTALL_LOCALSTATEDIR}/lib/lomiri)
+ 
+-add_subdirectory(systemd-user)
++#add_subdirectory(systemd-user)
+-- 
+2.32.0
+
