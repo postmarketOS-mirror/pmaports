@@ -1,8 +1,8 @@
 # Reference: <https://postmarketos.org/devicepkg>
 pkgname=device-pine64-pinebookpro
 pkgdesc="PINE64 Pinebook Pro"
-pkgver=2
-pkgrel=1
+pkgver=3
+pkgrel=0
 url="https://postmarketos.org"
 license="MIT"
 arch="aarch64"
@@ -61,9 +61,8 @@ nonfree_firmware() {
 	depends="firmware-pine64-pinebookpro"
 	mkdir "$subpkgdir"
 }
-
 sha512sums="
-25c5b71848d5bb956697ecf2be43079a448c8c0a67952e09f5738223d8b024aa4ff0495c396f94aacf0d607168d70a5812be41381e45645f95723c0cdef9515c  deviceinfo
+3312fce7e96e44bb722ef4ced1f7f048232e61dd80bbf050f50c48fa68837d318590801e7c2c26ae1004b8d845430d74e60ef36c78917412814694d9054544c4  deviceinfo
 cdcb1d36440c29d411691990c1170d9665b13b1c551b35825720d23b6ae40311ce91c3b2b7a089deaacd7a33c6febe4f81dc75d71dd4bed887291221d56dc1d2  extlinux.conf
 d3988fe83c54228d743f4a8c190e9530404a436a7fbc0b004bf20d3986b502d864717d8cc9c76812e599266bf84cb08f9a86e1bfd220875799c5a022aea588ec  10-pinebookpro.hwdb
 bcae155e24a151d3c098833680b83b6004a329962f115480d560ebe19257eab87286b8a4c194e456c067ca54fb53e59a5a16b022cea13c11135b0855145db563  mem_sleep.conf
