@@ -1,0 +1,39 @@
+#!/sbin/openrc-run
+
+description="Copy modem firmware files from special partition"
+
+MODEM_RPROC_NUMBER=1
+MODEM_STATE_FILE="/sys/class/remoteproc/remoteproc${MODEM_RPROC_NUMBER}/state"
+MODEM_FW_PARTITION="/dev/disk/by-partlabel/modem"
+FW_MNT_POINT="/mnt/firmware-modem"
+PMOSFW="/lib/firmware/postmarketos"
+
+depend() {
+	before rmtfs
+	# we need to copy firmware files before rmtfs
+	#   service brings modem online and it fails
+	#   to start due to missing firmware
+}
+
+copy_firmware() {
+	ebegin "Copying modem firmware files..."
+	mkdir -p "${FW_MNT_POINT}"
+	mount -t vfat -o ro "${MODEM_FW_PARTITION}" "${FW_MNT_POINT}"
+	cp "${FW_MNT_POINT}"/image/* "${PMOSFW}/" || return 1
+	umount "${FW_MNT_POINT}"
+	rm -r "${FW_MNT_POINT}"
+	eend $?
+}
+
+start() {
+	MODEM_STATE=$(cat ${MODEM_STATE_FILE})
+	einfo "Modem state: ${MODEM_STATE}"	
+	# TODO: maybe stop modem if it is running and restart
+	#       again after copy complete?
+
+	if [ ! -f "${PMOSFW}/modem.mdt" ]; then
+		copy_firmware
+	else
+		einfo "Modem firmware files are already in place."
+	fi
+}

@@ -1,0 +1,3 @@
+#!/bin/sh
+# rmtfs is also in runlevel boot; we need to start this before rmtfs
+rc-update -q add modem-firmware-copy boot
